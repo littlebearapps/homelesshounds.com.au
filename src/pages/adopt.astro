@@ -4,17 +4,18 @@ const account = import.meta.env.PUBLIC_ASM_ACCOUNT;
 ---
 <Base title="Adoptable Animals">
   <h1 class="text-3xl font-semibold mb-4">Adoptable Animals</h1>
-  {account
-    ? <>
-        <div id="asm3-adoptables"></div>
-        <script src={`https://service.sheltermanager.com/asmservice?method=animal_view_adoptable_js&account=${account}`}></script>
-      </>
-    : <p class="text-sm text-red-600">PUBLIC_ASM_ACCOUNT is not set. Please configure environment variables.</p>}
-  <div class="mt-8 text-sm text-gray-600">
-    <p>Looking for something specific?</p>
-    <ul class="list-disc ml-5">
-      <li><a class="underline" href="/adopt/dogs">Dogs</a></li>
-      <li><a class="underline" href="/adopt/cats">Cats</a></li>
-    </ul>
-  </div>
+  {account ? (
+    <>
+      <div id="asm3-adoptables"></div>
+      <script>
+        // Optional: open animal profiles in an overlay instead of a new tab
+        window.asm3_adoptable_iframe = true;
+        // You can also expose dropdown filters by defining `asm3_adoptable_filters`
+        // Example: window.asm3_adoptable_filters = "species,sex,age,goodwith";
+      </script>
+      <script src={`https://service.sheltermanager.com/asmservice?method=animal_view_adoptable_js&account=${account}`}></script>
+    </>
+  ) : (
+    <p class="text-sm text-red-600">PUBLIC_ASM_ACCOUNT is not set.</p>
+  )}
 </Base>
