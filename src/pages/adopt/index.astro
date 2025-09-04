@@ -1,0 +1,23 @@
+---
+import Base from "../../layouts/Base.astro";
+const account = import.meta.env.PUBLIC_ASM_ACCOUNT;
+const base = import.meta.env.PUBLIC_ASM_BASE;
+---
+<Base title="Adoptable Animals">
+  <h1 class="text-3xl font-semibold mb-6">Adoptable Animals</h1>
+
+  {account ? (
+    <>
+      <div id="asm3-adoptables" class="grid gap-6"></div>
+      <script>
+        // ASM embed options (documented on Service API page)
+        window.asm3_adoptable_iframe = true;       // open profile in overlay iframe
+        window.asm3_adoptable_iframe_fixed = true; // less scroll-jump on long pages
+        window.asm3_adoptable_filters = "species,sex,age"; // show dropdowns
+      </script>
+      <script src={`${base}?method=animal_view_adoptable_js&account=${account}`}></script>
+    </>
+  ) : (
+    <p class="text-sm text-red-600">PUBLIC_ASM_ACCOUNT not set.</p>
+  )}
+</Base>

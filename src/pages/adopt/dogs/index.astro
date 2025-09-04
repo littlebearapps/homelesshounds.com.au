@@ -1,21 +1,23 @@
 ---
 import Base from "../../../layouts/Base.astro";
 const account = import.meta.env.PUBLIC_ASM_ACCOUNT;
+const base = import.meta.env.PUBLIC_ASM_BASE;
 ---
-<Base title="Adoptable Dogs">
-  <h1 class="text-3xl font-semibold mb-4">Adoptable Dogs</h1>
+<Base title="Dogs for Adoption">
+  <h1 class="text-3xl font-semibold mb-6">Dogs for Adoption</h1>
+
   {account ? (
     <>
-      <div id="asm3-adoptables"></div>
+      <div id="asm3-adoptables" class="grid gap-6"></div>
       <script>
-        // ASM sends SPECIESNAME and SPECIESID in each item; filter before render
-        window.asm3_adoptable_filter = (item) =>
-          (item.SPECIESNAME || "").toLowerCase() === "dog";
+        // Only include items where SPECIESNAME === "Dog"
+        window.asm3_adoptable_filter = (item) => (item.SPECIESNAME || "").toLowerCase() === "dog";
         window.asm3_adoptable_iframe = true;
+        window.asm3_adoptable_filters = "sex,age";
       </script>
-      <script src={`https://service.sheltermanager.com/asmservice?method=animal_view_adoptable_js&account=${account}`}></script>
+      <script src={`${base}?method=animal_view_adoptable_js&account=${account}`}></script>
     </>
   ) : (
-    <p class="text-sm text-red-600">PUBLIC_ASM_ACCOUNT is not set.</p>
+    <p class="text-sm text-red-600">PUBLIC_ASM_ACCOUNT not set.</p>
   )}
 </Base>
