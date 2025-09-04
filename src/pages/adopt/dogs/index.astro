@@ -1,23 +1,108 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import "../../../styles/asm-overrides.css";
 const account = import.meta.env.PUBLIC_ASM_ACCOUNT;
 const base = import.meta.env.PUBLIC_ASM_BASE;
 ---
 <Base title="Dogs for Adoption">
-  <h1 class="text-3xl font-semibold mb-6">Dogs for Adoption</h1>
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
+        <span class="text-3xl">🐕</span>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Dogs Looking for Homes</h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Meet our wonderful dogs who are ready to become your loyal companions. All dogs are health checked, 
+        vaccinated, microchipped, and desexed (if age appropriate).
+      </p>
+    </div>
 
-  {account ? (
-    <>
-      <div id="asm3-adoptables" class="grid gap-6"></div>
-      <script>
-        // Only include items where SPECIESNAME === "Dog"
-        window.asm3_adoptable_filter = (item) => (item.SPECIESNAME || "").toLowerCase() === "dog";
-        window.asm3_adoptable_iframe = true;
-        window.asm3_adoptable_filters = "sex,age";
-      </script>
-      <script src={`${base}?method=animal_view_adoptable_js&account=${account}`}></script>
-    </>
-  ) : (
-    <p class="text-sm text-red-600">PUBLIC_ASM_ACCOUNT not set.</p>
-  )}
+    <!-- Navigation -->
+    <div class="flex justify-center gap-4 mb-8">
+      <a href="/adopt" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">
+        ← All Animals
+      </a>
+      <a href="/adopt/cats" class="inline-flex items-center px-4 py-2 bg-amber-50 text-amber-700 rounded-lg hover:bg-amber-100 transition-colors text-sm font-medium">
+        🐱 View Cats
+      </a>
+    </div>
+
+    {account ? (
+      <>
+        <!-- Filter Section -->
+        <div class="bg-blue-50 rounded-xl border p-6 mb-8">
+          <h2 class="text-lg font-semibold text-blue-900 mb-4">Filter dogs by preferences</h2>
+          <div id="asm3-filters-container" class="flex flex-wrap gap-4">
+            <!-- Filters will be inserted here by ASM -->
+          </div>
+        </div>
+
+        <!-- Dogs Grid -->
+        <div id="asm3-adoptables" class="min-h-[400px]"></div>
+        
+        <script>
+          // Only include items where SPECIESNAME === "Dog"
+          window.asm3_adoptable_filter = (item) => (item.SPECIESNAME || "").toLowerCase() === "dog";
+          window.asm3_adoptable_iframe = true;
+          window.asm3_adoptable_filters = "sex,age,size";
+          
+          // Custom initialization
+          window.addEventListener('load', function() {
+            // Move filters to custom container if they exist
+            setTimeout(function() {
+              const filters = document.querySelector('.asm3-adoptables-filters');
+              const container = document.getElementById('asm3-filters-container');
+              if (filters && container) {
+                container.appendChild(filters);
+                filters.style.background = 'transparent';
+                filters.style.border = 'none';
+                filters.style.padding = '0';
+              }
+            }, 1000);
+          });
+        </script>
+        <script src={`${base}?method=animal_view_adoptable_js&account=${account}`}></script>
+      </>
+    ) : (
+      <div class="text-center py-12">
+        <div class="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+          <p class="text-red-800 font-medium mb-2">Configuration Required</p>
+          <p class="text-sm text-red-600">PUBLIC_ASM_ACCOUNT environment variable not set.</p>
+        </div>
+      </div>
+    )}
+
+    <!-- Dog Care Information -->
+    <div class="mt-16 grid md:grid-cols-2 gap-8">
+      <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8">
+        <h3 class="text-xl font-semibold text-blue-900 mb-4">🏠 Preparing for Your Dog</h3>
+        <ul class="space-y-2 text-blue-800">
+          <li>• Secure, fenced yard (for most dogs)</li>
+          <li>• Dog bed and comfortable sleeping area</li>
+          <li>• Quality dog food and water bowls</li>
+          <li>• Collar, leash, and ID tags</li>
+          <li>• Toys and enrichment activities</li>
+          <li>• Regular exercise and mental stimulation</li>
+        </ul>
+      </div>
+      <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8">
+        <h3 class="text-xl font-semibold text-green-900 mb-4">💝 Why Adopt a Dog?</h3>
+        <ul class="space-y-2 text-green-800">
+          <li>• Loyal, loving companionship</li>
+          <li>• Great exercise motivation</li>
+          <li>• Enhanced home security</li>
+          <li>• Wonderful with children (many breeds)</li>
+          <li>• Social opportunities in your community</li>
+          <li>• Improved mental health and wellbeing</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="mt-8 text-center">
+      <p class="text-gray-600">
+        Questions about a specific dog? <a href="/contact-us" class="text-blue-600 hover:text-blue-700 underline">Contact our team</a> for more information.
+      </p>
+    </div>
+  </div>
 </Base>

@@ -1,23 +1,108 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import "../../../styles/asm-overrides.css";
 const account = import.meta.env.PUBLIC_ASM_ACCOUNT;
 const base = import.meta.env.PUBLIC_ASM_BASE;
 ---
 <Base title="Cats for Adoption">
-  <h1 class="text-3xl font-semibold mb-6">Cats for Adoption</h1>
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-100 rounded-full mb-4">
+        <span class="text-3xl">🐱</span>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Cats Looking for Homes</h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Meet our wonderful cats who are ready to become your perfect companions. All cats are health checked, 
+        vaccinated, microchipped, and desexed (if age appropriate).
+      </p>
+    </div>
 
-  {account ? (
-    <>
-      <div id="asm3-adoptables" class="grid gap-6"></div>
-      <script>
-        // Only include items where SPECIESNAME === "Cat"
-        window.asm3_adoptable_filter = (item) => (item.SPECIESNAME || "").toLowerCase() === "cat";
-        window.asm3_adoptable_iframe = true;
-        window.asm3_adoptable_filters = "sex,age";
-      </script>
-      <script src={`${base}?method=animal_view_adoptable_js&account=${account}`}></script>
-    </>
-  ) : (
-    <p class="text-sm text-red-600">PUBLIC_ASM_ACCOUNT not set.</p>
-  )}
+    <!-- Navigation -->
+    <div class="flex justify-center gap-4 mb-8">
+      <a href="/adopt" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">
+        ← All Animals
+      </a>
+      <a href="/adopt/dogs" class="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium">
+        🐕 View Dogs
+      </a>
+    </div>
+
+    {account ? (
+      <>
+        <!-- Filter Section -->
+        <div class="bg-amber-50 rounded-xl border p-6 mb-8">
+          <h2 class="text-lg font-semibold text-amber-900 mb-4">Filter cats by preferences</h2>
+          <div id="asm3-filters-container" class="flex flex-wrap gap-4">
+            <!-- Filters will be inserted here by ASM -->
+          </div>
+        </div>
+
+        <!-- Cats Grid -->
+        <div id="asm3-adoptables" class="min-h-[400px]"></div>
+        
+        <script>
+          // Only include items where SPECIESNAME === "Cat"
+          window.asm3_adoptable_filter = (item) => (item.SPECIESNAME || "").toLowerCase() === "cat";
+          window.asm3_adoptable_iframe = true;
+          window.asm3_adoptable_filters = "sex,age,size";
+          
+          // Custom initialization
+          window.addEventListener('load', function() {
+            // Move filters to custom container if they exist
+            setTimeout(function() {
+              const filters = document.querySelector('.asm3-adoptables-filters');
+              const container = document.getElementById('asm3-filters-container');
+              if (filters && container) {
+                container.appendChild(filters);
+                filters.style.background = 'transparent';
+                filters.style.border = 'none';
+                filters.style.padding = '0';
+              }
+            }, 1000);
+          });
+        </script>
+        <script src={`${base}?method=animal_view_adoptable_js&account=${account}`}></script>
+      </>
+    ) : (
+      <div class="text-center py-12">
+        <div class="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+          <p class="text-red-800 font-medium mb-2">Configuration Required</p>
+          <p class="text-sm text-red-600">PUBLIC_ASM_ACCOUNT environment variable not set.</p>
+        </div>
+      </div>
+    )}
+
+    <!-- Cat Care Information -->
+    <div class="mt-16 grid md:grid-cols-2 gap-8">
+      <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-8">
+        <h3 class="text-xl font-semibold text-amber-900 mb-4">🏠 Preparing for Your Cat</h3>
+        <ul class="space-y-2 text-amber-800">
+          <li>• Secure indoor environment or cat-proofed outdoor space</li>
+          <li>• Comfortable cat bed and cozy hiding spots</li>
+          <li>• Quality cat food and fresh water bowls</li>
+          <li>• Litter box with appropriate litter</li>
+          <li>• Scratching posts and interactive toys</li>
+          <li>• Regular grooming and enrichment activities</li>
+        </ul>
+      </div>
+      <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8">
+        <h3 class="text-xl font-semibold text-purple-900 mb-4">💝 Why Adopt a Cat?</h3>
+        <ul class="space-y-2 text-purple-800">
+          <li>• Independent yet affectionate companions</li>
+          <li>• Therapeutic purring and calming presence</li>
+          <li>• Natural pest control abilities</li>
+          <li>• Lower maintenance than many pets</li>
+          <li>• Great for apartments and smaller homes</li>
+          <li>• Stress-reducing and mood-boosting benefits</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="mt-8 text-center">
+      <p class="text-gray-600">
+        Questions about a specific cat? <a href="/contact-us" class="text-amber-600 hover:text-amber-700 underline">Contact our team</a> for more information.
+      </p>
+    </div>
+  </div>
 </Base>

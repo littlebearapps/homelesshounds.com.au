@@ -1,23 +1,98 @@
 ---
 import Base from "../../layouts/Base.astro";
+import "../../styles/asm-overrides.css";
 const account = import.meta.env.PUBLIC_ASM_ACCOUNT;
 const base = import.meta.env.PUBLIC_ASM_BASE;
 ---
 <Base title="Adoptable Animals">
-  <h1 class="text-3xl font-semibold mb-6">Adoptable Animals</h1>
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Find Your Perfect Companion</h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Browse all our wonderful animals looking for their forever homes. Each pet has been health checked, 
+        microchipped, and is ready for adoption through our caring foster network.
+      </p>
+    </div>
 
-  {account ? (
-    <>
-      <div id="asm3-adoptables" class="grid gap-6"></div>
-      <script>
-        // ASM embed options (documented on Service API page)
-        window.asm3_adoptable_iframe = true;       // open profile in overlay iframe
-        window.asm3_adoptable_iframe_fixed = true; // less scroll-jump on long pages
-        window.asm3_adoptable_filters = "species,sex,age"; // show dropdowns
-      </script>
-      <script src={`${base}?method=animal_view_adoptable_js&account=${account}`}></script>
-    </>
-  ) : (
-    <p class="text-sm text-red-600">PUBLIC_ASM_ACCOUNT not set.</p>
-  )}
+    {account ? (
+      <>
+        <!-- Filter Section -->
+        <div class="bg-gray-50 rounded-xl border p-6 mb-8">
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">Filter by preferences</h2>
+          <div id="asm3-filters-container" class="flex flex-wrap gap-4">
+            <!-- Filters will be inserted here by ASM -->
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="flex justify-center gap-4 mb-8">
+          <a href="/adopt/dogs" class="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium">
+            🐕 View Dogs Only
+          </a>
+          <a href="/adopt/cats" class="inline-flex items-center px-4 py-2 bg-amber-50 text-amber-700 rounded-lg hover:bg-amber-100 transition-colors text-sm font-medium">
+            🐱 View Cats Only
+          </a>
+        </div>
+
+        <!-- Animals Grid -->
+        <div id="asm3-adoptables" class="min-h-[400px]"></div>
+        
+        <script>
+          // ASM embed options (documented on Service API page)
+          window.asm3_adoptable_iframe = true;       // open profile in overlay iframe
+          window.asm3_adoptable_iframe_fixed = true; // less scroll-jump on long pages
+          window.asm3_adoptable_filters = "species,sex,age"; // show dropdowns
+          
+          // Custom initialization to handle the display
+          window.addEventListener('load', function() {
+            // Move filters to custom container if they exist
+            setTimeout(function() {
+              const filters = document.querySelector('.asm3-adoptables-filters');
+              const container = document.getElementById('asm3-filters-container');
+              if (filters && container) {
+                container.appendChild(filters);
+                filters.style.background = 'transparent';
+                filters.style.border = 'none';
+                filters.style.padding = '0';
+              }
+            }, 1000);
+          });
+        </script>
+        <script src={`${base}?method=animal_view_adoptable_js&account=${account}`}></script>
+      </>
+    ) : (
+      <div class="text-center py-12">
+        <div class="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+          <p class="text-red-800 font-medium mb-2">Configuration Required</p>
+          <p class="text-sm text-red-600">PUBLIC_ASM_ACCOUNT environment variable not set.</p>
+        </div>
+      </div>
+    )}
+
+    <!-- Information Section -->
+    <div class="mt-16 bg-blue-50 rounded-xl p-8">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-xl font-semibold text-blue-900 mb-4">Adoption Process</h3>
+          <ul class="space-y-2 text-blue-800">
+            <li>• Browse available animals</li>
+            <li>• Submit adoption application</li>
+            <li>• Meet and greet appointment</li>
+            <li>• Home check (if required)</li>
+            <li>• Take your new friend home!</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-blue-900 mb-4">What's Included</h3>
+          <ul class="space-y-2 text-blue-800">
+            <li>• Health check and vaccinations</li>
+            <li>• Microchipping</li>
+            <li>• Desexing (if age appropriate)</li>
+            <li>• Starter pack of food</li>
+            <li>• Ongoing support from our team</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </Base>

@@ -1,0 +1,171 @@
+/* ASM Animal Listings Custom Styling */
+
+/* Container styling for responsive grid */
+#asm3-adoptables {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+  gap: 1.5rem !important;
+  margin-top: 2rem !important;
+  padding: 0 !important;
+}
+
+/* Individual animal card styling */
+.asm3-adoptables-item {
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 0.75rem !important;
+  padding: 1.25rem !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+  transition: all 0.2s ease-in-out !important;
+  overflow: hidden !important;
+}
+
+.asm3-adoptables-item:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Animal photo styling */
+.asm3-adoptables-item img {
+  width: 100% !important;
+  height: 200px !important;
+  object-fit: cover !important;
+  border-radius: 0.5rem !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Animal name styling */
+.asm3-adoptables-item h3,
+.asm3-adoptables-item .asm3-name {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  color: #111827 !important;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.3 !important;
+}
+
+/* Animal details styling */
+.asm3-adoptables-item .asm3-breed,
+.asm3-adoptables-item .asm3-age,
+.asm3-adoptables-item .asm3-sex,
+.asm3-adoptables-item .asm3-size {
+  font-size: 0.875rem !important;
+  color: #6b7280 !important;
+  margin-bottom: 0.25rem !important;
+  line-height: 1.4 !important;
+}
+
+/* Special status badges */
+.asm3-adoptables-item .asm3-location {
+  display: inline-block !important;
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  padding: 0.25rem 0.5rem !important;
+  border-radius: 0.375rem !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  margin-top: 0.5rem !important;
+}
+
+/* Foster status styling */
+.asm3-adoptables-item .asm3-location:contains("Foster") {
+  background: #dbeafe !important;
+  color: #1d4ed8 !important;
+}
+
+/* Action buttons */
+.asm3-adoptables-item a,
+.asm3-adoptables-item button {
+  display: inline-block !important;
+  background: #1f2937 !important;
+  color: white !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.375rem !important;
+  text-decoration: none !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  margin-top: 1rem !important;
+  transition: background-color 0.2s !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+.asm3-adoptables-item a:hover,
+.asm3-adoptables-item button:hover {
+  background: #374151 !important;
+}
+
+/* Filter dropdown styling */
+.asm3-adoptables-filters {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 1rem !important;
+  margin-bottom: 2rem !important;
+  padding: 1.5rem !important;
+  background: #f9fafb !important;
+  border-radius: 0.75rem !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.asm3-adoptables-filters select {
+  padding: 0.5rem 0.75rem !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 0.375rem !important;
+  background: white !important;
+  font-size: 0.875rem !important;
+  min-width: 120px !important;
+}
+
+.asm3-adoptables-filters label {
+  font-weight: 500 !important;
+  color: #374151 !important;
+  font-size: 0.875rem !important;
+  margin-right: 0.5rem !important;
+}
+
+/* Loading state */
+#asm3-adoptables:empty::before {
+  content: "Loading available animals..." !important;
+  display: block !important;
+  text-align: center !important;
+  color: #6b7280 !important;
+  font-style: italic !important;
+  padding: 2rem !important;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  #asm3-adoptables {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .asm3-adoptables-item {
+    padding: 1rem !important;
+  }
+  
+  .asm3-adoptables-filters {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+}
+
+/* No results message */
+.asm3-no-animals {
+  text-align: center !important;
+  color: #6b7280 !important;
+  font-style: italic !important;
+  padding: 3rem 1rem !important;
+  background: #f9fafb !important;
+  border-radius: 0.75rem !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+/* Ensure consistent spacing */
+.asm3-adoptables-item > * {
+  margin: 0 !important;
+}
+
+.asm3-adoptables-item > *:not(:last-child) {
+  margin-bottom: 0.5rem !important;
+}
