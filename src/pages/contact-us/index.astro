@@ -1,0 +1,13 @@
+---
+import Base from "../../layouts/Base.astro";
+const account = import.meta.env.PUBLIC_ASM_ACCOUNT;
+const formId = import.meta.env.PUBLIC_ASM_CONTACT_FORM_ID;
+---
+<Base title="Contact Us">
+  <h1 class="text-3xl font-semibold mb-4">Contact Us</h1>
+  {account && formId
+    ? <iframe
+        src={`https://service.sheltermanager.com/asmservice?account=${account}&method=online_form_html&formid=${formId}`}
+        width="100%" height="1800" loading="lazy"></iframe>
+    : <p class="text-sm text-gray-700">Contact form coming soon. (Set PUBLIC_ASM_ACCOUNT and PUBLIC_ASM_CONTACT_FORM_ID)</p>}
+</Base>

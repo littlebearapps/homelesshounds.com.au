@@ -1,0 +1,10 @@
+---
+import Base from "../layouts/Base.astro";
+const donate = import.meta.env.PUBLIC_DONATE_URL;
+---
+<Base title="Donate">
+  <h1 class="text-3xl font-semibold mb-4">Donate</h1>
+  {donate
+    ? <p><a class="underline" href={donate} target="_blank" rel="noopener">Open donation page ↗</a></p>
+    : <p class="text-gray-700">Donation link coming soon.</p>}
+</Base>

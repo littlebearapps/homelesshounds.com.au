@@ -1,0 +1,10 @@
+---
+import Base from "../../../layouts/Base.astro";
+const url = import.meta.env.PUBLIC_FUNDRAISE_URL;
+---
+<Base title="Fundraise">
+  <h1 class="text-3xl font-semibold mb-4">Fundraise</h1>
+  {url
+    ? <p><a class="underline" href={url} target="_blank" rel="noopener">Open fundraising options ↗</a></p>
+    : <p class="text-gray-700">Fundraising link coming soon.</p>}
+</Base>

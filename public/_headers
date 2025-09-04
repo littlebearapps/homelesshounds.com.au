@@ -1,0 +1,6 @@
+/*
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https://service.sheltermanager.com; script-src 'self' https://service.sheltermanager.com; style-src 'self' 'unsafe-inline'; frame-src https://service.sheltermanager.com; connect-src 'self'; font-src 'self' data:;
