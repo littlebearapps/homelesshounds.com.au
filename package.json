@@ -1,0 +1,29 @@
+{
+  "name": "homelesshounds.com.au-main",
+  "version": "1.0.0",
+  "description": "Site scaffold coming soon.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/littlebearapps/homelesshounds.com.au.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/littlebearapps/homelesshounds.com.au/issues"
+  },
+  "homepage": "https://github.com/littlebearapps/homelesshounds.com.au#readme",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.12",
+    "astro": "^5.13.5",
+    "tailwindcss": "^4.1.12"
+  }
+}

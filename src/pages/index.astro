@@ -1,0 +1,58 @@
+---
+import "../styles/global.css";
+const title = "Homeless Hounds";
+const tagline = "Volunteer-run animal rescue in Victoria";
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content="Homeless Hounds — volunteer-run animal rescue group." />
+  </head>
+  <body class="min-h-screen bg-white text-gray-900">
+    <header class="border-b">
+      <div class="mx-auto max-w-5xl px-6 py-4 flex items-center justify-between">
+        <a href="/" class="font-semibold text-lg">{title}</a>
+        <nav class="flex gap-4 text-sm">
+          <a class="hover:underline" href="/">Home</a>
+          <a class="hover:underline" href="/adopt">Adopt</a>
+          <a class="hover:underline" href="/volunteer">Volunteer</a>
+          <a class="hover:underline" href="https://homelesshounds.com.au" rel="noopener">Main site</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-5xl px-6 py-16">
+      <section class="text-center">
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">{title}</h1>
+        <p class="text-lg text-gray-700 mb-8">{tagline}</p>
+        <div class="flex justify-center gap-4">
+          <a href="/adopt" class="px-5 py-3 rounded-lg border text-sm font-medium hover:bg-gray-50">See pets</a>
+          <a href="/donate" class="px-5 py-3 rounded-lg bg-black text-white text-sm font-medium hover:opacity-90">Donate</a>
+        </div>
+      </section>
+
+      <section class="mt-16 grid md:grid-cols-3 gap-6 text-left">
+        <article class="p-5 border rounded-lg">
+          <h2 class="font-semibold mb-2">Our mission</h2>
+          <p class="text-sm text-gray-700">Rescuing, fostering, and rehoming animals in need through community support.</p>
+        </article>
+        <article class="p-5 border rounded-lg">
+          <h2 class="font-semibold mb-2">Foster & volunteer</h2>
+          <p class="text-sm text-gray-700">Open your home or help with transport, events, and admin—every bit matters.</p>
+        </article>
+        <article class="p-5 border rounded-lg">
+          <h2 class="font-semibold mb-2">Adoption process</h2>
+          <p class="text-sm text-gray-700">Simple application, meet & greet, and ongoing support for every placement.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="mt-16 border-t">
+      <div class="mx-auto max-w-5xl px-6 py-8 text-sm text-gray-600">
+        © {new Date().getFullYear()} Homeless Hounds • ABN/Charity details here
+      </div>
+    </footer>
+  </body>
+</html>
