@@ -2,7 +2,8 @@ import { defineConfig } from "astro/config";
 import tailwind from "@tailwindcss/vite";
 
 export default defineConfig({
-  site: "https://homelesshounds.com.au",
+  site: "https://littlebearapps.github.io",
+  base: "/homelesshounds.com.au",
   vite: {
     plugins: [tailwind()],
   },

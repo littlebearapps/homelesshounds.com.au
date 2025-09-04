@@ -38,24 +38,61 @@ const base = import.meta.env.PUBLIC_ASM_BASE;
         <div id="asm3-adoptables" class="min-h-[400px]"></div>
         
         <script>
+          // Debug logging
+          console.log('ASM page script loaded');
+          
           // ASM embed options (documented on Service API page)
           window.asm3_adoptable_iframe = true;       // open profile in overlay iframe
           window.asm3_adoptable_iframe_fixed = true; // less scroll-jump on long pages
           window.asm3_adoptable_filters = "species,sex,age"; // show dropdowns
+          window.asm3_adoptable_border = "1px solid #ccc"; // border styling
+          window.asm3_adoptable_bgcolour = "#ffffff"; // background color
+          
+          console.log('ASM options set:', {
+            iframe: window.asm3_adoptable_iframe,
+            filters: window.asm3_adoptable_filters
+          });
           
           // Custom initialization to handle the display
           window.addEventListener('load', function() {
+            console.log('Page loaded, starting ASM filter detection');
+            
             // Move filters to custom container if they exist
-            setTimeout(function() {
-              const filters = document.querySelector('.asm3-adoptables-filters');
+            const moveFilters = function() {
+              const filters = document.querySelector('.asm3-filters, #asm3-adoptable-filters');
               const container = document.getElementById('asm3-filters-container');
-              if (filters && container) {
+              const adoptables = document.getElementById('asm3-adoptables');
+              
+              // Log all potential filter-related elements
+              const allFilters = document.querySelectorAll('[class*="filter"], [class*="asm3"]');
+              console.log('Looking for elements:', {
+                filters: !!filters,
+                container: !!container,
+                adoptables: !!adoptables,
+                adoptablesContent: adoptables ? adoptables.innerHTML.length : 0,
+                allASMElements: Array.from(allFilters).map(el => el.className),
+                firstFewCharsOfAdoptables: adoptables ? adoptables.innerHTML.substring(0, 200) : 'none'
+              });
+              
+              if (filters && container && !container.querySelector('.asm3-filters, #asm3-adoptable-filters')) {
                 container.appendChild(filters);
                 filters.style.background = 'transparent';
                 filters.style.border = 'none';
                 filters.style.padding = '0';
+                console.log('ASM filters moved successfully');
+                return true;
               }
-            }, 1000);
+              return false;
+            };
+            
+            // Try multiple times with increasing delays
+            const attempts = [500, 1000, 2000, 3000, 5000];
+            attempts.forEach((delay, index) => {
+              setTimeout(() => {
+                console.log(`Attempt ${index + 1} after ${delay}ms`);
+                moveFilters();
+              }, delay);
+            });
           });
         </script>
         <script src={`${base}?method=animal_view_adoptable_js&account=${account}`}></script>

@@ -49,16 +49,28 @@ const base = import.meta.env.PUBLIC_ASM_BASE;
           // Custom initialization
           window.addEventListener('load', function() {
             // Move filters to custom container if they exist
-            setTimeout(function() {
+            const moveFilters = function() {
               const filters = document.querySelector('.asm3-adoptables-filters');
               const container = document.getElementById('asm3-filters-container');
-              if (filters && container) {
+              if (filters && container && !container.querySelector('.asm3-adoptables-filters')) {
                 container.appendChild(filters);
                 filters.style.background = 'transparent';
                 filters.style.border = 'none';
                 filters.style.padding = '0';
+                return true;
               }
-            }, 1000);
+              return false;
+            };
+            
+            // Try multiple times with increasing delays
+            const attempts = [500, 1000, 2000, 3000];
+            attempts.forEach((delay, index) => {
+              setTimeout(() => {
+                if (moveFilters()) {
+                  console.log(`ASM filters moved successfully after ${delay}ms`);
+                }
+              }, delay);
+            });
           });
         </script>
         <script src={`${base}?method=animal_view_adoptable_js&account=${account}`}></script>
