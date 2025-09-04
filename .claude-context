@@ -1,0 +1,116 @@
+# Claude Code Session Context
+
+## 📍 Project Stage
+
+**Current Phase**: 2 - Core Pages Development  
+**Progress**: 12% complete  
+**Last Session**: 2025-09-04  
+**Session Goal**: Set up Astro + Tailwind framework and create project documentation
+
+## ✅ Completed This Session
+
+- [x] Initialized Astro v5 project with Tailwind CSS v4
+- [x] Created basic homepage with navigation
+- [x] Set up project structure (src/pages, src/styles)
+- [x] Created README.md with project roadmap
+- [x] Generated CLAUDE.md and .claude-context files
+
+## 🔄 Active Tasks
+
+### In Progress
+- [ ] **Task 2.1**: Design and implement navigation structure
+  - Status: 25% complete
+  - Next: Create reusable navigation component
+
+- [ ] **Task 2.2**: Create homepage with hero section
+  - Status: Basic structure done
+  - Next: Add hero image and improve styling
+
+### Queued
+- [ ] Task 2.3: Build About Us page
+- [ ] Task 2.4: Create Contact page with form
+- [ ] Task 2.5: Set up Adopt a Pet listing page
+- [ ] Task 2.6: Create individual pet profile template
+
+## 📚 Key References
+
+**Project Structure**:
+- Pages: `src/pages/`
+- Components: `src/components/` (to be created)
+- Styles: `src/styles/global.css`
+- Config: `astro.config.mjs`
+
+**Documentation**:
+- Framework: https://docs.astro.build
+- Styling: https://tailwindcss.com
+- Current site: https://homelesshounds.com.au
+
+## 🔖 Session Continuity
+
+### Last Session Summary
+Successfully bootstrapped the Homeless Hounds website project with Astro v5 and Tailwind CSS v4. Created initial homepage with basic navigation and information cards. Set up project documentation following templates.
+
+### Current Working Directory
+```
+homelesshounds.com.au-main/
+├── src/pages/index.astro (active)
+├── src/styles/global.css
+└── astro.config.mjs
+```
+
+### Environment State
+- Branch: `main`
+- Node version: 24.2.0
+- Astro version: 5.13.5
+- Dev server: Running on http://localhost:4321
+
+## ⏭️ Next Actions
+
+### Immediate (This Session)
+1. Create reusable Layout component for consistent page structure
+2. Build navigation component with mobile responsiveness
+3. Create About Us page with organization info
+
+### Next Session Priority
+1. Set up pet adoption listing page with grid layout
+2. Create pet profile template page
+3. Implement contact form functionality
+
+## ⚠️ Important Context
+
+### Design Considerations
+- Mobile-first responsive design essential
+- Accessibility compliance (WCAG 2.1 AA)
+- Fast loading times for users on mobile data
+- Clear calls-to-action for adoptions and donations
+
+### Technical Decisions
+- Static site generation for performance
+- Tailwind CSS for consistent styling
+- Markdown/MDX for content management
+- No database needed initially (static content)
+
+### Content Requirements
+- Pet profiles with photos and descriptions
+- Adoption application forms
+- Volunteer sign-up forms
+- Donation integration (Stripe/PayPal)
+- Success stories and updates
+
+## 💭 Session Notes
+
+This is a volunteer project for a registered animal rescue charity. Focus on:
+- Clear, compassionate messaging
+- Easy navigation for potential adopters
+- Prominent donation options
+- Mobile-optimized experience
+- Fast, accessible design
+
+The current live site (homelesshounds.com.au) can be referenced for content and features to migrate.
+
+---
+
+**Token Count**: ~450 (Optimized for continuity)  
+**Session Started**: 2025-09-04 19:40  
+**Session Updated**: 2025-09-04 19:52  
+**Next Review**: When implementing pet listings
