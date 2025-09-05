@@ -14,10 +14,11 @@
 
 ## 🔧 Technical Stack
 
-**Framework**: Astro v5 (Static Site Generator)  
+**Framework**: Astro v5 (SSR enabled for dynamic content)  
 **Styling**: Tailwind CSS v4 via Vite plugin  
-**Deployment**: TBD (Netlify/Vercel recommended)  
-**Content**: Markdown/MDX for dynamic content  
+**Deployment**: Cloudflare Pages (Active: homelesshounds-com-au.pages.dev)  
+**Content**: Native ASM API integration + Markdown/MDX  
+**Data Source**: Animal Shelter Manager (ASM) API
 
 **Performance Targets**:
 - Lighthouse score: >90 all categories
@@ -42,9 +43,10 @@ src/
 
 ## 🚧 Current Focus
 
-**Active Task**: Building core page structure  
-**Next Milestone**: Complete essential pages (About, Contact, Adopt)  
-**Priority**: Get basic site structure ready for content
+**Recently Completed**: Native ASM integration for adoption pages  
+**Active Task**: Implementing native forms with Turnstile protection  
+**Next Milestone**: Complete surrender/contact forms with ASM integration  
+**Priority**: Replace all JavaScript embeds with native components
 
 ## ⚠️ Critical Requirements
 
@@ -60,19 +62,19 @@ src/
 - Clear navigation
 - Prominent CTAs for adoption/donation
 
-## 🔗 Key Features to Implement
+## 🔗 Key Features Implementation
 
-**Phase 1 - Core Pages**:
-- Homepage with mission statement
-- About Us page
-- Contact form
-- Basic navigation
+**Phase 1 - Core Pages** ✅:
+- [x] Homepage with mission statement
+- [x] About Us page
+- [ ] Contact forms (in progress)
+- [x] Basic navigation
 
-**Phase 2 - Pet Adoption System**:
-- Pet listing grid with filters
-- Individual pet profiles
-- Adoption application form
-- Search functionality
+**Phase 2 - Pet Adoption System** ✅:
+- [x] Pet listing grid with filters (native ASM)
+- [x] Individual pet profiles (dynamic routing)
+- [ ] Adoption application form (next)
+- [x] Search/filter functionality
 
 **Phase 3 - Volunteer System**:
 - Volunteer registration form
@@ -97,12 +99,27 @@ src/
 **Images**: Pet photos need optimization for web  
 **SEO**: Meta tags and structured data for pet listings
 
+## 🏗️ ASM Integration Details
+
+**API Endpoints** (Cloudflare Pages Functions):
+- `/api/asm/adoptable` - List adoptable animals
+- `/api/asm/animal/[id]` - Individual animal details  
+- `/api/asm/form-schema` - Form structure (proposed)
+- `/api/submit/surrender` - Form submission (proposed)
+
+**Environment Variables** (Cloudflare Pages):
+- `ASM_ACCOUNT` - Account ID (st3418)
+- `ASM_BASE_URL` - API base URL
+- `ASM_USERNAME` - API username (encrypted)
+- `ASM_PASSWORD` - API password (encrypted)
+
 ## 💡 Key Decisions
 
-- **Static Generation**: Using Astro for fast, SEO-friendly static sites
+- **SSR over Static**: Using Astro SSR for dynamic ASM content
+- **Native Integration**: Replace JS embeds with server-side components
+- **Cloudflare Pages**: Leverages edge functions and KV storage
+- **Turnstile Protection**: Anti-spam for forms (proposed)
 - **Tailwind CSS**: Utility-first for rapid, consistent styling
-- **No CMS Initially**: Static content, can add CMS later if needed
-- **Form Handling**: Consider Netlify Forms or similar service
 
 ## 📝 Notes for Claude
 
@@ -126,6 +143,6 @@ src/
 
 ---
 
-**Token Count**: ~500 (Optimized for Claude Code)  
-**Last Updated**: 2025-09-04  
-**Version**: 0.1.0
+**Token Count**: ~600 (Optimized for Claude Code)  
+**Last Updated**: 2025-09-05  
+**Version**: 0.2.0

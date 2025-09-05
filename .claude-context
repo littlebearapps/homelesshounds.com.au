@@ -2,115 +2,117 @@
 
 ## 📍 Project Stage
 
-**Current Phase**: 2 - Core Pages Development  
-**Progress**: 12% complete  
-**Last Session**: 2025-09-04  
-**Session Goal**: Set up Astro + Tailwind framework and create project documentation
+**Current Phase**: 2 - Core Implementation  
+**Progress**: 65% complete  
+**Last Session**: 2025-09-05  
+**Session Goal**: Complete native ASM integration and implement form systems
 
 ## ✅ Completed This Session
 
-- [x] Initialized Astro v5 project with Tailwind CSS v4
-- [x] Created basic homepage with navigation
-- [x] Set up project structure (src/pages, src/styles)
-- [x] Created README.md with project roadmap
-- [x] Generated CLAUDE.md and .claude-context files
+- [x] Migrated all adoption pages to native ASM system
+- [x] Replaced JavaScript embeds with server-side components
+- [x] Implemented SSR for real-time animal data
+- [x] Fixed Cloudflare Pages environment variables
+- [x] Deployed to production (homelesshounds-com-au.pages.dev)
+- [x] Created AnimalCard and AnimalFilters components
+- [x] Set up dynamic routing for pet profiles
 
 ## 🔄 Active Tasks
 
 ### In Progress
-- [ ] **Task 2.1**: Design and implement navigation structure
-  - Status: 25% complete
-  - Next: Create reusable navigation component
-
-- [ ] **Task 2.2**: Create homepage with hero section
-  - Status: Basic structure done
-  - Next: Add hero image and improve styling
+- [ ] **Native Forms Implementation**
+  - Status: Planning/review phase
+  - Next: Implement surrender form with Turnstile
 
 ### Queued
-- [ ] Task 2.3: Build About Us page
-- [ ] Task 2.4: Create Contact page with form
-- [ ] Task 2.5: Set up Adopt a Pet listing page
-- [ ] Task 2.6: Create individual pet profile template
+- [ ] Adoption application form
+- [ ] Volunteer registration form
+- [ ] Foster care application
+- [ ] Donation integration
 
 ## 📚 Key References
 
 **Project Structure**:
-- Pages: `src/pages/`
-- Components: `src/components/` (to be created)
-- Styles: `src/styles/global.css`
-- Config: `astro.config.mjs`
+- Pages: `src/pages/adopt/` (native ASM)
+- Components: `src/components/AnimalCard.astro`, `AnimalFilters.astro`
+- API Routes: `src/pages/api/asm/`
+- Functions: `functions/api/` (proposed)
 
-**Documentation**:
-- Framework: https://docs.astro.build
-- Styling: https://tailwindcss.com
-- Current site: https://homelesshounds.com.au
+**Live Sites**:
+- Production: https://homelesshounds-com-au.pages.dev
+- ASM API: https://service.sheltermanager.com/asmservice
 
 ## 🔖 Session Continuity
 
 ### Last Session Summary
-Successfully bootstrapped the Homeless Hounds website project with Astro v5 and Tailwind CSS v4. Created initial homepage with basic navigation and information cards. Set up project documentation following templates.
+Successfully implemented native ASM integration for all adoption pages. Replaced JavaScript embeds with server-side rendered components using Astro SSR. Fixed environment variable access patterns for Cloudflare Pages. All 20 animals (dogs and cats) now display with native components, filters, and SEO-friendly URLs.
 
-### Current Working Directory
-```
-homelesshounds.com.au-main/
-├── src/pages/index.astro (active)
-├── src/styles/global.css
-└── astro.config.mjs
+### Key Implementation Details
+```typescript
+// Environment variable access pattern for Cloudflare Pages
+const ASM_ACCOUNT = locals?.runtime?.env?.ASM_ACCOUNT;
+
+// SSR enabled for dynamic content
+export const prerender = false;
+
+// API endpoints
+/api/asm/adoptable?species=[all|dog|cat]
+/api/asm/animal/[id]
 ```
 
 ### Environment State
-- Branch: `main`
-- Node version: 24.2.0
-- Astro version: 5.13.5
-- Dev server: Running on http://localhost:4321
+- Branch: `main`  
+- Deployment: Cloudflare Pages
+- ASM Account: st3418
+- Animals in system: 20 total
 
 ## ⏭️ Next Actions
 
 ### Immediate (This Session)
-1. Create reusable Layout component for consistent page structure
-2. Build navigation component with mobile responsiveness
-3. Create About Us page with organization info
+1. Review and implement native forms proposal
+2. Set up Cloudflare Turnstile for spam protection
+3. Create surrender form with ASM integration
 
 ### Next Session Priority
-1. Set up pet adoption listing page with grid layout
-2. Create pet profile template page
-3. Implement contact form functionality
+1. Adoption application form
+2. Volunteer/foster forms
+3. Payment integration for donations
 
 ## ⚠️ Important Context
 
-### Design Considerations
-- Mobile-first responsive design essential
-- Accessibility compliance (WCAG 2.1 AA)
-- Fast loading times for users on mobile data
-- Clear calls-to-action for adoptions and donations
+### ASM Integration Notes
+- API credentials stored in Cloudflare Pages env vars (encrypted)
+- Forms can use `online_form_json` for schema
+- Submit to `online_form_html` for processing
+- Cache form schemas for performance
 
-### Technical Decisions
-- Static site generation for performance
-- Tailwind CSS for consistent styling
-- Markdown/MDX for content management
-- No database needed initially (static content)
+### Proposed Forms Architecture
+- Use Cloudflare Pages Functions for backend
+- Turnstile for anti-spam protection  
+- Native form rendering from ASM JSON
+- Proper CSP headers for security
+- Thank you page redirects
 
-### Content Requirements
-- Pet profiles with photos and descriptions
-- Adoption application forms
-- Volunteer sign-up forms
-- Donation integration (Stripe/PayPal)
-- Success stories and updates
+### Security Considerations
+- Never expose ASM credentials to client
+- Use server-side form validation
+- Implement rate limiting
+- Add CSP headers for XSS protection
 
 ## 💭 Session Notes
 
-This is a volunteer project for a registered animal rescue charity. Focus on:
-- Clear, compassionate messaging
-- Easy navigation for potential adopters
-- Prominent donation options
-- Mobile-optimized experience
-- Fast, accessible design
+The native ASM integration is a major improvement over JavaScript embeds:
+- Better SEO (server-rendered content)
+- Faster initial page loads
+- More control over styling and UX
+- Improved accessibility
+- Real-time data without iframe issues
 
-The current live site (homelesshounds.com.au) can be referenced for content and features to migrate.
+The proposed forms system looks excellent - well-architected with proper security (Turnstile), caching, and native rendering. This will complete the transition away from JavaScript embeds.
 
 ---
 
-**Token Count**: ~450 (Optimized for continuity)  
-**Session Started**: 2025-09-04 19:40  
-**Session Updated**: 2025-09-04 19:52  
-**Next Review**: When implementing pet listings
+**Token Count**: ~550 (Optimized for continuity)  
+**Session Started**: 2025-09-05 (continued from previous)  
+**Session Updated**: 2025-09-05 23:28  
+**Next Review**: After forms implementation
