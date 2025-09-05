@@ -43,10 +43,10 @@ src/
 
 ## 🚧 Current Focus
 
-**Recently Completed**: Native ASM integration for adoption pages  
-**Active Task**: Implementing native forms with Turnstile protection  
-**Next Milestone**: Complete surrender/contact forms with ASM integration  
-**Priority**: Replace all JavaScript embeds with native components
+**Recently Completed**: Native surrender form with ASM integration & Turnstile protection  
+**Active Task**: Planning next phase - volunteer/foster/adoption application forms  
+**Next Milestone**: Complete remaining contact forms and volunteer registration  
+**Priority**: Build out volunteer engagement system
 
 ## ⚠️ Critical Requirements
 
@@ -67,19 +67,21 @@ src/
 **Phase 1 - Core Pages** ✅:
 - [x] Homepage with mission statement
 - [x] About Us page
-- [ ] Contact forms (in progress)
+- [x] Contact forms (surrender form complete)
 - [x] Basic navigation
 
 **Phase 2 - Pet Adoption System** ✅:
 - [x] Pet listing grid with filters (native ASM)
 - [x] Individual pet profiles (dynamic routing)
-- [ ] Adoption application form (next)
+- [ ] Adoption application form (ASM form ID 38)
 - [x] Search/filter functionality
 
-**Phase 3 - Volunteer System**:
-- Volunteer registration form
-- Foster care application
-- Volunteer resources page
+**Phase 3 - Form Integration System** 🚧:
+- [x] Animal surrender form (ASM form ID 37) 
+- [ ] Volunteer registration form (ASM form ID 36)
+- [ ] Foster care application (ASM form ID 39)
+- [ ] Adoption application form (ASM form ID 38)
+- [x] Turnstile spam protection integration
 
 **Phase 4 - Donations**:
 - Payment gateway integration
@@ -101,11 +103,17 @@ src/
 
 ## 🏗️ ASM Integration Details
 
-**API Endpoints** (Cloudflare Pages Functions):
-- `/api/asm/adoptable` - List adoptable animals
-- `/api/asm/animal/[id]` - Individual animal details  
-- `/api/asm/form-schema` - Form structure (proposed)
-- `/api/submit/surrender` - Form submission (proposed)
+**API Endpoints** (Working):
+- `/api/asm/adoptable` - List adoptable animals ✅
+- `/api/asm/animal/[id]` - Individual animal details ✅  
+- `/api/asm/form-schema` - Form structure with HTML fallback ✅
+- `/api/submit` - Universal form submission with Turnstile ✅
+
+**Form ID Mapping** (ASM):
+- Form ID 36: Volunteer registration
+- Form ID 37: Animal surrender ✅
+- Form ID 38: Adoption application  
+- Form ID 39: Foster care application
 
 **Environment Variables** (Cloudflare Pages):
 - `ASM_ACCOUNT` - Account ID (st3418)
@@ -145,4 +153,4 @@ src/
 
 **Token Count**: ~600 (Optimized for Claude Code)  
 **Last Updated**: 2025-09-05  
-**Version**: 0.2.0
+**Version**: 0.3.0
