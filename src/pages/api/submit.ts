@@ -23,25 +23,29 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
     // --- Turnstile verification ---
     const token = form.get("cf-turnstile-response");
-    if (!token) {
-      return new Response("Turnstile token missing", { status: 400 });
-    }
     
-    const ip = request.headers.get("CF-Connecting-IP") || "";
-    
-    const verifyRes = await fetch(TURNSTILE_VERIFY, {
-      method: "POST",
-      headers: { "content-type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        secret: TURNSTILE_SECRET_KEY,
-        response: String(token),
-        remoteip: ip
-      })
-    });
-    
-    const verify = await verifyRes.json() as { success: boolean };
-    if (!verify.success) {
-      return new Response("Turnstile verification failed", { status: 403 });
+    // Only verify Turnstile if secret key is configured
+    if (TURNSTILE_SECRET_KEY && TURNSTILE_SECRET_KEY !== '') {
+      if (!token) {
+        return new Response("Turnstile token missing", { status: 400 });
+      }
+      
+      const ip = request.headers.get("CF-Connecting-IP") || "";
+      
+      const verifyRes = await fetch(TURNSTILE_VERIFY, {
+        method: "POST",
+        headers: { "content-type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          secret: TURNSTILE_SECRET_KEY,
+          response: String(token),
+          remoteip: ip
+        })
+      });
+      
+      const verify = await verifyRes.json() as { success: boolean };
+      if (!verify.success) {
+        return new Response("Turnstile verification failed", { status: 403 });
+      }
     }
 
     // --- Validate files + total size ---
@@ -67,8 +71,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
       return new Response("Missing ASM configuration or form ID", { status: 400 });
     }
 
-    // Remove Turnstile token before forwarding to ASM
-    form.delete("cf-turnstile-response");
+    // Remove Turnstile token before forwarding to ASM (if present)
+    if (form.has("cf-turnstile-response")) {
+      form.delete("cf-turnstile-response");
+    }
     
     const asmUrl = `${baseUrl}?account=${encodeURIComponent(account)}&method=online_form_html&formid=${encodeURIComponent(formid)}`;
     

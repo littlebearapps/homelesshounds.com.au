@@ -41,7 +41,7 @@ const formid = url.searchParams.get('formid') || '37';
             </div>
 
             <!-- Turnstile widget -->
-            {TURNSTILE_SITE_KEY && (
+            {TURNSTILE_SITE_KEY && TURNSTILE_SITE_KEY !== '' && (
               <div class="pt-4 border-t border-gray-200">
                 <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY}></div>
               </div>
@@ -72,7 +72,7 @@ const formid = url.searchParams.get('formid') || '37';
         </template>
 
         <!-- Load Turnstile -->
-        {TURNSTILE_SITE_KEY && (
+        {TURNSTILE_SITE_KEY && TURNSTILE_SITE_KEY !== '' && (
           <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
         )}
         
@@ -229,13 +229,6 @@ const formid = url.searchParams.get('formid') || '37';
             wrap.appendChild(lbl);
             
             return wrap;
-          }
-
-          function createHTMLNote(f) {
-            const div = document.createElement("div");
-            div.className = "col-span-full bg-gray-50 rounded-lg p-4";
-            div.innerHTML = f.label || f.tooltip || "";
-            return div;
           }
 
           function renderField(f) {
