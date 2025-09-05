@@ -1,124 +1,232 @@
 ---
+export const prerender = false;
+
 import Base from "../../../layouts/Base.astro";
-import "../../../styles/asm-overrides.css";
-const account = import.meta.env.PUBLIC_ASM_ACCOUNT;
-const base = import.meta.env.PUBLIC_ASM_BASE;
+import AnimalCard from "../../../components/AnimalCard.astro";
+import AnimalFilters from "../../../components/AnimalFilters.astro";
+import type { AdoptableAnimalsResponse } from "../../../types/asm";
+
+// Fetch only dogs from our API
+let animalsData: AdoptableAnimalsResponse | null = null;
+let error: string | null = null;
+
+try {
+  const response = await fetch(`${Astro.url.origin}/api/asm/adoptable?species=dog&limit=100`);
+  if (!response.ok) {
+    throw new Error(`API returned ${response.status}`);
+  }
+  animalsData = await response.json();
+} catch (e) {
+  console.error('Error fetching dogs:', e);
+  error = e instanceof Error ? e.message : 'Failed to fetch dogs';
+}
+
+const animals = animalsData?.animals || [];
+const total = animalsData?.total || 0;
+
+// Get current filters from URL (excluding species since we're filtering for dogs only)
+const url = new URL(Astro.request.url);
+const currentFilters = {
+  species: 'dog', // Fixed to dogs
+  agegroup: url.searchParams.get('agegroup') || undefined,
+  size: url.searchParams.get('size') || undefined,
+  sex: url.searchParams.get('sex') || undefined,
+  goodWith: url.searchParams.get('goodWith') || undefined,
+};
 ---
+
 <Base title="Dogs for Adoption">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-8">
-      <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-        <span class="text-3xl">🐕</span>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-100 to-sky-100 rounded-full mb-6">
+        <span class="text-4xl">🐕</span>
       </div>
-      <h1 class="text-4xl font-bold text-gray-900 mb-4">Dogs Looking for Homes</h1>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Meet our wonderful dogs who are ready to become your loyal companions. All dogs are health checked, 
-        vaccinated, microchipped, and desexed (if age appropriate).
+      <h1 class="text-5xl font-bold text-gray-900 mb-6">
+        Dogs Looking for 
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-sky-600">
+          Forever Homes
+        </span>
+      </h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        Our wonderful dogs are waiting to meet you! Each one has their own unique personality 
+        and is ready to become your loyal companion.
       </p>
     </div>
 
     <!-- Navigation -->
     <div class="flex justify-center gap-4 mb-8">
-      <a href="/adopt" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">
-        ← All Animals
+      <a href="/adopt" class="inline-flex items-center px-6 py-3 bg-purple-50 text-purple-700 rounded-xl hover:bg-purple-100 transition-colors text-base font-semibold">
+        🏠 All Animals
       </a>
-      <a href="/adopt/cats" class="inline-flex items-center px-4 py-2 bg-amber-50 text-amber-700 rounded-lg hover:bg-amber-100 transition-colors text-sm font-medium">
-        🐱 View Cats
+      <a href="/adopt/dogs" class="inline-flex items-center px-6 py-3 bg-blue-100 text-blue-700 rounded-xl hover:bg-blue-200 transition-colors text-base font-semibold shadow-sm">
+        🐕 Dogs
+      </a>
+      <a href="/adopt/cats" class="inline-flex items-center px-6 py-3 bg-amber-50 text-amber-700 rounded-xl hover:bg-amber-100 transition-colors text-base font-semibold">
+        🐱 Cats
       </a>
     </div>
 
-    {account ? (
-      <>
-        <!-- Filter Section -->
-        <div class="bg-blue-50 rounded-xl border p-6 mb-8">
-          <h2 class="text-lg font-semibold text-blue-900 mb-4">Filter dogs by preferences</h2>
-          <div id="asm3-filters-container" class="flex flex-wrap gap-4">
-            <!-- Filters will be inserted here by ASM -->
-          </div>
-        </div>
+    <!-- Filters (without species filter) -->
+    <AnimalFilters currentFilters={currentFilters} showSpeciesFilter={false} />
 
-        <!-- Dogs Grid -->
-        <div id="asm3-adoptables" class="min-h-[400px]"></div>
-        
-        <script>
-          // Only include items where SPECIESNAME === "Dog"
-          window.asm3_adoptable_filter = (item) => (item.SPECIESNAME || "").toLowerCase() === "dog";
-          window.asm3_adoptable_iframe = true;
-          window.asm3_adoptable_filters = "sex,age,size";
-          
-          // Custom initialization
-          window.addEventListener('load', function() {
-            // Move filters to custom container if they exist
-            const moveFilters = function() {
-              const filters = document.querySelector('.asm3-adoptables-filters');
-              const container = document.getElementById('asm3-filters-container');
-              if (filters && container && !container.querySelector('.asm3-adoptables-filters')) {
-                container.appendChild(filters);
-                filters.style.background = 'transparent';
-                filters.style.border = 'none';
-                filters.style.padding = '0';
-                return true;
-              }
-              return false;
-            };
-            
-            // Try multiple times with increasing delays
-            const attempts = [500, 1000, 2000, 3000];
-            attempts.forEach((delay, index) => {
-              setTimeout(() => {
-                if (moveFilters()) {
-                  console.log(`ASM filters moved successfully after ${delay}ms`);
-                }
-              }, delay);
-            });
-          });
-        </script>
-        <script 
-          src={`${base}?method=animal_view_adoptable_js&account=${account}`}
-          onerror="console.error('Failed to load ASM script for dogs'); document.getElementById('asm3-adoptables').innerHTML = '<div class=\"text-center py-12\"><div class=\"bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto\"><p class=\"text-red-800 font-medium mb-2\">Unable to Load Dog Listings</p><p class=\"text-sm text-red-600\">Please check back later or <a href=\"/contact-us\" class=\"underline\">contact us</a> for assistance.</p></div></div>';"
-          onload="console.log('ASM script loaded successfully for dogs')">
-        </script>
-      </>
-    ) : (
-      <div class="text-center py-12">
-        <div class="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
-          <p class="text-red-800 font-medium mb-2">Configuration Required</p>
-          <p class="text-sm text-red-600">PUBLIC_ASM_ACCOUNT environment variable not set.</p>
+    <!-- Error State -->
+    {error && (
+      <div class="text-center py-16">
+        <div class="bg-red-50 border-2 border-red-200 rounded-xl p-8 max-w-lg mx-auto">
+          <div class="text-red-600 mb-4">
+            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-red-800 mb-2">Unable to Load Dogs</h3>
+          <p class="text-red-700 text-sm mb-4">We're having trouble connecting to our database.</p>
+          <p class="text-red-600 text-xs">{error}</p>
+          <button 
+            onclick="window.location.reload()" 
+            class="mt-4 px-4 py-2 bg-red-100 hover:bg-red-200 text-red-800 rounded-lg font-medium transition-colors"
+          >
+            Try Again
+          </button>
         </div>
       </div>
     )}
 
-    <!-- Dog Care Information -->
-    <div class="mt-16 grid md:grid-cols-2 gap-8">
-      <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8">
-        <h3 class="text-xl font-semibold text-blue-900 mb-4">🏠 Preparing for Your Dog</h3>
-        <ul class="space-y-2 text-blue-800">
-          <li>• Secure, fenced yard (for most dogs)</li>
-          <li>• Dog bed and comfortable sleeping area</li>
-          <li>• Quality dog food and water bowls</li>
-          <li>• Collar, leash, and ID tags</li>
-          <li>• Toys and enrichment activities</li>
-          <li>• Regular exercise and mental stimulation</li>
-        </ul>
+    <!-- Dogs Grid -->
+    {!error && animals.length > 0 && (
+      <>
+        <div class="animals-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {animals.map((animal) => (
+            <AnimalCard animal={animal} />
+          ))}
+        </div>
+      </>
+    )}
+
+    <!-- Empty State -->
+    {!error && animals.length === 0 && (
+      <div class="text-center py-16">
+        <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-8 max-w-lg mx-auto">
+          <div class="text-gray-400 mb-4">
+            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">No Dogs Available</h3>
+          <p class="text-gray-600 text-sm mb-4">Check back soon for new arrivals!</p>
+          <a href="/adopt" class="text-blue-600 hover:text-blue-700 font-medium">
+            View all animals instead →
+          </a>
+        </div>
       </div>
-      <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8">
-        <h3 class="text-xl font-semibold text-green-900 mb-4">💝 Why Adopt a Dog?</h3>
-        <ul class="space-y-2 text-green-800">
-          <li>• Loyal, loving companionship</li>
-          <li>• Great exercise motivation</li>
-          <li>• Enhanced home security</li>
-          <li>• Wonderful with children (many breeds)</li>
-          <li>• Social opportunities in your community</li>
-          <li>• Improved mental health and wellbeing</li>
+    )}
+
+    <!-- Dog Information Section -->
+    <div class="mt-16 bg-gradient-to-br from-blue-50 to-sky-50 rounded-xl p-8 border border-blue-100">
+      <h2 class="text-2xl font-bold text-blue-900 mb-6 text-center">About Our Dogs</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="text-center">
+          <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-3">
+            <span class="text-xl">🏥</span>
+          </div>
+          <h3 class="font-semibold text-blue-900 mb-2">Health Checked</h3>
+          <p class="text-sm text-blue-700">All dogs are vet checked, vaccinated, and treated for parasites</p>
+        </div>
+        <div class="text-center">
+          <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-3">
+            <span class="text-xl">🏡</span>
+          </div>
+          <h3 class="font-semibold text-blue-900 mb-2">Foster Homes</h3>
+          <p class="text-sm text-blue-700">Living in loving foster homes where their personalities shine</p>
+        </div>
+        <div class="text-center">
+          <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-3">
+            <span class="text-xl">💖</span>
+          </div>
+          <h3 class="font-semibold text-blue-900 mb-2">Support Included</h3>
+          <p class="text-sm text-blue-700">Lifetime support and advice from our experienced team</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dog Care Tips -->
+    <div class="mt-8 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-8 border border-amber-100">
+      <h3 class="text-xl font-semibold text-amber-900 mb-4 flex items-center">
+        <span class="text-2xl mr-2">💡</span>
+        Dog Care Essentials
+      </h3>
+      <div class="grid md:grid-cols-2 gap-4 text-amber-800">
+        <ul class="space-y-2">
+          <li class="flex items-start">
+            <span class="text-amber-600 mr-2">•</span>
+            Daily exercise and mental stimulation
+          </li>
+          <li class="flex items-start">
+            <span class="text-amber-600 mr-2">•</span>
+            Regular grooming and health check-ups
+          </li>
+          <li class="flex items-start">
+            <span class="text-amber-600 mr-2">•</span>
+            Quality nutrition appropriate for age and size
+          </li>
+        </ul>
+        <ul class="space-y-2">
+          <li class="flex items-start">
+            <span class="text-amber-600 mr-2">•</span>
+            Secure fencing and safe environment
+          </li>
+          <li class="flex items-start">
+            <span class="text-amber-600 mr-2">•</span>
+            Training and socialization opportunities
+          </li>
+          <li class="flex items-start">
+            <span class="text-amber-600 mr-2">•</span>
+            Plenty of love and companionship
+          </li>
         </ul>
       </div>
     </div>
 
-    <!-- Contact Information -->
-    <div class="mt-8 text-center">
-      <p class="text-gray-600">
-        Questions about a specific dog? <a href="/contact-us" class="text-blue-600 hover:text-blue-700 underline">Contact our team</a> for more information.
+    <!-- Call to Action -->
+    <div class="mt-12 text-center bg-blue-50 rounded-2xl p-8 border border-blue-100">
+      <h3 class="text-xl font-semibold text-blue-900 mb-4">Found Your New Best Friend?</h3>
+      <p class="text-blue-700 mb-6">
+        Click on any dog's profile to learn more about their personality and start the adoption process.
       </p>
+      <a href="/contact-us" class="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 font-semibold text-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-transform">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4-8 9-8s9 3.582 9 8z" />
+        </svg>
+        Contact Us About Adoption
+      </a>
     </div>
   </div>
+
+  <style>
+    .animals-grid {
+      min-height: 400px;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .asm3-adoptable-item {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    .asm3-adoptable-item:nth-child(1) { animation-delay: 0.1s; }
+    .asm3-adoptable-item:nth-child(2) { animation-delay: 0.2s; }
+    .asm3-adoptable-item:nth-child(3) { animation-delay: 0.3s; }
+    .asm3-adoptable-item:nth-child(4) { animation-delay: 0.4s; }
+    .asm3-adoptable-item:nth-child(5) { animation-delay: 0.5s; }
+    .asm3-adoptable-item:nth-child(6) { animation-delay: 0.6s; }
+  </style>
 </Base>
