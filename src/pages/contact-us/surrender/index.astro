@@ -1,8 +1,8 @@
 ---
 import Base from "../../../layouts/Base.astro";
-const account = import.meta.env.PUBLIC_ASM_ACCOUNT;
-const base = import.meta.env.PUBLIC_ASM_BASE;
-const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const account = import.meta.env.PUBLIC_ASM_ACCOUNT || 'st3418';
+const base = import.meta.env.PUBLIC_ASM_BASE || 'https://service.sheltermanager.com/asmservice';
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 export const prerender = false;
 
 // Default form ID for surrender (can be overridden by URL param)
@@ -41,9 +41,11 @@ const formid = url.searchParams.get('formid') || '36';
             </div>
 
             <!-- Turnstile widget -->
-            <div class="pt-4 border-t border-gray-200">
-              <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY}></div>
-            </div>
+            {TURNSTILE_SITE_KEY && (
+              <div class="pt-4 border-t border-gray-200">
+                <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY}></div>
+              </div>
+            )}
 
             <!-- Submit button -->
             <div class="pt-6">
@@ -70,7 +72,9 @@ const formid = url.searchParams.get('formid') || '36';
         </template>
 
         <!-- Load Turnstile -->
-        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+        {TURNSTILE_SITE_KEY && (
+          <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+        )}
         
         <!-- Form builder script -->
         <script type="module" define:vars={{ account, formid }}>
