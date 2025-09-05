@@ -1,0 +1,55 @@
+---
+import Base from "../../../layouts/Base.astro";
+const account = import.meta.env.PUBLIC_ASM_ACCOUNT || 'st3418';
+const base = import.meta.env.PUBLIC_ASM_BASE || 'https://service.sheltermanager.com/asmservice';
+export const prerender = false;
+
+// Default form ID for surrender (can be overridden by URL param)
+const url = new URL(Astro.request.url);
+const formid = url.searchParams.get('formid') || '36';
+---
+
+<Base title="Surrender an Animal">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-red-100 to-orange-100 rounded-full mb-4">
+        <span class="text-3xl">🏠</span>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Surrender an Animal</h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        We understand that surrendering a pet is a difficult decision. Please complete the form below 
+        and our team will review your submission as soon as possible.
+      </p>
+    </div>
+
+    {account && formid ? (
+      <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <iframe 
+          src={`${base}?account=${account}&method=online_form_html&formid=${formid}`}
+          class="w-full min-h-[900px]"
+          frameborder="0"
+          loading="lazy"
+          title="Surrender Form">
+        </iframe>
+      </div>
+    ) : (
+      <div class="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+        <p class="text-red-800 font-medium mb-2">Form Configuration Missing</p>
+        <p class="text-sm text-red-600">Please set PUBLIC_ASM_ACCOUNT in environment variables.</p>
+      </div>
+    )}
+
+    <div class="mt-8 text-center">
+      <p class="text-sm text-gray-500">
+        Having trouble? <a href="/contact-us" class="text-purple-600 hover:text-purple-700 underline">Contact us directly</a>
+      </p>
+    </div>
+    
+    <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+      <p class="text-sm text-blue-800">
+        <strong>Note:</strong> This form is provided by Animal Shelter Manager. 
+        After submission, you'll receive a confirmation email from our system.
+      </p>
+    </div>
+  </div>
+</Base>
