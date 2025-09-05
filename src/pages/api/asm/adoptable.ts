@@ -2,12 +2,12 @@ import type { AdoptableAnimalsResponse, ASMAnimal } from '../../../types/asm';
 
 export const prerender = false;
 
-export const GET = async ({ request, url }) => {
-  // Get environment variables
-  const ASM_ACCOUNT = import.meta.env.ASM_ACCOUNT;
-  const ASM_BASE_URL = import.meta.env.ASM_BASE_URL;
-  const ASM_USERNAME = import.meta.env.ASM_USERNAME;
-  const ASM_PASSWORD = import.meta.env.ASM_PASSWORD;
+export const GET = async ({ request, url, locals }) => {
+  // Get environment variables from Cloudflare runtime
+  const ASM_ACCOUNT = locals?.runtime?.env?.ASM_ACCOUNT;
+  const ASM_BASE_URL = locals?.runtime?.env?.ASM_BASE_URL;
+  const ASM_USERNAME = locals?.runtime?.env?.ASM_USERNAME;
+  const ASM_PASSWORD = locals?.runtime?.env?.ASM_PASSWORD;
 
   // Validate environment variables
   if (!ASM_ACCOUNT || !ASM_BASE_URL || !ASM_USERNAME || !ASM_PASSWORD) {
