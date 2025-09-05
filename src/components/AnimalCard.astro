@@ -129,19 +129,34 @@ const daysText = animal.DAYSONSHELTER === 1 ? '1 day' : `${animal.DAYSONSHELTER}
 
 <style>
   .asm3-adoptable-item {
-    @apply bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden;
+    background-color: white;
+    border: 1px solid rgb(229 231 235);
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
   }
   
   .asm3-adoptable-item:hover {
-    @apply -translate-y-2 border-purple-300;
+    transform: translateY(-0.5rem);
+    border-color: rgb(196 181 253);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   }
 
   .asm3-adoptable-item::before {
     content: '';
-    @apply absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 transition-opacity duration-300;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0.25rem;
+    background: linear-gradient(90deg, rgb(59 130 246), rgb(168 85 247), rgb(236 72 153));
+    opacity: 0;
+    transition: opacity 0.3s;
   }
 
   .asm3-adoptable-item:hover::before {
-    @apply opacity-100;
+    opacity: 1;
   }
 </style>

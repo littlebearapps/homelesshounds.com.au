@@ -264,6 +264,8 @@ const { currentFilters = {}, showSpeciesFilter = true } = Astro.props;
   }
   
   .filter-select:focus {
-    @apply ring-2 ring-purple-500 border-transparent;
+    @apply border-transparent;
+    outline: 2px solid rgb(168 85 247);
+    outline-offset: 2px;
   }
 </style>

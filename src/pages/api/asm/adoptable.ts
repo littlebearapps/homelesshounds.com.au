@@ -1,7 +1,8 @@
-import type { APIRoute } from 'astro';
 import type { AdoptableAnimalsResponse, ASMAnimal } from '../../../types/asm';
 
-export const GET: APIRoute = async ({ request, url }) => {
+export const prerender = false;
+
+export const GET = async ({ request, url }) => {
   // Get environment variables
   const ASM_ACCOUNT = import.meta.env.ASM_ACCOUNT;
   const ASM_BASE_URL = import.meta.env.ASM_BASE_URL;

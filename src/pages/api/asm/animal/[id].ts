@@ -1,7 +1,8 @@
-import type { APIRoute } from 'astro';
 import type { AnimalDetailResponse, ASMAnimal } from '../../../../types/asm';
 
-export const GET: APIRoute = async ({ params, request }) => {
+export const prerender = false;
+
+export const GET = async ({ params, request }) => {
   const { id } = params;
 
   // Get environment variables

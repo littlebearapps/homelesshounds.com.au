@@ -1,7 +1,6 @@
-import type { APIRoute } from 'astro';
+export const prerender = false;
 
-export const GET: APIRoute = async ({ request }) => {
-  // Test endpoint to verify API routes are working
+export async function GET() {
   const env = {
     ASM_ACCOUNT: import.meta.env.ASM_ACCOUNT || 'undefined',
     ASM_BASE_URL: import.meta.env.ASM_BASE_URL || 'undefined',
@@ -10,14 +9,14 @@ export const GET: APIRoute = async ({ request }) => {
   };
 
   return new Response(JSON.stringify({
-    message: "Astro API routes are working!",
+    ok: true,
+    where: "astro+cloudflare pages functions",
+    message: "SSR API routes are working!",
     timestamp: new Date().toISOString(),
-    environment: env,
-    url: request.url
+    environment: env
   }, null, 2), {
-    status: 200,
-    headers: {
-      'Content-Type': 'application/json'
+    headers: { 
+      "content-type": "application/json" 
     }
   });
-};
+}

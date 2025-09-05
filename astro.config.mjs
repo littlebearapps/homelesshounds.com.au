@@ -4,9 +4,21 @@ import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
   site: "https://homelesshounds.com.au",
-  output: "server", // Full SSR for better compatibility
-  adapter: cloudflare({
-    mode: "advanced"
+  output: "server",
+  adapter: cloudflare({ 
+    mode: "directory",
+    routes: { 
+      extend: { 
+        include: [{ pattern: "/*" }], 
+        exclude: [
+          { pattern: "/_astro/*" }, 
+          { pattern: "/assets/*" }, 
+          { pattern: "/favicon.ico" }, 
+          { pattern: "/robots.txt" }, 
+          { pattern: "/sitemap.xml" }
+        ] 
+      } 
+    }
   }),
   vite: {
     plugins: [tailwind()],
