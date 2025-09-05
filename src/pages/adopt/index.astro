@@ -47,20 +47,10 @@ if (typeof window !== 'undefined') {
         <div id="asm3-adoptables" class="min-h-[400px]"></div>
         
         <script>
-          // Debug logging
-          console.log('ASM page script loaded');
-          
           // ASM embed options (documented on Service API page)
           window.asm3_adoptable_iframe = true;       // open profile in overlay iframe
           window.asm3_adoptable_iframe_fixed = true; // less scroll-jump on long pages
           window.asm3_adoptable_filters = "species,sex,age"; // show dropdowns
-          window.asm3_adoptable_border = "1px solid #ccc"; // border styling
-          window.asm3_adoptable_bgcolour = "#ffffff"; // background color
-          
-          console.log('ASM options set:', {
-            iframe: window.asm3_adoptable_iframe,
-            filters: window.asm3_adoptable_filters
-          });
           
           // Custom initialization to handle the display
           window.addEventListener('load', function() {
@@ -104,7 +94,9 @@ if (typeof window !== 'undefined') {
             });
           });
         </script>
-        <script src={`${base}?method=animal_view_adoptable_js&account=${account}`}></script>
+        <script src={`${base}?method=animal_view_adoptable_js&account=${account}`} 
+                onerror="console.error('Failed to load ASM script'); document.getElementById('asm3-adoptables').innerHTML = 'Error loading animal listings. Please check back later.';"
+                onload="console.log('ASM script loaded successfully')"></script>
       </>
     ) : (
       <div class="text-center py-12">
