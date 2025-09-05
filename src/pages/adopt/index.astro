@@ -3,6 +3,10 @@ import Base from "../../layouts/Base.astro";
 import "../../styles/asm-overrides.css";
 const account = import.meta.env.PUBLIC_ASM_ACCOUNT;
 const base = import.meta.env.PUBLIC_ASM_BASE;
+// Debug: Log environment variables to console
+if (typeof window !== 'undefined') {
+  console.log('ENV CHECK - account:', account, 'base:', base);
+}
 ---
 <Base title="Adoptable Animals">
   <div class="max-w-7xl mx-auto">
@@ -14,6 +18,11 @@ const base = import.meta.env.PUBLIC_ASM_BASE;
       </p>
     </div>
 
+    <!-- Debug info for Cloudflare Pages -->
+    <div class="text-xs text-gray-500 bg-yellow-100 p-2 mb-4">
+      Debug ENV: account={account || "NOT SET"}, base={base || "NOT SET"}
+    </div>
+    
     {account ? (
       <>
         <!-- Filter Section -->
