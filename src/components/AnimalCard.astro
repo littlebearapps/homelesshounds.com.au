@@ -1,6 +1,6 @@
 ---
 import type { ASMAnimal } from '../types/asm';
-import { createAnimalSlug } from '../types/asm';
+import { createAnimalSlug, createAnimalProfile, getCompatibilityIcon } from '../types/asm';
 
 interface Props {
   animal: ASMAnimal;
@@ -15,14 +15,31 @@ const slug = createAnimalSlug(animal);
 const speciesPath = animal.SPECIESNAME.toLowerCase();
 const detailUrl = `/adopt/${speciesPath}/${animal.ID}/${slug}`;
 
-// Debug logging (remove in production)
-console.log(`AnimalCard: ${animal.ANIMALNAME} -> ${detailUrl}`);
+// Create structured profile
+const profile = createAnimalProfile(animal);
 
 // Determine thumbnail URL
 const thumbnailUrl = `https://service.sheltermanager.com/asmservice?account=st3418&method=animal_thumbnail&animalid=${animal.ID}`;
 
 // Calculate days on shelter for display
 const daysText = animal.DAYSONSHELTER === 1 ? '1 day' : `${animal.DAYSONSHELTER} days`;
+
+// Get compatibility badges
+const compatibilityBadges = [
+  { condition: animal.ISGOODWITHCATS === 1, label: '🐱 Cat Friendly', color: 'bg-amber-100 text-amber-800' },
+  { condition: animal.ISGOODWITHDOGS === 1, label: '🐕 Dog Friendly', color: 'bg-blue-100 text-blue-800' },
+  { condition: animal.ISGOODWITHCHILDREN === 1, label: '👶 Kid Friendly', color: 'bg-green-100 text-green-800' },
+  { condition: animal.ISGOODWITHSMALLANIMALS === 1, label: '🐰 Small Animal Friendly', color: 'bg-pink-100 text-pink-800' },
+  { condition: animal.ISHOUSETRAINED === 1, label: '🏠 House Trained', color: 'bg-indigo-100 text-indigo-800' },
+].filter(badge => badge.condition);
+
+// Get status badges
+const statusBadges = [
+  { condition: animal.NEUTERED === 1, label: '✅ Desexed', color: 'bg-purple-100 text-purple-800' },
+  { condition: animal.IDENTICHIPPED === 1 || animal.MICROCHIPPED === 1, label: '🔍 Microchipped', color: 'bg-gray-100 text-gray-800' },
+  { condition: animal.HASSPECIALNEEDS === 1, label: '💖 Special Needs', color: 'bg-red-100 text-red-800' },
+  { condition: profile.medical.vaccinationCount && profile.medical.vaccinationCount > 0, label: `💉 ${profile.medical.vaccinationCount}x Vacc`, color: 'bg-teal-100 text-teal-800' },
+].filter(badge => badge.condition);
 ---
 
 <article class="asm3-adoptable-item group">
@@ -88,29 +105,50 @@ const daysText = animal.DAYSONSHELTER === 1 ? '1 day' : `${animal.DAYSONSHELTER}
         </div>
       </div>
 
-      <!-- Compatibility Badges -->
-      {showBadges && (
-        <div class="flex flex-wrap gap-2 mb-4">
-          {animal.ISGOODWITHCATSNAME === 'Yes' && (
-            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
-              🐱 Cat Friendly
-            </span>
+      <!-- Enhanced Badges -->
+      {showBadges && (compatibilityBadges.length > 0 || statusBadges.length > 0) && (
+        <div class="space-y-2 mb-4">
+          <!-- Compatibility Badges -->
+          {compatibilityBadges.length > 0 && (
+            <div class="flex flex-wrap gap-1.5">
+              {compatibilityBadges.map(badge => (
+                <span class={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${badge.color}`}>
+                  {badge.label}
+                </span>
+              ))}
+            </div>
           )}
-          {animal.ISGOODWITHDOGSNAME === 'Yes' && (
-            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-              🐕 Dog Friendly
-            </span>
+          
+          <!-- Status Badges -->
+          {statusBadges.length > 0 && (
+            <div class="flex flex-wrap gap-1.5">
+              {statusBadges.map(badge => (
+                <span class={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${badge.color}`}>
+                  {badge.label}
+                </span>
+              ))}
+            </div>
           )}
-          {animal.ISGOODWITHCHILDRENNAME === 'Yes' && (
-            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-              👶 Kid Friendly
-            </span>
-          )}
-          {animal.NEUTEREDNAME === 'Yes' && (
-            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-              ✅ Desexed
-            </span>
-          )}
+        </div>
+      )}
+
+      <!-- Adoption Fee -->
+      {profile.adoption.fee && (
+        <div class="mb-3">
+          <div class="inline-flex items-center px-3 py-2 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg text-sm">
+            <span class="text-purple-600 font-semibold">💰 Adoption Fee: ${profile.adoption.fee}</span>
+          </div>
+        </div>
+      )}
+
+      <!-- Location -->
+      {profile.adoption.location && (
+        <div class="mb-3 text-sm text-gray-600 flex items-center">
+          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+          📍 {profile.adoption.location}
         </div>
       )}
 

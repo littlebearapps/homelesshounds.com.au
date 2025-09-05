@@ -2,6 +2,7 @@
 import Base from "../../../../layouts/Base.astro";
 import AdoptionModal from "../../../../components/AdoptionModal.astro";
 import type { AnimalDetailResponse } from "../../../../types/asm";
+import { createAnimalProfile, getCompatibilityIcon, calculateAge } from "../../../../types/asm";
 
 export async function getStaticPaths() {
   // For static generation, we'll need to fetch all animals
@@ -48,9 +49,12 @@ if (animal.SPECIESNAME.toLowerCase() !== species) {
   return Astro.redirect("/adopt");
 }
 
-// Create page title and meta description
+// Create structured profile
+const profile = createAnimalProfile(animal);
+
+// Create page title and meta description with enhanced info
 const title = `${animal.ANIMALNAME} - ${animal.BREEDNAME} ${animal.SPECIESNAME} for Adoption`;
-const description = `Meet ${animal.ANIMALNAME}, a ${animal.AGEGROUP.toLowerCase()} ${animal.SEXNAME.toLowerCase()} ${animal.BREEDNAME} ${animal.SPECIESNAME.toLowerCase()} looking for a loving home. ${animal.SIZENAME} size, ${animal.DAYSONSHELTER} days in care.`;
+const description = `Meet ${animal.ANIMALNAME}, a ${animal.AGEGROUP.toLowerCase()} ${animal.SEXNAME.toLowerCase()} ${animal.BREEDNAME} ${animal.SPECIESNAME.toLowerCase()} looking for a loving home. ${animal.SIZENAME} size, ${animal.DAYSONSHELTER} days in care.${profile.adoption.fee ? ` Adoption fee: $${profile.adoption.fee}.` : ''}`;
 
 // Main image URL
 const mainImageUrl = animalData?.thumbnailUrl || `https://service.sheltermanager.com/asmservice?account=st3418&method=animal_thumbnail&animalid=${animal.ID}`;
@@ -61,6 +65,40 @@ const daysText = animal.DAYSONSHELTER === 1 ? '1 day' : `${animal.DAYSONSHELTER}
 // Determine icon for species
 const speciesIcon = species === 'dog' ? '🐕' : '🐱';
 const speciesColor = species === 'dog' ? 'blue' : 'amber';
+
+// Enhanced compatibility information
+const compatibilityInfo = [
+  { 
+    label: 'Good with Cats', 
+    level: profile.compatibility.cats, 
+    icon: getCompatibilityIcon(profile.compatibility.cats, 'cats'),
+    show: true
+  },
+  { 
+    label: 'Good with Dogs', 
+    level: profile.compatibility.dogs, 
+    icon: getCompatibilityIcon(profile.compatibility.dogs, 'dogs'),
+    show: true
+  },
+  { 
+    label: 'Good with Children', 
+    level: profile.compatibility.children, 
+    icon: getCompatibilityIcon(profile.compatibility.children, 'children'),
+    show: true
+  },
+  { 
+    label: 'Good with Small Animals', 
+    level: profile.compatibility.smallAnimals, 
+    icon: getCompatibilityIcon(profile.compatibility.smallAnimals, 'small'),
+    show: animal.ISGOODWITHSMALLANIMALS !== undefined
+  },
+  { 
+    label: 'House Trained', 
+    level: profile.compatibility.houseTrained, 
+    icon: profile.compatibility.houseTrained === 1 ? '✅ 🏠' : profile.compatibility.houseTrained === 0 ? '❌ 🏠' : '❓ 🏠',
+    show: true
+  },
+].filter(item => item.show);
 ---
 
 <Base title={title} description={description}>
@@ -74,7 +112,7 @@ const speciesColor = species === 'dog' ? 'blue' : 'amber';
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={mainImageUrl} />
 
-  <!-- Structured Data for SEO -->
+  <!-- Enhanced Structured Data for SEO -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Animal",
@@ -84,15 +122,27 @@ const speciesColor = species === 'dog' ? 'blue' : 'amber';
     "gender": animal.SEXNAME,
     "age": animal.AGEGROUP,
     "size": animal.SIZENAME,
-    "description": `${animal.ANIMALNAME} is a ${animal.AGEGROUP.toLowerCase()} ${animal.SEXNAME.toLowerCase()} ${animal.BREEDNAME} ${animal.SPECIESNAME.toLowerCase()} looking for adoption.`,
+    "weight": animal.WEIGHT ? `${animal.WEIGHT}kg` : undefined,
+    "description": animal.ANIMALCOMMENTS || `${animal.ANIMALNAME} is a ${animal.AGEGROUP.toLowerCase()} ${animal.SEXNAME.toLowerCase()} ${animal.BREEDNAME} ${animal.SPECIESNAME.toLowerCase()} looking for adoption.`,
     "image": mainImageUrl,
     "url": Astro.url.href,
-    "isAvailableForAdoption": true,
+    "isAvailableForAdoption": animal.HASACTIVERESERVE !== 1,
+    "healthCondition": profile.medical.healthNotes || "Good health",
+    "adoptionFee": profile.adoption.fee ? `$${profile.adoption.fee}` : undefined,
+    "location": profile.adoption.location,
     "shelter": {
-      "@type": "Organization",
+      "@type": "Organization", 
       "name": "Homeless Hounds Animal Rescue",
       "url": Astro.site
-    }
+    },
+    "additionalProperty": [
+      ...(animal.NEUTERED === 1 ? [{ "@type": "PropertyValue", "name": "Desexed", "value": "Yes" }] : []),
+      ...(animal.IDENTICHIPPED === 1 || animal.MICROCHIPPED === 1 ? [{ "@type": "PropertyValue", "name": "Microchipped", "value": "Yes" }] : []),
+      ...(animal.ISGOODWITHCATS === 1 ? [{ "@type": "PropertyValue", "name": "Good with Cats", "value": "Yes" }] : []),
+      ...(animal.ISGOODWITHDOGS === 1 ? [{ "@type": "PropertyValue", "name": "Good with Dogs", "value": "Yes" }] : []),
+      ...(animal.ISGOODWITHCHILDREN === 1 ? [{ "@type": "PropertyValue", "name": "Good with Children", "value": "Yes" }] : []),
+      ...(profile.medical.vaccinationCount ? [{ "@type": "PropertyValue", "name": "Vaccination Count", "value": profile.medical.vaccinationCount.toString() }] : [])
+    ].filter(Boolean)
   })} />
 
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -123,10 +173,10 @@ const speciesColor = species === 'dog' ? 'blue' : 'amber';
     <!-- Animal Details -->
     {animal && (
       <div class="grid lg:grid-cols-2 gap-12">
-        <!-- Image Section -->
+        <!-- Enhanced Image Section -->
         <div>
           <!-- Main Image -->
-          <div class="relative overflow-hidden rounded-2xl mb-6">
+          <div class="relative overflow-hidden rounded-2xl mb-6 group">
             {animal.HASACTIVERESERVE === 1 && (
               <div class="absolute top-4 right-4 z-10">
                 <span class="bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider shadow-lg transform rotate-12">
@@ -134,24 +184,96 @@ const speciesColor = species === 'dog' ? 'blue' : 'amber';
                 </span>
               </div>
             )}
+            
+            <!-- Image Counter Badge -->
+            {profile.media.imageCount > 1 && (
+              <div class="absolute top-4 left-4 z-10">
+                <span class="bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  📸 {profile.media.imageCount} photos
+                </span>
+              </div>
+            )}
+            
             <img 
               src={mainImageUrl}
               alt={`${animal.ANIMALNAME} - ${animal.BREEDNAME} ${animal.SPECIESNAME}`}
-              class="w-full h-96 object-cover"
+              class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105"
               loading="eager"
             />
+            
+            <!-- Photo Caption -->
+            {profile.media.mediaName && (
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                <p class="text-white text-sm font-medium">{profile.media.mediaName}</p>
+                {profile.media.mediaDate && (
+                  <p class="text-white/80 text-xs mt-1">
+                    📅 {new Date(profile.media.mediaDate).toLocaleDateString()}
+                  </p>
+                )}
+              </div>
+            )}
+            
+            <!-- Click to View Larger Indicator -->
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
+              <div class="bg-white/90 rounded-full p-3">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                </svg>
+              </div>
+            </div>
           </div>
 
-          <!-- Additional Images -->
+          <!-- Image Gallery Grid -->
           {images.length > 1 && (
-            <div class="grid grid-cols-3 gap-4">
-              {images.slice(1).map((imageUrl, index) => (
-                <img 
-                  src={imageUrl}
-                  alt={`${animal.ANIMALNAME} photo ${index + 2}`}
-                  class="w-full h-24 object-cover rounded-lg cursor-pointer hover:opacity-75 transition-opacity"
-                />
-              ))}
+            <div>
+              <h4 class="text-sm font-semibold text-gray-700 mb-4 flex items-center">
+                <span class="mr-2">📷</span>
+                More Photos of {animal.ANIMALNAME}
+              </h4>
+              <div class="grid grid-cols-3 gap-4">
+                {images.slice(1).map((imageUrl, index) => (
+                  <div class="relative group cursor-pointer">
+                    <img 
+                      src={imageUrl}
+                      alt={`${animal.ANIMALNAME} photo ${index + 2}`}
+                      class="w-full h-24 object-cover rounded-lg transition-all duration-300 group-hover:opacity-75 group-hover:scale-105"
+                    />
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 rounded-lg">
+                      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- Media Statistics -->
+          {(profile.media.imageCount > 0 || profile.media.videoUrl) && (
+            <div class="bg-gray-50 rounded-lg p-4 mt-6">
+              <h4 class="text-sm font-semibold text-gray-700 mb-3">📊 Media Gallery</h4>
+              <div class="flex items-center gap-4 text-sm text-gray-600">
+                {profile.media.imageCount > 0 && (
+                  <div class="flex items-center">
+                    <span class="mr-1">📸</span>
+                    <span>{profile.media.imageCount} photo{profile.media.imageCount !== 1 ? 's' : ''}</span>
+                  </div>
+                )}
+                {profile.media.videoUrl && (
+                  <div class="flex items-center">
+                    <span class="mr-1">🎥</span>
+                    <span>1 video</span>
+                  </div>
+                )}
+                {profile.media.mediaDate && (
+                  <div class="flex items-center">
+                    <span class="mr-1">📅</span>
+                    <span>Updated {new Date(profile.media.mediaDate).toLocaleDateString()}</span>
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>
@@ -185,8 +307,8 @@ const speciesColor = species === 'dog' ? 'blue' : 'amber';
             )}
           </div>
 
-          <!-- Key Information -->
-          <div class="grid grid-cols-2 gap-6 mb-8">
+          <!-- Enhanced Key Information -->
+          <div class="grid grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <div class="flex items-center">
               <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -219,6 +341,18 @@ const speciesColor = species === 'dog' ? 'blue' : 'amber';
               </div>
             </div>
 
+            {profile.basicInfo.weight && (
+              <div class="flex items-center">
+                <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                </svg>
+                <div>
+                  <p class="font-medium text-gray-900">{profile.basicInfo.weight}kg</p>
+                  <p class="text-sm text-gray-600">Weight</p>
+                </div>
+              </div>
+            )}
+
             <div class="flex items-center">
               <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 9l2-2 2 2M8 13h8m-9-3h10a1 1 0 011 1v8a1 1 0 01-1 1H7a1 1 0 01-1-1v-8a1 1 0 011-1z" />
@@ -228,51 +362,178 @@ const speciesColor = species === 'dog' ? 'blue' : 'amber';
                 <p class="text-sm text-gray-600">Time with us</p>
               </div>
             </div>
+
+            {profile.adoption.location && (
+              <div class="flex items-center">
+                <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <div>
+                  <p class="font-medium text-gray-900">{profile.adoption.location}</p>
+                  <p class="text-sm text-gray-600">Current Location</p>
+                </div>
+              </div>
+            )}
           </div>
 
-          <!-- Compatibility Badges -->
+          <!-- Adoption Fee -->
+          {profile.adoption.fee && (
+            <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 mb-8">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="text-lg font-semibold text-purple-900 mb-1">Adoption Fee</h3>
+                  <p class="text-purple-700">Includes desexing, microchipping, and vaccinations</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-2xl font-bold text-purple-900">${profile.adoption.fee}</p>
+                  {profile.adoption.sourceNumber && (
+                    <p class="text-xs text-purple-600">Source: {profile.adoption.sourceNumber}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          <!-- Enhanced Compatibility & Health Section -->
           <div class="mb-8">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Compatibility & Health</h3>
-            <div class="flex flex-wrap gap-3">
-              {animal.ISGOODWITHCATSNAME === 'Yes' && (
-                <span class="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-amber-100 text-amber-800">
-                  🐱 Cat Friendly
-                </span>
-              )}
-              {animal.ISGOODWITHDOGSNAME === 'Yes' && (
-                <span class="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                  🐕 Dog Friendly
-                </span>
-              )}
-              {animal.ISGOODWITHCHILDRENNAME === 'Yes' && (
-                <span class="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                  👶 Kid Friendly
-                </span>
-              )}
-              {animal.NEUTEREDNAME === 'Yes' && (
-                <span class="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-                  ✅ Desexed
-                </span>
-              )}
-              {animal.IDENTICHIPPEDNAME === 'Yes' && (
-                <span class="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-                  🔍 Microchipped
-                </span>
-              )}
-              {animal.ISHOUSETRAINEDNAME === 'Yes' && (
-                <span class="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-emerald-100 text-emerald-800">
-                  🏠 House Trained
-                </span>
+            <h3 class="text-lg font-semibold text-gray-900 mb-6">Compatibility & Health</h3>
+            
+            <!-- Compatibility Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              {compatibilityInfo.map(item => (
+                <div class="flex items-center justify-between bg-gray-50 rounded-lg p-4">
+                  <span class="text-sm font-medium text-gray-700">{item.label}</span>
+                  <span class="text-lg">{item.icon}</span>
+                </div>
+              ))}
+            </div>
+
+            <!-- Health Status -->
+            <div class="bg-green-50 rounded-lg p-6">
+              <h4 class="text-md font-semibold text-green-900 mb-4">🏥 Health Information</h4>
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {profile.medical.isNeutered && (
+                  <div class="flex items-center">
+                    <span class="text-green-600 mr-2">✅</span>
+                    <span class="text-sm text-green-800">Desexed</span>
+                  </div>
+                )}
+                {profile.medical.isMicrochipped && (
+                  <div class="flex items-center">
+                    <span class="text-green-600 mr-2">✅</span>
+                    <span class="text-sm text-green-800">Microchipped</span>
+                  </div>
+                )}
+                {profile.medical.vaccinationCount && profile.medical.vaccinationCount > 0 && (
+                  <div class="flex items-center">
+                    <span class="text-green-600 mr-2">💉</span>
+                    <span class="text-sm text-green-800">{profile.medical.vaccinationCount}x Vaccinated</span>
+                  </div>
+                )}
+                {profile.medical.hasSpecialNeeds && (
+                  <div class="flex items-center">
+                    <span class="text-orange-600 mr-2">💖</span>
+                    <span class="text-sm text-orange-800">Special Needs</span>
+                  </div>
+                )}
+                {animal.HEARTWORMTESTED === 1 && (
+                  <div class="flex items-center">
+                    <span class="text-green-600 mr-2">🔬</span>
+                    <span class="text-sm text-green-800">Heartworm Tested</span>
+                  </div>
+                )}
+                {animal.FLVRESULT === 0 && (
+                  <div class="flex items-center">
+                    <span class="text-green-600 mr-2">🧪</span>
+                    <span class="text-sm text-green-800">FeLV Negative</span>
+                  </div>
+                )}
+              </div>
+              
+              <!-- Vet Information -->
+              {(profile.medical.vetName || profile.medical.vetPhone) && (
+                <div class="mt-4 pt-4 border-t border-green-200">
+                  <h5 class="text-sm font-semibold text-green-900 mb-2">Veterinary Contact</h5>
+                  <div class="text-sm text-green-800">
+                    {profile.medical.vetName && <div>📞 {profile.medical.vetName}</div>}
+                    {profile.medical.vetPhone && <div>☎️ {profile.medical.vetPhone}</div>}
+                  </div>
+                </div>
               )}
             </div>
           </div>
+
+          <!-- Video Section -->
+          {profile.media.videoUrl && (
+            <div class="mb-8">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">Meet {animal.ANIMALNAME} - Video</h3>
+              <div class="bg-gray-100 rounded-xl p-6">
+                <div class="aspect-w-16 aspect-h-9">
+                  {profile.media.videoUrl.includes('youtube.com') || profile.media.videoUrl.includes('youtu.be') ? (
+                    <iframe 
+                      src={profile.media.videoUrl.replace('watch?v=', 'embed/')}
+                      class="w-full h-64 rounded-lg"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  ) : (
+                    <video 
+                      controls 
+                      class="w-full h-64 rounded-lg"
+                      poster={mainImageUrl}
+                    >
+                      <source src={profile.media.videoUrl} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
 
           <!-- Description -->
           {animal.ANIMALCOMMENTS && (
             <div class="mb-8">
               <h3 class="text-lg font-semibold text-gray-900 mb-4">About {animal.ANIMALNAME}</h3>
-              <div class="prose prose-gray max-w-none">
-                <p class="text-gray-700 leading-relaxed">{animal.ANIMALCOMMENTS}</p>
+              <div class="prose prose-gray max-w-none bg-gray-50 rounded-xl p-6">
+                <div class="text-gray-700 leading-relaxed whitespace-pre-line">{animal.ANIMALCOMMENTS}</div>
+              </div>
+            </div>
+          )}
+
+          <!-- Medical Notes -->
+          {profile.medical.healthNotes && (
+            <div class="mb-8">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">Medical Notes</h3>
+              <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-xl p-6">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm text-blue-800 whitespace-pre-line">{profile.medical.healthNotes}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <!-- Physical Description -->
+          {animal.MARKINGS && (
+            <div class="mb-8">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">Physical Description</h3>
+              <div class="bg-amber-50 rounded-xl p-6">
+                <div class="flex items-start">
+                  <span class="text-2xl mr-3">🎨</span>
+                  <div>
+                    <h4 class="font-medium text-amber-900 mb-2">Markings & Features</h4>
+                    <p class="text-amber-800">{animal.MARKINGS}</p>
+                  </div>
+                </div>
               </div>
             </div>
           )}

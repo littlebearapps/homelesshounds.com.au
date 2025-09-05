@@ -55,6 +55,14 @@ export interface ASMAnimal {
   FLVRESULT: 0 | 1 | 2;
   FLVRESULTNAME: 'Negative' | 'Positive' | 'Unknown';
   
+  // Enhanced Medical Fields
+  VACCGIVENCOUNT?: number;
+  CURRENTVETNAME?: string;
+  CURRENTVETPHONE?: string;
+  ORIGINALOWNERPHONE?: string;
+  MICROCHIPPED: 0 | 1;
+  MICROCHIPPEDNAME: 'Yes' | 'No';
+  
   // Compatibility
   ISGOODWITHCATS: 0 | 1 | 2;
   ISGOODWITHCATSNAME: 'Yes' | 'No' | 'Unknown';
@@ -64,6 +72,8 @@ export interface ASMAnimal {
   ISGOODWITHCHILDRENNAME: 'Yes' | 'No' | 'Unknown';
   ISHOUSETRAINED: 0 | 1 | 2;
   ISHOUSETRAINEDNAME: 'Yes' | 'No' | 'Unknown';
+  ISGOODWITHSMALLANIMALS: 0 | 1 | 2;
+  ISGOODWITHSMALLANIMALSSNAME: 'Yes' | 'No' | 'Unknown';
   
   // Special Needs & Flags
   HASSPECIALNEEDS: 0 | 1;
@@ -91,6 +101,10 @@ export interface ASMAnimal {
   DISPLAYLOCATION: string;
   DISPLAYLOCATIONNAME: string;
   
+  // Enhanced Location Fields
+  CURRENTOWNERADDRESS?: string;
+  CURRENTOWNERPOSTCODE?: string;
+  
   // Entry & History
   DATEBROUGHTIN: string;
   ENTRYREASONID: number;
@@ -103,6 +117,11 @@ export interface ASMAnimal {
   HIDDENANIMALDETAILS?: string;
   MARKINGS?: string;
   FEE?: number;
+  
+  // Enhanced Information Fields
+  ADOPTIONDONATION?: number; // Adoption fee
+  SOURCENUMBER?: string; // Source number like RE100081
+  HIDDENCOMMENTS?: string; // Internal notes
   
   // Adoption Information
   ADOPTIONCOORDINATORID?: number;
@@ -141,8 +160,58 @@ export interface AnimalFilters {
   goodWithCats?: boolean;
   goodWithDogs?: boolean;
   goodWithChildren?: boolean;
+  goodWithSmallAnimals?: boolean;
   hasSpecialNeeds?: boolean;
+  isHouseTrained?: boolean;
+  hasActiveReserve?: boolean;
   location?: string;
+}
+
+// Compatibility helper types
+export type CompatibilityLevel = 0 | 1 | 2;
+export type CompatibilityName = 'Yes' | 'No' | 'Unknown';
+
+// Enhanced animal profile sections
+export interface AnimalProfile {
+  basicInfo: {
+    name: string;
+    age: string;
+    breed: string;
+    sex: string;
+    size: string;
+    species: string;
+    weight?: number;
+    markings?: string;
+  };
+  compatibility: {
+    cats: CompatibilityLevel;
+    dogs: CompatibilityLevel;
+    children: CompatibilityLevel;
+    smallAnimals: CompatibilityLevel;
+    houseTrained: CompatibilityLevel;
+  };
+  medical: {
+    isNeutered: boolean;
+    isMicrochipped: boolean;
+    vaccinationCount?: number;
+    healthNotes?: string;
+    hasSpecialNeeds: boolean;
+    vetName?: string;
+    vetPhone?: string;
+  };
+  adoption: {
+    fee?: number;
+    location?: string;
+    isReserved: boolean;
+    coordinator?: string;
+    sourceNumber?: string;
+  };
+  media: {
+    imageCount: number;
+    videoUrl?: string;
+    mediaName?: string;
+    mediaDate?: string;
+  };
 }
 
 // Helper function to create slug from animal name
@@ -159,4 +228,84 @@ export function createAnimalSlug(animal: ASMAnimal): string {
     .replace(/[^a-z0-9-]/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
+}
+
+// Helper function to transform ASM data to structured profile
+export function createAnimalProfile(animal: ASMAnimal): AnimalProfile {
+  return {
+    basicInfo: {
+      name: animal.ANIMALNAME,
+      age: animal.AGEGROUP,
+      breed: animal.BREEDNAME,
+      sex: animal.SEXNAME,
+      size: animal.SIZENAME,
+      species: animal.SPECIESNAME,
+      weight: animal.WEIGHT,
+      markings: animal.MARKINGS
+    },
+    compatibility: {
+      cats: animal.ISGOODWITHCATS,
+      dogs: animal.ISGOODWITHDOGS,
+      children: animal.ISGOODWITHCHILDREN,
+      smallAnimals: animal.ISGOODWITHSMALLANIMALS,
+      houseTrained: animal.ISHOUSETRAINED
+    },
+    medical: {
+      isNeutered: animal.NEUTERED === 1,
+      isMicrochipped: animal.MICROCHIPPED === 1 || animal.IDENTICHIPPED === 1,
+      vaccinationCount: animal.VACCGIVENCOUNT,
+      healthNotes: animal.HEALTHPROBLEMS,
+      hasSpecialNeeds: animal.HASSPECIALNEEDS === 1,
+      vetName: animal.CURRENTVETNAME,
+      vetPhone: animal.CURRENTVETPHONE
+    },
+    adoption: {
+      fee: animal.ADOPTIONDONATION || animal.FEE,
+      location: animal.CURRENTOWNERADDRESS || animal.DISPLAYLOCATIONNAME,
+      isReserved: animal.HASACTIVERESERVE === 1,
+      coordinator: animal.ADOPTIONCOORDINATORNAME,
+      sourceNumber: animal.SOURCENUMBER
+    },
+    media: {
+      imageCount: animal.WEBSITEIMAGECOUNT,
+      videoUrl: animal.WEBSITEVIDEOURL,
+      mediaName: animal.WEBSITEMEDIANAME,
+      mediaDate: animal.WEBSITEMEDIADATE
+    }
+  };
+}
+
+// Helper function to get compatibility icon
+export function getCompatibilityIcon(level: CompatibilityLevel, type: 'cats' | 'dogs' | 'children' | 'small'): string {
+  const icons = {
+    cats: '🐱',
+    dogs: '🐕',
+    children: '👶',
+    small: '🐰'
+  };
+  
+  const baseIcon = icons[type];
+  
+  switch (level) {
+    case 1: return `✅ ${baseIcon}`;  // Yes - green check
+    case 0: return `❌ ${baseIcon}`;  // No - red X
+    case 2: 
+    default: return `❓ ${baseIcon}`; // Unknown - question mark
+  }
+}
+
+// Helper function to format age from date of birth
+export function calculateAge(dateOfBirth: string): string {
+  const birth = new Date(dateOfBirth);
+  const now = new Date();
+  const diffTime = Math.abs(now.getTime() - birth.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays < 365) {
+    const months = Math.floor(diffDays / 30);
+    return months <= 1 ? 'Young' : `${months} months`;
+  }
+  
+  const years = Math.floor(diffDays / 365);
+  return `${years} year${years !== 1 ? 's' : ''}`;
 }
