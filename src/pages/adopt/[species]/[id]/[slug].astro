@@ -1,0 +1,307 @@
+---
+import Base from "../../../../layouts/Base.astro";
+import type { AnimalDetailResponse } from "../../../../types/asm";
+
+export async function getStaticPaths() {
+  // For static generation, we'll need to fetch all animals
+  // In a real implementation, this would be populated during build
+  // For now, return empty array - these will be handled dynamically
+  return [];
+}
+
+const { species, id, slug } = Astro.params;
+
+// Validate parameters
+if (!species || !id || !slug) {
+  return Astro.redirect("/adopt");
+}
+
+if (!['dog', 'cat'].includes(species)) {
+  return Astro.redirect("/adopt");
+}
+
+// Fetch animal details
+let animalData: AnimalDetailResponse | null = null;
+let error: string | null = null;
+
+try {
+  const response = await fetch(`${Astro.url.origin}/api/asm/animal/${id}`);
+  if (!response.ok) {
+    throw new Error(`API returned ${response.status}`);
+  }
+  animalData = await response.json();
+} catch (e) {
+  console.error('Error fetching animal details:', e);
+  error = e instanceof Error ? e.message : 'Failed to fetch animal details';
+}
+
+const animal = animalData?.animal;
+const images = animalData?.images || [];
+
+// Check if animal exists and is the correct species
+if (!animal) {
+  return Astro.redirect("/adopt");
+}
+
+if (animal.SPECIESNAME.toLowerCase() !== species) {
+  return Astro.redirect("/adopt");
+}
+
+// Create page title and meta description
+const title = `${animal.ANIMALNAME} - ${animal.BREEDNAME} ${animal.SPECIESNAME} for Adoption`;
+const description = `Meet ${animal.ANIMALNAME}, a ${animal.AGEGROUP.toLowerCase()} ${animal.SEXNAME.toLowerCase()} ${animal.BREEDNAME} ${animal.SPECIESNAME.toLowerCase()} looking for a loving home. ${animal.SIZENAME} size, ${animal.DAYSONSHELTER} days in care.`;
+
+// Main image URL
+const mainImageUrl = animalData?.thumbnailUrl || `https://service.sheltermanager.com/asmservice?account=st3418&method=animal_thumbnail&animalid=${animal.ID}`;
+
+// Calculate days on shelter for display
+const daysText = animal.DAYSONSHELTER === 1 ? '1 day' : `${animal.DAYSONSHELTER} days`;
+
+// Determine icon for species
+const speciesIcon = species === 'dog' ? '🐕' : '🐱';
+const speciesColor = species === 'dog' ? 'blue' : 'amber';
+---
+
+<Base title={title} description={description}>
+  <!-- Open Graph and Twitter meta tags -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={mainImageUrl} />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={mainImageUrl} />
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Animal",
+    "name": animal.ANIMALNAME,
+    "species": animal.SPECIESNAME,
+    "breed": animal.BREEDNAME,
+    "gender": animal.SEXNAME,
+    "age": animal.AGEGROUP,
+    "size": animal.SIZENAME,
+    "description": `${animal.ANIMALNAME} is a ${animal.AGEGROUP.toLowerCase()} ${animal.SEXNAME.toLowerCase()} ${animal.BREEDNAME} ${animal.SPECIESNAME.toLowerCase()} looking for adoption.`,
+    "image": mainImageUrl,
+    "url": Astro.url.href,
+    "isAvailableForAdoption": true,
+    "shelter": {
+      "@type": "Organization",
+      "name": "Homeless Hounds Animal Rescue",
+      "url": Astro.site
+    }
+  })} />
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Breadcrumb Navigation -->
+    <nav class="flex items-center space-x-2 text-sm text-gray-600 mb-8">
+      <a href="/adopt" class="hover:text-purple-600 transition-colors">All Animals</a>
+      <span>›</span>
+      <a href={`/adopt/${species}s`} class="hover:text-purple-600 transition-colors">
+        {species === 'dog' ? 'Dogs' : 'Cats'}
+      </a>
+      <span>›</span>
+      <span class="text-gray-900 font-medium">{animal.ANIMALNAME}</span>
+    </nav>
+
+    <!-- Error State -->
+    {error && (
+      <div class="text-center py-16">
+        <div class="bg-red-50 border-2 border-red-200 rounded-xl p-8 max-w-lg mx-auto">
+          <h3 class="text-lg font-semibold text-red-800 mb-2">Unable to Load Animal Details</h3>
+          <p class="text-red-700 text-sm mb-4">We're having trouble loading information about this animal.</p>
+          <a href="/adopt" class="inline-flex items-center px-4 py-2 bg-red-100 hover:bg-red-200 text-red-800 rounded-lg font-medium transition-colors">
+            ← Back to All Animals
+          </a>
+        </div>
+      </div>
+    )}
+
+    <!-- Animal Details -->
+    {animal && (
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Image Section -->
+        <div>
+          <!-- Main Image -->
+          <div class="relative overflow-hidden rounded-2xl mb-6">
+            {animal.HASACTIVERESERVE === 1 && (
+              <div class="absolute top-4 right-4 z-10">
+                <span class="bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider shadow-lg transform rotate-12">
+                  Reserved
+                </span>
+              </div>
+            )}
+            <img 
+              src={mainImageUrl}
+              alt={`${animal.ANIMALNAME} - ${animal.BREEDNAME} ${animal.SPECIESNAME}`}
+              class="w-full h-96 object-cover"
+              loading="eager"
+            />
+          </div>
+
+          <!-- Additional Images -->
+          {images.length > 1 && (
+            <div class="grid grid-cols-3 gap-4">
+              {images.slice(1).map((imageUrl, index) => (
+                <img 
+                  src={imageUrl}
+                  alt={`${animal.ANIMALNAME} photo ${index + 2}`}
+                  class="w-full h-24 object-cover rounded-lg cursor-pointer hover:opacity-75 transition-opacity"
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        <!-- Details Section -->
+        <div>
+          <!-- Header -->
+          <div class="mb-8">
+            <div class="flex items-center mb-2">
+              <span class="text-4xl mr-3">{speciesIcon}</span>
+              <div>
+                <h1 class="text-4xl font-bold text-gray-900 mb-2">{animal.ANIMALNAME}</h1>
+                <p class="text-xl text-gray-600">
+                  {animal.BREEDNAME}
+                  {animal.CROSSBREED === 1 && (
+                    <span class="ml-2 text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Mix</span>
+                  )}
+                </p>
+              </div>
+            </div>
+            
+            {animal.HASACTIVERESERVE === 1 && (
+              <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg mb-6">
+                <div class="flex">
+                  <div class="ml-3">
+                    <h3 class="text-sm font-medium text-red-800">This animal is currently reserved</h3>
+                    <p class="text-sm text-red-700">They may become available again if the adoption doesn't proceed.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <!-- Key Information -->
+          <div class="grid grid-cols-2 gap-6 mb-8">
+            <div class="flex items-center">
+              <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p class="font-medium text-gray-900">{animal.AGEGROUP}</p>
+                <p class="text-sm text-gray-600">Age Group</p>
+              </div>
+            </div>
+
+            <div class="flex items-center">
+              <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <div>
+                <p class="font-medium text-gray-900">{animal.SEXNAME}</p>
+                <p class="text-sm text-gray-600">Sex</p>
+              </div>
+            </div>
+
+            <div class="flex items-center">
+              <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v0H8v0z" />
+              </svg>
+              <div>
+                <p class="font-medium text-gray-900">{animal.SIZENAME}</p>
+                <p class="text-sm text-gray-600">Size</p>
+              </div>
+            </div>
+
+            <div class="flex items-center">
+              <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 9l2-2 2 2M8 13h8m-9-3h10a1 1 0 011 1v8a1 1 0 01-1 1H7a1 1 0 01-1-1v-8a1 1 0 011-1z" />
+              </svg>
+              <div>
+                <p class="font-medium text-gray-900">In care for {daysText}</p>
+                <p class="text-sm text-gray-600">Time with us</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Compatibility Badges -->
+          <div class="mb-8">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Compatibility & Health</h3>
+            <div class="flex flex-wrap gap-3">
+              {animal.ISGOODWITHCATSNAME === 'Yes' && (
+                <span class="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-amber-100 text-amber-800">
+                  🐱 Cat Friendly
+                </span>
+              )}
+              {animal.ISGOODWITHDOGSNAME === 'Yes' && (
+                <span class="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                  🐕 Dog Friendly
+                </span>
+              )}
+              {animal.ISGOODWITHCHILDRENNAME === 'Yes' && (
+                <span class="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                  👶 Kid Friendly
+                </span>
+              )}
+              {animal.NEUTEREDNAME === 'Yes' && (
+                <span class="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                  ✅ Desexed
+                </span>
+              )}
+              {animal.IDENTICHIPPEDNAME === 'Yes' && (
+                <span class="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                  🔍 Microchipped
+                </span>
+              )}
+              {animal.ISHOUSETRAINEDNAME === 'Yes' && (
+                <span class="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-emerald-100 text-emerald-800">
+                  🏠 House Trained
+                </span>
+              )}
+            </div>
+          </div>
+
+          <!-- Description -->
+          {animal.ANIMALCOMMENTS && (
+            <div class="mb-8">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">About {animal.ANIMALNAME}</h3>
+              <div class="prose prose-gray max-w-none">
+                <p class="text-gray-700 leading-relaxed">{animal.ANIMALCOMMENTS}</p>
+              </div>
+            </div>
+          )}
+
+          <!-- Contact CTA -->
+          <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8">
+            <h3 class="text-xl font-bold text-purple-900 mb-4">Ready to Meet {animal.ANIMALNAME}?</h3>
+            <p class="text-purple-800 mb-6">
+              Contact us to learn more about {animal.ANIMALNAME} and start the adoption process.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a 
+                href="/contact-us" 
+                class={`inline-flex items-center justify-center px-6 py-3 bg-${speciesColor}-600 text-white rounded-xl hover:bg-${speciesColor}-700 font-semibold transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-transform`}
+              >
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4-8 9-8s9 3.582 9 8z" />
+                </svg>
+                Contact About {animal.ANIMALNAME}
+              </a>
+              <a 
+                href={`/adopt/${species}s`} 
+                class="inline-flex items-center justify-center px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 font-semibold transition-colors"
+              >
+                ← Back to {species === 'dog' ? 'Dogs' : 'Cats'}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+</Base>

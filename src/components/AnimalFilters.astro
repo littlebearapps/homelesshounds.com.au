@@ -1,0 +1,269 @@
+---
+interface Props {
+  currentFilters?: {
+    species?: string;
+    agegroup?: string;
+    size?: string;
+    sex?: string;
+    goodWith?: string;
+  };
+  showSpeciesFilter?: boolean;
+}
+
+const { currentFilters = {}, showSpeciesFilter = true } = Astro.props;
+---
+
+<div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+  <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+    <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z" />
+    </svg>
+    Filter Animals
+  </h2>
+  
+  <form id="animal-filters" class="flex flex-wrap gap-4">
+    {showSpeciesFilter && (
+      <div class="flex-1 min-w-32">
+        <label for="species-filter" class="sr-only">Species</label>
+        <select 
+          id="species-filter" 
+          name="species"
+          class="filter-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+        >
+          <option value="">All Animals</option>
+          <option value="dog" selected={currentFilters.species === 'dog'}>Dogs</option>
+          <option value="cat" selected={currentFilters.species === 'cat'}>Cats</option>
+        </select>
+      </div>
+    )}
+    
+    <div class="flex-1 min-w-32">
+      <label for="agegroup-filter" class="sr-only">Age Group</label>
+      <select 
+        id="agegroup-filter" 
+        name="agegroup"
+        class="filter-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+      >
+        <option value="">Any Age</option>
+        <option value="Young" selected={currentFilters.agegroup === 'Young'}>Young</option>
+        <option value="Adult" selected={currentFilters.agegroup === 'Adult'}>Adult</option>
+        <option value="Senior" selected={currentFilters.agegroup === 'Senior'}>Senior</option>
+      </select>
+    </div>
+    
+    <div class="flex-1 min-w-32">
+      <label for="size-filter" class="sr-only">Size</label>
+      <select 
+        id="size-filter" 
+        name="size"
+        class="filter-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+      >
+        <option value="">Any Size</option>
+        <option value="Small" selected={currentFilters.size === 'Small'}>Small</option>
+        <option value="Medium" selected={currentFilters.size === 'Medium'}>Medium</option>
+        <option value="Large" selected={currentFilters.size === 'Large'}>Large</option>
+        <option value="Very Large" selected={currentFilters.size === 'Very Large'}>Very Large</option>
+      </select>
+    </div>
+    
+    <div class="flex-1 min-w-32">
+      <label for="sex-filter" class="sr-only">Sex</label>
+      <select 
+        id="sex-filter" 
+        name="sex"
+        class="filter-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+      >
+        <option value="">Any Sex</option>
+        <option value="Male" selected={currentFilters.sex === 'Male'}>Male</option>
+        <option value="Female" selected={currentFilters.sex === 'Female'}>Female</option>
+      </select>
+    </div>
+    
+    <div class="flex-1 min-w-40">
+      <label for="goodwith-filter" class="sr-only">Good With</label>
+      <select 
+        id="goodwith-filter" 
+        name="goodWith"
+        class="filter-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+      >
+        <option value="">Good With Any</option>
+        <option value="cats" selected={currentFilters.goodWith === 'cats'}>Good with Cats</option>
+        <option value="dogs" selected={currentFilters.goodWith === 'dogs'}>Good with Dogs</option>
+        <option value="children" selected={currentFilters.goodWith === 'children'}>Good with Children</option>
+      </select>
+    </div>
+    
+    <!-- Sort Options -->
+    <div class="flex-1 min-w-32">
+      <label for="sort-filter" class="sr-only">Sort By</label>
+      <select 
+        id="sort-filter" 
+        name="sort"
+        class="filter-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+      >
+        <option value="name">Name A-Z</option>
+        <option value="-name">Name Z-A</option>
+        <option value="age">Youngest First</option>
+        <option value="-age">Oldest First</option>
+        <option value="-daysonshelter">Longest in Care</option>
+        <option value="daysonshelter">Newest Arrivals</option>
+      </select>
+    </div>
+    
+    <!-- Clear Filters Button -->
+    <button 
+      type="button" 
+      id="clear-filters"
+      class="px-4 py-2 text-gray-600 hover:text-gray-800 font-medium transition-colors duration-200 flex items-center"
+    >
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+      Clear
+    </button>
+  </form>
+</div>
+
+<script>
+  // Client-side filtering functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('animal-filters');
+    const clearButton = document.getElementById('clear-filters');
+    
+    if (!form || !clearButton) return;
+    
+    // Filter change handler
+    function handleFilterChange() {
+      const formData = new FormData(form);
+      const params = new URLSearchParams();
+      
+      // Build query parameters
+      for (const [key, value] of formData.entries()) {
+        if (value && value !== '') {
+          params.set(key, value);
+        }
+      }
+      
+      // Update URL without page reload
+      const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+      window.history.replaceState({}, '', newUrl);
+      
+      // Apply filters to visible animals
+      filterAnimals(Object.fromEntries(params));
+    }
+    
+    // Clear filters handler
+    function clearFilters() {
+      form.reset();
+      window.history.replaceState({}, '', window.location.pathname);
+      filterAnimals({});
+    }
+    
+    // Apply filters to animal cards
+    function filterAnimals(filters) {
+      const animals = document.querySelectorAll('.asm3-adoptable-item');
+      let visibleCount = 0;
+      
+      animals.forEach(animal => {
+        let shouldShow = true;
+        const link = animal.querySelector('a');
+        const href = link?.getAttribute('href') || '';
+        
+        // Extract animal info from the card
+        const nameEl = animal.querySelector('.asm3-adoptable-name');
+        const taglineEl = animal.querySelector('.asm3-adoptable-tagline');
+        const badgesEl = animal.querySelector('.flex.flex-wrap.gap-2');
+        
+        if (!nameEl || !taglineEl) return;
+        
+        const name = nameEl.textContent?.toLowerCase() || '';
+        const content = taglineEl.textContent?.toLowerCase() || '';
+        const badges = badgesEl?.textContent?.toLowerCase() || '';
+        
+        // Apply filters
+        if (filters.species && !href.includes(`/adopt/${filters.species}/`)) {
+          shouldShow = false;
+        }
+        
+        if (filters.agegroup && !content.includes(filters.agegroup.toLowerCase())) {
+          shouldShow = false;
+        }
+        
+        if (filters.size && !content.includes(filters.size.toLowerCase())) {
+          shouldShow = false;
+        }
+        
+        if (filters.sex && !content.includes(filters.sex.toLowerCase())) {
+          shouldShow = false;
+        }
+        
+        if (filters.goodWith) {
+          const goodWithMap = {
+            'cats': 'cat friendly',
+            'dogs': 'dog friendly', 
+            'children': 'kid friendly'
+          };
+          const searchTerm = goodWithMap[filters.goodWith];
+          if (searchTerm && !badges.includes(searchTerm)) {
+            shouldShow = false;
+          }
+        }
+        
+        // Show/hide animal
+        animal.style.display = shouldShow ? 'block' : 'none';
+        if (shouldShow) visibleCount++;
+      });
+      
+      // Update results count
+      updateResultsCount(visibleCount);
+    }
+    
+    // Update results counter
+    function updateResultsCount(count) {
+      let counter = document.getElementById('results-counter');
+      if (!counter) {
+        counter = document.createElement('div');
+        counter.id = 'results-counter';
+        counter.className = 'text-sm text-gray-600 mb-4';
+        const container = document.querySelector('.animals-grid')?.parentElement;
+        if (container) {
+          container.insertBefore(counter, container.querySelector('.animals-grid'));
+        }
+      }
+      
+      const total = document.querySelectorAll('.asm3-adoptable-item').length;
+      counter.textContent = `Showing ${count} of ${total} animals`;
+    }
+    
+    // Event listeners
+    form.addEventListener('change', handleFilterChange);
+    clearButton.addEventListener('click', clearFilters);
+    
+    // Initialize filters from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialFilters = Object.fromEntries(urlParams);
+    
+    // Set form values from URL
+    Object.entries(initialFilters).forEach(([key, value]) => {
+      const input = form.querySelector(`[name="${key}"]`);
+      if (input) input.value = value;
+    });
+    
+    // Apply initial filters
+    filterAnimals(initialFilters);
+  });
+</script>
+
+<style>
+  .filter-select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    appearance: none;
+  }
+  
+  .filter-select:focus {
+    @apply ring-2 ring-purple-500 border-transparent;
+  }
+</style>

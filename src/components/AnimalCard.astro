@@ -1,0 +1,144 @@
+---
+import type { ASMAnimal } from '../types/asm';
+import { createAnimalSlug } from '../types/asm';
+
+interface Props {
+  animal: ASMAnimal;
+  showBadges?: boolean;
+  lazyLoad?: boolean;
+}
+
+const { animal, showBadges = true, lazyLoad = true } = Astro.props;
+
+// Create SEO-friendly URL
+const slug = createAnimalSlug(animal);
+const speciesPath = animal.SPECIESNAME.toLowerCase();
+const detailUrl = `/adopt/${speciesPath}/${animal.ID}/${slug}`;
+
+// Determine thumbnail URL
+const thumbnailUrl = `https://service.sheltermanager.com/asmservice?account=st3418&method=animal_thumbnail&animalid=${animal.ID}`;
+
+// Calculate days on shelter for display
+const daysText = animal.DAYSONSHELTER === 1 ? '1 day' : `${animal.DAYSONSHELTER} days`;
+---
+
+<article class="asm3-adoptable-item group">
+  <a href={detailUrl} class="asm3-adoptable-link block h-full">
+    <!-- Reserved Badge -->
+    {animal.HASACTIVERESERVE === 1 && (
+      <div class="asm3-adoptable-reserved absolute top-3 right-3 z-10">
+        <span class="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg transform rotate-12">
+          Reserved
+        </span>
+      </div>
+    )}
+
+    <!-- Animal Photo -->
+    <div class="relative overflow-hidden rounded-t-xl">
+      <img 
+        src={thumbnailUrl}
+        alt={`${animal.ANIMALNAME} - ${animal.BREEDNAME} ${animal.SPECIESNAME}`}
+        class="asm3-adoptable-thumbnail w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105"
+        loading={lazyLoad ? "lazy" : "eager"}
+        decoding="async"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    </div>
+
+    <!-- Card Content -->
+    <div class="p-6">
+      <!-- Animal Name -->
+      <h3 class="asm3-adoptable-name text-2xl font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors duration-200">
+        {animal.ANIMALNAME}
+      </h3>
+
+      <!-- Basic Info -->
+      <div class="asm3-adoptable-tagline space-y-2 mb-4">
+        <div class="flex items-center text-gray-600">
+          <span class="text-sm font-medium">{animal.BREEDNAME}</span>
+          {animal.CROSSBREED === 1 && (
+            <span class="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Mix</span>
+          )}
+        </div>
+        
+        <div class="flex items-center justify-between text-sm text-gray-500">
+          <span class="flex items-center">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {animal.AGEGROUP}
+          </span>
+          <span class="flex items-center">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            {animal.SEXNAME}
+          </span>
+          <span class="flex items-center">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v0H8v0z" />
+            </svg>
+            {animal.SIZENAME}
+          </span>
+        </div>
+      </div>
+
+      <!-- Compatibility Badges -->
+      {showBadges && (
+        <div class="flex flex-wrap gap-2 mb-4">
+          {animal.ISGOODWITHCATSNAME === 'Yes' && (
+            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+              🐱 Cat Friendly
+            </span>
+          )}
+          {animal.ISGOODWITHDOGSNAME === 'Yes' && (
+            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+              🐕 Dog Friendly
+            </span>
+          )}
+          {animal.ISGOODWITHCHILDRENNAME === 'Yes' && (
+            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+              👶 Kid Friendly
+            </span>
+          )}
+          {animal.NEUTEREDNAME === 'Yes' && (
+            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+              ✅ Desexed
+            </span>
+          )}
+        </div>
+      )}
+
+      <!-- Time on Shelter -->
+      <div class="text-xs text-gray-400 border-t pt-3 mt-4">
+        In care for {daysText}
+      </div>
+
+      <!-- Hover Effect -->
+      <div class="mt-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <span class="text-purple-600 font-medium text-sm">View Details →</span>
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  .asm3-adoptable-item {
+    @apply bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden;
+  }
+  
+  .asm3-adoptable-item:hover {
+    @apply -translate-y-2 border-purple-300;
+  }
+
+  .asm3-adoptable-item::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 transition-opacity duration-300;
+  }
+
+  .asm3-adoptable-item:hover::before {
+    @apply opacity-100;
+  }
+</style>
