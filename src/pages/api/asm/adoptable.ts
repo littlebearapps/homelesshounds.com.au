@@ -31,7 +31,7 @@ export const GET: APIRoute = async ({ request, url }) => {
     const limit = Math.min(parseInt(searchParams.get('limit') || '50'), 100);
     const offset = parseInt(searchParams.get('offset') || '0');
 
-    // Build ASM API URL
+    // Build ASM API URL - using correct method name from docs
     const asmUrl = new URL(ASM_BASE_URL);
     asmUrl.searchParams.set('method', 'json_adoptable_animals');
     asmUrl.searchParams.set('account', ASM_ACCOUNT);

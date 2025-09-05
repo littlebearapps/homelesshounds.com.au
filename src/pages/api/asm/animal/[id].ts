@@ -38,7 +38,7 @@ export const GET: APIRoute = async ({ params, request }) => {
   try {
     console.log(`Fetching animal details for ID: ${id}`);
 
-    // Build ASM API URL
+    // Build ASM API URL - using correct method name from docs
     const asmUrl = new URL(ASM_BASE_URL);
     asmUrl.searchParams.set('method', 'json_adoptable_animal');
     asmUrl.searchParams.set('account', ASM_ACCOUNT);
