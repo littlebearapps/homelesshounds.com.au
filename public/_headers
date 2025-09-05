@@ -3,4 +3,4 @@
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
-  Content-Security-Policy: default-src 'self'; img-src 'self' data: https://service.sheltermanager.com; script-src 'self' https://service.sheltermanager.com; style-src 'self' 'unsafe-inline'; frame-src https://service.sheltermanager.com; connect-src 'self'; font-src 'self' data:;
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://service.sheltermanager.com; style-src 'self' 'unsafe-inline'; frame-src 'self' https://service.sheltermanager.com; connect-src 'self' https://service.sheltermanager.com; font-src 'self' data:;
