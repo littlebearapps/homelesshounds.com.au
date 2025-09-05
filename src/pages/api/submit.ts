@@ -84,11 +84,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
       // Determine thank you page based on form ID
       let thankYouPage = "/contact-us/thanks";
       if (formid === "36") {
-        thankYouPage = "/contact-us/surrender/thanks";
-      } else if (formid === "37") {
-        thankYouPage = "/contact-us/adoption/thanks";
-      } else if (formid === "38") {
         thankYouPage = "/contact-us/volunteer/thanks";
+      } else if (formid === "37") {
+        thankYouPage = "/contact-us/surrender/thanks";
+      } else if (formid === "38") {
+        thankYouPage = "/contact-us/adoption/thanks";
       } else if (formid === "39") {
         thankYouPage = "/contact-us/foster/thanks";
       }
