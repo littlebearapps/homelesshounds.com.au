@@ -92,9 +92,12 @@ const formid = url.searchParams.get('formid') || '36';
             "MULTI-LOOKUP": (f) => createSelect(f, true),
             RADIO: (f) => createRadios(f),
             CHECKBOX: (f) => createCheckbox(f),
+            YESNO: (f) => createRadios(f), // ASM Yes/No field
             DATE: () => createInput("date"),
             FILE: () => createFileInput(),
-            GDPR: (f) => createGDPR(f)
+            GDPR: (f) => createGDPR(f),
+            HTMLNOTE: (f) => createHTMLNote(f), // HTML display field
+            NOTES: () => createTextarea() // Notes field
           };
 
           function createInput(type) {
@@ -195,6 +198,13 @@ const formid = url.searchParams.get('formid') || '36';
             wrap.appendChild(lbl);
             
             return wrap;
+          }
+
+          function createHTMLNote(f) {
+            const div = document.createElement("div");
+            div.className = "col-span-full bg-gray-50 rounded-lg p-4";
+            div.innerHTML = f.label || f.tooltip || "";
+            return div;
           }
 
           function renderField(f) {

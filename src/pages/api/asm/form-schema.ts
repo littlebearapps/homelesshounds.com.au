@@ -19,8 +19,8 @@ export const GET: APIRoute = async ({ request, locals }) => {
     );
   }
   
-  // Build ASM URL for form JSON
-  const asmUrl = `${baseUrl}?account=${encodeURIComponent(account)}&method=online_form_json&formid=${encodeURIComponent(formid)}`;
+  // Build ASM URL for form JSON (using online_form_json2 for newer API)
+  const asmUrl = `${baseUrl}?account=${encodeURIComponent(account)}&method=online_form_json2&formid=${encodeURIComponent(formid)}`;
   
   try {
     // Fetch from ASM with caching
@@ -60,3 +60,8 @@ export const GET: APIRoute = async ({ request, locals }) => {
 };
 
 export const prerender = false;
+
+// Also export as default for compatibility
+export default {
+  GET
+};

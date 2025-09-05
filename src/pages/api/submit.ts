@@ -110,3 +110,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
 };
 
 export const prerender = false;
+
+// Also export as default for compatibility
+export default {
+  POST
+};
