@@ -1,171 +1,343 @@
-/* ASM Animal Listings Custom Styling */
+/* ASM Animal Listings Custom Styling - Fixed for ASM's actual class structure */
 
-/* Container styling for responsive grid */
-#asm3-adoptables {
+/* Main container - fixed 3-column grid */
+.asm3-adoptable-list {
   display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-  gap: 1.5rem !important;
-  margin-top: 2rem !important;
-  padding: 0 !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 2rem !important;
+  padding: 2rem 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
 }
 
-/* Individual animal card styling */
-.asm3-adoptables-item {
-  background: white !important;
-  border: 1px solid #e5e7eb !important;
-  border-radius: 0.75rem !important;
-  padding: 1.25rem !important;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
-  transition: all 0.2s ease-in-out !important;
+/* Responsive breakpoints */
+@media (max-width: 1280px) {
+  .asm3-adoptable-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.75rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .asm3-adoptable-list {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    padding: 1.5rem 0 !important;
+  }
+}
+
+/* Enhanced animal card styling using correct ASM classes */
+.asm3-adoptable-item {
+  background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%) !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 1.25rem !important;
+  padding: 1.5rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
   overflow: hidden !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
 }
 
-.asm3-adoptables-item:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
-  transform: translateY(-2px) !important;
+/* Gradient border effect on hover */
+.asm3-adoptable-item::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 4px !important;
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%) !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
 }
 
-/* Animal photo styling */
-.asm3-adoptables-item img {
+.asm3-adoptable-item:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+  border-color: #cbd5e1 !important;
+}
+
+.asm3-adoptable-item:hover::before {
+  opacity: 1 !important;
+}
+
+/* Animal photo styling - using correct ASM classes */
+.asm3-adoptable-thumbnail {
   width: 100% !important;
-  height: 200px !important;
+  height: 280px !important;
   object-fit: cover !important;
-  border-radius: 0.5rem !important;
+  border-radius: 1rem !important;
   margin-bottom: 1rem !important;
+  transition: transform 0.5s ease !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Animal name styling */
-.asm3-adoptables-item h3,
-.asm3-adoptables-item .asm3-name {
-  font-size: 1.25rem !important;
-  font-weight: 600 !important;
-  color: #111827 !important;
-  margin-bottom: 0.5rem !important;
-  line-height: 1.3 !important;
+.asm3-adoptable-item:hover .asm3-adoptable-thumbnail {
+  transform: scale(1.05) !important;
 }
 
-/* Animal details styling */
-.asm3-adoptables-item .asm3-breed,
-.asm3-adoptables-item .asm3-age,
-.asm3-adoptables-item .asm3-sex,
-.asm3-adoptables-item .asm3-size {
-  font-size: 0.875rem !important;
-  color: #6b7280 !important;
-  margin-bottom: 0.25rem !important;
-  line-height: 1.4 !important;
+/* Animal name styling - using correct ASM classes */
+.asm3-adoptable-name {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: #1a202c !important;
+  margin: 1rem 0 0.5rem !important;
+  padding: 0 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.025em !important;
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
 }
 
-/* Special status badges */
-.asm3-adoptables-item .asm3-location {
-  display: inline-block !important;
-  background: #fef3c7 !important;
-  color: #92400e !important;
-  padding: 0.25rem 0.5rem !important;
-  border-radius: 0.375rem !important;
-  font-size: 0.75rem !important;
-  font-weight: 500 !important;
-  margin-top: 0.5rem !important;
+/* Animal tagline/details styling */
+.asm3-adoptable-tagline {
+  font-size: 0.95rem !important;
+  color: #4a5568 !important;
+  line-height: 1.6 !important;
+  margin: 0.5rem 0 1rem !important;
+  padding: 0 !important;
+  text-align: center !important;
 }
 
-/* Foster status styling */
-.asm3-adoptables-item .asm3-location:contains("Foster") {
-  background: #dbeafe !important;
-  color: #1d4ed8 !important;
-}
-
-/* Action buttons */
-.asm3-adoptables-item a,
-.asm3-adoptables-item button {
-  display: inline-block !important;
-  background: #1f2937 !important;
-  color: white !important;
-  padding: 0.5rem 1rem !important;
-  border-radius: 0.375rem !important;
+/* Enhanced link styling */
+.asm3-adoptable-link {
   text-decoration: none !important;
-  font-size: 0.875rem !important;
-  font-weight: 500 !important;
-  margin-top: 1rem !important;
-  transition: background-color 0.2s !important;
-  border: none !important;
-  cursor: pointer !important;
+  color: inherit !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  transition: all 0.3s ease !important;
 }
 
-.asm3-adoptables-item a:hover,
-.asm3-adoptables-item button:hover {
-  background: #374151 !important;
+.asm3-adoptable-link:hover {
+  text-decoration: none !important;
+  color: inherit !important;
 }
 
-/* Filter dropdown styling */
+/* Reserved animal styling */
+.asm3-adoptable-reserved {
+  position: relative !important;
+  display: inline-block !important;
+}
+
+.asm3-adoptable-reserved::after {
+  content: "RESERVED" !important;
+  position: absolute !important;
+  top: 10px !important;
+  right: -10px !important;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  color: white !important;
+  padding: 0.25rem 0.75rem !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  transform: rotate(12deg) !important;
+  border-radius: 0.375rem !important;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.4) !important;
+  z-index: 10 !important;
+}
+
+/* Enhanced filter section */
+.asm3-filters,
 .asm3-adoptables-filters {
   display: flex !important;
   flex-wrap: wrap !important;
-  gap: 1rem !important;
-  margin-bottom: 2rem !important;
-  padding: 1.5rem !important;
-  background: #f9fafb !important;
-  border-radius: 0.75rem !important;
-  border: 1px solid #e5e7eb !important;
+  gap: 1.25rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  margin: 0 !important;
 }
 
+.asm3-filters select,
 .asm3-adoptables-filters select {
-  padding: 0.5rem 0.75rem !important;
-  border: 1px solid #d1d5db !important;
-  border-radius: 0.375rem !important;
+  padding: 0.625rem 2.5rem 0.625rem 1rem !important;
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 0.75rem !important;
   background: white !important;
-  font-size: 0.875rem !important;
-  min-width: 120px !important;
-}
-
-.asm3-adoptables-filters label {
+  font-size: 0.95rem !important;
   font-weight: 500 !important;
-  color: #374151 !important;
-  font-size: 0.875rem !important;
-  margin-right: 0.5rem !important;
+  color: #2d3748 !important;
+  min-width: 140px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  appearance: none !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0.75rem center !important;
+  background-size: 1.25rem !important;
 }
 
-/* Loading state */
+.asm3-filters select:hover,
+.asm3-adoptables-filters select:hover {
+  border-color: #cbd5e1 !important;
+  background-color: #f8fafc !important;
+}
+
+.asm3-filters select:focus,
+.asm3-adoptables-filters select:focus {
+  outline: none !important;
+  border-color: #4f46e5 !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1) !important;
+}
+
+.asm3-filters label,
+.asm3-adoptables-filters label {
+  display: none !important;
+}
+
+/* Loading state with animation */
 #asm3-adoptables:empty::before {
-  content: "Loading available animals..." !important;
-  display: block !important;
+  content: "🐾 Loading adorable animals..." !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   text-align: center !important;
-  color: #6b7280 !important;
-  font-style: italic !important;
+  color: #64748b !important;
+  font-size: 1.125rem !important;
+  font-weight: 500 !important;
+  padding: 4rem 2rem !important;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%) !important;
+  border-radius: 1rem !important;
+  animation: pulse 2s ease-in-out infinite !important;
+  grid-column: 1 / -1 !important;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* No results message styling */
+.asm3-no-animals {
+  grid-column: 1 / -1 !important;
+  text-align: center !important;
+  color: #64748b !important;
+  font-size: 1.125rem !important;
+  padding: 4rem 2rem !important;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+  border-radius: 1rem !important;
+  border: 2px dashed #cbd5e1 !important;
+}
+
+/* Enhanced iframe popup styling */
+#asm3-adoptable-iframe-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   padding: 2rem !important;
+}
+
+#asm3-adoptable-iframe {
+  width: 100% !important;
+  max-width: 900px !important;
+  height: 90% !important;
+  border: none !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+#asm3-adoptable-iframe-close {
+  position: absolute !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 3rem !important;
+  height: 3rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  z-index: 10000 !important;
+}
+
+#asm3-adoptable-iframe-close:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+  transform: scale(1.1) !important;
+  text-decoration: none !important;
 }
 
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
-  #asm3-adoptables {
-    grid-template-columns: 1fr !important;
-    gap: 1rem !important;
+  .asm3-adoptable-item {
+    padding: 1.25rem !important;
   }
   
-  .asm3-adoptables-item {
-    padding: 1rem !important;
+  .asm3-adoptable-thumbnail {
+    height: 240px !important;
   }
   
+  .asm3-adoptable-name {
+    font-size: 1.25rem !important;
+  }
+  
+  .asm3-filters,
   .asm3-adoptables-filters {
     flex-direction: column !important;
     gap: 0.75rem !important;
   }
+  
+  #asm3-adoptable-iframe-overlay {
+    padding: 1rem !important;
+  }
+  
+  #asm3-adoptable-iframe {
+    height: 95% !important;
+  }
+  
+  #asm3-adoptable-iframe-close {
+    top: 0.5rem !important;
+    right: 0.5rem !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    font-size: 1rem !important;
+  }
 }
 
-/* No results message */
-.asm3-no-animals {
-  text-align: center !important;
+/* Additional enhancements for rich animal data display */
+.asm3-adoptable-item .asm3-adoptable-tagline {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+  align-items: center !important;
+}
+
+/* Style individual pieces of information if ASM splits them */
+.asm3-adoptable-tagline > div,
+.asm3-adoptable-tagline > span {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  font-size: 0.875rem !important;
   color: #6b7280 !important;
-  font-style: italic !important;
-  padding: 3rem 1rem !important;
-  background: #f9fafb !important;
-  border-radius: 0.75rem !important;
-  border: 1px solid #e5e7eb !important;
+  margin: 0.125rem 0 !important;
 }
 
-/* Ensure consistent spacing */
-.asm3-adoptables-item > * {
-  margin: 0 !important;
-}
-
-.asm3-adoptables-item > *:not(:last-child) {
-  margin-bottom: 0.5rem !important;
+/* Add visual enhancements for better information display */
+.asm3-adoptable-tagline strong {
+  color: #374151 !important;
+  font-weight: 600 !important;
 }
