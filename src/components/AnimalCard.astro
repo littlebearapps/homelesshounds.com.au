@@ -15,6 +15,9 @@ const slug = createAnimalSlug(animal);
 const speciesPath = animal.SPECIESNAME.toLowerCase();
 const detailUrl = `/adopt/${speciesPath}/${animal.ID}/${slug}`;
 
+// Debug logging (remove in production)
+console.log(`AnimalCard: ${animal.ANIMALNAME} -> ${detailUrl}`);
+
 // Determine thumbnail URL
 const thumbnailUrl = `https://service.sheltermanager.com/asmservice?account=st3418&method=animal_thumbnail&animalid=${animal.ID}`;
 
