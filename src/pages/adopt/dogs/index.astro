@@ -73,7 +73,11 @@ const base = import.meta.env.PUBLIC_ASM_BASE;
             });
           });
         </script>
-        <script src={`${base}?method=animal_view_adoptable_js&account=${account}`}></script>
+        <script 
+          src={`${base}?method=animal_view_adoptable_js&account=${account}`}
+          onerror="console.error('Failed to load ASM script for dogs'); document.getElementById('asm3-adoptables').innerHTML = '<div class=\"text-center py-12\"><div class=\"bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto\"><p class=\"text-red-800 font-medium mb-2\">Unable to Load Dog Listings</p><p class=\"text-sm text-red-600\">Please check back later or <a href=\"/contact-us\" class=\"underline\">contact us</a> for assistance.</p></div></div>';"
+          onload="console.log('ASM script loaded successfully for dogs')">
+        </script>
       </>
     ) : (
       <div class="text-center py-12">
