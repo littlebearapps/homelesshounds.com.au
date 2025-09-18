@@ -23,17 +23,16 @@
 - [x] Added form schema API with HTML parsing fallback
 
 ### Today (2025-09-18)
-- [x] **Fixed form ID mapping** (adoption = form 39, not 38)
-- [x] **Created comprehensive email template system** with base template
-- [x] **Integrated SendGrid email service** with smart routing
-- [x] **Built department-specific email routing** (dog/cat adoptions, surrenders)
-- [x] **Added thank you pages** with personalization for all forms
-- [x] **Fixed email template styling** (dark mode, logo, branding)
-- [x] **Created email test page** for development verification
-- [x] **Implemented SendGrid event webhooks** with signature verification
-- [x] **Added automated email alerts** for critical delivery issues
-- [x] **Fixed template text visibility** in dark mode
-- [x] **Updated email branding** to "Homeless Hounds Animal Rescue"
+- [x] **Created comprehensive Contact Us page** with accordion FAQs and emergency contacts
+- [x] **Added RSPCA Victoria & Wildlife Victoria** emergency contact information
+- [x] **Implemented accordion-style FAQ section** with 8 common questions
+- [x] **Added Turnstile spam protection** to contact form
+- [x] **Created two-column layout** for contact information and response times
+- [x] **Built thank you page** with highlighted response times and office hours
+- [x] **Redesigned homepage** with modern gradients and live ASM adoption carousel
+- [x] **Fixed adoption carousel** to show live animal data with proper photos
+- [x] **Added mission cards** with emoji icons for Adopt/Foster/Donate/Volunteer
+- [x] **Implemented partner section** with 5 real partner placeholders
 
 ## 🔄 Active Tasks
 
@@ -63,7 +62,7 @@
 ## 🔖 Session Continuity
 
 ### Last Session Summary
-**PRODUCTION EMAIL MONITORING COMPLETE**: Implemented enterprise-grade SendGrid email system with real-time monitoring. Features: professional email templates with Homeless Hounds branding, smart routing by department, personalized thank you pages, event webhooks with signature verification, automated alerts for bounces/spam/delivery issues, domain authentication (bounce.homelesshounds.com.au), link branding (link.homelesshounds.com.au), and complete dark mode support. System now provides real-time delivery monitoring with automated admin notifications for critical events.
+**CORE WEBSITE STRUCTURE COMPLETE**: Redesigned homepage with live ASM adoption carousel showing real animal photos and details. Created comprehensive Contact Us page with accordion FAQs, emergency contacts (RSPCA Victoria & Wildlife Victoria), and Turnstile spam protection. Implemented modern design with gradient backgrounds, mission cards with emoji icons, and partner section. Fixed all animal card display issues including proper field mappings (uppercase ASM fields), image URLs, and personalized "Meet [Name]" buttons. Website now has complete core page structure ready for next phase of form implementations.
 
 ### Key Implementation Details
 ```typescript
