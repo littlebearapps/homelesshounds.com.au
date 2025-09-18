@@ -38,12 +38,12 @@ export const surrenderConfirmationEmail = (data: EmailData) => {
 
     ${styles.divider}
 
-    <h3 style="color: #2d3748; font-size: 16px; font-weight: 600; margin: 0 0 10px;">Support & Resources</h3>
-    <p style="color: #4a5568; font-size: 14px; line-height: 1.6; margin: 0 0 15px;">
+    <h3 style="color: #2d3748; font-size: 16px; font-weight: 600; margin: 0 0 10px;" class="dark-mode-text">Support & Resources</h3>
+    <p style="color: #4a5568; font-size: 14px; line-height: 1.6; margin: 0 0 15px;" class="dark-mode-subtext">
       If your circumstances change or you need immediate assistance, please don't hesitate to contact us.
       We may be able to provide:
     </p>
-    <ul style="color: #4a5568; font-size: 14px; line-height: 1.8; margin: 0 0 15px; padding-left: 20px;">
+    <ul style="color: #4a5568; font-size: 14px; line-height: 1.8; margin: 0 0 15px; padding-left: 20px;" class="dark-mode-subtext">
       <li>Temporary foster care in emergency situations</li>
       <li>Behavioral support and training resources</li>
       <li>Financial assistance for veterinary care</li>

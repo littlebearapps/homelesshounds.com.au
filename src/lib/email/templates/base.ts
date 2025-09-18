@@ -68,7 +68,7 @@ export const baseEmailTemplate = (content: string, preheader?: string) => `
                     />
                     <!-- Tagline -->
                     <p style="margin: 0; color: #ffffff; font-size: 16px; font-weight: 500;">
-                      Animal Rescue Victoria
+                      Homeless Hounds Animal Rescue
                     </p>
                   </td>
                 </tr>
