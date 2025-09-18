@@ -1,18 +1,260 @@
 ---
 import Base from "../../../layouts/Base.astro";
 ---
-<Base title="Foster Care">
-  <h1 class="text-3xl font-semibold mb-4">Foster Care</h1>
-  <p class="text-gray-700 mb-4">Information about fostering coming soon.</p>
 
-  <!-- TODO: Add foster care application form from ASM when form ID is assigned -->
-  <!-- Currently we don't have a foster form ID in ASM -->
-  <!-- Form 38 is currently unassigned and could potentially be used for foster applications -->
-  <div class="bg-amber-50 border border-amber-200 rounded-lg p-6 mt-8">
-    <p class="text-amber-800">
-      <strong>Note:</strong> Foster care applications are not yet available online.
-      Please <a href="/contact-us" class="underline text-blue-600 hover:text-blue-700">contact us</a> directly
-      if you're interested in becoming a foster carer.
-    </p>
-  </div>
+<Base title="Foster Care | Homeless Hounds Animal Rescue">
+  <main class="min-h-screen bg-gray-50">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-purple-600 to-purple-800 text-white py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">Foster Care</h1>
+          <h2 class="text-2xl md:text-3xl text-yellow-300 font-semibold mb-6">Give Animals a Second Chance</h2>
+          <p class="text-lg md:text-xl mb-8">
+            Foster care saves lives. By opening your home temporarily, you help animals recover,
+            heal and prepare for their forever homes.
+          </p>
+          <p class="text-sm text-purple-100 mb-8">
+            <em>Homeless Hounds is registered as a charity with the Australian Charities and Not-for-profits Commission – ABN 93 136 291 221</em>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+      <!-- Why Foster Section -->
+      <section class="bg-white rounded-lg shadow-md p-8 mb-12">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Why should I become a foster carer?</h3>
+        <div class="prose prose-lg max-w-none text-gray-700">
+          <p class="mb-6">
+            Foster carers are the backbone of our rescue operations. Without foster homes, we simply cannot save as many animals.
+            By fostering, you're providing a safe, loving environment where animals can recover from trauma, illness, or surgery,
+            and learn to trust humans again.
+          </p>
+          <p class="mb-6">
+            Many of the animals that come into our care need time to decompress and heal – something that's difficult to achieve
+            in a shelter environment. Foster homes provide the peace, quiet, and individual attention these animals need to flourish.
+          </p>
+          <p class="mb-6">
+            Foster care is also incredibly rewarding. You get to witness an animal's transformation from scared and uncertain
+            to confident and ready for adoption. You're literally saving lives and giving animals a second chance at happiness.
+          </p>
+        </div>
+      </section>
+
+      <!-- Animals Needing Help -->
+      <section class="bg-white rounded-lg shadow-md p-8 mb-12">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Animals That Need Foster Care</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <div class="border-l-4 border-purple-600 pl-6">
+            <h4 class="text-lg font-semibold text-gray-900 mb-3">Pregnant Animals</h4>
+            <p class="text-gray-600 text-sm">
+              Expecting mothers need a quiet, stress-free environment to give birth and raise their babies safely.
+            </p>
+          </div>
+
+          <div class="border-l-4 border-purple-600 pl-6">
+            <h4 class="text-lg font-semibold text-gray-900 mb-3">Mothers with Babies</h4>
+            <p class="text-gray-600 text-sm">
+              New mothers and their offspring need a calm environment during those crucial first weeks of life.
+            </p>
+          </div>
+
+          <div class="border-l-4 border-purple-600 pl-6">
+            <h4 class="text-lg font-semibold text-gray-900 mb-3">Medical Recovery</h4>
+            <p class="text-gray-600 text-sm">
+              Animals recovering from surgery or illness need a quiet place to heal with monitoring and care.
+            </p>
+          </div>
+
+          <div class="border-l-4 border-purple-600 pl-6">
+            <h4 class="text-lg font-semibold text-gray-900 mb-3">Behavioural Rehabilitation</h4>
+            <p class="text-gray-600 text-sm">
+              Some animals need help learning to trust humans again or basic house training and socialisation.
+            </p>
+          </div>
+
+          <div class="border-l-4 border-purple-600 pl-6">
+            <h4 class="text-lg font-semibold text-gray-900 mb-3">Emergency Care</h4>
+            <p class="text-gray-600 text-sm">
+              When shelters are full or animals need immediate help, foster homes provide life-saving temporary accommodation.
+            </p>
+          </div>
+
+          <div class="border-l-4 border-purple-600 pl-6">
+            <h4 class="text-lg font-semibold text-gray-900 mb-3">Senior Animals</h4>
+            <p class="text-gray-600 text-sm">
+              Older animals often struggle in shelter environments and thrive in the comfort of a loving foster home.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Foster Care FAQ -->
+      <section class="bg-white rounded-lg shadow-md p-8 mb-12">
+        <h3 class="text-2xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h3>
+        <div class="space-y-8">
+
+          <!-- FAQ 1 -->
+          <div class="border-b border-gray-200 pb-6">
+            <h4 class="text-lg font-semibold text-gray-900 mb-3">How long do animals stay in foster care?</h4>
+            <p class="text-gray-700">
+              Foster periods vary depending on the animal's needs. It could be a few weeks for a healthy animal
+              waiting for adoption, several months for a mother with babies, or longer for animals requiring
+              medical treatment or behavioural rehabilitation. We'll always discuss the expected timeframe with you beforehand.
+            </p>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="border-b border-gray-200 pb-6">
+            <h4 class="text-lg font-semibold text-gray-900 mb-3">What support do foster carers receive?</h4>
+            <p class="text-gray-700">
+              Homeless Hounds covers all veterinary expenses and provides food, bedding, toys, and any other
+              supplies needed. You'll have 24/7 access to our support team and experienced volunteers for advice
+              and assistance. We also provide training and resources to help you succeed as a foster carer.
+            </p>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="border-b border-gray-200 pb-6">
+            <h4 class="text-lg font-semibold text-gray-900 mb-3">What if I fall in love with my foster animal?</h4>
+            <p class="text-gray-700">
+              Foster carers have first option to adopt their foster animals! Many of our volunteers have become
+              "foster failures" – and we couldn't be happier. If you decide to adopt, you'll go through the same
+              adoption process as any other applicant to ensure it's the right match.
+            </p>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="border-b border-gray-200 pb-6">
+            <h4 class="text-lg font-semibold text-gray-900 mb-3">Do I need experience with animals to foster?</h4>
+            <p class="text-gray-700">
+              While experience is helpful, it's not essential. What matters most is your commitment, patience, and
+              willingness to learn. We provide comprehensive support and training to all our foster carers, regardless
+              of their experience level. We'll match you with animals that suit your comfort level and experience.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Application Information -->
+      <section class="bg-white rounded-lg shadow-md p-8 mb-12">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Ready to Start Fostering?</h3>
+        <div class="prose prose-lg max-w-none text-gray-700 mb-8">
+          <p class="mb-4">
+            If you're ready to make a difference in an animal's life, we'd love to hear from you.
+            The application process helps us understand your living situation, experience, and preferences
+            so we can match you with the right animals.
+          </p>
+          <p class="mb-6">
+            We have separate application processes for dog and cat foster carers, as the requirements
+            and considerations can be different for each type of animal.
+          </p>
+        </div>
+
+        <!-- Current Application Note -->
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-6 mb-8">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <svg class="h-5 w-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm text-amber-700">
+                <strong>Foster applications are currently being updated.</strong>
+                Please <a href="/contact-us" class="underline text-blue-600 hover:text-blue-700">contact us directly</a>
+                if you're interested in becoming a foster carer and we'll guide you through the application process.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+          <h4 class="text-lg font-semibold text-purple-900 mb-4">Get Started Today</h4>
+          <p class="text-purple-800 mb-4">
+            Ready to open your heart and home to an animal in need? Contact us to begin your foster care journey:
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/contact-us"
+               class="inline-block bg-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors text-center">
+              Contact Us
+            </a>
+            <a href="mailto:info@homelesshounds.com.au"
+               class="inline-block bg-white text-purple-600 border-2 border-purple-600 font-bold py-3 px-6 rounded-lg hover:bg-purple-50 transition-colors text-center">
+              Email Us
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- What We Provide -->
+      <section class="bg-white rounded-lg shadow-md p-8 mb-12">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">What Homeless Hounds Provides</h3>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-4">Medical Care</h4>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                All veterinary expenses covered
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Regular health checks and vaccinations
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Emergency medical care when needed
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Desexing before adoption
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-4">Supplies & Support</h4>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Food and bedding provided
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Toys and enrichment items
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                24/7 support from our team
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Training and guidance throughout
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="bg-gradient-to-r from-purple-600 to-purple-800 rounded-lg text-white p-8 text-center">
+        <h3 class="text-2xl font-bold mb-4">Every Animal Deserves Love</h3>
+        <p class="text-lg mb-6">
+          Your foster home could be the bridge between an animal's difficult past and their bright future.
+          Together, we can save more lives.
+        </p>
+        <p class="text-purple-200">
+          Foster care: where healing begins and hope is restored.
+        </p>
+      </section>
+
+    </div>
+  </main>
 </Base>

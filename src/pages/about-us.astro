@@ -1,7 +1,275 @@
 ---
 import Base from "../layouts/Base.astro";
 ---
-<Base title="About Us">
-  <h1 class="text-3xl font-semibold mb-4">About Homeless Hounds</h1>
-  <p class="text-gray-700">We are a volunteer-run animal rescue group in Victoria. Content coming soon.</p>
+
+<Base title="About Us | Homeless Hounds Animal Rescue">
+  <main class="min-h-screen bg-gray-50">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-purple-600 to-purple-800 text-white py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">Homeless Hounds</h1>
+          <h2 class="text-2xl md:text-3xl text-yellow-300 font-semibold mb-6">Animal Rescue</h2>
+          <p class="text-lg md:text-xl mb-8">
+            Founded in 2011, Homeless Hounds is an Australia-wide network of volunteer foster-carers
+            working to rescue, rehabilitate and rehome animals into loving forever homes.
+          </p>
+          <p class="text-sm text-purple-100 mb-8">
+            <em>Homeless Hounds is registered as a charity with the Australian Charities and Not-for-profits Commission – ABN 93 136 291 221</em>
+          </p>
+          <a href="/volunteer" class="inline-block bg-yellow-400 text-purple-900 font-bold py-3 px-6 rounded-lg hover:bg-yellow-300 transition-colors">
+            Join the team
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+      <!-- About Us Section -->
+      <section class="mb-16">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">About us</h2>
+          <p class="text-lg text-gray-600">Our Mission, Values, Commitments and Success Stories</p>
+        </div>
+      </section>
+
+      <!-- Our Mission -->
+      <section class="bg-white rounded-lg shadow-md p-8 mb-12">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Our Mission</h3>
+        <div class="prose prose-lg max-w-none text-gray-700">
+          <p class="mb-4">
+            Homeless Hounds Animal Rescue exists to ensure the welfare and wellbeing of all animals in need of care.
+            We rescue, rehabilitate and rehome at-risk companion animals, and seek to support and promote responsible
+            pet ownership and animal welfare.
+          </p>
+          <p class="mb-4">
+            Whilst cats, dogs and other companion animals are seen by most as our best friends, there are many animals
+            who unfortunately end up in situations where they are at-risk and without vital care. Stray and unwanted
+            animals regularly end up in shelters or pounds where they can develop behavioural problems and their core
+            physical and emotional needs are not met.
+          </p>
+          <p class="mb-4">
+            We also recognise that there are times when a responsible pet owner may be temporarily or permanently unable
+            to provide appropriate care for their loved ones, such as periods of economic hardship, poor health or unsafe
+            living situations.
+          </p>
+          <p class="mb-4">
+            Through our network of animal lovers and dedicated volunteers, we provide a home for animals that come into
+            our care, while they receive any veterinary care or behavioural training they may require before we find them
+            a forever home. We advocate for animal welfare and responsible pet ownership.
+          </p>
+          <p>
+            We are a volunteer-based not-for-profit organisation registered as a Charity with the Australian Charities
+            and Not-For-Profits Commission with DGR status.
+          </p>
+        </div>
+      </section>
+
+      <!-- Our Values -->
+      <section class="bg-white rounded-lg shadow-md p-8 mb-12">
+        <h3 class="text-2xl font-bold text-gray-900 mb-8">Our Values</h3>
+        <div class="grid md:grid-cols-3 gap-8">
+
+          <!-- Value 1 -->
+          <div class="text-center">
+            <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-2">Put animal welfare first</h4>
+            <p class="text-gray-600 text-sm">
+              Animals are our number one priority. We will always work to improve their welfare and living standards
+              when they're in our direct care, when they go into their forever home, or when they are in the wider community.
+            </p>
+          </div>
+
+          <!-- Value 2 -->
+          <div class="text-center">
+            <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-2">Be open and honest</h4>
+            <p class="text-gray-600 text-sm">
+              As a charitable organisation, our integrity is important to us, so we operate and communicate in an open
+              and honest way. This means being transparent about the way we work and the decisions we make.
+            </p>
+          </div>
+
+          <!-- Value 3 -->
+          <div class="text-center">
+            <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-2">Be fair and reasonable</h4>
+            <p class="text-gray-600 text-sm">
+              We will always treat people fairly and with respect. We value diversity and inclusivity. We don't
+              discriminate on the basis of race, religion, gender or sexual identity, age, disability or any other protected status.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Our Commitments -->
+      <section class="bg-white rounded-lg shadow-md p-8 mb-12">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Our Commitments</h3>
+        <p class="text-gray-700 mb-6">The organisation and our volunteers make the following commitments.</p>
+        <div class="space-y-4">
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
+            <p class="text-gray-700">
+              We commit to advocating for the rights and welfare of companion animals, and for laws to be updated for the benefit of all animals.
+            </p>
+          </div>
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
+            <p class="text-gray-700">
+              We commit to promoting and supporting responsible pet ownership and educating the community about their responsibilities for the physical and emotional wellbeing of their pets.
+            </p>
+          </div>
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
+            <p class="text-gray-700">
+              We commit to nurturing and expanding a network of volunteers who demonstrate a strong animal welfare ethic, exhibit empathy to the animals in our care, and have an active desire to help companion animals be responsibly rehomed.
+            </p>
+          </div>
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
+            <p class="text-gray-700">
+              We commit to providing our volunteers with the tools and resources necessary for them to achieve Our mission and respond to the needs of animals in our care.
+            </p>
+          </div>
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
+            <p class="text-gray-700">
+              We commit to being ethical in the way we work, conscious of our impact on the environment, and transparent in how we operate.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Success Stories -->
+      <section class="bg-white rounded-lg shadow-md p-8">
+        <h3 class="text-2xl font-bold text-gray-900 mb-8">Success Stories</h3>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+
+          <!-- Success Story 1 -->
+          <div class="bg-gray-50 rounded-lg p-6">
+            <div class="flex items-start mb-4">
+              <img src="https://i0.wp.com/homelesshounds.com.au/wp-content/uploads/2019/10/ss-1.png"
+                   alt="Michelle and Jake"
+                   class="w-16 h-16 rounded-full object-cover mr-4">
+              <div>
+                <h4 class="font-semibold text-gray-900">Michelle</h4>
+                <p class="text-sm text-gray-600">Foster Carer and Volunteer</p>
+              </div>
+            </div>
+            <h5 class="font-semibold text-gray-900 mb-2">Jake really is one of a kind!</h5>
+            <p class="text-gray-700 text-sm">
+              Jake was dumped at a rural pound with the name of "Pig" and the excuse of "I don't want him no more".
+              A week later both Jake and I hit the jackpot when we found each other due to the fantastic work of
+              Homeless Hounds busting him out of that pound. I originally planned to just foster Jake but I soon
+              realised how special this boy was and I couldn't let him go. Over the past nine years Jake has been
+              a patient foster brother to around 70 dogs, cats, puppies, and kittens. At 11 years of age he was
+              running up to 30km helping me train for a marathon – he was the best running buddy anyone could ask for.
+              Jake went from being someone's trash to my absolute treasure.
+            </p>
+          </div>
+
+          <!-- Success Story 2 -->
+          <div class="bg-gray-50 rounded-lg p-6">
+            <div class="flex items-start mb-4">
+              <img src="https://i0.wp.com/homelesshounds.com.au/wp-content/uploads/2019/10/ss-2.png"
+                   alt="Nathan and Normi"
+                   class="w-16 h-16 rounded-full object-cover mr-4">
+              <div>
+                <h4 class="font-semibold text-gray-900">Nathan</h4>
+                <p class="text-sm text-gray-600">Adopter and Volunteer</p>
+              </div>
+            </div>
+            <h5 class="font-semibold text-gray-900 mb-2">He's a huge part of my life.</h5>
+            <p class="text-gray-700 text-sm">
+              I started walking Normi when he was first rescued by HH volunteers. The poor little guy was in such
+              bad shape, obviously abused by his former owners! He was just so loving, playful and energetic,
+              I adopted him and I'm so happy I did – he's a huge part of my life, and I couldn't imagine life without him.
+            </p>
+          </div>
+
+          <!-- Success Story 3 -->
+          <div class="bg-gray-50 rounded-lg p-6">
+            <div class="flex items-start mb-4">
+              <img src="https://i0.wp.com/homelesshounds.com.au/wp-content/uploads/2019/10/ss-3.png"
+                   alt="Sally and Albert"
+                   class="w-16 h-16 rounded-full object-cover mr-4">
+              <div>
+                <h4 class="font-semibold text-gray-900">Sally</h4>
+                <p class="text-sm text-gray-600">Adopter and Volunteer</p>
+              </div>
+            </div>
+            <h5 class="font-semibold text-gray-900 mb-2">Thank you Homeless Hounds for giving my daughter her best friend and her therapy dog.</h5>
+            <p class="text-gray-700 text-sm">
+              The foster mum drove Albert up to me for a meet and greet. Well, here was this lanky, scared puppy
+              who had no idea what was going on, at my front door. He came in and, in true doberman style made
+              himself at home on my couch. I was so excited, here was this puppy who had a tough couple of months
+              and here I was who had also had a tough couple of months. A perfect match. He would become my therapy
+              dog, my extra reason to do things. But my world was shattered in a split second. He wouldn't come to
+              me at all. Instead, he went straight to my daughter. Obviously he knew she needed him more than I did.
+              That was a year ago and best friends they are.
+            </p>
+          </div>
+
+          <!-- Success Story 4 -->
+          <div class="bg-gray-50 rounded-lg p-6">
+            <div class="flex items-start mb-4">
+              <img src="https://i0.wp.com/homelesshounds.com.au/wp-content/uploads/2019/10/candidate-photo.png"
+                   alt="Lachlan and Bronte"
+                   class="w-16 h-16 rounded-full object-cover mr-4">
+              <div>
+                <h4 class="font-semibold text-gray-900">Lachlan</h4>
+                <p class="text-sm text-gray-600">Adopter and Volunteer</p>
+              </div>
+            </div>
+            <h5 class="font-semibold text-gray-900 mb-2">There's something about getting a rescue dog that makes you feel like you're doing good in the world.</h5>
+            <p class="text-gray-700 text-sm">
+              A while after one of my dogs passed away in late 2014, I began considering getting another dog not
+              only because my current little one was very lonely but also because I felt our family needed that
+              extra furry member. I reached out to Homeless Hounds and stipulated that I would like another dog
+              but it had to be good with other dogs, cats and young children. Not long after, I was contacted by
+              Homeless Hounds with a story about a young dog that had been dumped outside a pound in QLD with her
+              brother when they were just puppies. The dog's name was Bronte and she had been living at a Homeless
+              Hounds foster carer's home for several weeks. Right from that moment she has been such a wonderful,
+              caring, loving, affectionate, gentle and energetic dog.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="bg-purple-600 rounded-lg text-white p-8 mt-12 text-center">
+        <h3 class="text-2xl font-bold mb-4">Ready to Make a Difference?</h3>
+        <p class="text-lg mb-6">Join our community of volunteers and help save more animals in need.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/volunteer" class="bg-yellow-400 text-purple-900 font-bold py-3 px-6 rounded-lg hover:bg-yellow-300 transition-colors">
+            Volunteer with Us
+          </a>
+          <a href="/adopt" class="bg-white text-purple-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors">
+            Adopt a Pet
+          </a>
+          <a href="https://donate.homelesshounds.com.au" target="_blank" class="bg-purple-800 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-900 transition-colors">
+            Donate Now
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
 </Base>
