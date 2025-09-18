@@ -1,0 +1,248 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+// Get the URL for server-side processing
+const url = new URL(Astro.request.url);
+---
+
+<Layout title="Thank You for Your Foster Care Application | Homeless Hounds">
+  <main class="min-h-screen bg-gradient-to-b from-purple-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto">
+      <!-- Success Animation -->
+      <div class="text-center mb-8">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
+          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Foster Application Received!</h1>
+        <p class="text-lg text-gray-600" id="personalGreeting">Thank you for offering to provide a loving foster home</p>
+      </div>
+
+      <!-- Application Details Card -->
+      <div class="bg-white shadow-xl rounded-lg overflow-hidden mb-8">
+        <div class="bg-purple-600 text-white px-6 py-4">
+          <h2 class="text-xl font-semibold">What Happens Next?</h2>
+        </div>
+
+        <div class="p-6 space-y-6">
+          <!-- Pet Details (will be populated by JavaScript if applying for specific pet) -->
+          <div id="petDetails" class="hidden">
+            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+              <p class="font-semibold text-gray-900 mb-2">Foster Request For:</p>
+              <div class="flex items-center space-x-4">
+                <div>
+                  <p class="text-lg font-medium text-gray-900" id="petName"></p>
+                  <p class="text-sm text-gray-600" id="petBreed"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Applicant Details (will be populated by JavaScript) -->
+          <div id="applicantDetails" class="hidden">
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+              <p class="font-semibold text-gray-900 mb-2">Your Application:</p>
+              <p class="text-gray-700">
+                <span class="font-medium">Name:</span>
+                <span id="applicantName"></span>
+              </p>
+              <p class="text-gray-700">
+                <span class="font-medium">Email:</span>
+                <span id="applicantEmail"></span>
+              </p>
+              <p class="text-gray-700">
+                <span class="font-medium">Phone:</span>
+                <span id="applicantPhone"></span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Foster Care Benefits -->
+          <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">As a Foster Carer, We Provide:</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-purple-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-gray-700">All food and supplies needed</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-purple-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-gray-700">Full veterinary care coverage</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-purple-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-gray-700">24/7 support from our foster team</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-purple-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-gray-700">Training and behavioral support</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Timeline -->
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Foster Application Process</h3>
+            <ol class="relative border-l border-gray-200 ml-3">
+              <li class="mb-6 ml-6">
+                <span class="absolute flex items-center justify-center w-6 h-6 bg-green-600 rounded-full -left-3">
+                  <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <h4 class="font-medium text-gray-900">Application Received</h4>
+                <p class="text-sm text-gray-600">Your foster application has been successfully submitted</p>
+              </li>
+              <li class="mb-6 ml-6">
+                <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-300 rounded-full -left-3">
+                  <span class="text-white text-xs">2</span>
+                </span>
+                <h4 class="font-medium text-gray-900">Initial Review</h4>
+                <p class="text-sm text-gray-600">Our foster coordinator will review your application within 24 hours</p>
+              </li>
+              <li class="mb-6 ml-6">
+                <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-300 rounded-full -left-3">
+                  <span class="text-white text-xs">3</span>
+                </span>
+                <h4 class="font-medium text-gray-900">Home Check</h4>
+                <p class="text-sm text-gray-600">We'll arrange a quick home visit to ensure it's suitable for fostering</p>
+              </li>
+              <li class="mb-6 ml-6">
+                <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-300 rounded-full -left-3">
+                  <span class="text-white text-xs">4</span>
+                </span>
+                <h4 class="font-medium text-gray-900">Foster Orientation</h4>
+                <p class="text-sm text-gray-600">Join our foster family with a brief orientation session</p>
+              </li>
+              <li class="ml-6">
+                <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-300 rounded-full -left-3">
+                  <span class="text-white text-xs">5</span>
+                </span>
+                <h4 class="font-medium text-gray-900">Welcome Your Foster Pet!</h4>
+                <p class="text-sm text-gray-600">Start making a difference in a rescue pet's life</p>
+              </li>
+            </ol>
+          </div>
+
+          <!-- Important Information -->
+          <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <div class="ml-3">
+                <h3 class="text-sm font-medium text-amber-900">Important Information</h3>
+                <div class="mt-2 text-sm text-amber-700">
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>Foster periods typically range from 2 weeks to 3 months</li>
+                    <li>We provide all supplies and medical care</li>
+                    <li>You provide love, care, and a safe environment</li>
+                    <li>Foster families have first choice to adopt their foster pet</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/get-involved" class="inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+          Learn More About Fostering
+        </a>
+        <a href="/" class="inline-flex justify-center items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+          Return to Homepage
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Retrieve and display form data from session storage
+    document.addEventListener('DOMContentLoaded', function() {
+      const formData = sessionStorage.getItem('adoptionFormData');
+
+      if (formData) {
+        try {
+          const data = JSON.parse(formData);
+
+          // Add personalized greeting if name is available
+          const personalGreeting = document.getElementById('personalGreeting');
+          if (personalGreeting && data.firstname) {
+            personalGreeting.textContent = `Thank you, ${data.firstname}! Your willingness to foster saves lives.`;
+          }
+
+          // Display pet details if available (for pet-specific foster applications)
+          if (data.pet_name) {
+            const petDetails = document.getElementById('petDetails');
+            const petName = document.getElementById('petName');
+            const petBreed = document.getElementById('petBreed');
+
+            if (petDetails && petName) {
+              petName.textContent = data.pet_name || 'Unknown';
+              if (petBreed && data.pet_breed) {
+                petBreed.textContent = `${data.pet_breed} ${data.pet_species || ''}`.trim();
+              }
+              petDetails.classList.remove('hidden');
+            }
+          }
+
+          // Display applicant details if available
+          const applicantDetails = document.getElementById('applicantDetails');
+          const applicantName = document.getElementById('applicantName');
+          const applicantEmail = document.getElementById('applicantEmail');
+          const applicantPhone = document.getElementById('applicantPhone');
+
+          if (applicantDetails && (data.firstname || data.lastname || data.email || data.cellphone)) {
+            if (applicantName && (data.firstname || data.lastname)) {
+              applicantName.textContent = `${data.firstname || ''} ${data.lastname || ''}`.trim();
+            }
+            if (applicantEmail && data.email) {
+              applicantEmail.textContent = data.email;
+            }
+            if (applicantPhone && data.cellphone) {
+              applicantPhone.textContent = data.cellphone;
+            }
+            applicantDetails.classList.remove('hidden');
+          }
+
+          // Clear the session storage after displaying
+          // Comment this out if you want to preserve data for debugging
+          // sessionStorage.removeItem('adoptionFormData');
+
+        } catch (error) {
+          console.error('Error parsing form data:', error);
+        }
+      }
+
+      // Add animation to timeline items on scroll
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateX(0)';
+          }
+        });
+      });
+
+      document.querySelectorAll('ol li').forEach((item) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-20px)';
+        item.style.transition = 'all 0.5s ease-out';
+        observer.observe(item);
+      });
+    });
+  </script>
+</Layout>

@@ -73,7 +73,7 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 
         <form id="adoption-form" class="space-y-6" action="/api/submit" method="POST" enctype="multipart/form-data">
           <!-- Hidden Fields -->
-          <input type="hidden" name="formid" value="38" />
+          <input type="hidden" name="formid" value="39" />
           <input type="hidden" name="pet_id" value={petId} />
           <input type="hidden" name="pet_name" value={petName} />
           <input type="hidden" name="pet_breed" value={petBreed} />
@@ -434,7 +434,7 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
   // Initialize form
   async function initForm() {
     try {
-      const schemaUrl = `/api/asm/form-schema?formid=38`;
+      const schemaUrl = `/api/asm/form-schema?formid=39`;
       const response = await fetch(schemaUrl);
       const data = await response.json();
       

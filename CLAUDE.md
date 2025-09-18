@@ -10,15 +10,16 @@
 **Project Type**: Charity website (Non-commercial volunteer project)  
 **Timeline**: Flexible (volunteer basis)  
 **Platform**: Astro v5 + Tailwind CSS v4  
-**Status**: Phase 2 - Core Pages Development
+**Status**: Phase 3 - Email System & Forms Complete
 
 ## 🔧 Technical Stack
 
-**Framework**: Astro v5 (SSR enabled for dynamic content)  
-**Styling**: Tailwind CSS v4 via Vite plugin  
-**Deployment**: Cloudflare Pages (Active: homelesshounds-com-au.pages.dev)  
-**Content**: Native ASM API integration + Markdown/MDX  
+**Framework**: Astro v5 (SSR enabled for dynamic content)
+**Styling**: Tailwind CSS v4 via Vite plugin
+**Deployment**: Cloudflare Pages (Active: homelesshounds-com-au.pages.dev)
+**Content**: Native ASM API integration + Markdown/MDX
 **Data Source**: Animal Shelter Manager (ASM) API
+**Email Service**: SendGrid with templated notifications
 
 **Performance Targets**:
 - Lighthouse score: >90 all categories
@@ -33,9 +34,14 @@ src/
 ├── pages/           # Astro pages (.astro)
 │   ├── index.astro  # Homepage
 │   ├── adopt.astro  # Pet listings
-│   └── pets/        # Individual pet profiles
+│   ├── pets/        # Individual pet profiles
+│   └── api/         # API endpoints (ASM, forms, email)
 ├── components/      # Reusable components
 ├── layouts/         # Page layouts
+├── lib/
+│   └── email/       # Email templates & services
+│       ├── templates/   # Email template files
+│       └── services/    # SendGrid integration
 ├── styles/          # Global styles
 │   └── global.css   # Tailwind imports
 └── content/         # Markdown content
@@ -43,10 +49,10 @@ src/
 
 ## 🚧 Current Focus
 
-**Recently Completed**: Fixed ASM API authentication for local development (2025-09-18)
-**Active Task**: Planning next phase - volunteer/foster/adoption application forms
-**Next Milestone**: Complete remaining contact forms and volunteer registration
-**Priority**: Build out volunteer engagement system
+**Recently Completed**: Complete SendGrid email notification system with templated emails (2025-09-18)
+**Active Task**: Planning volunteer registration and foster application forms
+**Next Milestone**: Complete remaining application forms and volunteer registration
+**Priority**: Build out volunteer engagement system with email notifications
 
 ## ⚠️ Critical Requirements
 
@@ -76,11 +82,14 @@ src/
 - [ ] Adoption application form (ASM form ID 38)
 - [x] Search/filter functionality
 
-**Phase 3 - Form Integration System** 🚧:
-- [x] Animal surrender form (ASM form ID 37) 
+**Phase 3 - Form Integration System** ✅:
+- [x] Animal surrender form (ASM form ID 37) with email notifications
+- [x] SendGrid email system with templated notifications
+- [x] Smart email routing by department (dogs/cats/general)
+- [x] Complete email template system with branding
+- [x] Thank you pages with personalization
 - [ ] Volunteer registration form (ASM form ID 36)
-- [ ] Foster care application (ASM form ID 39)
-- [ ] Adoption application form (ASM form ID 38)
+- [ ] Adoption application form (ASM form ID 39)
 - [x] Turnstile spam protection integration
 
 **Phase 4 - Donations**:
@@ -97,7 +106,7 @@ src/
 ## 🚨 Important Considerations
 
 **Content Migration**: Need to review current site for content to migrate  
-**Forms**: All forms need email notification system  
+**Forms**: ✅ Email notification system complete (SendGrid)  
 **Images**: Pet photos need optimization for web  
 **SEO**: Meta tags and structured data for pet listings
 
@@ -111,7 +120,7 @@ src/
 
 **Form ID Mapping** (ASM):
 - Form ID 36: Volunteer registration
-- Form ID 37: Animal surrender ✅
+- Form ID 37: Animal surrender ✅ (with email notifications)
 - Form ID 38: Adoption application
 - Form ID 39: Foster care application
 
@@ -127,6 +136,8 @@ src/
 - `ASM_BASE_URL` - API base URL
 - `ASM_USERNAME` - API service account username
 - `ASM_PASSWORD` - API service account password
+- `SENDGRID_API_KEY` - SendGrid API key for email notifications
+- `EMAIL_*` - Smart routing emails for different departments
 
 ## 💡 Key Decisions
 
@@ -160,4 +171,4 @@ src/
 
 **Token Count**: ~650 (Optimized for Claude Code)
 **Last Updated**: 2025-09-18
-**Version**: 0.3.1
+**Version**: 0.4.0

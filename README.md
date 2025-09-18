@@ -24,39 +24,42 @@ npm run preview
 
 ### Development Phases
 - [x] **Phase 1**: Initial Setup & Configuration ✅
-- [ ] **Phase 2**: Core Pages Development ⏳
-- [ ] **Phase 3**: Pet Adoption System ⏳
+- [x] **Phase 2**: Core Pages Development ✅
+- [x] **Phase 3**: Email Notification System ✅
 - [ ] **Phase 4**: Volunteer Portal ⏳
-- [ ] **Phase 5**: Donation Integration ⏳
-- [ ] **Phase 6**: Content Migration ⏳
-- [ ] **Phase 7**: Testing & Optimization ⏳
-- [ ] **Phase 8**: Deployment & Launch ⏳
+- [ ] **Phase 5**: Pet Adoption System ⏳
+- [ ] **Phase 6**: Donation Integration ⏳
+- [ ] **Phase 7**: Content Migration ⏳
+- [ ] **Phase 8**: Testing & Optimization ⏳
+- [ ] **Phase 9**: Deployment & Launch ⏳
 
 ## 📈 Current Status
 
-**Active Phase**: Phase 2 - Core Pages Development  
-**Completion**: 12%  
-**Version**: 0.1.0  
-**Next Checkpoint**: TBD  
+**Active Phase**: Phase 4 - Volunteer Portal Development
+**Completion**: 35%
+**Version**: 0.4.0
+**Next Checkpoint**: Complete volunteer and adoption application forms  
 
 ### In Progress
-- [ ] Task 2.1: Design and implement navigation structure
-- [ ] Task 2.2: Create homepage with hero section
-- [ ] Task 2.3: Build About Us page
-- [ ] Task 2.4: Create Contact page with form
+- [ ] Task 4.1: Volunteer registration form (ASM form ID 36)
+- [ ] Task 4.2: Adoption application form (ASM form ID 39)
+- [ ] Task 4.3: Remove foster care form references
+- [ ] Task 4.4: General contact form (non-ASM)
 
 ## ✅ Features Checklist
 
 | Feature | Status | Priority | Notes |
 |---------|--------|----------|-------|
-| Homepage | ⏳ | High | Basic structure done |
-| Pet Listings | ⏳ | High | Pending |
-| Adoption Form | ⏳ | High | Pending |
-| Volunteer Sign-up | ⏳ | Medium | Pending |
-| Donation Gateway | ⏳ | High | Pending |
-| Foster Application | ⏳ | Medium | Pending |
-| Events Calendar | ⏳ | Low | Pending |
-| Success Stories | ⏳ | Low | Pending |
+| Homepage | ✅ | High | Complete with ASM integration |
+| Pet Listings | ✅ | High | Native ASM integration |
+| Surrender Form | ✅ | High | Complete with email notifications |
+| Email System | ✅ | High | SendGrid with templated emails |
+| Adoption Form | ⏳ | High | Next priority |
+| Volunteer Sign-up | ⏳ | Medium | Next priority |
+| Donation Gateway | ⏳ | High | Future phase |
+| Foster Application | ❌ | Low | Requested removal |
+| Events Calendar | ⏳ | Low | Future phase |
+| Success Stories | ⏳ | Low | Future phase |
 
 ## 📁 Project Structure
 
@@ -75,10 +78,11 @@ homelesshounds.com.au-main/
 
 ## 🛠 Technical Stack
 
-**Framework**: Astro v5  
-**Styling**: Tailwind CSS v4 (Vite plugin)  
-**Deployment**: TBD (Netlify/Vercel recommended)  
-**Content**: Markdown/MDX for blog posts and pet profiles
+**Framework**: Astro v5 (SSR enabled)
+**Styling**: Tailwind CSS v4 (Vite plugin)
+**Deployment**: Cloudflare Pages (Production: homelesshounds-com-au.pages.dev)
+**Content**: Native ASM API integration + Markdown/MDX
+**Email Service**: SendGrid with templated notifications
 
 **Core Features**:
 - Static site generation for performance
@@ -97,11 +101,11 @@ homelesshounds.com.au-main/
 6. **Contact**: Contact form and details
 7. **About**: Organization story and team
 
-### Additional Pages (Phase 2)
-- Foster Care Program
+### Additional Pages (Future Phases)
 - Success Stories / Blog
 - Events Calendar
 - Resources for Pet Owners
+- Donation portal
 
 ## 🧪 Testing
 
@@ -149,6 +153,7 @@ This is a volunteer project for Homeless Hounds Animal Rescue, a registered char
 
 ---
 
-**Last Updated**: 2025-09-04  
-**Maintainer**: Nathan (Volunteer Developer)  
+**Last Updated**: 2025-09-18
+**Maintainer**: Nathan (Volunteer Developer)
 **Organization**: Homeless Hounds Animal Rescue
+**Production URL**: https://homelesshounds-com-au.pages.dev

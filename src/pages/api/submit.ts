@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { createEmailService } from '../../lib/email/services/sendgrid.service';
 
 // POST /api/submit - Single endpoint for all form submissions
 const TURNSTILE_VERIFY = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
@@ -86,7 +87,52 @@ export const POST: APIRoute = async ({ request, locals }) => {
     // Handle redirect responses from ASM
     if (asmRes.status >= 300 && asmRes.status < 400) {
       const location = asmRes.headers.get("location");
-      
+
+      // Successful submission - send email notifications
+      try {
+        // Get all environment variables including email config
+        const fullEnv = {
+          ...env,
+          ...import.meta.env,
+          // Ensure we have all email config from both sources
+          SENDGRID_API_KEY: env.SENDGRID_API_KEY || import.meta.env.SENDGRID_API_KEY,
+          SENDGRID_FROM_EMAIL: env.SENDGRID_FROM_EMAIL || import.meta.env.SENDGRID_FROM_EMAIL,
+          SENDGRID_FROM_NAME: env.SENDGRID_FROM_NAME || import.meta.env.SENDGRID_FROM_NAME,
+          EMAIL_DOG_ADOPTIONS: env.EMAIL_DOG_ADOPTIONS || import.meta.env.EMAIL_DOG_ADOPTIONS,
+          EMAIL_CAT_ADOPTIONS: env.EMAIL_CAT_ADOPTIONS || import.meta.env.EMAIL_CAT_ADOPTIONS,
+          EMAIL_SURRENDER_APPLICATIONS: env.EMAIL_SURRENDER_APPLICATIONS || import.meta.env.EMAIL_SURRENDER_APPLICATIONS,
+          EMAIL_ADMIN_DEFAULT: env.EMAIL_ADMIN_DEFAULT || import.meta.env.EMAIL_ADMIN_DEFAULT,
+        };
+
+        const emailService = createEmailService(fullEnv);
+
+        if (emailService) {
+          // Convert FormData to plain object for email templates
+          const formDataObj: any = {};
+          for (const [key, value] of form.entries()) {
+            // Skip files for email templates
+            if (!(value instanceof File)) {
+              formDataObj[key] = value;
+            }
+          }
+
+          // Send emails asynchronously (don't block the redirect)
+          emailService.sendFormEmails(formid, formDataObj).then(results => {
+            console.log(`Email results for form ${formid}:`, {
+              admin: results.admin.success ? 'sent' : `failed: ${results.admin.error}`,
+              user: results.user ? (results.user.success ? 'sent' : `failed: ${results.user.error}`) : 'not sent (no email)'
+            });
+          }).catch(error => {
+            console.error('Failed to send emails:', error);
+          });
+        } else {
+          console.warn('Email service not configured - skipping notifications');
+        }
+      } catch (emailError) {
+        // Log but don't fail the form submission
+        console.error('Email setup error:', emailError);
+      }
+
       // Determine thank you page based on form ID
       let thankYouPage = "/contact-us/thanks";
       if (formid === "36") {
@@ -94,11 +140,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
       } else if (formid === "37") {
         thankYouPage = "/contact-us/surrender/thanks";
       } else if (formid === "38") {
-        thankYouPage = "/contact-us/adoption/thanks";
+        // TODO: Form 38 is currently unassigned - update when new form is added
+        thankYouPage = "/contact-us/thanks";
       } else if (formid === "39") {
-        thankYouPage = "/contact-us/foster/thanks";
+        thankYouPage = "/adopt/thanks";  // Adoption application
       }
-      
+
       return Response.redirect(location || thankYouPage, 303);
     }
     
