@@ -2,13 +2,14 @@
 
 ## 📍 Project Stage
 
-**Current Phase**: 2 - Core Implementation  
-**Progress**: 65% complete  
-**Last Session**: 2025-09-05  
-**Session Goal**: Complete native ASM integration and implement form systems
+**Current Phase**: 2 - Core Implementation
+**Progress**: 70% complete
+**Last Session**: 2025-09-18
+**Session Goal**: Fix ASM API authentication and restore adoption pages functionality
 
 ## ✅ Completed This Session
 
+### Previous Sessions
 - [x] Migrated all adoption pages to native ASM system
 - [x] Replaced JavaScript embeds with server-side components
 - [x] Implemented SSR for real-time animal data
@@ -16,10 +17,17 @@
 - [x] Deployed to production (homelesshounds-com-au.pages.dev)
 - [x] Created AnimalCard and AnimalFilters components
 - [x] Set up dynamic routing for pet profiles
-- [x] **Implemented native surrender form with ASM integration**
-- [x] **Fixed JavaScript errors and Turnstile integration**
-- [x] **Created universal form submission API endpoint**
-- [x] **Added form schema API with HTML parsing fallback**
+- [x] Implemented native surrender form with ASM integration
+- [x] Fixed JavaScript errors and Turnstile integration
+- [x] Created universal form submission API endpoint
+- [x] Added form schema API with HTML parsing fallback
+
+### Today (2025-09-18)
+- [x] **Fixed ASM API 500 error on adoption pages**
+- [x] **Added local development environment variable support**
+- [x] **Configured API service account authentication**
+- [x] **Improved error handling in API endpoints**
+- [x] **Documented ASM service account setup**
 
 ## 🔄 Active Tasks
 
@@ -48,7 +56,7 @@
 ## 🔖 Session Continuity
 
 ### Last Session Summary
-**MAJOR BREAKTHROUGH**: Successfully completed native surrender form implementation! Fixed critical JavaScript errors (duplicate function declarations), implemented conditional Turnstile integration, and created robust form submission system. All forms now use native ASM API integration with beautiful Tailwind styling. The surrender form (ID 37) is fully functional and deployed.
+**API FIX COMPLETE**: Fixed critical ASM API authentication issue preventing adoption pages from loading. The problem was that API endpoints only checked Cloudflare runtime environment variables, not local development variables. Added fallback to `import.meta.env` for local development and configured the `api_service_account` (no-login service account) for secure API-only access. All adoption pages now working with live animal data.
 
 ### Key Implementation Details
 ```typescript
@@ -71,10 +79,11 @@ if (TURNSTILE_SECRET_KEY && TURNSTILE_SECRET_KEY !== '') {
 ```
 
 ### Environment State
-- Branch: `main`  
+- Branch: `main`
 - Deployment: Cloudflare Pages
 - ASM Account: st3418
-- Animals in system: 20 total
+- ASM Service Account: `api_service_account` (no-login)
+- Animals in system: 2 currently adoptable (Spike & Kodi)
 
 ## ⏭️ Next Actions
 
@@ -93,6 +102,9 @@ if (TURNSTILE_SECRET_KEY && TURNSTILE_SECRET_KEY !== '') {
 
 ### ASM Integration Notes
 - API credentials stored in Cloudflare Pages env vars (encrypted)
+- Local development uses `.env` file with same variables
+- API endpoints updated with fallback: `locals?.runtime?.env?.VAR || import.meta.env.VAR`
+- Using dedicated `api_service_account` with "Can Login: NO" for security
 - Forms can use `online_form_json` for schema
 - Submit to `online_form_html` for processing
 - Cache form schemas for performance
@@ -123,7 +135,7 @@ The proposed forms system looks excellent - well-architected with proper securit
 
 ---
 
-**Token Count**: ~550 (Optimized for continuity)  
-**Session Started**: 2025-09-05 (continued from previous)  
-**Session Updated**: 2025-09-05 23:28  
+**Token Count**: ~600 (Optimized for continuity)
+**Session Started**: 2025-09-05 (continued from previous)
+**Session Updated**: 2025-09-18
 **Next Review**: After forms implementation

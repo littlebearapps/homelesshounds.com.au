@@ -43,9 +43,9 @@ src/
 
 ## 🚧 Current Focus
 
-**Recently Completed**: Native surrender form with ASM integration & Turnstile protection  
-**Active Task**: Planning next phase - volunteer/foster/adoption application forms  
-**Next Milestone**: Complete remaining contact forms and volunteer registration  
+**Recently Completed**: Fixed ASM API authentication for local development (2025-09-18)
+**Active Task**: Planning next phase - volunteer/foster/adoption application forms
+**Next Milestone**: Complete remaining contact forms and volunteer registration
 **Priority**: Build out volunteer engagement system
 
 ## ⚠️ Critical Requirements
@@ -105,21 +105,28 @@ src/
 
 **API Endpoints** (Working):
 - `/api/asm/adoptable` - List adoptable animals ✅
-- `/api/asm/animal/[id]` - Individual animal details ✅  
+- `/api/asm/animal/[id]` - Individual animal details ✅
 - `/api/asm/form-schema` - Form structure with HTML fallback ✅
 - `/api/submit` - Universal form submission with Turnstile ✅
 
 **Form ID Mapping** (ASM):
 - Form ID 36: Volunteer registration
 - Form ID 37: Animal surrender ✅
-- Form ID 38: Adoption application  
+- Form ID 38: Adoption application
 - Form ID 39: Foster care application
 
-**Environment Variables** (Cloudflare Pages):
+**ASM API Authentication**:
+- **Service Account**: `api_service_account` (no-login account for API-only access)
+- **Account ID**: `st3418`
+- **Base URL**: `https://service.sheltermanager.com/asmservice`
+- **Local Dev**: Uses `.env` file with fallback to `import.meta.env`
+- **Production**: Uses Cloudflare Pages environment variables
+
+**Environment Variables** (Required):
 - `ASM_ACCOUNT` - Account ID (st3418)
 - `ASM_BASE_URL` - API base URL
-- `ASM_USERNAME` - API username (encrypted)
-- `ASM_PASSWORD` - API password (encrypted)
+- `ASM_USERNAME` - API service account username
+- `ASM_PASSWORD` - API service account password
 
 ## 💡 Key Decisions
 
@@ -151,6 +158,6 @@ src/
 
 ---
 
-**Token Count**: ~600 (Optimized for Claude Code)  
-**Last Updated**: 2025-09-05  
-**Version**: 0.3.0
+**Token Count**: ~650 (Optimized for Claude Code)
+**Last Updated**: 2025-09-18
+**Version**: 0.3.1

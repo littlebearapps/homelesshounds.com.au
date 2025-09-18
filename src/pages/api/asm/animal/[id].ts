@@ -5,11 +5,11 @@ export const prerender = false;
 export const GET = async ({ params, request, locals }) => {
   const { id } = params;
 
-  // Get environment variables from Cloudflare runtime
-  const ASM_ACCOUNT = locals?.runtime?.env?.ASM_ACCOUNT;
-  const ASM_BASE_URL = locals?.runtime?.env?.ASM_BASE_URL;
-  const ASM_USERNAME = locals?.runtime?.env?.ASM_USERNAME;
-  const ASM_PASSWORD = locals?.runtime?.env?.ASM_PASSWORD;
+  // Get environment variables from Cloudflare runtime OR local dev environment
+  const ASM_ACCOUNT = locals?.runtime?.env?.ASM_ACCOUNT || import.meta.env.ASM_ACCOUNT;
+  const ASM_BASE_URL = locals?.runtime?.env?.ASM_BASE_URL || import.meta.env.ASM_BASE_URL;
+  const ASM_USERNAME = locals?.runtime?.env?.ASM_USERNAME || import.meta.env.ASM_USERNAME;
+  const ASM_PASSWORD = locals?.runtime?.env?.ASM_PASSWORD || import.meta.env.ASM_PASSWORD;
 
   // Validate environment variables
   if (!ASM_ACCOUNT || !ASM_BASE_URL || !ASM_USERNAME || !ASM_PASSWORD) {
