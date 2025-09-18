@@ -23,16 +23,15 @@
 - [x] Added form schema API with HTML parsing fallback
 
 ### Today (2025-09-18)
-- [x] **Created comprehensive Contact Us page** with accordion FAQs and emergency contacts
-- [x] **Added RSPCA Victoria & Wildlife Victoria** emergency contact information
-- [x] **Implemented accordion-style FAQ section** with 8 common questions
-- [x] **Added Turnstile spam protection** to contact form
-- [x] **Created two-column layout** for contact information and response times
-- [x] **Built thank you page** with highlighted response times and office hours
-- [x] **Redesigned homepage** with modern gradients and live ASM adoption carousel
-- [x] **Fixed adoption carousel** to show live animal data with proper photos
-- [x] **Added mission cards** with emoji icons for Adopt/Foster/Donate/Volunteer
-- [x] **Implemented partner section** with 5 real partner placeholders
+- [x] **Updated homepage adoption section** with "Meet:" heading and three category buttons
+- [x] **Removed Goodwill Wines** from navigation menu and entire website
+- [x] **Created Privacy Policy page** using content from current WordPress site
+- [x] **Restructured volunteer page** with modern 2-column layout and improved visual hierarchy
+- [x] **Applied modern design updates** to volunteer page matching homepage style
+- [x] **Integrated Code of Conduct** into Getting Started column for better balance
+- [x] **Restructured volunteer CTA section** with improved button layout
+- [x] **Implemented accordion-style opportunities** with always-visible key info and expandable details
+- [x] **Enhanced accordion UI** with colored buttons, "View Details" text, and hover effects
 
 ## 🔄 Active Tasks
 
@@ -62,7 +61,7 @@
 ## 🔖 Session Continuity
 
 ### Last Session Summary
-**CORE WEBSITE STRUCTURE COMPLETE**: Redesigned homepage with live ASM adoption carousel showing real animal photos and details. Created comprehensive Contact Us page with accordion FAQs, emergency contacts (RSPCA Victoria & Wildlife Victoria), and Turnstile spam protection. Implemented modern design with gradient backgrounds, mission cards with emoji icons, and partner section. Fixed all animal card display issues including proper field mappings (uppercase ASM fields), image URLs, and personalized "Meet [Name]" buttons. Website now has complete core page structure ready for next phase of form implementations.
+**VOLUNTEER ENGAGEMENT SYSTEM ENHANCED**: Complete redesign of volunteer page with modern UI including accordion-style opportunity listings, 2-column layout for Getting Started/Benefits sections, integrated Code of Conduct, and improved CTA section. Created Privacy Policy page from WordPress content. Updated homepage adoption buttons to match /adopt page style with category navigation. Removed outdated Goodwill Wines references. All pages now feature consistent modern design language with gradients, rounded corners, shadow effects, and responsive layouts. Accordion implementation provides better UX for volunteer opportunities with always-visible key information and expandable details.
 
 ### Key Implementation Details
 ```typescript

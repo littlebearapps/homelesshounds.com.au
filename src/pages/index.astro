@@ -216,9 +216,20 @@ const partners = [
         )}
 
         <div class="mt-12 text-center">
-          <a href="/adopt" class="inline-block bg-purple-600 text-white font-bold py-4 px-8 rounded-full hover:bg-purple-700 transform hover:scale-105 transition-all shadow-lg">
-            View All Adoptable Pets
-          </a>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <span class="text-lg font-semibold text-gray-700">Meet:</span>
+            <div class="flex flex-wrap gap-3 justify-center">
+              <a href="/adopt" class="inline-flex items-center bg-purple-600 text-white font-bold py-3 px-6 rounded-full hover:bg-purple-700 transform hover:scale-105 transition-all shadow-lg">
+                <span class="mr-2">🏠</span> All Animals
+              </a>
+              <a href="/adopt/dogs" class="inline-flex items-center bg-blue-600 text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 transform hover:scale-105 transition-all shadow-lg">
+                <span class="mr-2">🐕</span> Dogs
+              </a>
+              <a href="/adopt/cats" class="inline-flex items-center bg-pink-600 text-white font-bold py-3 px-6 rounded-full hover:bg-pink-700 transform hover:scale-105 transition-all shadow-lg">
+                <span class="mr-2">🐱</span> Cats
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

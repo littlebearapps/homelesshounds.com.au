@@ -63,7 +63,6 @@ const { title = "Homeless Hounds", description = "Volunteer-run animal rescue in
                 <a href="/get-involved/pet-couriers" class="block px-4 py-2 hover:bg-gray-50">Pet Couriers</a>
                 <a href="/get-involved/fundraise" class="block px-4 py-2 hover:bg-gray-50">Fundraise</a>
                 <a href="/get-involved/bequests" class="block px-4 py-2 hover:bg-gray-50">Bequests</a>
-                <a href="/get-involved/goodwill-wines" class="block px-4 py-2 hover:bg-gray-50">Goodwill Wines</a>
               </div>
             </div>
             
@@ -105,7 +104,6 @@ const { title = "Homeless Hounds", description = "Volunteer-run animal rescue in
             <a href="/get-involved/pet-couriers" class="block py-2 pl-4 hover:bg-gray-50">Pet Couriers</a>
             <a href="/get-involved/fundraise" class="block py-2 pl-4 hover:bg-gray-50">Fundraise</a>
             <a href="/get-involved/bequests" class="block py-2 pl-4 hover:bg-gray-50">Bequests</a>
-            <a href="/get-involved/goodwill-wines" class="block py-2 pl-4 hover:bg-gray-50">Goodwill Wines</a>
           </div>
           
           <div class="border-t mt-2 pt-2">
@@ -130,7 +128,14 @@ const { title = "Homeless Hounds", description = "Volunteer-run animal rescue in
     </main>
     <footer class="mt-16 border-t">
       <div class="mx-auto max-w-5xl px-6 py-8 text-sm text-gray-600">
-        © {new Date().getFullYear()} Homeless Hounds • ABN/Charity details here
+        <div class="flex flex-col sm:flex-row justify-between items-center">
+          <div>
+            © {new Date().getFullYear()} Homeless Hounds Animal Rescue Inc. • ABN 93 136 291 221
+          </div>
+          <div class="mt-2 sm:mt-0">
+            <a href="/privacy-policy" class="hover:text-purple-600 transition-colors">Privacy Policy</a>
+          </div>
+        </div>
       </div>
     </footer>
   </body>
