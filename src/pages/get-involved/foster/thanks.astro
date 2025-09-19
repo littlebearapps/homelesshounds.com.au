@@ -6,7 +6,7 @@ const url = new URL(Astro.request.url);
 ---
 
 <Layout title="Thank You for Your Foster Care Application | Homeless Hounds">
-  <main class="min-h-screen bg-gradient-to-b from-purple-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+  <main class="min-h-screen bg-gradient-to-b from-indigo-50 to-white py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-3xl mx-auto">
       <!-- Success Animation -->
       <div class="text-center mb-8">
@@ -21,14 +21,14 @@ const url = new URL(Astro.request.url);
 
       <!-- Application Details Card -->
       <div class="bg-white shadow-xl rounded-lg overflow-hidden mb-8">
-        <div class="bg-purple-600 text-white px-6 py-4">
+        <div class="bg-indigo-700 text-white px-6 py-4">
           <h2 class="text-xl font-semibold">What Happens Next?</h2>
         </div>
 
         <div class="p-6 space-y-6">
           <!-- Pet Details (will be populated by JavaScript if applying for specific pet) -->
           <div id="petDetails" class="hidden">
-            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+            <div class="bg-indigo-50 border border-indigo-300 rounded-lg p-4">
               <p class="font-semibold text-gray-900 mb-2">Foster Request For:</p>
               <div class="flex items-center space-x-4">
                 <div>
@@ -59,29 +59,29 @@ const url = new URL(Astro.request.url);
           </div>
 
           <!-- Foster Care Benefits -->
-          <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+          <div class="bg-indigo-50 border border-indigo-300 rounded-lg p-4">
             <h3 class="text-lg font-semibold text-gray-900 mb-3">As a Foster Carer, We Provide:</h3>
             <ul class="space-y-2">
               <li class="flex items-start">
-                <svg class="h-5 w-5 text-purple-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="h-5 w-5 text-indigo-700 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                 </svg>
                 <span class="text-gray-700">All food and supplies needed</span>
               </li>
               <li class="flex items-start">
-                <svg class="h-5 w-5 text-purple-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="h-5 w-5 text-indigo-700 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                 </svg>
                 <span class="text-gray-700">Full veterinary care coverage</span>
               </li>
               <li class="flex items-start">
-                <svg class="h-5 w-5 text-purple-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="h-5 w-5 text-indigo-700 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                 </svg>
                 <span class="text-gray-700">24/7 support from our foster team</span>
               </li>
               <li class="flex items-start">
-                <svg class="h-5 w-5 text-purple-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="h-5 w-5 text-indigo-700 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                 </svg>
                 <span class="text-gray-700">Training and behavioral support</span>
@@ -159,10 +159,10 @@ const url = new URL(Astro.request.url);
 
       <!-- Action Buttons -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/get-involved" class="inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+        <a href="/get-involved" class="inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
           Learn More About Fostering
         </a>
-        <a href="/" class="inline-flex justify-center items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+        <a href="/" class="inline-flex justify-center items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
           Return to Homepage
         </a>
       </div>

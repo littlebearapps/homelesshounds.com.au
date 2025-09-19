@@ -148,9 +148,9 @@ const compatibilityInfo = [
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Breadcrumb Navigation -->
     <nav class="flex items-center space-x-2 text-sm text-gray-600 mb-8">
-      <a href="/adopt" class="hover:text-purple-600 transition-colors">All Animals</a>
+      <a href="/adopt" class="hover:text-indigo-700 transition-colors">All Animals</a>
       <span>›</span>
-      <a href={`/adopt/${species}s`} class="hover:text-purple-600 transition-colors">
+      <a href={`/adopt/${species}s`} class="hover:text-indigo-700 transition-colors">
         {species === 'dog' ? 'Dogs' : 'Cats'}
       </a>
       <span>›</span>
@@ -379,16 +379,16 @@ const compatibilityInfo = [
 
           <!-- Adoption Fee -->
           {profile.adoption.fee && (
-            <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 mb-8">
+            <div class="bg-gradient-to-r from-indigo-50 to-pink-50 rounded-xl p-6 mb-8">
               <div class="flex items-center justify-between">
                 <div>
-                  <h3 class="text-lg font-semibold text-purple-900 mb-1">Adoption Fee</h3>
-                  <p class="text-purple-700">Includes desexing, microchipping, and vaccinations</p>
+                  <h3 class="text-lg font-semibold text-indigo-900 mb-1">Adoption Fee</h3>
+                  <p class="text-indigo-800">Includes desexing, microchipping, and vaccinations</p>
                 </div>
                 <div class="text-right">
-                  <p class="text-2xl font-bold text-purple-900">${profile.adoption.fee}</p>
+                  <p class="text-2xl font-bold text-indigo-900">${profile.adoption.fee}</p>
                   {profile.adoption.sourceNumber && (
-                    <p class="text-xs text-purple-600">Source: {profile.adoption.sourceNumber}</p>
+                    <p class="text-xs text-indigo-700">Source: {profile.adoption.sourceNumber}</p>
                   )}
                 </div>
               </div>
@@ -539,9 +539,9 @@ const compatibilityInfo = [
           )}
 
           <!-- Adoption CTA -->
-          <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8">
-            <h3 class="text-xl font-bold text-purple-900 mb-4">Ready to Adopt {animal.ANIMALNAME}?</h3>
-            <p class="text-purple-800 mb-6">
+          <div class="bg-gradient-to-br from-indigo-50 to-pink-50 rounded-2xl p-8">
+            <h3 class="text-xl font-bold text-indigo-900 mb-4">Ready to Adopt {animal.ANIMALNAME}?</h3>
+            <p class="text-indigo-800 mb-6">
               Start your adoption application for {animal.ANIMALNAME}. Our team will review your application and guide you through the process.
             </p>
             <div class="flex flex-col sm:flex-row gap-4">

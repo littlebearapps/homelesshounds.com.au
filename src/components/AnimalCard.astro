@@ -35,7 +35,7 @@ const compatibilityBadges = [
 
 // Get status badges
 const statusBadges = [
-  { condition: animal.NEUTERED === 1, label: '✅ Desexed', color: 'bg-purple-100 text-purple-800' },
+  { condition: animal.NEUTERED === 1, label: '✅ Desexed', color: 'bg-indigo-200 text-indigo-800' },
   { condition: animal.IDENTICHIPPED === 1 || animal.MICROCHIPPED === 1, label: '🔍 Microchipped', color: 'bg-gray-100 text-gray-800' },
   { condition: animal.HASSPECIALNEEDS === 1, label: '💖 Special Needs', color: 'bg-red-100 text-red-800' },
   { condition: profile.medical.vaccinationCount && profile.medical.vaccinationCount > 0, label: `💉 ${profile.medical.vaccinationCount}x Vacc`, color: 'bg-teal-100 text-teal-800' },
@@ -68,7 +68,7 @@ const statusBadges = [
     <!-- Card Content -->
     <div class="p-6">
       <!-- Animal Name -->
-      <h3 class="asm3-adoptable-name text-2xl font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors duration-200">
+      <h3 class="asm3-adoptable-name text-2xl font-bold text-gray-900 mb-3 group-hover:text-indigo-700 transition-colors duration-200">
         {animal.ANIMALNAME}
       </h3>
 
@@ -135,8 +135,8 @@ const statusBadges = [
       <!-- Adoption Fee -->
       {profile.adoption.fee && (
         <div class="mb-3">
-          <div class="inline-flex items-center px-3 py-2 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg text-sm">
-            <span class="text-purple-600 font-semibold">💰 Adoption Fee: ${profile.adoption.fee}</span>
+          <div class="inline-flex items-center px-3 py-2 bg-gradient-to-r from-indigo-50 to-pink-50 rounded-lg text-sm">
+            <span class="text-indigo-700 font-semibold">💰 Adoption Fee: ${profile.adoption.fee}</span>
           </div>
         </div>
       )}
@@ -159,7 +159,7 @@ const statusBadges = [
 
       <!-- Hover Effect -->
       <div class="mt-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-        <span class="text-purple-600 font-medium text-sm">View Details →</span>
+        <span class="text-indigo-700 font-medium text-sm">View Details →</span>
       </div>
     </div>
   </a>
