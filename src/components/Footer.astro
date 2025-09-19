@@ -1,0 +1,219 @@
+---
+const currentYear = new Date().getFullYear();
+
+// Schema.org JSON-LD for SEO
+const schemaOrg = {
+  "@context": "https://schema.org",
+  "@type": "AnimalShelter",
+  "name": "Homeless Hounds Animal Rescue",
+  "url": "https://homelesshounds.com.au/",
+  "logo": "https://homelesshounds.com.au/hh-logo.png",
+  "telephone": "+61-409-894-110",
+  "email": "info@homelesshounds.com.au",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Melbourne",
+    "addressRegion": "VIC",
+    "addressCountry": "AU"
+  },
+  "taxID": "ABN 93 136 291 221",
+  "sameAs": [
+    "https://www.facebook.com/homelesshoundsau",
+    "https://www.instagram.com/homelesshounds/"
+  ]
+};
+---
+
+<footer>
+  <!-- CTA Section -->
+  <section class="bg-gradient-to-r from-purple-600 to-purple-700 text-white">
+    <div class="mx-auto max-w-5xl px-6 py-8">
+      <div class="text-center space-y-4">
+        <h2 class="text-2xl font-bold">Your help gives homeless pets a second chance</h2>
+        <p class="text-purple-100">Join us in saving lives across Victoria</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-2">
+          <a href="/donate" class="inline-flex items-center justify-center px-6 py-3 bg-white text-purple-700 font-semibold rounded-lg shadow-lg hover:bg-purple-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+            </svg>
+            Donate Now
+          </a>
+          <a href="/get-involved/foster-care" class="inline-flex items-center justify-center px-6 py-3 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+            Become a Foster Carer
+          </a>
+          <a href="/get-involved/volunteer" class="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-purple-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            Volunteer
+          </a>
+        </div>
+        <p class="text-sm text-purple-100 mt-4">
+          Registered charity • Donations over $2 are tax-deductible
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Footer -->
+  <section class="bg-gray-900 text-gray-300">
+    <div class="mx-auto max-w-5xl px-6 py-12">
+      <!-- Mission Statement -->
+      <div class="text-center mb-10">
+        <p class="text-lg text-gray-100 mb-3">
+          Homeless Hounds rescues, rehabilitates, and rehomes dogs and cats across Victoria.
+        </p>
+        <div class="flex justify-center items-center gap-6 text-sm">
+          <div class="flex items-center">
+            <svg class="w-5 h-5 mr-2 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+            </svg>
+            <span>500+ animals saved annually</span>
+          </div>
+          <div class="flex items-center">
+            <svg class="w-5 h-5 mr-2 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+            </svg>
+            <span>95% adoption success rate</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Links Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <!-- Adopt Column -->
+        <div>
+          <h3 class="text-white font-semibold mb-4 text-lg">Adopt</h3>
+          <ul class="space-y-2">
+            <li><a href="/adopt" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-1">View All Pets</a></li>
+            <li><a href="/adopt/dogs" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-1">Adoptable Dogs</a></li>
+            <li><a href="/adopt/cats" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-1">Adoptable Cats</a></li>
+            <li><a href="/adopt#process" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-1">Adoption Process</a></li>
+          </ul>
+        </div>
+
+        <!-- Help Column -->
+        <div>
+          <h3 class="text-white font-semibold mb-4 text-lg">Help Us</h3>
+          <ul class="space-y-2">
+            <li><a href="/donate" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-1">Make a Donation</a></li>
+            <li><a href="/get-involved/volunteer" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-1">Volunteer With Us</a></li>
+            <li><a href="/get-involved/foster-care" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-1">Foster a Pet</a></li>
+            <li><a href="/get-involved/pet-couriers" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-1">Pet Transport</a></li>
+            <li><a href="/get-involved/fundraise" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-1">Fundraise</a></li>
+            <li><a href="/get-involved/bequests" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-1">Leave a Bequest</a></li>
+          </ul>
+        </div>
+
+        <!-- About Column -->
+        <div>
+          <h3 class="text-white font-semibold mb-4 text-lg">About</h3>
+          <ul class="space-y-2">
+            <li><a href="/about-us" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-1">Our Story</a></li>
+            <li><a href="/about-us#mission" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-1">Mission & Values</a></li>
+            <li><a href="/about-us#team" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-1">Our Team</a></li>
+            <li><a href="/contact-us/surrender" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-1">Surrender a Pet</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Column -->
+        <div>
+          <h3 class="text-white font-semibold mb-4 text-lg">Contact</h3>
+          <div class="space-y-4">
+            <p class="text-gray-300">
+              Have questions or need help? We're here for you.
+            </p>
+            <a href="/contact-us" class="inline-flex items-center justify-center px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-500 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              Contact Us
+            </a>
+            <div class="pt-4">
+              <p class="flex items-center text-sm">
+                <svg class="w-5 h-5 mr-2 flex-shrink-0 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <span>Melbourne & Regional Victoria</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Social Media Links -->
+          <div class="mt-6">
+            <p class="text-white font-semibold mb-3">Follow Us</p>
+            <div class="flex gap-3">
+              <a href="https://www.facebook.com/homelesshoundsau" aria-label="Follow Homeless Hounds on Facebook" class="bg-gray-800 p-2 rounded-lg hover:bg-purple-600 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/homelesshounds/" aria-label="Follow Homeless Hounds on Instagram" class="bg-gray-800 p-2 rounded-lg hover:bg-purple-600 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Newsletter Signup -->
+      <div class="border-t border-gray-800 pt-8">
+        <div class="max-w-md mx-auto text-center">
+          <h3 class="text-white font-semibold mb-2">Stay Connected</h3>
+          <p class="text-sm mb-4">Get rescue stories, adoption alerts, and ways to help</p>
+          <form class="flex flex-col sm:flex-row gap-3" action="/api/newsletter" method="POST">
+            <label for="email" class="sr-only">Email address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="Your email address"
+              class="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent"
+              aria-label="Email address for newsletter"
+            />
+            <!-- Honeypot field for spam protection -->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              <input type="text" name="website" tabindex="-1" autocomplete="off">
+            </div>
+            <button type="submit" class="px-6 py-2 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-500 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Utility Bar -->
+  <section class="bg-gray-950 text-gray-400 text-sm">
+    <div class="mx-auto max-w-5xl px-6 py-4">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="text-center md:text-left">
+          <p>© {currentYear} Homeless Hounds Animal Rescue Inc. • ABN 93 136 291 221</p>
+          <p class="text-xs mt-1">Registered charity with DGR status • All donations over $2 are tax-deductible</p>
+        </div>
+        <nav class="flex flex-wrap justify-center gap-4 text-xs">
+          <a href="/privacy-policy" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-950 rounded px-1">Privacy Policy</a>
+          <a href="/terms" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-950 rounded px-1">Terms of Use</a>
+          <a href="/accessibility" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-950 rounded px-1">Accessibility</a>
+          <a href="/sitemap.xml" class="hover:text-purple-400 transition-colors underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-950 rounded px-1">Sitemap</a>
+        </nav>
+      </div>
+
+      <!-- Acknowledgement of Country -->
+      <div class="text-center mt-4 pt-4 border-t border-gray-800 text-xs">
+        <p>We acknowledge the Traditional Owners of the land on which we work and pay our respects to Elders past, present and emerging.</p>
+      </div>
+    </div>
+  </section>
+</footer>
+
+<!-- Schema.org JSON-LD for SEO -->
+<script type="application/ld+json" set:html={JSON.stringify(schemaOrg)}></script>
