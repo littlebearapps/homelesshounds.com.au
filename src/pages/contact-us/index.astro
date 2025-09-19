@@ -5,44 +5,43 @@ export const prerender = false;
 ---
 
 <Base title="Contact Us | Homeless Hounds Animal Rescue">
-  <main class="min-h-screen bg-gray-50">
+  <main>
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-purple-600 to-purple-800 text-white py-16">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="relative bg-gradient-to-br from-purple-700 via-purple-600 to-teal-600 text-white">
+      <div class="absolute inset-0 bg-pattern-dots opacity-10"></div>
+      <div class="relative container-custom py-20 md:py-28">
         <div class="max-w-3xl">
-          <h1 class="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
+          <h1 class="mb-4">Contact Us</h1>
           <h2 class="text-2xl md:text-3xl text-yellow-300 font-semibold mb-6">Before you Contact Us</h2>
-          <p class="text-lg md:text-xl mb-8">
+          <p class="text-lg md:text-xl mb-8 leading-relaxed text-purple-50">
             We want to help you as quickly as possible. Please check our FAQs below
             or use our contact form for specific enquiries.
           </p>
-          <p class="text-sm text-purple-100 mb-8">
-            <em>Homeless Hounds is registered as a charity with the Australian Charities and Not-for-profits Commission – ABN 93 136 291 221</em>
+          <p class="text-sm text-purple-100 mb-8 italic">
+            Homeless Hounds is registered as a charity with the Australian Charities and Not-for-profits Commission – ABN 93 136 291 221
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
-      <!-- FAQ Section -->
-      <section class="bg-white rounded-lg shadow-md p-8 mb-12">
-        <h3 class="text-2xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h3>
-        <div class="space-y-4">
+    <!-- FAQ Section -->
+    <section class="section bg-gray-50">
+      <div class="container-custom">
+        <h3 class="text-center mb-12">Frequently Asked Questions</h3>
+        <div class="max-w-4xl mx-auto space-y-4">
 
           <!-- FAQ 1 -->
-          <div class="border border-gray-200 rounded-lg">
+          <div class="card overflow-visible">
             <button
-              class="faq-toggle w-full text-left p-4 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset rounded-lg"
+              class="faq-toggle w-full text-left p-5 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-inset rounded-t-2xl transition-colors"
               data-target="faq-1"
             >
               <h4 class="text-lg font-semibold text-gray-900">I want to adopt a pet, what do I do?</h4>
-              <svg class="faq-icon w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="faq-icon w-5 h-5 text-purple-600 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div id="faq-1" class="faq-content hidden px-4 pb-4">
+            <div id="faq-1" class="faq-content hidden px-5 pb-5">
               <p class="text-gray-700">
                 Visit our <a href="/adopt" class="text-purple-600 underline hover:text-purple-700">Adopt page</a>
                 to browse our available animals. When you find a pet you're interested in, you can submit an
@@ -53,17 +52,17 @@ export const prerender = false;
           </div>
 
           <!-- FAQ 2 -->
-          <div class="border border-gray-200 rounded-lg">
+          <div class="card overflow-visible">
             <button
-              class="faq-toggle w-full text-left p-4 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset rounded-lg"
+              class="faq-toggle w-full text-left p-5 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-inset rounded-t-2xl transition-colors"
               data-target="faq-2"
             >
               <h4 class="text-lg font-semibold text-gray-900">Can I visit your shelter to see the animals?</h4>
-              <svg class="faq-icon w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="faq-icon w-5 h-5 text-purple-600 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div id="faq-2" class="faq-content hidden px-4 pb-4">
+            <div id="faq-2" class="faq-content hidden px-5 pb-5">
               <p class="text-gray-700">
                 Homeless Hounds doesn't operate a traditional shelter. Our animals live with volunteer
                 foster carers in homes across Australia. If you're interested in meeting a specific animal,
@@ -73,17 +72,17 @@ export const prerender = false;
           </div>
 
           <!-- FAQ 3 -->
-          <div class="border border-gray-200 rounded-lg">
+          <div class="card overflow-visible">
             <button
-              class="faq-toggle w-full text-left p-4 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset rounded-lg"
+              class="faq-toggle w-full text-left p-5 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-inset rounded-t-2xl transition-colors"
               data-target="faq-3"
             >
               <h4 class="text-lg font-semibold text-gray-900">How do I become a foster carer?</h4>
-              <svg class="faq-icon w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="faq-icon w-5 h-5 text-purple-600 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div id="faq-3" class="faq-content hidden px-4 pb-4">
+            <div id="faq-3" class="faq-content hidden px-5 pb-5">
               <p class="text-gray-700">
                 Thank you for your interest in fostering! Please visit our
                 <a href="/get-involved/foster-care" class="text-purple-600 underline hover:text-purple-700">Foster Care page</a>
@@ -94,17 +93,17 @@ export const prerender = false;
           </div>
 
           <!-- FAQ 4 -->
-          <div class="border border-gray-200 rounded-lg">
+          <div class="card overflow-visible">
             <button
-              class="faq-toggle w-full text-left p-4 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset rounded-lg"
+              class="faq-toggle w-full text-left p-5 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-inset rounded-t-2xl transition-colors"
               data-target="faq-4"
             >
               <h4 class="text-lg font-semibold text-gray-900">I want to volunteer, how do I get started?</h4>
-              <svg class="faq-icon w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="faq-icon w-5 h-5 text-purple-600 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div id="faq-4" class="faq-content hidden px-4 pb-4">
+            <div id="faq-4" class="faq-content hidden px-5 pb-5">
               <p class="text-gray-700">
                 We're always looking for passionate volunteers! Visit our
                 <a href="/get-involved/volunteer" class="text-purple-600 underline hover:text-purple-700">Volunteer page</a>
@@ -115,20 +114,20 @@ export const prerender = false;
           </div>
 
           <!-- FAQ 5 -->
-          <div class="border border-gray-200 rounded-lg">
+          <div class="card overflow-visible">
             <button
-              class="faq-toggle w-full text-left p-4 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset rounded-lg"
+              class="faq-toggle w-full text-left p-5 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-inset rounded-t-2xl transition-colors"
               data-target="faq-5"
             >
               <h4 class="text-lg font-semibold text-gray-900">How can I make a donation?</h4>
-              <svg class="faq-icon w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="faq-icon w-5 h-5 text-purple-600 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div id="faq-5" class="faq-content hidden px-4 pb-4">
+            <div id="faq-5" class="faq-content hidden px-5 pb-5">
               <p class="text-gray-700">
                 You can donate securely online at
-                <a href="https://donate.homelesshounds.com.au" target="_blank" class="text-purple-600 underline hover:text-purple-700">donate.homelesshounds.com.au</a>.
+                <a href="/donate" class="text-purple-600 underline hover:text-purple-700">our donation page</a>.
                 We also accept donations by phone, bank transfer, or cheque. Contact us for details about
                 other donation methods or if you'd like to make a regular monthly donation.
               </p>
@@ -136,17 +135,17 @@ export const prerender = false;
           </div>
 
           <!-- FAQ 6 -->
-          <div class="border border-gray-200 rounded-lg">
+          <div class="card overflow-visible">
             <button
-              class="faq-toggle w-full text-left p-4 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset rounded-lg"
+              class="faq-toggle w-full text-left p-5 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-inset rounded-t-2xl transition-colors"
               data-target="faq-6"
             >
               <h4 class="text-lg font-semibold text-gray-900">Are donations tax deductible?</h4>
-              <svg class="faq-icon w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="faq-icon w-5 h-5 text-purple-600 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div id="faq-6" class="faq-content hidden px-4 pb-4">
+            <div id="faq-6" class="faq-content hidden px-5 pb-5">
               <p class="text-gray-700">
                 Yes! Homeless Hounds is a registered charity with DGR (Deductible Gift Recipient) status.
                 All donations over $2 are tax deductible. We'll send you a tax receipt for your donation
@@ -156,22 +155,22 @@ export const prerender = false;
           </div>
 
           <!-- FAQ 7 -->
-          <div class="border border-gray-200 rounded-lg">
+          <div class="card overflow-visible">
             <button
-              class="faq-toggle w-full text-left p-4 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset rounded-lg"
+              class="faq-toggle w-full text-left p-5 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-inset rounded-t-2xl transition-colors"
               data-target="faq-7"
             >
               <h4 class="text-lg font-semibold text-gray-900">Where can I find your application forms?</h4>
-              <svg class="faq-icon w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="faq-icon w-5 h-5 text-purple-600 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div id="faq-7" class="faq-content hidden px-4 pb-4">
+            <div id="faq-7" class="faq-content hidden px-5 pb-5">
               <p class="text-gray-700">
                 Most of our forms are available directly on our website:
                 <ul class="list-disc pl-6 mt-2 space-y-1">
                   <li>Adoption applications: Available on each pet's profile page</li>
-                  <li>Surrender form: Available on our <a href="/surrender" class="text-purple-600 underline hover:text-purple-700">Surrender page</a></li>
+                  <li>Surrender form: Available on our <a href="/contact-us/surrender" class="text-purple-600 underline hover:text-purple-700">Surrender page</a></li>
                   <li>Pet courier applications: Available on our <a href="/get-involved/pet-couriers" class="text-purple-600 underline hover:text-purple-700">Pet Couriers page</a></li>
                   <li>Foster and volunteer applications: Contact us directly as these are currently being updated</li>
                 </ul>
@@ -180,20 +179,20 @@ export const prerender = false;
           </div>
 
           <!-- FAQ 8 -->
-          <div class="border border-gray-200 rounded-lg">
+          <div class="card overflow-visible">
             <button
-              class="faq-toggle w-full text-left p-4 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset rounded-lg"
+              class="faq-toggle w-full text-left p-5 flex justify-between items-center hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-inset rounded-t-2xl transition-colors"
               data-target="faq-8"
             >
               <h4 class="text-lg font-semibold text-gray-900">I need to surrender my pet, what should I do?</h4>
-              <svg class="faq-icon w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="faq-icon w-5 h-5 text-purple-600 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div id="faq-8" class="faq-content hidden px-4 pb-4">
+            <div id="faq-8" class="faq-content hidden px-5 pb-5">
               <p class="text-gray-700">
                 We understand this is a difficult decision. Please visit our
-                <a href="/surrender" class="text-purple-600 underline hover:text-purple-700">Surrender page</a>
+                <a href="/contact-us/surrender" class="text-purple-600 underline hover:text-purple-700">Surrender page</a>
                 to fill out our surrender form. This helps us understand your situation and your pet's needs.
                 Please note that we prioritise animals in crisis situations and may not be able to help immediately,
                 but we'll do our best to assist you.
@@ -202,312 +201,321 @@ export const prerender = false;
           </div>
 
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Contact Form and Information Section -->
-      <div class="grid lg:grid-cols-2 gap-8 mb-12">
-
-        <!-- Contact Form -->
-        <section class="bg-white rounded-lg shadow-md p-8">
-          <h3 class="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h3>
-          <div class="prose prose-lg max-w-none text-gray-700 mb-8">
-            <p class="mb-4">
-              If you can't find what you're looking for in our FAQs above, please use the form below to contact us.
-              We aim to respond to all enquiries within 48 hours during business hours.
-            </p>
-            <p class="mb-6">
-              <strong>Please be as specific as possible in your message.</strong> If you're enquiring about a specific animal,
-              please include their name and any reference numbers.
-            </p>
-          </div>
+    <!-- Contact Form and Information Section -->
+    <section class="section">
+      <div class="container-custom">
+        <div class="grid lg:grid-cols-2 gap-8">
 
           <!-- Contact Form -->
-          <form action="/api/contact" method="POST" class="space-y-6">
-            <div class="grid grid-cols-2 gap-4">
-              <!-- First Name -->
-              <div>
-                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">
-                  First Name <span class="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  required
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                />
-              </div>
-
-              <!-- Last Name -->
-              <div>
-                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">
-                  Last Name <span class="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  required
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                />
-              </div>
-            </div>
-
-            <!-- Email -->
-            <div>
-              <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                Email Address <span class="text-red-500">*</span>
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-              />
-            </div>
-
-            <!-- Phone -->
-            <div>
-              <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
-                Phone (including area code) <span class="text-red-500">*</span>
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                required
-                placeholder="e.g. 03 9123 4567 or 0412 345 678"
-                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-              />
-            </div>
-
-            <!-- Purpose -->
-            <div>
-              <label for="purpose" class="block text-sm font-medium text-gray-700 mb-2">
-                Purpose of Contact <span class="text-red-500">*</span>
-              </label>
-              <select
-                id="purpose"
-                name="purpose"
-                required
-                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-              >
-                <option value="">Please select...</option>
-                <option value="Adoption Enquiry">Adoption Enquiry</option>
-                <option value="Fostering Enquiry">Fostering Enquiry</option>
-                <option value="Volunteering Enquiry">Volunteering Enquiry</option>
-                <option value="Surrendering a Pet Enquiry">Surrendering a Pet Enquiry</option>
-                <option value="Bequest Enquiry">Bequest Enquiry</option>
-                <option value="Partnership/Media Enquiry">Partnership/Media Enquiry</option>
-                <option value="Fundraising Enquiry">Fundraising Enquiry</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-
-            <!-- Message -->
-            <div>
-              <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
-                Your Message <span class="text-red-500">*</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows="4"
-                placeholder="Please be as specific as possible. If enquiring about a specific animal, please include their name and any reference numbers."
-                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 resize-vertical"
-              ></textarea>
-            </div>
-
-            <!-- Turnstile Widget -->
-            {TURNSTILE_SITE_KEY && TURNSTILE_SITE_KEY !== '' && (
-              <div class="pt-4 border-t border-gray-200">
-                <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY}></div>
-                <p class="text-xs text-gray-500 mt-2">Please complete the security check above</p>
-              </div>
-            )}
-
-            <!-- Submit Button -->
-            <div>
-              <button
-                type="submit"
-                class="w-full bg-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors"
-              >
-                Send Message
-              </button>
-            </div>
-          </form>
-        </section>
-
-        <!-- Response Times and Contact Information -->
-        <section class="space-y-8">
-
-          <!-- Response Times & Office Hours (MOVED TO TOP) -->
-          <div class="bg-white rounded-lg shadow-md p-8 border-2 border-purple-200">
-            <h3 class="text-xl font-bold text-gray-900 mb-6">Response Times & Office Hours</h3>
-
-            <!-- Response Times (MOVED TO TOP AND HIGHLIGHTED) -->
-            <div class="mb-6">
-              <h4 class="text-lg font-semibold text-gray-900 mb-3">How Quickly We Respond</h4>
-              <div class="space-y-2">
-                <div class="bg-purple-50 border-l-4 border-purple-600 p-3">
-                  <p class="text-gray-800"><strong>Urgent Matters:</strong> <span class="text-purple-700 font-semibold">Within 24 hours</span></p>
-                </div>
-                <div class="bg-purple-50 border-l-4 border-purple-400 p-3">
-                  <p class="text-gray-800"><strong>Adoption Applications:</strong> <span class="text-purple-600 font-semibold">Within 48 hours</span></p>
-                </div>
-                <div class="bg-purple-50 border-l-4 border-purple-300 p-3">
-                  <p class="text-gray-800"><strong>General Enquiries:</strong> <span class="text-purple-600 font-semibold">Within 48 hours</span></p>
-                </div>
-                <p class="text-sm text-gray-600 mt-3 italic">
-                  Response times may be longer during peak periods or public holidays.
+          <div class="card">
+            <div class="card-body">
+              <h3 class="mb-6">Get in Touch</h3>
+              <div class="prose prose-lg max-w-none text-gray-700 mb-8">
+                <p class="mb-4">
+                  If you can't find what you're looking for in our FAQs above, please use the form below to contact us.
+                  We aim to respond to all enquiries within 48 hours during business hours.
                 </p>
-              </div>
-            </div>
-
-            <!-- Office Hours -->
-            <div>
-              <h4 class="text-lg font-semibold text-gray-900 mb-3">When We're Available</h4>
-              <div class="text-gray-700 space-y-1">
-                <p><strong>Monday - Friday:</strong> 9:00am - 5:00pm AEST</p>
-                <p><strong>Saturday - Sunday:</strong> Closed</p>
-                <p class="text-sm text-gray-600 mt-3">
-                  <em>Please note: Our volunteers work across different time zones throughout Australia.</em>
+                <p class="mb-6">
+                  <strong>Please be as specific as possible in your message.</strong> If you're enquiring about a specific animal,
+                  please include their name and any reference numbers.
                 </p>
               </div>
 
-              <!-- Out of Hours Note -->
-              <div class="mt-4 p-3 bg-amber-50 border-l-4 border-amber-400 text-sm">
-                <p class="text-amber-800">
-                  <strong>Out of Hours:</strong> Emergency situations are prioritized and responded to as soon as possible. Due to high message volumes, non-urgent enquiries will be addressed during business hours.
-                </p>
-              </div>
+              <!-- Contact Form -->
+              <form action="/api/contact" method="POST" class="space-y-6">
+                <div class="grid grid-cols-2 gap-4">
+                  <!-- First Name -->
+                  <div class="field">
+                    <label for="firstName" class="label">
+                      First Name <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      required
+                      class="input"
+                    />
+                  </div>
+
+                  <!-- Last Name -->
+                  <div class="field">
+                    <label for="lastName" class="label">
+                      Last Name <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      required
+                      class="input"
+                    />
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="field">
+                  <label for="email" class="label">
+                    Email Address <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    class="input"
+                  />
+                </div>
+
+                <!-- Phone -->
+                <div class="field">
+                  <label for="phone" class="label">
+                    Phone (including area code) <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    required
+                    placeholder="e.g. 03 9123 4567 or 0412 345 678"
+                    class="input"
+                  />
+                </div>
+
+                <!-- Purpose -->
+                <div class="field">
+                  <label for="purpose" class="label">
+                    Purpose of Contact <span class="text-red-500">*</span>
+                  </label>
+                  <select
+                    id="purpose"
+                    name="purpose"
+                    required
+                    class="input"
+                  >
+                    <option value="">Please select...</option>
+                    <option value="Adoption Enquiry">Adoption Enquiry</option>
+                    <option value="Fostering Enquiry">Fostering Enquiry</option>
+                    <option value="Volunteering Enquiry">Volunteering Enquiry</option>
+                    <option value="Surrendering a Pet Enquiry">Surrendering a Pet Enquiry</option>
+                    <option value="Bequest Enquiry">Bequest Enquiry</option>
+                    <option value="Partnership/Media Enquiry">Partnership/Media Enquiry</option>
+                    <option value="Fundraising Enquiry">Fundraising Enquiry</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <!-- Message -->
+                <div class="field">
+                  <label for="message" class="label">
+                    Your Message <span class="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows="4"
+                    placeholder="Please be as specific as possible. If enquiring about a specific animal, please include their name and any reference numbers."
+                    class="textarea resize-vertical"
+                  ></textarea>
+                </div>
+
+                <!-- Turnstile Widget -->
+                {TURNSTILE_SITE_KEY && TURNSTILE_SITE_KEY !== '' && (
+                  <div class="pt-4 border-t border-gray-200">
+                    <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY}></div>
+                    <p class="text-xs text-gray-500 mt-2">Please complete the security check above</p>
+                  </div>
+                )}
+
+                <!-- Submit Button -->
+                <div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary w-full"
+                  >
+                    Send Message
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
 
-          <!-- Contact Information (MOVED TO BOTTOM) -->
-          <div class="bg-white rounded-lg shadow-md p-8">
-            <h3 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+          <!-- Response Times and Contact Information -->
+          <div class="space-y-8">
 
-            <!-- Email & Phone -->
-            <div class="mb-6">
-              <h4 class="text-lg font-semibold text-gray-900 mb-3">Get in Touch</h4>
-              <div class="text-gray-700 space-y-2">
-                <p class="flex items-center">
-                  <svg class="w-4 h-4 text-purple-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                  </svg>
-                  <a href="mailto:info@homelesshounds.com.au" class="text-purple-600 hover:text-purple-700">
-                    info@homelesshounds.com.au
-                  </a>
-                </p>
-                <p class="flex items-center">
-                  <svg class="w-4 h-4 text-purple-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                  </svg>
-                  Available on request (email us first)
-                </p>
-              </div>
-            </div>
+            <!-- Response Times & Office Hours -->
+            <div class="card ring-2 ring-purple-200">
+              <div class="card-body">
+                <h3 class="text-xl font-bold text-gray-900 mb-6">Response Times & Office Hours</h3>
 
-            <!-- Postal Address -->
-            <div>
-              <h4 class="text-lg font-semibold text-gray-900 mb-3">Postal Address</h4>
-              <div class="text-gray-700">
-                <p class="mb-1">Homeless Hounds Animal Rescue Inc.</p>
-                <p class="mb-1">PO Box 93</p>
-                <p class="mb-1">Forest Hill VIC 3131</p>
-                <p>Australia</p>
-              </div>
-            </div>
-
-            <!-- Office Note -->
-            <div class="mt-6 bg-blue-50 border-l-4 border-blue-400 p-4">
-              <div class="flex">
-                <div class="flex-shrink-0">
-                  <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
-                  </svg>
+                <!-- Response Times -->
+                <div class="mb-6">
+                  <h4 class="text-lg font-semibold text-gray-900 mb-3">How Quickly We Respond</h4>
+                  <div class="space-y-2">
+                    <div class="bg-gradient-to-r from-purple-50 to-purple-100 border-l-4 border-purple-600 p-3 rounded-r-lg">
+                      <p class="text-gray-800"><strong>Urgent Matters:</strong> <span class="text-purple-700 font-semibold">Within 24 hours</span></p>
+                    </div>
+                    <div class="bg-gradient-to-r from-purple-50 to-purple-100 border-l-4 border-purple-400 p-3 rounded-r-lg">
+                      <p class="text-gray-800"><strong>Adoption Applications:</strong> <span class="text-purple-600 font-semibold">Within 48 hours</span></p>
+                    </div>
+                    <div class="bg-gradient-to-r from-purple-50 to-purple-100 border-l-4 border-purple-300 p-3 rounded-r-lg">
+                      <p class="text-gray-800"><strong>General Enquiries:</strong> <span class="text-purple-600 font-semibold">Within 48 hours</span></p>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-3 italic">
+                      Response times may be longer during peak periods or public holidays.
+                    </p>
+                  </div>
                 </div>
-                <div class="ml-3">
-                  <p class="text-sm text-blue-700">
-                    <strong>Office Address:</strong> We operate from a home office and don't have a physical location
-                    for public visits. All our animals are cared for by volunteer foster carers in their homes.
+
+                <!-- Office Hours -->
+                <div>
+                  <h4 class="text-lg font-semibold text-gray-900 mb-3">When We're Available</h4>
+                  <div class="text-gray-700 space-y-1">
+                    <p><strong>Monday - Friday:</strong> 9:00am - 5:00pm AEST</p>
+                    <p><strong>Saturday - Sunday:</strong> Closed</p>
+                    <p class="text-sm text-gray-600 mt-3">
+                      <em>Please note: Our volunteers work across different time zones throughout Australia.</em>
+                    </p>
+                  </div>
+
+                  <!-- Out of Hours Note -->
+                  <div class="mt-4 p-3 bg-amber-50 border-l-4 border-amber-400 text-sm rounded-r-lg">
+                    <p class="text-amber-800">
+                      <strong>Out of Hours:</strong> Emergency situations are prioritized and responded to as soon as possible.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="card">
+              <div class="card-body">
+                <h3 class="mb-6">Contact Information</h3>
+
+                <!-- Email -->
+                <div class="mb-6">
+                  <h4 class="text-lg font-semibold text-gray-900 mb-3">Get in Touch</h4>
+                  <div class="text-gray-700 space-y-2">
+                    <p class="flex items-center">
+                      <svg class="w-4 h-4 text-purple-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                      </svg>
+                      <a href="mailto:info@homelesshounds.com.au" class="text-purple-600 hover:text-purple-700">
+                        info@homelesshounds.com.au
+                      </a>
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Postal Address -->
+                <div>
+                  <h4 class="text-lg font-semibold text-gray-900 mb-3">Postal Address</h4>
+                  <div class="text-gray-700">
+                    <p class="mb-1">Homeless Hounds Animal Rescue Inc.</p>
+                    <p class="mb-1">PO Box 93</p>
+                    <p class="mb-1">Forest Hill VIC 3131</p>
+                    <p>Australia</p>
+                  </div>
+                </div>
+
+                <!-- Office Note -->
+                <div class="mt-6 bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                  <div class="flex">
+                    <div class="flex-shrink-0">
+                      <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                      </svg>
+                    </div>
+                    <div class="ml-3">
+                      <p class="text-sm text-blue-700">
+                        <strong>Office Address:</strong> We operate from a home office and don't have a physical location
+                        for public visits. All our animals are cared for by volunteer foster carers in their homes.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Emergency Note -->
+    <section class="section bg-gradient-to-b from-white to-red-50">
+      <div class="container-custom">
+        <div class="bg-red-50 border-2 border-red-200 rounded-2xl p-6 shadow-soft">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <svg class="h-6 w-6 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="ml-3">
+              <h4 class="text-sm font-semibold text-red-700 mb-3">Emergency Animal Situations</h4>
+              <p class="text-sm text-red-700 mb-4">
+                If you've found an injured animal or there's an immediate threat to an animal's welfare,
+                please contact the appropriate emergency service immediately.
+              </p>
+
+              <div class="space-y-3">
+                <div class="bg-white bg-opacity-70 rounded-xl p-3">
+                  <p class="text-sm font-semibold text-red-800 mb-1">Domestic Animals (Dogs, Cats, etc.)</p>
+                  <p class="text-sm text-red-700">
+                    <strong>RSPCA Victoria:</strong> <a href="tel:0392242222" class="underline hover:no-underline">(03) 9224 2222</a>
+                  </p>
+                  <p class="text-xs text-red-600">For animal cruelty, neglect, or welfare concerns</p>
+                </div>
+
+                <div class="bg-white bg-opacity-70 rounded-xl p-3">
+                  <p class="text-sm font-semibold text-red-800 mb-1">Native Wildlife</p>
+                  <p class="text-sm text-red-700">
+                    <strong>Wildlife Victoria:</strong> <a href="tel:0384007300" class="underline hover:no-underline">(03) 8400 7300</a>
+                  </p>
+                  <p class="text-xs text-red-600">24/7 emergency response for sick, injured or orphaned native animals</p>
+                </div>
+
+                <div class="bg-white bg-opacity-70 rounded-xl p-3">
+                  <p class="text-sm font-semibold text-red-800 mb-1">General Emergencies</p>
+                  <p class="text-sm text-red-700">
+                    <strong>Police:</strong> <a href="tel:000" class="underline hover:no-underline">000</a> (life-threatening) or
+                    <strong>Local Council:</strong> for stray animals
                   </p>
                 </div>
               </div>
             </div>
           </div>
-
-        </section>
-      </div>
-
-      <!-- Emergency Note -->
-      <section class="bg-red-50 border border-red-200 rounded-lg p-6 mb-12">
-        <div class="flex">
-          <div class="flex-shrink-0">
-            <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-            </svg>
-          </div>
-          <div class="ml-3">
-            <h4 class="text-sm font-semibold text-red-700 mb-3">Emergency Animal Situations</h4>
-            <p class="text-sm text-red-700 mb-4">
-              If you've found an injured animal or there's an immediate threat to an animal's welfare,
-              please contact the appropriate emergency service immediately. We're a volunteer organisation
-              and may not be able to respond immediately to emergency situations.
-            </p>
-
-            <div class="space-y-3">
-              <div class="bg-white bg-opacity-70 rounded p-3">
-                <p class="text-sm font-semibold text-red-800 mb-1">Domestic Animals (Dogs, Cats, etc.)</p>
-                <p class="text-sm text-red-700">
-                  <strong>RSPCA Victoria:</strong> <a href="tel:0392242222" class="underline hover:no-underline">(03) 9224 2222</a>
-                </p>
-                <p class="text-xs text-red-600">For animal cruelty, neglect, or welfare concerns</p>
-              </div>
-
-              <div class="bg-white bg-opacity-70 rounded p-3">
-                <p class="text-sm font-semibold text-red-800 mb-1">Native Wildlife</p>
-                <p class="text-sm text-red-700">
-                  <strong>Wildlife Victoria:</strong> <a href="tel:0384007300" class="underline hover:no-underline">(03) 8400 7300</a>
-                </p>
-                <p class="text-xs text-red-600">24/7 emergency response for sick, injured or orphaned native animals</p>
-              </div>
-
-              <div class="bg-white bg-opacity-70 rounded p-3">
-                <p class="text-sm font-semibold text-red-800 mb-1">General Emergencies</p>
-                <p class="text-sm text-red-700">
-                  <strong>Police:</strong> <a href="tel:000" class="underline hover:no-underline">000</a> (life-threatening) or
-                  <strong>Local Council:</strong> for stray animals
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Call to Action -->
-      <section class="bg-gradient-to-r from-purple-600 to-purple-800 rounded-lg text-white p-8 text-center">
-        <h3 class="text-2xl font-bold mb-4">Ready to Help Save Lives?</h3>
-        <p class="text-lg mb-6">
+    <!-- Call to Action -->
+    <section class="section bg-gradient-to-br from-purple-600 via-purple-700 to-teal-600 text-white">
+      <div class="container-custom text-center">
+        <h3 class="text-white mb-6">Ready to Help Save Lives?</h3>
+        <p class="text-lg mb-8 text-purple-100">
           Whether you want to adopt, foster, volunteer, or donate, every action helps us save more animals.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/adopt" class="bg-yellow-400 text-purple-900 font-bold py-3 px-6 rounded-lg hover:bg-yellow-300 transition-colors">
+          <a href="/adopt" class="btn btn-accent">
             Adopt a Pet
           </a>
-          <a href="/get-involved/foster-care" class="bg-white text-purple-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors">
+          <a href="/get-involved/foster-care" class="btn btn-white">
             Foster Care
           </a>
-          <a href="https://donate.homelesshounds.com.au" target="_blank" class="bg-purple-800 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-900 transition-colors">
+          <a href="/donate" class="btn bg-purple-800 text-white hover:bg-purple-900">
             Donate Now
           </a>
         </div>
-      </section>
+      </div>
+    </section>
 
-    </div>
   </main>
 
   <!-- Load Turnstile -->

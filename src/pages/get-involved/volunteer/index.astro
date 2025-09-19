@@ -3,236 +3,261 @@ import Base from "../../../layouts/Base.astro";
 ---
 
 <Base title="Volunteer | Homeless Hounds Animal Rescue">
-  <main class="min-h-screen bg-gray-50">
-    <!-- Hero Section -->
-    <section class="relative min-h-[40vh] bg-gradient-to-br from-purple-900 via-purple-700 to-pink-600 flex items-center">
-      <div class="absolute inset-0 bg-black opacity-20"></div>
-      <div class="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div class="max-w-3xl">
-          <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Become a <span class="text-yellow-400">Volunteer</span>
-          </h1>
-          <p class="text-xl md:text-2xl text-white/90 mb-8">
-            Join our network of dedicated volunteers and help change the lives of hundreds of animals that come into our care each year.
-          </p>
-          <p class="text-lg text-purple-100">
-            <em>We couldn't do it without our amazing volunteers!</em>
-          </p>
+  <!-- Hero Section - Full Width -->
+  <section class="relative isolate overflow-hidden bg-white min-h-[50vh] flex items-center">
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute inset-0 bg-gradient-to-br from-purple-900/90 via-purple-700/80 to-teal-600/70"></div>
+    </div>
+    <div class="absolute inset-0 bg-pattern-dots opacity-10"></div>
+
+    <div class="container-custom py-20 relative z-10">
+      <div class="max-w-3xl">
+        <p class="text-purple-200 text-sm uppercase tracking-widest font-semibold mb-4">Make a difference today</p>
+        <h1 class="text-white mb-6">
+          Become a <span class="text-gradient">Volunteer</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-white/90 mb-8">
+          Join our network of dedicated volunteers and help change the lives of hundreds of animals that come into our care each year.
+        </p>
+        <p class="text-lg text-purple-200">
+          <em>We couldn't do it without our amazing volunteers!</em>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Introduction Section - Boxed -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="card max-w-5xl mx-auto">
+        <div class="card-body">
+          <h2 class="mb-6">Why Volunteer with Homeless Hounds?</h2>
+          <div class="prose prose-lg max-w-none text-gray-700">
+            <p class="mb-6">
+              As a volunteer-run animal rescue group, Homeless Hounds volunteers kindly donate their time to support the
+              day-to-day running of our organisation. Our volunteers help us change the lives of the hundreds of animals
+              that come into our care each year.
+            </p>
+            <p class="mb-6">
+              <strong>Put simply – we couldn't do it without them!</strong>
+            </p>
+            <p>
+              We offer a variety of volunteer opportunities to suit different skillsets. If you want to get involved and
+              make a difference, volunteering with Homeless Hounds is a great way for you to do this while you gain
+              experience in Australian animal welfare and meet like-minded people.
+            </p>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <!-- Getting Started & Benefits - Two Column Grid -->
+  <section class="section section-muted">
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-2 gap-8">
 
-      <!-- Introduction Section -->
-      <section class="bg-white rounded-2xl shadow-xl p-8 mb-12 transform hover:shadow-2xl transition-all duration-300">
-        <h3 class="text-3xl font-bold text-gray-900 mb-6">Why Volunteer with Homeless Hounds?</h3>
-        <div class="prose prose-lg max-w-none text-gray-700">
-          <p class="mb-6">
-            As a volunteer-run animal rescue group, Homeless Hounds volunteers kindly donate their time to support the
-            day-to-day running of our organisation. Our volunteers help us change the lives of the hundreds of animals
-            that come into our care each year.
-          </p>
-          <p class="mb-6">
-            <strong>Put simply – we couldn't do it without them!</strong>
-          </p>
-          <p class="mb-6">
-            We offer a variety of volunteer opportunities to suit different skillsets. If you want to get involved and
-            make a difference, volunteering with Homeless Hounds is a great way for you to do this while you gain
-            experience in Australian animal welfare and meet like-minded people.
-          </p>
-        </div>
-      </section>
+        <!-- Getting Started Card -->
+        <div class="card">
+          <div class="card-body">
+            <h3 class="mb-6">Getting Started as a Volunteer</h3>
+            <div class="space-y-6">
 
-      <!-- Getting Started & Benefits Section - Two Column Layout -->
-      <section class="grid lg:grid-cols-2 gap-8 mb-12">
-
-        <!-- Getting Started -->
-        <div class="bg-white rounded-2xl shadow-xl p-8 transform hover:shadow-2xl transition-all duration-300">
-          <h3 class="text-2xl font-bold text-gray-900 mb-6">Getting Started as a Volunteer</h3>
-          <div class="space-y-6">
-
-            <!-- Step 1 -->
-            <div class="flex items-start">
-              <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                <span class="text-lg font-bold text-white">1</span>
+              <!-- Step 1 -->
+              <div class="flex items-start">
+                <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center mr-4 flex-shrink-0 shadow-lg">
+                  <span class="text-lg font-bold text-white">1</span>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">Choose Your Role</h4>
+                  <p class="text-gray-600 text-sm">
+                    Review the available volunteer opportunities and find one that matches your skills, interests, and availability.
+                  </p>
+                </div>
               </div>
-              <div>
-                <h4 class="text-lg font-semibold text-gray-900 mb-2">Choose Your Role</h4>
-                <p class="text-gray-600 text-sm">
-                  Review the available volunteer opportunities and find one that matches your skills, interests, and availability.
-                </p>
-              </div>
-            </div>
 
-            <!-- Step 2 -->
-            <div class="flex items-start">
-              <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                <span class="text-lg font-bold text-white">2</span>
+              <!-- Step 2 -->
+              <div class="flex items-start">
+                <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center mr-4 flex-shrink-0 shadow-lg">
+                  <span class="text-lg font-bold text-white">2</span>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">Apply & Connect</h4>
+                  <p class="text-gray-600 text-sm">
+                    Contact us or send your application. We'll discuss the role and answer any questions you might have.
+                  </p>
+                </div>
               </div>
-              <div>
-                <h4 class="text-lg font-semibold text-gray-900 mb-2">Apply & Connect</h4>
-                <p class="text-gray-600 text-sm">
-                  Contact us or send your application. We'll discuss the role and answer any questions you might have.
-                </p>
+
+              <!-- Step 3 -->
+              <div class="flex items-start">
+                <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center mr-4 flex-shrink-0 shadow-lg">
+                  <span class="text-lg font-bold text-white">3</span>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">Start Making a Difference</h4>
+                  <p class="text-gray-600 text-sm">
+                    Once onboarded, you'll join our team of dedicated volunteers working to save animals across Australia.
+                  </p>
+                </div>
               </div>
             </div>
 
-            <!-- Step 3 -->
-            <div class="flex items-start">
-              <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                <span class="text-lg font-bold text-white">3</span>
-              </div>
-              <div>
-                <h4 class="text-lg font-semibold text-gray-900 mb-2">Start Making a Difference</h4>
-                <p class="text-gray-600 text-sm">
-                  Once onboarded, you'll join our team of dedicated volunteers working to save animals across Australia.
-                </p>
-              </div>
+            <!-- Code of Conduct -->
+            <div class="border-t pt-6 mt-6">
+              <h4 class="font-semibold text-gray-900 mb-3 flex items-center">
+                <svg class="w-5 h-5 text-purple-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                </svg>
+                Code of Conduct Required
+              </h4>
+              <p class="text-gray-600 text-sm mb-4">
+                All volunteers must read and agree to our Code of Conduct, which ensures a professional and welcoming environment.
+              </p>
+              <a href="#" target="_blank" class="btn btn-ghost">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                Download Code of Conduct
+              </a>
             </div>
-
-          </div>
-
-          <!-- Code of Conduct -->
-          <div class="border-t pt-6 mt-6">
-            <h4 class="font-semibold text-gray-900 mb-3 flex items-center">
-              <svg class="w-5 h-5 text-purple-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
-              </svg>
-              Code of Conduct Required
-            </h4>
-            <p class="text-gray-600 text-sm mb-4">
-              All volunteers must read and agree to our Code of Conduct, which ensures a professional and welcoming environment.
-            </p>
-            <a href="#" target="_blank" class="inline-flex items-center bg-purple-100 text-purple-700 font-semibold py-2 px-4 rounded-full hover:bg-purple-200 transition-colors text-sm">
-              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
-              Download Code of Conduct
-            </a>
           </div>
         </div>
 
-        <!-- Benefits of Volunteering -->
-        <div class="bg-white rounded-2xl shadow-xl p-8 transform hover:shadow-2xl transition-all duration-300">
-          <h3 class="text-2xl font-bold text-gray-900 mb-6">Benefits of Volunteering with Us</h3>
-          <div class="space-y-4">
+        <!-- Benefits Card -->
+        <div class="card">
+          <div class="card-body">
+            <h3 class="mb-6">Benefits of Volunteering with Us</h3>
+            <div class="space-y-4">
 
-            <div class="flex items-start">
-              <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
-              <div>
-                <h4 class="font-semibold text-gray-900 mb-1">Gain Experience in Animal Welfare</h4>
-                <p class="text-gray-600 text-sm">
-                  Develop valuable skills and knowledge in Australian animal welfare practices.
-                </p>
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-1">Gain Experience in Animal Welfare</h4>
+                  <p class="text-gray-600 text-sm">
+                    Develop valuable skills and knowledge in Australian animal welfare practices.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-1">Meet Like-Minded People</h4>
+                  <p class="text-gray-600 text-sm">
+                    Connect with passionate animal lovers and build lasting friendships.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-1">Flexible Opportunities</h4>
+                  <p class="text-gray-600 text-sm">
+                    Choose roles that fit around your schedule and commitments.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-1">Make a Real Difference</h4>
+                  <p class="text-gray-600 text-sm">
+                    Directly contribute to saving hundreds of animals each year.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-1">Develop New Skills</h4>
+                  <p class="text-gray-600 text-sm">
+                    Learn in areas like animal care, administration, and teamwork.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-1">Be Part of Something Bigger</h4>
+                  <p class="text-gray-600 text-sm">
+                    Join a dedicated network working towards a common goal.
+                  </p>
+                </div>
               </div>
             </div>
-
-            <div class="flex items-start">
-              <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
-              <div>
-                <h4 class="font-semibold text-gray-900 mb-1">Meet Like-Minded People</h4>
-                <p class="text-gray-600 text-sm">
-                  Connect with passionate animal lovers and build lasting friendships.
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-start">
-              <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
-              <div>
-                <h4 class="font-semibold text-gray-900 mb-1">Flexible Opportunities</h4>
-                <p class="text-gray-600 text-sm">
-                  Choose roles that fit around your schedule and commitments.
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-start">
-              <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
-              <div>
-                <h4 class="font-semibold text-gray-900 mb-1">Make a Real Difference</h4>
-                <p class="text-gray-600 text-sm">
-                  Directly contribute to saving hundreds of animals each year.
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-start">
-              <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
-              <div>
-                <h4 class="font-semibold text-gray-900 mb-1">Develop New Skills</h4>
-                <p class="text-gray-600 text-sm">
-                  Learn in areas like animal care, administration, and teamwork.
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-start">
-              <div class="flex-shrink-0 w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3"></div>
-              <div>
-                <h4 class="font-semibold text-gray-900 mb-1">Be Part of Something Bigger</h4>
-                <p class="text-gray-600 text-sm">
-                  Join a dedicated network working towards a common goal.
-                </p>
-              </div>
-            </div>
-
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <!-- Key Volunteer Roles -->
-      <section class="bg-white rounded-2xl shadow-xl p-8 mb-12">
-        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Important Volunteer Roles</h3>
-        <div class="grid md:grid-cols-2 gap-8">
+  <!-- Key Volunteer Roles - Boxed -->
+  <section class="section">
+    <div class="container-custom">
+      <h2 class="text-center mb-12">Important Volunteer Roles</h2>
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
 
-          <!-- Foster Carers -->
-          <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-50 to-purple-100 p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+        <!-- Foster Carers Card -->
+        <article class="card group bg-gradient-to-br from-purple-50 to-white">
+          <div class="card-body">
             <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center mr-4">
-                <span class="text-2xl">🏠</span>
+              <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center mr-4 shadow-lg">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                </svg>
               </div>
-              <h4 class="text-xl font-bold text-purple-900">Foster Carers</h4>
+              <h4 class="text-xl font-bold text-gray-900">Foster Carers</h4>
             </div>
-            <p class="text-purple-800 mb-4">
+            <p class="text-gray-700 mb-4">
               Provide temporary homes for animals while they receive veterinary care and behavioural training before finding their forever homes.
             </p>
-            <a href="/get-involved/foster-care" class="inline-flex items-center bg-purple-600 text-white font-bold py-2 px-4 rounded-full hover:bg-purple-700 transform hover:scale-105 transition-all text-sm">
+            <a href="/get-involved/foster-care" class="btn btn-primary">
               Learn More About Fostering
-              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
               </svg>
             </a>
           </div>
+        </article>
 
-          <!-- Pet Couriers -->
-          <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+        <!-- Pet Couriers Card -->
+        <article class="card group bg-gradient-to-br from-teal-50 to-white">
+          <div class="card-body">
             <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mr-4">
-                <span class="text-2xl">🚗</span>
+              <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-700 rounded-full flex items-center justify-center mr-4 shadow-lg">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                  <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z" />
+                </svg>
               </div>
-              <h4 class="text-xl font-bold text-yellow-900">Pet Couriers</h4>
+              <h4 class="text-xl font-bold text-gray-900">Pet Couriers</h4>
             </div>
-            <p class="text-yellow-800 mb-4">
+            <p class="text-gray-700 mb-4">
               Help transport animals between foster homes, veterinary appointments, and their new forever families.
             </p>
-            <a href="/get-involved/pet-couriers" class="inline-flex items-center bg-yellow-500 text-white font-bold py-2 px-4 rounded-full hover:bg-yellow-600 transform hover:scale-105 transition-all text-sm">
+            <a href="/get-involved/pet-couriers" class="btn btn-secondary">
               Learn More About Pet Couriers
-              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
               </svg>
             </a>
           </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-        </div>
-      </section>
-
-      <!-- Available Positions -->
-      <section class="bg-white rounded-2xl shadow-xl p-8 mb-12">
-        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Current Volunteer Opportunities</h3>
-        <p class="text-gray-600 mb-8">
+  <!-- Available Positions - Full Width Background -->
+  <section class="section section-muted">
+    <div class="container-custom">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-center mb-8">Current Volunteer Opportunities</h2>
+        <p class="text-gray-600 mb-8 text-center">
           As specific opportunities appear, they'll be listed below. To register your interest in any capacity as a volunteer,
           please see the available roles and <a href="/contact-us" class="text-purple-600 hover:text-purple-800 underline">contact us</a>.
         </p>
@@ -240,13 +265,13 @@ import Base from "../../../layouts/Base.astro";
         <div class="space-y-4">
 
           <!-- Administration Assistant - Dogs -->
-          <div class="border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
-            <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-6">
+          <div class="card overflow-hidden">
+            <div class="bg-gradient-to-r from-purple-50 via-white to-purple-50 p-6">
               <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                <div class="flex-1 flex items-start">
+                <div class="flex-1">
                   <button
                     onclick="toggleAccordion('dogs-admin')"
-                    class="flex-1 flex items-center justify-between text-left group hover:bg-white/50 rounded-lg p-2 -m-2 transition-colors"
+                    class="flex items-center justify-between text-left w-full group"
                   >
                     <div>
                       <h4 class="text-xl font-semibold text-gray-900 mb-1 group-hover:text-purple-700 transition-colors">
@@ -258,17 +283,17 @@ import Base from "../../../layouts/Base.astro";
                       <span class="text-xs text-gray-500 font-medium hidden sm:inline">View Details</span>
                       <div class="bg-purple-100 group-hover:bg-purple-200 rounded-full p-2 transition-colors">
                         <svg id="dogs-admin-icon" class="w-5 h-5 text-purple-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7 7"></path>
                         </svg>
                       </div>
                     </div>
                   </button>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-2 mt-4 md:mt-0 md:ml-4">
-                  <a href="#" target="_blank" class="inline-block bg-blue-600 text-white font-medium py-2 px-4 rounded-full text-sm hover:bg-blue-700 transition-colors">
-                    Full Role Description (PDF)
+                  <a href="#" target="_blank" class="btn btn-ghost text-sm">
+                    Full Role Description
                   </a>
-                  <a href="mailto:volunteering@homelesshounds.com.au" class="inline-block bg-purple-600 text-white font-medium py-2 px-4 rounded-full text-sm hover:bg-purple-700 transition-colors">
+                  <a href="mailto:volunteering@homelesshounds.com.au" class="btn btn-primary text-sm">
                     Apply Now
                   </a>
                 </div>
@@ -297,35 +322,35 @@ import Base from "../../../layouts/Base.astro";
           </div>
 
           <!-- Administration Assistant - Cats -->
-          <div class="border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
-            <div class="bg-gradient-to-r from-pink-50 to-pink-100 p-6">
+          <div class="card overflow-hidden">
+            <div class="bg-gradient-to-r from-teal-50 via-white to-teal-50 p-6">
               <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                <div class="flex-1 flex items-start">
+                <div class="flex-1">
                   <button
                     onclick="toggleAccordion('cats-admin')"
-                    class="flex-1 flex items-center justify-between text-left group hover:bg-white/50 rounded-lg p-2 -m-2 transition-colors"
+                    class="flex items-center justify-between text-left w-full group"
                   >
                     <div>
-                      <h4 class="text-xl font-semibold text-gray-900 mb-1 group-hover:text-purple-700 transition-colors">
+                      <h4 class="text-xl font-semibold text-gray-900 mb-1 group-hover:text-teal-700 transition-colors">
                         Administration Assistant - Cats
                       </h4>
-                      <p class="text-sm text-purple-600 font-medium">4-5 hours minimum per week</p>
+                      <p class="text-sm text-teal-600 font-medium">4-5 hours minimum per week</p>
                     </div>
                     <div class="flex items-center gap-2 ml-4">
                       <span class="text-xs text-gray-500 font-medium hidden sm:inline">View Details</span>
-                      <div class="bg-pink-100 group-hover:bg-pink-200 rounded-full p-2 transition-colors">
-                        <svg id="cats-admin-icon" class="w-5 h-5 text-pink-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      <div class="bg-teal-100 group-hover:bg-teal-200 rounded-full p-2 transition-colors">
+                        <svg id="cats-admin-icon" class="w-5 h-5 text-teal-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7 7"></path>
                         </svg>
                       </div>
                     </div>
                   </button>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-2 mt-4 md:mt-0 md:ml-4">
-                  <a href="#" target="_blank" class="inline-block bg-blue-600 text-white font-medium py-2 px-4 rounded-full text-sm hover:bg-blue-700 transition-colors">
-                    Full Role Description (PDF)
+                  <a href="#" target="_blank" class="btn btn-ghost text-sm">
+                    Full Role Description
                   </a>
-                  <a href="mailto:volunteering@homelesshounds.com.au" class="inline-block bg-purple-600 text-white font-medium py-2 px-4 rounded-full text-sm hover:bg-purple-700 transition-colors">
+                  <a href="mailto:volunteering@homelesshounds.com.au" class="btn btn-secondary text-sm">
                     Apply Now
                   </a>
                 </div>
@@ -352,39 +377,48 @@ import Base from "../../../layouts/Base.astro";
               </div>
             </div>
           </div>
-
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-
-      <!-- Call to Action -->
-      <section class="bg-gradient-to-br from-purple-900 to-purple-600 rounded-2xl text-white p-12 text-center shadow-2xl">
-        <h3 class="text-3xl md:text-4xl font-bold mb-6">Ready to Start Volunteering?</h3>
+  <!-- Call to Action - Full Width -->
+  <section class="relative bg-gradient-to-br from-purple-900 via-purple-700 to-teal-700">
+    <div class="absolute inset-0 bg-pattern-dots opacity-5"></div>
+    <div class="container-custom section relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-white mb-6">Ready to Start Volunteering?</h2>
         <p class="text-xl mb-10 text-white/90">
           Join our amazing team of volunteers and help us rescue, rehabilitate, and rehome animals in need.
         </p>
 
-        <!-- Specific Roles on One Line -->
+        <!-- Specific Roles -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-          <a href="/get-involved/foster-care" class="inline-flex items-center justify-center bg-white text-purple-700 font-bold py-4 px-8 rounded-full hover:bg-gray-100 transform hover:scale-105 transition-all shadow-xl">
-            <span class="mr-2">🏠</span> Become a Foster Carer
+          <a href="/get-involved/foster-care" class="btn btn-white">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+            </svg>
+            Become a Foster Carer
           </a>
-          <a href="/get-involved/pet-couriers" class="inline-flex items-center justify-center bg-purple-800/50 backdrop-blur text-white font-bold py-4 px-8 rounded-full hover:bg-purple-800/70 transform hover:scale-105 transition-all shadow-xl border border-white/20">
-            <span class="mr-2">🚗</span> Join Pet Couriers Team
+          <a href="/get-involved/pet-couriers" class="btn btn-secondary">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+              <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z" />
+            </svg>
+            Join Pet Couriers Team
           </a>
         </div>
 
-        <!-- General Contact Section -->
+        <!-- General Contact -->
         <div>
           <p class="text-xl mb-6 text-purple-200">Not sure? Have questions?</p>
-          <a href="/contact-us" class="inline-block bg-yellow-400 text-purple-900 font-bold py-4 px-10 rounded-full hover:bg-yellow-300 transform hover:scale-105 transition-all shadow-xl">
+          <a href="/contact-us" class="btn btn-accent">
             Contact Us to Find Out More
           </a>
         </div>
-      </section>
-
+      </div>
     </div>
-  </main>
+  </section>
 </Base>
 
 <script>
@@ -402,7 +436,4 @@ import Base from "../../../layouts/Base.astro";
       }
     }
   }
-
-  // Make function globally available
-  (window as any).toggleAccordion = toggleAccordion;
 </script>

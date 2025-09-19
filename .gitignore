@@ -5,3 +5,5 @@ node_modules/
 .env
 .dev.vars
 dist/
+.mcp.json
+.claude-settings.json
