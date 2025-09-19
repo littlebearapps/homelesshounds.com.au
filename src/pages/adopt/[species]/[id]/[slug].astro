@@ -1,6 +1,7 @@
 ---
 import Base from "../../../../layouts/Base.astro";
 import AdoptionModal from "../../../../components/AdoptionModal.astro";
+import CTASection from "../../../../components/CTASection.astro";
 import type { AnimalDetailResponse } from "../../../../types/asm";
 import { createAnimalProfile, getCompatibilityIcon, calculateAge } from "../../../../types/asm";
 
@@ -62,40 +63,51 @@ const mainImageUrl = animalData?.thumbnailUrl || `https://service.sheltermanager
 // Calculate days on shelter for display
 const daysText = animal.DAYSONSHELTER === 1 ? '1 day' : `${animal.DAYSONSHELTER} days`;
 
+// Format entry date
+const entryDate = animal.DATEBROUGHTIN ? new Date(animal.DATEBROUGHTIN).toLocaleDateString('en-AU', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric'
+}) : null;
+
+// Get coat type if available
+const coatType = animal.COATTYPENAME || null;
+
 // Determine icon for species
 const speciesIcon = species === 'dog' ? '🐕' : '🐱';
-const speciesColor = species === 'dog' ? 'blue' : 'amber';
+const heroColor = species === 'dog' ? 'from-blue-500 to-blue-700' : 'from-amber-500 to-amber-700';
+const accentColor = species === 'dog' ? 'blue' : 'amber';
 
 // Enhanced compatibility information
 const compatibilityInfo = [
-  { 
-    label: 'Good with Cats', 
-    level: profile.compatibility.cats, 
+  {
+    label: '🐱 Good with Cats',
+    level: profile.compatibility.cats,
     icon: getCompatibilityIcon(profile.compatibility.cats, 'cats'),
     show: true
   },
-  { 
-    label: 'Good with Dogs', 
-    level: profile.compatibility.dogs, 
+  {
+    label: '🐕 Good with Dogs',
+    level: profile.compatibility.dogs,
     icon: getCompatibilityIcon(profile.compatibility.dogs, 'dogs'),
     show: true
   },
-  { 
-    label: 'Good with Children', 
-    level: profile.compatibility.children, 
+  {
+    label: '👶 Good with Children',
+    level: profile.compatibility.children,
     icon: getCompatibilityIcon(profile.compatibility.children, 'children'),
     show: true
   },
-  { 
-    label: 'Good with Small Animals', 
-    level: profile.compatibility.smallAnimals, 
+  {
+    label: '🐰 Good with Small Animals',
+    level: profile.compatibility.smallAnimals,
     icon: getCompatibilityIcon(profile.compatibility.smallAnimals, 'small'),
     show: animal.ISGOODWITHSMALLANIMALS !== undefined
   },
-  { 
-    label: 'House Trained', 
-    level: profile.compatibility.houseTrained, 
-    icon: profile.compatibility.houseTrained === 1 ? '✅ 🏠' : profile.compatibility.houseTrained === 0 ? '❌ 🏠' : '❓ 🏠',
+  {
+    label: '🏠 House Trained',
+    level: profile.compatibility.houseTrained,
+    icon: getCompatibilityIcon(profile.compatibility.houseTrained, 'house'),
     show: true
   },
 ].filter(item => item.show);
@@ -131,7 +143,7 @@ const compatibilityInfo = [
     "adoptionFee": profile.adoption.fee ? `$${profile.adoption.fee}` : undefined,
     "location": profile.adoption.location,
     "shelter": {
-      "@type": "Organization", 
+      "@type": "Organization",
       "name": "Homeless Hounds Animal Rescue",
       "url": Astro.site
     },
@@ -145,17 +157,73 @@ const compatibilityInfo = [
     ].filter(Boolean)
   })} />
 
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- Breadcrumb Navigation -->
-    <nav class="flex items-center space-x-2 text-sm text-gray-600 mb-8">
-      <a href="/adopt" class="hover:text-indigo-700 transition-colors">All Animals</a>
-      <span>›</span>
-      <a href={`/adopt/${species}s`} class="hover:text-indigo-700 transition-colors">
-        {species === 'dog' ? 'Dogs' : 'Cats'}
-      </a>
-      <span>›</span>
-      <span class="text-gray-900 font-medium">{animal.ANIMALNAME}</span>
-    </nav>
+  <!-- Hero Section -->
+  <section class={`relative isolate overflow-hidden bg-white min-h-[40vh] flex items-center`}>
+    <div class="absolute inset-0 -z-10">
+      <div class={`absolute inset-0 bg-gradient-to-br ${heroColor}`}></div>
+    </div>
+    <div class="absolute inset-0 bg-pattern-dots opacity-10"></div>
+
+    <div class="container-custom py-16 md:py-20 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- Breadcrumb -->
+        <nav class="flex justify-center items-center space-x-2 text-sm text-white/80 mb-6">
+          <a href="/adopt" class="hover:text-white transition-colors">All Animals</a>
+          <span>›</span>
+          <a href={`/adopt/${species}s`} class="hover:text-white transition-colors">
+            {species === 'dog' ? 'Dogs' : 'Cats'}
+          </a>
+          <span>›</span>
+          <span class="text-white font-medium">{animal.ANIMALNAME}</span>
+        </nav>
+
+        <!-- Name and Breed -->
+        <h1 class="text-white mb-4 text-4xl md:text-6xl font-bold">
+          {animal.ANIMALNAME}
+        </h1>
+        <p class="text-xl md:text-2xl text-white/90 mb-8">
+          {animal.BREEDNAME} {animal.SPECIESNAME}
+          {animal.CROSSBREED === 1 && (
+            <span class="ml-2 text-sm bg-white/20 text-white px-3 py-1 rounded-full">Mix</span>
+          )}
+        </p>
+
+        <!-- Reserved Status -->
+        {animal.HASACTIVERESERVE === 1 && (
+          <div class="inline-flex items-center bg-red-500 text-white px-6 py-3 rounded-full font-bold uppercase tracking-wider shadow-lg transform rotate-2 mb-6">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            Currently Reserved
+          </div>
+        )}
+
+        <!-- Key Info Pills -->
+        <div class="flex flex-wrap gap-3 justify-center">
+          <span class="bg-white/20 backdrop-blur text-white px-4 py-2 rounded-full font-medium">
+            {animal.AGEGROUP}
+          </span>
+          <span class="bg-white/20 backdrop-blur text-white px-4 py-2 rounded-full font-medium">
+            {animal.SEXNAME}
+          </span>
+          <span class="bg-white/20 backdrop-blur text-white px-4 py-2 rounded-full font-medium">
+            {animal.SIZENAME} Size
+          </span>
+          {profile.basicInfo.weight && (
+            <span class="bg-white/20 backdrop-blur text-white px-4 py-2 rounded-full font-medium">
+              {profile.basicInfo.weight}kg
+            </span>
+          )}
+          <span class="bg-white/20 backdrop-blur text-white px-4 py-2 rounded-full font-medium">
+            In care {daysText}
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container-custom py-12">
 
     <!-- Error State -->
     {error && (
@@ -172,414 +240,348 @@ const compatibilityInfo = [
 
     <!-- Animal Details -->
     {animal && (
-      <div class="grid lg:grid-cols-2 gap-12">
-        <!-- Enhanced Image Section -->
-        <div>
-          <!-- Main Image -->
-          <div class="relative overflow-hidden rounded-2xl mb-6 group">
-            {animal.HASACTIVERESERVE === 1 && (
-              <div class="absolute top-4 right-4 z-10">
-                <span class="bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider shadow-lg transform rotate-12">
-                  Reserved
-                </span>
-              </div>
-            )}
-            
-            <!-- Image Counter Badge -->
-            {profile.media.imageCount > 1 && (
-              <div class="absolute top-4 left-4 z-10">
-                <span class="bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium">
-                  📸 {profile.media.imageCount} photos
-                </span>
-              </div>
-            )}
-            
-            <img 
-              src={mainImageUrl}
-              alt={`${animal.ANIMALNAME} - ${animal.BREEDNAME} ${animal.SPECIESNAME}`}
-              class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105"
-              loading="eager"
-            />
-            
-            <!-- Photo Caption -->
-            {profile.media.mediaName && (
-              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <p class="text-white text-sm font-medium">{profile.media.mediaName}</p>
-                {profile.media.mediaDate && (
-                  <p class="text-white/80 text-xs mt-1">
-                    📅 {new Date(profile.media.mediaDate).toLocaleDateString()}
-                  </p>
-                )}
-              </div>
-            )}
-            
-            <!-- Click to View Larger Indicator -->
-            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
-              <div class="bg-white/90 rounded-full p-3">
-                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          <!-- Image Gallery Grid -->
-          {images.length > 1 && (
-            <div>
-              <h4 class="text-sm font-semibold text-gray-700 mb-4 flex items-center">
-                <span class="mr-2">📷</span>
-                More Photos of {animal.ANIMALNAME}
-              </h4>
-              <div class="grid grid-cols-3 gap-4">
-                {images.slice(1).map((imageUrl, index) => (
-                  <div class="relative group cursor-pointer">
-                    <img 
-                      src={imageUrl}
-                      alt={`${animal.ANIMALNAME} photo ${index + 2}`}
-                      class="w-full h-24 object-cover rounded-lg transition-all duration-300 group-hover:opacity-75 group-hover:scale-105"
-                    />
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 rounded-lg">
-                      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                      </svg>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <!-- Media Statistics -->
-          {(profile.media.imageCount > 0 || profile.media.videoUrl) && (
-            <div class="bg-gray-50 rounded-lg p-4 mt-6">
-              <h4 class="text-sm font-semibold text-gray-700 mb-3">📊 Media Gallery</h4>
-              <div class="flex items-center gap-4 text-sm text-gray-600">
+      <div>
+        <!-- Image Gallery Section -->
+        <div class="mb-16">
+          <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Main Image -->
+            <div class="lg:col-span-2">
+              <div class="relative overflow-hidden rounded-2xl shadow-lg group">
                 {profile.media.imageCount > 0 && (
-                  <div class="flex items-center">
-                    <span class="mr-1">📸</span>
-                    <span>{profile.media.imageCount} photo{profile.media.imageCount !== 1 ? 's' : ''}</span>
+                  <div class="absolute top-4 left-4 z-10">
+                    <span class="bg-black/70 backdrop-blur text-white px-3 py-1.5 rounded-full text-sm font-medium">
+                      📸 {profile.media.imageCount} {profile.media.imageCount === 1 ? 'photo' : 'photos'}
+                    </span>
                   </div>
                 )}
-                {profile.media.videoUrl && (
-                  <div class="flex items-center">
-                    <span class="mr-1">🎥</span>
-                    <span>1 video</span>
-                  </div>
-                )}
-                {profile.media.mediaDate && (
-                  <div class="flex items-center">
-                    <span class="mr-1">📅</span>
-                    <span>Updated {new Date(profile.media.mediaDate).toLocaleDateString()}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
 
-        <!-- Details Section -->
-        <div>
-          <!-- Header -->
-          <div class="mb-8">
-            <div class="flex items-center mb-2">
-              <span class="text-4xl mr-3">{speciesIcon}</span>
-              <div>
-                <h1 class="text-4xl font-bold text-gray-900 mb-2">{animal.ANIMALNAME}</h1>
-                <p class="text-xl text-gray-600">
-                  {animal.BREEDNAME}
-                  {animal.CROSSBREED === 1 && (
-                    <span class="ml-2 text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Mix</span>
-                  )}
-                </p>
+                <img
+                  src={mainImageUrl}
+                  alt={`${animal.ANIMALNAME} - ${animal.BREEDNAME} ${animal.SPECIESNAME}`}
+                  class="w-full h-[500px] object-cover"
+                  loading="eager"
+                />
               </div>
-            </div>
-            
-            {animal.HASACTIVERESERVE === 1 && (
-              <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg mb-6">
-                <div class="flex">
-                  <div class="ml-3">
-                    <h3 class="text-sm font-medium text-red-800">This animal is currently reserved</h3>
-                    <p class="text-sm text-red-700">They may become available again if the adoption doesn't proceed.</p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
 
-          <!-- Enhanced Key Information -->
-          <div class="grid grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            <div class="flex items-center">
-              <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div>
-                <p class="font-medium text-gray-900">{animal.AGEGROUP}</p>
-                <p class="text-sm text-gray-600">Age Group</p>
-              </div>
-            </div>
-
-            <div class="flex items-center">
-              <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <div>
-                <p class="font-medium text-gray-900">{animal.SEXNAME}</p>
-                <p class="text-sm text-gray-600">Sex</p>
-              </div>
-            </div>
-
-            <div class="flex items-center">
-              <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v0H8v0z" />
-              </svg>
-              <div>
-                <p class="font-medium text-gray-900">{animal.SIZENAME}</p>
-                <p class="text-sm text-gray-600">Size</p>
-              </div>
-            </div>
-
-            {profile.basicInfo.weight && (
-              <div class="flex items-center">
-                <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-                </svg>
-                <div>
-                  <p class="font-medium text-gray-900">{profile.basicInfo.weight}kg</p>
-                  <p class="text-sm text-gray-600">Weight</p>
-                </div>
-              </div>
-            )}
-
-            <div class="flex items-center">
-              <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 9l2-2 2 2M8 13h8m-9-3h10a1 1 0 011 1v8a1 1 0 01-1 1H7a1 1 0 01-1-1v-8a1 1 0 011-1z" />
-              </svg>
-              <div>
-                <p class="font-medium text-gray-900">In care for {daysText}</p>
-                <p class="text-sm text-gray-600">Time with us</p>
-              </div>
-            </div>
-
-            {profile.adoption.location && (
-              <div class="flex items-center">
-                <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <div>
-                  <p class="font-medium text-gray-900">{profile.adoption.location}</p>
-                  <p class="text-sm text-gray-600">Current Location</p>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <!-- Adoption Fee -->
-          {profile.adoption.fee && (
-            <div class="bg-gradient-to-r from-indigo-50 to-pink-50 rounded-xl p-6 mb-8">
-              <div class="flex items-center justify-between">
-                <div>
-                  <h3 class="text-lg font-semibold text-indigo-900 mb-1">Adoption Fee</h3>
-                  <p class="text-indigo-800">Includes desexing, microchipping, and vaccinations</p>
-                </div>
-                <div class="text-right">
-                  <p class="text-2xl font-bold text-indigo-900">${profile.adoption.fee}</p>
-                  {profile.adoption.sourceNumber && (
-                    <p class="text-xs text-indigo-700">Source: {profile.adoption.sourceNumber}</p>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
-
-          <!-- Enhanced Compatibility & Health Section -->
-          <div class="mb-8">
-            <h3 class="text-lg font-semibold text-gray-900 mb-6">Compatibility & Health</h3>
-            
-            <!-- Compatibility Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              {compatibilityInfo.map(item => (
-                <div class="flex items-center justify-between bg-gray-50 rounded-lg p-4">
-                  <span class="text-sm font-medium text-gray-700">{item.label}</span>
-                  <span class="text-lg">{item.icon}</span>
-                </div>
-              ))}
-            </div>
-
-            <!-- Health Status -->
-            <div class="bg-green-50 rounded-lg p-6">
-              <h4 class="text-md font-semibold text-green-900 mb-4">🏥 Health Information</h4>
-              <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {profile.medical.isNeutered && (
-                  <div class="flex items-center">
-                    <span class="text-green-600 mr-2">✅</span>
-                    <span class="text-sm text-green-800">Desexed</span>
-                  </div>
-                )}
-                {profile.medical.isMicrochipped && (
-                  <div class="flex items-center">
-                    <span class="text-green-600 mr-2">✅</span>
-                    <span class="text-sm text-green-800">Microchipped</span>
-                  </div>
-                )}
-                {profile.medical.vaccinationCount && profile.medical.vaccinationCount > 0 && (
-                  <div class="flex items-center">
-                    <span class="text-green-600 mr-2">💉</span>
-                    <span class="text-sm text-green-800">{profile.medical.vaccinationCount}x Vaccinated</span>
-                  </div>
-                )}
-                {profile.medical.hasSpecialNeeds && (
-                  <div class="flex items-center">
-                    <span class="text-orange-600 mr-2">💖</span>
-                    <span class="text-sm text-orange-800">Special Needs</span>
-                  </div>
-                )}
-                {animal.HEARTWORMTESTED === 1 && (
-                  <div class="flex items-center">
-                    <span class="text-green-600 mr-2">🔬</span>
-                    <span class="text-sm text-green-800">Heartworm Tested</span>
-                  </div>
-                )}
-                {animal.FLVRESULT === 0 && (
-                  <div class="flex items-center">
-                    <span class="text-green-600 mr-2">🧪</span>
-                    <span class="text-sm text-green-800">FeLV Negative</span>
-                  </div>
-                )}
-              </div>
-              
-              <!-- Vet Information -->
-              {(profile.medical.vetName || profile.medical.vetPhone) && (
-                <div class="mt-4 pt-4 border-t border-green-200">
-                  <h5 class="text-sm font-semibold text-green-900 mb-2">Veterinary Contact</h5>
-                  <div class="text-sm text-green-800">
-                    {profile.medical.vetName && <div>📞 {profile.medical.vetName}</div>}
-                    {profile.medical.vetPhone && <div>☎️ {profile.medical.vetPhone}</div>}
+              <!-- Thumbnail Gallery -->
+              {images.length > 0 && (
+                <div class="mt-4">
+                  <div class="grid grid-cols-6 gap-2">
+                    {images.map((imageUrl, index) => (
+                      <div class="relative group cursor-pointer">
+                        <img
+                          src={imageUrl}
+                          alt={`${animal.ANIMALNAME} photo ${index + 1}`}
+                          class={`w-full h-20 object-cover rounded-lg transition-all duration-300 ${index === 0 ? 'ring-2 ring-' + accentColor + '-500' : 'hover:opacity-75'}`}
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
             </div>
-          </div>
 
-          <!-- Video Section -->
-          {profile.media.videoUrl && (
-            <div class="mb-8">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">Meet {animal.ANIMALNAME} - Video</h3>
-              <div class="bg-gray-100 rounded-xl p-6">
-                <div class="aspect-w-16 aspect-h-9">
-                  {profile.media.videoUrl.includes('youtube.com') || profile.media.videoUrl.includes('youtu.be') ? (
-                    <iframe 
-                      src={profile.media.videoUrl.replace('watch?v=', 'embed/')}
-                      class="w-full h-64 rounded-lg"
-                      frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen
-                    ></iframe>
-                  ) : (
-                    <video 
-                      controls 
-                      class="w-full h-64 rounded-lg"
-                      poster={mainImageUrl}
+            <!-- Quick Info Card -->
+            <div class="lg:col-span-1">
+              <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-24">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Quick Info</h3>
+
+                <!-- Adoption Fee -->
+                <div class={`bg-gradient-to-r from-${accentColor}-50 to-pink-50 rounded-xl p-4 mb-4`}>
+                  <div class="flex items-center justify-between">
+                    <span class="text-gray-700 font-medium">Adoption Fee</span>
+                    <span class={`text-2xl font-bold text-${accentColor}-700`}>
+                      {profile.adoption.fee ? `$${profile.adoption.fee}` : 'Contact us'}
+                    </span>
+                  </div>
+                  <p class="text-xs text-gray-600 mt-1">
+                    {profile.adoption.fee ? 'Includes all medical care' : 'Please enquire for details'}
+                  </p>
+                </div>
+
+                <!-- Location -->
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                  <span class="text-gray-600">📍 Location</span>
+                  <span class="font-medium text-gray-900">
+                    {profile.adoption.location || animal.SHELTERLOCATIONNAME || 'Contact for details'}
+                  </span>
+                </div>
+
+                <!-- ID Number -->
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                  <span class="text-gray-600">🏷️ ID</span>
+                  <span class="font-medium text-gray-900">#{animal.ID}</span>
+                </div>
+
+                <!-- Days in Care -->
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                  <span class="text-gray-600">📅 Time with us</span>
+                  <span class="font-medium text-gray-900">{daysText}</span>
+                </div>
+
+                {/* Entry Date */}
+                {entryDate && (
+                  <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <span class="text-gray-600">📆 Arrived</span>
+                    <span class="font-medium text-gray-900">{entryDate}</span>
+                  </div>
+                )}
+
+                {/* Entry Reason */}
+                {animal.ENTRYREASONNAME && (
+                  <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <span class="text-gray-600">📝 Entry reason</span>
+                    <span class="font-medium text-gray-900 text-sm">{animal.ENTRYREASONNAME}</span>
+                  </div>
+                )}
+
+                <!-- CTA Buttons -->
+                <div class="mt-6 space-y-3">
+                  {animal.HASACTIVERESERVE !== 1 ? (
+                    <button
+                      id="apply-adopt-btn"
+                      class="w-full inline-flex items-center justify-center px-6 py-3 bg-orange-600 text-white rounded-xl hover:bg-orange-700 font-semibold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                     >
-                      <source src={profile.media.videoUrl} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
+                      <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 420 404">
+                        <path d="m281.78 0c-0.88 0.011256-1.79 0.054519-2.69 0.125-35.82 6.1835-55.52 44.064-58.37 77.469-4.17 30.316 9.19 69.266 42.47 76.066 4.83 0.92 9.84 0.5 14.56-0.78 40.08-13.44 58.01-60.908 52.22-100.22-1.69-25.396-20.83-53.009-48.19-52.66zm-151.87 1.625c-22.28 0.5468-39.63 23.138-43.16 44.375-7.441 42.074 11.698 94.35 55.53 107.66 4.11 0.89 8.35 0.98 12.5 0.34 29.63-4.94 42.18-38.15 40.94-64.969-0.89-35.372-19.27-76.273-56-86.218-3.36-0.8909-6.63-1.2661-9.81-1.188zm248.93 119.5c-38.53 2.31-64.95 40.76-68.72 76.66-5.09 25.89 8.71 60.53 38.26 62.6 41.19-0.51 69.3-44.53 70.46-82.41 2.61-25.05-12.15-55.46-40-56.85zm-337.28 8.54c-16.394-0.14-32.517 9.68-37.874 26.34-14.293 44.58 14.408 101.04 61.624 110.41 19.706 3.37 37.018-11.76 41.908-29.97 10.35-38.95-10.915-84.17-46.908-101.85-5.863-3.29-12.334-4.88-18.75-4.93zm172.75 79.93c-32.14 0.07-64.78 16.38-85.59 40.66-22.48 28.3-40.892 61.23-48.095 96.94-8.751 25.7 11.083 55.29 38.565 55.47 33.06 0.91 61.47-21.79 94.34-23.47 27.89-4.25 52.86 10.25 77.94 19.75 21.35 9.13 50.85 5.63 61.75-17.35 8.57-23.41-4.05-48.39-14.5-69.18-21.32-33.76-44.17-69.24-79.13-90.32-14.01-8.68-29.58-12.53-45.28-12.5z" />
+                      </svg>
+                      Apply to Adopt {animal.ANIMALNAME}
+                    </button>
+                  ) : (
+                    <div class="w-full inline-flex items-center justify-center px-6 py-3 bg-gray-400 text-white rounded-xl cursor-not-allowed opacity-75">
+                      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                      Currently Reserved
+                    </div>
                   )}
-                </div>
-              </div>
-            </div>
-          )}
-
-          <!-- Description -->
-          {animal.ANIMALCOMMENTS && (
-            <div class="mb-8">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">About {animal.ANIMALNAME}</h3>
-              <div class="prose prose-gray max-w-none bg-gray-50 rounded-xl p-6">
-                <div class="text-gray-700 leading-relaxed whitespace-pre-line">{animal.ANIMALCOMMENTS}</div>
-              </div>
-            </div>
-          )}
-
-          <!-- Medical Notes -->
-          {profile.medical.healthNotes && (
-            <div class="mb-8">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">Medical Notes</h3>
-              <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-xl p-6">
-                <div class="flex">
-                  <div class="flex-shrink-0">
-                    <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                  <a
+                    href="/contact-us"
+                    class="w-full inline-flex items-center justify-center px-6 py-3 bg-white text-gray-700 border-2 border-gray-300 rounded-xl hover:bg-gray-50 font-medium transition-colors"
+                  >
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4-8 9-8s9 3.582 9 8z" />
                     </svg>
-                  </div>
-                  <div class="ml-3">
-                    <p class="text-sm text-blue-800 whitespace-pre-line">{profile.medical.healthNotes}</p>
-                  </div>
+                    Ask a Question
+                  </a>
                 </div>
               </div>
             </div>
-          )}
+          </div>
+        </div>
 
-          <!-- Physical Description -->
-          {animal.MARKINGS && (
-            <div class="mb-8">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">Physical Description</h3>
-              <div class="bg-amber-50 rounded-xl p-6">
-                <div class="flex items-start">
-                  <span class="text-2xl mr-3">🎨</span>
-                  <div>
-                    <h4 class="font-medium text-amber-900 mb-2">Markings & Features</h4>
-                    <p class="text-amber-800">{animal.MARKINGS}</p>
-                  </div>
-                </div>
+        <!-- About Section - Full Width -->
+        <div class="mb-16">
+          <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">About {animal.ANIMALNAME}</h2>
+            <div class="bg-gray-50 rounded-2xl p-8 shadow-md">
+              <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed whitespace-pre-line">
+                {animal.ANIMALCOMMENTS || animal.WEBSITEMEDIANOTES ||
+                  `${animal.ANIMALNAME} is a ${animal.AGEGROUP.toLowerCase()} ${animal.SEXNAME.toLowerCase()} ${animal.BREEDNAME} looking for a loving home. ${animal.HASSPECIALNEEDS === 1 ? 'This pet has special needs and requires an understanding family. ' : ''}Please contact us to learn more about this wonderful ${animal.SPECIESNAME.toLowerCase()}.`
+                }
               </div>
             </div>
-          )}
+          </div>
+        </div>
 
-          <!-- Adoption CTA -->
-          <div class="bg-gradient-to-br from-indigo-50 to-pink-50 rounded-2xl p-8">
-            <h3 class="text-xl font-bold text-indigo-900 mb-4">Ready to Adopt {animal.ANIMALNAME}?</h3>
-            <p class="text-indigo-800 mb-6">
-              Start your adoption application for {animal.ANIMALNAME}. Our team will review your application and guide you through the process.
+        <!-- Key Information Cards -->
+        <div class="mb-16">
+          <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Key Information</h2>
+          <div class="grid md:grid-cols-3 gap-6">
+            <!-- Compatibility Card -->
+            <div class="bg-white rounded-2xl shadow-md p-6">
+              <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                <span class="text-2xl mr-2">🤝</span>
+                Compatibility
+              </h3>
+              {compatibilityInfo.length > 0 ? (
+                <div class="space-y-3">
+                  {compatibilityInfo.map(item => (
+                    <div class="flex items-center justify-between bg-gray-50 rounded-lg p-3">
+                      <span class="text-gray-600">{item.label}</span>
+                      <span class="font-medium text-gray-900">{item.icon}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p class="text-sm text-gray-500 italic">Compatibility information not yet available</p>
+              )}
+            </div>
+
+            <!-- Health Card -->
+            <div class="bg-white rounded-2xl shadow-md p-6">
+              <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                <span class="text-2xl mr-2">🏥</span>
+                Health Status
+              </h3>
+              {(profile.medical.isNeutered || profile.medical.isMicrochipped ||
+                (profile.medical.vaccinationCount && profile.medical.vaccinationCount > 0) ||
+                profile.medical.hasSpecialNeeds || animal.HEARTWORMTESTED === 1 ||
+                (animal.COMBITESTED === 1 && animal.SPECIESNAME === 'Cat') ||
+                (animal.DECLAWED === 1 && animal.SPECIESNAME === 'Cat')) ? (
+                <div class="space-y-3">
+                  {profile.medical.isNeutered ? (
+                    <div class="flex items-center text-green-700 bg-green-50 rounded-lg p-3">
+                      <span class="text-green-600 mr-2">✅</span>
+                      <span class="font-medium text-gray-900">Desexed</span>
+                    </div>
+                  ) : null}
+                  {profile.medical.isMicrochipped ? (
+                    <div class="flex items-center text-green-700 bg-green-50 rounded-lg p-3">
+                      <span class="text-green-600 mr-2">✅</span>
+                      <span class="font-medium text-gray-900">Microchipped</span>
+                    </div>
+                  ) : null}
+                  {profile.medical.vaccinationCount && profile.medical.vaccinationCount > 0 ? (
+                    <div class="flex items-center text-green-700 bg-green-50 rounded-lg p-3">
+                      <span class="text-green-600 mr-2">💉</span>
+                      <span class="font-medium text-gray-900">{profile.medical.vaccinationCount}x Vaccinated</span>
+                    </div>
+                  ) : null}
+                  {profile.medical.hasSpecialNeeds ? (
+                    <div class="flex items-center text-orange-700 bg-orange-50 rounded-lg p-3">
+                      <span class="text-orange-600 mr-2">💖</span>
+                      <span class="font-medium text-gray-900">Special Needs</span>
+                    </div>
+                  ) : null}
+                  {animal.HEARTWORMTESTED === 1 ? (
+                    <div class="flex items-center text-green-700 bg-green-50 rounded-lg p-3">
+                      <span class="text-green-600 mr-2">🔬</span>
+                      <span class="font-medium text-gray-900">
+                        Heartworm {animal.HEARTWORMTESTRESULTNAME === 'Negative' ? 'Negative' :
+                                  animal.HEARTWORMTESTRESULTNAME === 'Positive' ? 'Positive' : 'Tested'}
+                      </span>
+                    </div>
+                  ) : null}
+                  {animal.COMBITESTED === 1 && animal.SPECIESNAME === 'Cat' ? (
+                    <div class="flex items-center text-green-700 bg-green-50 rounded-lg p-3">
+                      <span class="text-green-600 mr-2">🔬</span>
+                      <span class="font-medium text-gray-900">
+                        FIV/FeLV {animal.FLVRESULTNAME === 'Negative' ? 'Negative' :
+                                 animal.FLVRESULTNAME === 'Positive' ? 'Positive' : 'Tested'}
+                      </span>
+                    </div>
+                  ) : null}
+                  {animal.DECLAWED === 1 && animal.SPECIESNAME === 'Cat' ? (
+                    <div class="flex items-center text-blue-700 bg-blue-50 rounded-lg p-3">
+                      <span class="text-blue-600 mr-2">ℹ️</span>
+                      <span class="font-medium text-gray-900">Declawed</span>
+                    </div>
+                  ) : null}
+                </div>
+              ) : (
+                <p class="text-sm text-gray-500 italic">Health information being updated</p>
+              )}
+            </div>
+
+            <!-- Details Card -->
+            <div class="bg-white rounded-2xl shadow-md p-6">
+              <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                <span class="text-2xl mr-2">📋</span>
+                Details
+              </h3>
+              <div class="space-y-3">
+                <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                  <span class="text-gray-600 text-sm">Age</span>
+                  <span class="font-medium text-gray-900">{animal.AGEGROUP}</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                  <span class="text-gray-600 text-sm">Sex</span>
+                  <span class="font-medium text-gray-900">{animal.SEXNAME}</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                  <span class="text-gray-600 text-sm">Size</span>
+                  <span class="font-medium text-gray-900">{animal.SIZENAME}</span>
+                </div>
+                {profile.basicInfo.weight && (
+                  <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span class="text-gray-600 text-sm">Weight</span>
+                    <span class="font-medium text-gray-900">{profile.basicInfo.weight}kg</span>
+                  </div>
+                )}
+                <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                  <span class="text-gray-600 text-sm">Breed</span>
+                  <span class="font-medium text-gray-900 text-right">
+                    {animal.BREEDNAME}
+                    {animal.CROSSBREED === 1 && ' Mix'}
+                  </span>
+                </div>
+                {coatType && (
+                  <div class="flex justify-between items-center py-2">
+                    <span class="text-gray-600 text-sm">Coat</span>
+                    <span class="font-medium text-gray-900">{coatType}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Medical Notes -->
+        {profile.medical.healthNotes && (
+          <div class="mb-16 max-w-4xl mx-auto">
+            <div class="bg-blue-50 border-l-4 border-blue-500 rounded-xl p-6">
+              <h3 class="text-lg font-bold text-blue-900 mb-3 flex items-center">
+                <svg class="w-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                </svg>
+                Medical Notes
+              </h3>
+              <p class="text-blue-800 whitespace-pre-line">{profile.medical.healthNotes}</p>
+            </div>
+          </div>
+        )}
+
+        <!-- Physical Description -->
+        {animal.MARKINGS && (
+          <div class="mb-16 max-w-4xl mx-auto">
+            <div class={`bg-${accentColor}-50 rounded-2xl p-6`}>
+              <h3 class={`text-lg font-bold text-${accentColor}-900 mb-3 flex items-center`}>
+                <span class="text-2xl mr-2">🎨</span>
+                Physical Description
+              </h3>
+              <p class={`text-${accentColor}-800`}>{animal.MARKINGS}</p>
+            </div>
+          </div>
+        )}
+
+        <!-- Final CTA Section -->
+        <div class="mb-16">
+          <div class={`bg-gradient-to-br from-${accentColor}-50 to-pink-50 rounded-3xl p-12 text-center`}>
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">
+              Ready to Welcome {animal.ANIMALNAME} Home?
+            </h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+              {animal.ANIMALNAME} is waiting to meet their forever family. Start your adoption journey today and give this beautiful {animal.SPECIESNAME.toLowerCase()} the loving home they deserve.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
               {animal.HASACTIVERESERVE !== 1 ? (
-                <button 
-                  id="apply-adopt-btn"
-                  class={`inline-flex items-center justify-center px-6 py-3 bg-${speciesColor}-600 text-white rounded-xl hover:bg-${speciesColor}-700 font-semibold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1`}
+                <button
+                  id="apply-adopt-btn-bottom"
+                  class="inline-flex items-center justify-center px-8 py-4 bg-orange-600 text-white rounded-xl hover:bg-orange-700 font-semibold text-lg transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
-                  <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                  <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 420 404">
+                    <path d="m281.78 0c-0.88 0.011256-1.79 0.054519-2.69 0.125-35.82 6.1835-55.52 44.064-58.37 77.469-4.17 30.316 9.19 69.266 42.47 76.066 4.83 0.92 9.84 0.5 14.56-0.78 40.08-13.44 58.01-60.908 52.22-100.22-1.69-25.396-20.83-53.009-48.19-52.66zm-151.87 1.625c-22.28 0.5468-39.63 23.138-43.16 44.375-7.441 42.074 11.698 94.35 55.53 107.66 4.11 0.89 8.35 0.98 12.5 0.34 29.63-4.94 42.18-38.15 40.94-64.969-0.89-35.372-19.27-76.273-56-86.218-3.36-0.8909-6.63-1.2661-9.81-1.188zm248.93 119.5c-38.53 2.31-64.95 40.76-68.72 76.66-5.09 25.89 8.71 60.53 38.26 62.6 41.19-0.51 69.3-44.53 70.46-82.41 2.61-25.05-12.15-55.46-40-56.85zm-337.28 8.54c-16.394-0.14-32.517 9.68-37.874 26.34-14.293 44.58 14.408 101.04 61.624 110.41 19.706 3.37 37.018-11.76 41.908-29.97 10.35-38.95-10.915-84.17-46.908-101.85-5.863-3.29-12.334-4.88-18.75-4.93zm172.75 79.93c-32.14 0.07-64.78 16.38-85.59 40.66-22.48 28.3-40.892 61.23-48.095 96.94-8.751 25.7 11.083 55.29 38.565 55.47 33.06 0.91 61.47-21.79 94.34-23.47 27.89-4.25 52.86 10.25 77.94 19.75 21.35 9.13 50.85 5.63 61.75-17.35 8.57-23.41-4.05-48.39-14.5-69.18-21.32-33.76-44.17-69.24-79.13-90.32-14.01-8.68-29.58-12.53-45.28-12.5z" />
                   </svg>
                   Apply to Adopt {animal.ANIMALNAME}
                 </button>
               ) : (
-                <div class="inline-flex items-center px-6 py-3 bg-gray-400 text-white rounded-xl cursor-not-allowed opacity-75">
-                  <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="inline-flex items-center px-8 py-4 bg-gray-400 text-white rounded-xl cursor-not-allowed opacity-75">
+                  <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                   Currently Reserved
                 </div>
               )}
-              <div class="flex gap-2">
-                <a 
-                  href="/contact-us" 
-                  class="inline-flex items-center justify-center px-4 py-3 bg-white text-gray-700 border border-gray-300 rounded-xl hover:bg-gray-50 font-medium transition-colors"
-                >
-                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                  Ask Question
-                </a>
-                <a 
-                  href={`/adopt/${species}s`} 
-                  class="inline-flex items-center justify-center px-4 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 font-medium transition-colors"
-                >
-                  ← Back
-                </a>
-              </div>
+              <a
+                href={`/adopt/${species}s`}
+                class="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-700 border-2 border-gray-300 rounded-xl hover:bg-gray-50 font-medium text-lg transition-colors"
+              >
+                View More {species === 'dog' ? 'Dogs' : 'Cats'}
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </a>
             </div>
           </div>
         </div>
@@ -587,9 +589,12 @@ const compatibilityInfo = [
     )}
   </div>
 
+  <!-- CTA Section -->
+  <CTASection />
+
   <!-- Adoption Modal -->
   {animal && animal.HASACTIVERESERVE !== 1 && (
-    <AdoptionModal 
+    <AdoptionModal
       petId={animal.ID}
       petName={animal.ANIMALNAME}
       petBreed={animal.BREEDNAME}
@@ -599,4 +604,17 @@ const compatibilityInfo = [
       petSize={animal.SIZENAME}
     />
   )}
+
+  <!-- Script for modal triggers -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const buttons = document.querySelectorAll('#apply-adopt-btn, #apply-adopt-btn-bottom');
+      buttons.forEach(btn => {
+        btn?.addEventListener('click', () => {
+          const event = new CustomEvent('openAdoptionModal');
+          window.dispatchEvent(event);
+        });
+      });
+    });
+  </script>
 </Base>

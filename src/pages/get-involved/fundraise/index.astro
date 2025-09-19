@@ -1,10 +1,85 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import CTASection from "../../../components/CTASection.astro";
 const url = import.meta.env.PUBLIC_FUNDRAISE_URL;
 ---
-<Base title="Fundraise">
-  <h1 class="text-3xl font-semibold mb-4">Fundraise</h1>
-  {url
-    ? <p><a class="underline" href={url} target="_blank" rel="noopener">Open fundraising options ↗</a></p>
-    : <p class="text-gray-700">Fundraising link coming soon.</p>}
+
+<Base title="Fundraise | Homeless Hounds Animal Rescue">
+  <main>
+    <!-- Hero Section -->
+    <section class="relative isolate overflow-hidden bg-white min-h-[50vh] flex items-center">
+      <div class="absolute inset-0 -z-10">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-700 via-blue-700 to-indigo-600"></div>
+      </div>
+      <div class="absolute inset-0 bg-pattern-dots opacity-10"></div>
+
+      <div class="container-custom py-20 md:py-24 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <p class="text-white/80 text-sm uppercase tracking-widest font-semibold mb-4">Make a difference</p>
+          <h1 class="text-white mb-6 text-4xl md:text-6xl font-bold">
+            Fundraise for <span class="text-orange-400">Animals</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-white/90 mb-10 max-w-3xl mx-auto">
+            Organize your own fundraising event or campaign to help us save more animals in need.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            {url ? (
+              <a href={url} target="_blank" rel="noopener" class="btn btn-white">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+                Start Fundraising
+              </a>
+            ) : (
+              <div class="btn btn-white opacity-75 cursor-not-allowed">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Coming Soon
+              </div>
+            )}
+            <a href="/contact-us" class="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-indigo-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              Ask Questions
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <section class="bg-white rounded-lg shadow-md p-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Help Us Save More Animals</h2>
+        <div class="prose prose-lg max-w-none text-gray-700">
+          <p class="mb-4">
+            Every dollar raised helps us rescue, rehabilitate, and rehome animals in need.
+            By organizing your own fundraising event or campaign, you're directly contributing
+            to saving animal lives.
+          </p>
+          <p class="mb-6">
+            Whether it's a bake sale, fun run, online campaign, or creative event - every
+            fundraising effort makes a real difference to animals waiting for their forever homes.
+          </p>
+          {url ? (
+            <p>
+              <a class="text-indigo-700 hover:text-indigo-800 underline font-semibold" href={url} target="_blank" rel="noopener">
+                Click here to explore our fundraising options and get started ↗
+              </a>
+            </p>
+          ) : (
+            <p class="text-gray-600 italic">
+              Our fundraising platform is coming soon. In the meantime, please contact us
+              to discuss fundraising opportunities.
+            </p>
+          )}
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- CTA Section -->
+  <CTASection />
 </Base>

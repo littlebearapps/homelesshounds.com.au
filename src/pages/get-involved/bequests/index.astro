@@ -1,22 +1,40 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import CTASection from "../../../components/CTASection.astro";
 ---
 
 <Base title="Bequests | Homeless Hounds Animal Rescue">
   <main class="min-h-screen bg-gray-50">
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-indigo-700 to-indigo-800 text-white py-16">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl">
-          <h1 class="text-4xl md:text-5xl font-bold mb-4">Bequests</h1>
-          <h2 class="text-2xl md:text-3xl text-yellow-300 font-semibold mb-6">Leave a Lasting Legacy</h2>
-          <p class="text-lg md:text-xl mb-8">
-            Your bequest can help save countless animals for generations to come.
-            Create a lasting legacy that continues to make a difference.
+    <section class="relative isolate overflow-hidden bg-white min-h-[50vh] flex items-center">
+      <div class="absolute inset-0 -z-10">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-700 via-blue-600 to-indigo-800"></div>
+      </div>
+      <div class="absolute inset-0 bg-pattern-dots opacity-10"></div>
+
+      <div class="container-custom py-20 md:py-24 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <p class="text-white/80 text-sm uppercase tracking-widest font-semibold mb-4">Leave a lasting legacy</p>
+          <h1 class="text-white mb-6 text-4xl md:text-6xl font-bold">
+            Legacy <span class="text-orange-400">Bequests</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-white/90 mb-10 max-w-3xl mx-auto">
+            Your bequest can help save countless animals for generations to come. Create a lasting legacy that continues to make a difference.
           </p>
-          <p class="text-sm text-indigo-200 mb-8">
-            <em>Homeless Hounds is registered as a charity with the Australian Charities and Not-for-profits Commission – ABN 93 136 291 221</em>
-          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#information" class="btn btn-white">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+              Learn More
+            </a>
+            <a href="/contact-us" class="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-indigo-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-700">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              Get in Touch
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -202,4 +220,7 @@ import Base from "../../../layouts/Base.astro";
 
     </div>
   </main>
+
+  <!-- CTA Section -->
+  <CTASection />
 </Base>

@@ -277,20 +277,11 @@ export function createAnimalProfile(animal: ASMAnimal): AnimalProfile {
 
 // Helper function to get compatibility icon
 export function getCompatibilityIcon(level: CompatibilityLevel, type: 'cats' | 'dogs' | 'children' | 'small'): string {
-  const icons = {
-    cats: '🐱',
-    dogs: '🐕',
-    children: '👶',
-    small: '🐰'
-  };
-  
-  const baseIcon = icons[type];
-  
   switch (level) {
-    case 1: return `✅ ${baseIcon}`;  // Yes - green check
-    case 0: return `❌ ${baseIcon}`;  // No - red X
-    case 2: 
-    default: return `❓ ${baseIcon}`; // Unknown - question mark
+    case 1: return `✅ Yes`;  // Yes - green check
+    case 0: return `❌ No`;   // No - red X
+    case 2:
+    default: return `❓ Unknown`; // Unknown - question mark
   }
 }
 

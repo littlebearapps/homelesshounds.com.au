@@ -1,5 +1,6 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import CTASection from "../../../components/CTASection.astro";
 const account = import.meta.env.PUBLIC_ASM_ACCOUNT || 'st3418';
 const base = import.meta.env.PUBLIC_ASM_BASE || 'https://service.sheltermanager.com/asmservice';
 const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
@@ -11,19 +12,41 @@ const formid = url.searchParams.get('formid') || '37';
 ---
 
 <Base title="Surrendering a Pet | Homeless Hounds">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="text-center mb-10">
-      <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-red-100 to-orange-100 rounded-full mb-4">
-        <span class="text-3xl">🏠</span>
-      </div>
-      <h1 class="text-4xl font-bold text-gray-900 mb-4">Surrendering a Pet</h1>
-      <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-4">
-        Homeless Hounds may be able to help you rehome your pet dog or cat.
-      </p>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        We understand surrendering a pet is never easy, and will endeavour to make the process as easy as possible for you and your animal.
-      </p>
+  <!-- Hero Section -->
+  <section class="relative isolate overflow-hidden bg-white min-h-[50vh] flex items-center">
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute inset-0 bg-gradient-to-br from-indigo-700 via-blue-600 to-indigo-800"></div>
     </div>
+    <div class="absolute inset-0 bg-pattern-dots opacity-10"></div>
+
+    <div class="container-custom py-20 md:py-24 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-white/80 text-sm uppercase tracking-widest font-semibold mb-4">We're here to help</p>
+        <h1 class="text-white mb-6 text-4xl md:text-6xl font-bold">
+          Surrendering a <span class="text-orange-400">Pet</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-white/90 mb-10 max-w-3xl mx-auto">
+          Homeless Hounds may be able to help you rehome your pet dog or cat. We understand surrendering a pet is never easy, and will endeavour to make the process as easy as possible for you and your animal.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#surrender-form" class="btn btn-white">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            Complete Form
+          </a>
+          <a href="/contact-us" class="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-indigo-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-700">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Ask Questions
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="surrender-form">
 
     <!-- Important Information -->
     <div class="bg-amber-50 border-2 border-amber-200 rounded-xl p-6 mb-8">
@@ -396,4 +419,7 @@ const formid = url.searchParams.get('formid') || '37';
       </p>
     </div>
   </div>
+
+  <!-- CTA Section -->
+  <CTASection />
 </Base>

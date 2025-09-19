@@ -4,6 +4,7 @@ export const prerender = false;
 import Base from "../../../layouts/Base.astro";
 import AnimalCard from "../../../components/AnimalCard.astro";
 import AnimalFilters from "../../../components/AnimalFilters.astro";
+import CTASection from "../../../components/CTASection.astro";
 import type { AdoptableAnimalsResponse } from "../../../types/asm";
 
 // Fetch only dogs from our API
@@ -21,8 +22,14 @@ try {
   error = e instanceof Error ? e.message : 'Failed to fetch dogs';
 }
 
-const animals = animalsData?.animals || [];
-const total = animalsData?.total || 0;
+// Double-check filtering on client side to ensure only dogs are shown
+const allAnimals = animalsData?.animals || [];
+const animals = allAnimals.filter(animal =>
+  animal.SPECIESNAME?.toLowerCase() === 'dog' ||
+  animal.SPECIESID === 1 ||
+  animal.SPECIESID === '1'
+);
+const total = animals.length;
 
 // Get current filters from URL (excluding species since we're filtering for dogs only)
 const url = new URL(Astro.request.url);
@@ -36,34 +43,63 @@ const currentFilters = {
 ---
 
 <Base title="Dogs for Adoption">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Header -->
-    <div class="text-center mb-12">
-      <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-100 to-sky-100 rounded-full mb-6">
-        <span class="text-4xl">🐕</span>
-      </div>
-      <h1 class="text-5xl font-bold text-gray-900 mb-6">
-        Dogs Looking for 
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-sky-600">
-          Forever Homes
-        </span>
-      </h1>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-        Our wonderful dogs are waiting to meet you! Each one has their own unique personality 
-        and is ready to become your loyal companion.
-      </p>
+  <!-- Hero Section -->
+  <section class="relative isolate overflow-hidden bg-white min-h-[50vh] flex items-center">
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute inset-0 bg-gradient-to-br from-orange-500 to-orange-700"></div>
     </div>
+    <div class="absolute inset-0 bg-pattern-dots opacity-10"></div>
+
+    <div class="container-custom py-20 md:py-24 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-white/80 text-sm uppercase tracking-widest font-semibold mb-4">Man's best friend awaits</p>
+        <h1 class="text-white mb-6 text-4xl md:text-6xl font-bold">
+          Adopt a <span class="text-white">Dog</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-white/90 mb-10 max-w-3xl mx-auto">
+          Our wonderful dogs are waiting to meet you! Each one has their own unique personality and is ready to become your loyal companion.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#dogs" class="btn btn-white">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            View All Dogs
+          </a>
+          <a href="/adopt/cats" class="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-orange-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-600">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7501 6.40636C10.2698 6.40636 10.1222 6.5625 9.3561 6.5625C8.71769 6.5625 6.80245 5 5.84485 5C4.88724 5 3.77004 5.5625 3.77004 7.1875V9.0625C3.77197 9.55469 3.95081 11.0634 4.65075 10.6602C3.82323 11.6382 3.73963 12.7786 3.751 13.8826C3.52812 13.947 3.30072 14.0196 3.08003 14.095C2.39614 14.3289 1.67085 14.6271 1.3432 14.8387C0.995241 15.0634 0.895339 15.5277 1.12006 15.8756C1.34478 16.2236 1.80903 16.3235 2.15698 16.0988C2.3132 15.9979 2.87823 15.7493 3.56532 15.5144C3.64124 15.4884 3.71731 15.4631 3.79298 15.4386C3.83925 15.8724 3.95408 16.2684 4.12478 16.6292L4.1012 16.6416C3.69148 16.8581 3.3113 17.1067 3.06889 17.2652C3.02694 17.2926 2.98912 17.3173 2.95599 17.3387C2.60803 17.5634 2.50813 18.0277 2.73285 18.3756C2.95757 18.7236 3.42182 18.8235 3.76978 18.5988C3.8109 18.5722 3.85472 18.5436 3.90097 18.5134C4.1463 18.3533 4.45999 18.1485 4.80199 17.9678C4.88218 17.9254 4.95935 17.887 5.03317 17.8524C6.76347 19.4748 9.86991 20 11.7501 20C13.6302 20 16.7367 19.4748 18.467 17.8524C18.5408 17.887 18.6179 17.9254 18.6981 17.9678C19.0401 18.1485 19.3538 18.3533 19.5991 18.5134C19.6454 18.5436 19.6892 18.5722 19.7303 18.5988C20.0783 18.8235 20.5425 18.7236 20.7673 18.3756C20.992 18.0277 20.8921 17.5634 20.5441 17.3387C20.511 17.3173 20.4732 17.2926 20.4312 17.2652C20.1888 17.1067 19.8086 16.8581 19.3989 16.6416L19.3754 16.6292C19.5461 16.2683 19.6609 15.8724 19.7072 15.4385C19.783 15.463 19.8592 15.4883 19.9352 15.5144C20.6223 15.7493 21.1874 15.9979 21.3436 16.0988C21.6915 16.3235 22.1558 16.2236 22.3805 15.8756C22.6052 15.5277 22.5053 15.0634 22.1574 14.8387C21.8297 14.6271 21.1044 14.3289 20.4205 14.095C20.1997 14.0195 19.9722 13.947 19.7492 13.8825C19.7605 12.7785 19.6769 11.6382 18.8494 10.6602C19.5494 11.0634 19.7282 9.55469 19.7302 9.0625V7.18761C19.7302 5.56261 18.6129 5.00011 17.6553 5.00011C16.6977 5.00011 14.7825 6.5625 14.1441 6.5625C13.378 6.5625 13.2305 6.40636 11.7501 6.40636ZM11.0745 15.6004C11.2771 15.5314 11.5162 15.5 11.7501 15.5C11.984 15.5 12.2231 15.5314 12.4257 15.6004C12.5251 15.6342 12.6467 15.6876 12.7537 15.7738C12.8612 15.8603 13.0001 16.0206 13.0001 16.25C13.0001 16.4794 12.8612 16.6397 12.7537 16.7262C12.6467 16.8124 12.5251 16.8658 12.4257 16.8996C12.2231 16.9686 11.984 17 11.7501 17C11.5162 17 11.2771 16.9686 11.0745 16.8996C10.9751 16.8658 10.8535 16.8124 10.7464 16.7262C10.6389 16.6397 10.5001 16.4794 10.5001 16.25C10.5001 16.0206 10.6389 15.8603 10.7464 15.7738C10.8535 15.6876 10.9751 15.6342 11.0745 15.6004ZM13.9201 12.5005C14.0566 12.2721 14.326 12 14.7301 12C15.1342 12 15.4036 12.2721 15.54 12.5005C15.6823 12.7387 15.7501 13.0274 15.7501 13.3125C15.7501 13.5976 15.6823 13.8863 15.54 14.1245C15.4036 14.3529 15.1342 14.625 14.7301 14.625C14.326 14.625 14.0566 14.3529 13.9201 14.1245C13.7778 13.8863 13.7101 13.5976 13.7101 13.3125C13.7101 13.0274 13.7778 12.7387 13.9201 12.5005ZM7.96016 12.5005C8.09658 12.2721 8.36599 12 8.7701 12C9.17421 12 9.44362 12.2721 9.58004 12.5005C9.72234 12.7387 9.79011 13.0274 9.79011 13.3125C9.79011 13.5976 9.72234 13.8863 9.58004 14.1245C9.44362 14.3529 9.17421 14.625 8.7701 14.625C8.36599 14.625 8.09658 14.3529 7.96016 14.1245C7.81786 13.8863 7.75009 13.5976 7.75009 13.3125C7.75009 13.0274 7.81786 12.7387 7.96016 12.5005Z" />
+            </svg>
+            View Cats Instead
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="dogs">
 
     <!-- Navigation -->
     <div class="flex justify-center gap-4 mb-8">
-      <a href="/adopt" class="inline-flex items-center px-6 py-3 bg-indigo-50 text-indigo-800 rounded-xl hover:bg-indigo-200 transition-colors text-base font-semibold">
-        🏠 All Animals
+      <a href="/adopt" class="inline-flex items-center px-6 py-3 bg-orange-50 text-orange-700 rounded-xl hover:bg-orange-100 transition-colors text-base font-semibold gap-2">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 420 404">
+          <path d="m281.78 0c-0.88 0.011256-1.79 0.054519-2.69 0.125-35.82 6.1835-55.52 44.064-58.37 77.469-4.17 30.316 9.19 69.266 42.47 76.066 4.83 0.92 9.84 0.5 14.56-0.78 40.08-13.44 58.01-60.908 52.22-100.22-1.69-25.396-20.83-53.009-48.19-52.66zm-151.87 1.625c-22.28 0.5468-39.63 23.138-43.16 44.375-7.441 42.074 11.698 94.35 55.53 107.66 4.11 0.89 8.35 0.98 12.5 0.34 29.63-4.94 42.18-38.15 40.94-64.969-0.89-35.372-19.27-76.273-56-86.218-3.36-0.8909-6.63-1.2661-9.81-1.188zm248.93 119.5c-38.53 2.31-64.95 40.76-68.72 76.66-5.09 25.89 8.71 60.53 38.26 62.6 41.19-0.51 69.3-44.53 70.46-82.41 2.61-25.05-12.15-55.46-40-56.85zm-337.28 8.54c-16.394-0.14-32.517 9.68-37.874 26.34-14.293 44.58 14.408 101.04 61.624 110.41 19.706 3.37 37.018-11.76 41.908-29.97 10.35-38.95-10.915-84.17-46.908-101.85-5.863-3.29-12.334-4.88-18.75-4.93zm172.75 79.93c-32.14 0.07-64.78 16.38-85.59 40.66-22.48 28.3-40.892 61.23-48.095 96.94-8.751 25.7 11.083 55.29 38.565 55.47 33.06 0.91 61.47-21.79 94.34-23.47 27.89-4.25 52.86 10.25 77.94 19.75 21.35 9.13 50.85 5.63 61.75-17.35 8.57-23.41-4.05-48.39-14.5-69.18-21.32-33.76-44.17-69.24-79.13-90.32-14.01-8.68-29.58-12.53-45.28-12.5z" />
+        </svg>
+        All Animals
       </a>
-      <a href="/adopt/dogs" class="inline-flex items-center px-6 py-3 bg-blue-100 text-blue-700 rounded-xl hover:bg-blue-200 transition-colors text-base font-semibold shadow-sm">
-        🐕 Dogs
+      <a href="/adopt/dogs" class="inline-flex items-center px-6 py-3 bg-orange-100 text-orange-700 rounded-xl hover:bg-orange-200 transition-colors text-base font-semibold shadow-sm gap-2">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 128 128">
+          <path d="M35.9,13c-3.5-3.5-9.3-4.4-12.7-1.2L4.5,30.5c-2.9,2.9-1.6,7.7,2.3,8.7L10,40c8.1,2.1,16.3-2.7,18.5-10.7 l2-7.7c0.3-1.1,1.4-1.7,2.4-1.4c1.1,0.3,1.7,1.4,1.4,2.4L32.6,29c3.4-1.9,7.3-3,11.5-3h4.7L35.9,13z"/>
+          <path d="M92.1,13c3.5-3.5,9.3-4.4,12.7-1.2l18.6,18.7c2.9,2.9,1.6,7.7-2.3,8.7l-3.2,0.8c-8.1,2.1-16.3-2.7-18.5-10.7 l-2-7.7c-0.3-1.1-1.4-1.7-2.4-1.4s-1.7,1.4-1.4,2.4l1.7,6.4c-3.4-1.9-7.3-3-11.5-3h-4.7L92.1,13z"/>
+          <path d="M103.6,59.9V49.8c0-10.8-8.9-19.7-19.7-19.7H44.3c-10.8,0-19.7,8.9-19.7,19.7v10.1c-3.1,4.1-5,9.3-5,15v14.9 c0,12.3,8.9,22.6,20.7,24.7c0.1,0,0.1,0,0.2,0c0.3,0.1,0.6,0.1,1,0.1c0.6,0.1,1.2,0.1,1.8,0.2c0.2,0,0.4,0,0.5,0c0.2,0,0.3,0,0.5,0 h0.5h7.5c3.2,2.7,7.2,4.2,11.7,4.2s8.5-1.6,11.7-4.2h7.6h0.5c0.2,0,0.3,0,0.5,0s0.4,0,0.5,0c0.6,0,1.2-0.1,1.8-0.2 c0.3,0,0.6-0.1,1-0.1c0.1,0,0.1,0,0.2,0c11.7-2.1,20.7-12.4,20.7-24.7V74.9C108.5,69.3,106.7,64.1,103.6,59.9z M82.5,47.7 c3.6,0,6.6,3,6.6,6.6s-3,6.6-6.6,6.6s-6.6-3-6.6-6.6C76,50.6,78.9,47.7,82.5,47.7z M45.5,47.7c3.6,0,6.6,3,6.6,6.6s-3,6.6-6.6,6.6 s-6.6-3-6.6-6.6C39,50.6,41.9,47.7,45.5,47.7z M64,114.9c-7.4,0-13.6-5.8-14-13.3c4.6,0,8.9-1.6,12.3-4.5v10.6c0,1,0.7,1.8,1.8,1.8 s1.8-0.7,1.8-1.8V97.1c3.4,2.8,7.7,4.5,12.3,4.5C77.6,109,71.4,114.9,64,114.9z M97.7,81.2c0,9.8-8,17.8-17.8,17.8 c-6.9,0-12.8-3.9-15.8-9.7c-3,5.7-8.9,9.7-15.8,9.7c-9.8,0-17.8-8-17.8-17.8v-5.8c0-1.1,0.8-2,2-2s2,0.8,2,2v5.8 c0,7.6,6.2,13.8,13.8,13.8c7,0,12.7-5.2,13.7-12c-0.1-0.1-0.1-0.1-0.2-0.2l-8-12.1c-1.1-1.6,0.2-3.5,2.3-3.5h16c2,0,3.3,1.9,2.3,3.5 l-8,12.1c0,0.1-0.1,0.1-0.2,0.2c1,6.8,6.7,12,13.7,12c7.6,0,13.8-6.2,13.8-13.8v-5.8c0-1.1,0.8-2,2-2s2,0.8,2,2V81.2L97.7,81.2z"/>
+        </svg>
+        Dogs
       </a>
-      <a href="/adopt/cats" class="inline-flex items-center px-6 py-3 bg-amber-50 text-amber-700 rounded-xl hover:bg-amber-100 transition-colors text-base font-semibold">
-        🐱 Cats
+      <a href="/adopt/cats" class="inline-flex items-center px-6 py-3 bg-orange-50 text-orange-700 rounded-xl hover:bg-orange-100 transition-colors text-base font-semibold gap-2">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7501 6.40636C10.2698 6.40636 10.1222 6.5625 9.3561 6.5625C8.71769 6.5625 6.80245 5 5.84485 5C4.88724 5 3.77004 5.5625 3.77004 7.1875V9.0625C3.77197 9.55469 3.95081 11.0634 4.65075 10.6602C3.82323 11.6382 3.73963 12.7786 3.751 13.8826C3.52812 13.947 3.30072 14.0196 3.08003 14.095C2.39614 14.3289 1.67085 14.6271 1.3432 14.8387C0.995241 15.0634 0.895339 15.5277 1.12006 15.8756C1.34478 16.2236 1.80903 16.3235 2.15698 16.0988C2.3132 15.9979 2.87823 15.7493 3.56532 15.5144C3.64124 15.4884 3.71731 15.4631 3.79298 15.4386C3.83925 15.8724 3.95408 16.2684 4.12478 16.6292L4.1012 16.6416C3.69148 16.8581 3.3113 17.1067 3.06889 17.2652C3.02694 17.2926 2.98912 17.3173 2.95599 17.3387C2.60803 17.5634 2.50813 18.0277 2.73285 18.3756C2.95757 18.7236 3.42182 18.8235 3.76978 18.5988C3.8109 18.5722 3.85472 18.5436 3.90097 18.5134C4.1463 18.3533 4.45999 18.1485 4.80199 17.9678C4.88218 17.9254 4.95935 17.887 5.03317 17.8524C6.76347 19.4748 9.86991 20 11.7501 20C13.6302 20 16.7367 19.4748 18.467 17.8524C18.5408 17.887 18.6179 17.9254 18.6981 17.9678C19.0401 18.1485 19.3538 18.3533 19.5991 18.5134C19.6454 18.5436 19.6892 18.5722 19.7303 18.5988C20.0783 18.8235 20.5425 18.7236 20.7673 18.3756C20.992 18.0277 20.8921 17.5634 20.5441 17.3387C20.511 17.3173 20.4732 17.2926 20.4312 17.2652C20.1888 17.1067 19.8086 16.8581 19.3989 16.6416L19.3754 16.6292C19.5461 16.2683 19.6609 15.8724 19.7072 15.4385C19.783 15.463 19.8592 15.4883 19.9352 15.5144C20.6223 15.7493 21.1874 15.9979 21.3436 16.0988C21.6915 16.3235 22.1558 16.2236 22.3805 15.8756C22.6052 15.5277 22.5053 15.0634 22.1574 14.8387C21.8297 14.6271 21.1044 14.3289 20.4205 14.095C20.1997 14.0195 19.9722 13.947 19.7492 13.8825C19.7605 12.7785 19.6769 11.6382 18.8494 10.6602C19.5494 11.0634 19.7282 9.55469 19.7302 9.0625V7.18761C19.7302 5.56261 18.6129 5.00011 17.6553 5.00011C16.6977 5.00011 14.7825 6.5625 14.1441 6.5625C13.378 6.5625 13.2305 6.40636 11.7501 6.40636ZM11.0745 15.6004C11.2771 15.5314 11.5162 15.5 11.7501 15.5C11.984 15.5 12.2231 15.5314 12.4257 15.6004C12.5251 15.6342 12.6467 15.6876 12.7537 15.7738C12.8612 15.8603 13.0001 16.0206 13.0001 16.25C13.0001 16.4794 12.8612 16.6397 12.7537 16.7262C12.6467 16.8124 12.5251 16.8658 12.4257 16.8996C12.2231 16.9686 11.984 17 11.7501 17C11.5162 17 11.2771 16.9686 11.0745 16.8996C10.9751 16.8658 10.8535 16.8124 10.7464 16.7262C10.6389 16.6397 10.5001 16.4794 10.5001 16.25C10.5001 16.0206 10.6389 15.8603 10.7464 15.7738C10.8535 15.6876 10.9751 15.6342 11.0745 15.6004ZM13.9201 12.5005C14.0566 12.2721 14.326 12 14.7301 12C15.1342 12 15.4036 12.2721 15.54 12.5005C15.6823 12.7387 15.7501 13.0274 15.7501 13.3125C15.7501 13.5976 15.6823 13.8863 15.54 14.1245C15.4036 14.3529 15.1342 14.625 14.7301 14.625C14.326 14.625 14.0566 14.3529 13.9201 14.1245C13.7778 13.8863 13.7101 13.5976 13.7101 13.3125C13.7101 13.0274 13.7778 12.7387 13.9201 12.5005ZM7.96016 12.5005C8.09658 12.2721 8.36599 12 8.7701 12C9.17421 12 9.44362 12.2721 9.58004 12.5005C9.72234 12.7387 9.79011 13.0274 9.79011 13.3125C9.79011 13.5976 9.72234 13.8863 9.58004 14.1245C9.44362 14.3529 9.17421 14.625 8.7701 14.625C8.36599 14.625 8.09658 14.3529 7.96016 14.1245C7.81786 13.8863 7.75009 13.5976 7.75009 13.3125C7.75009 13.0274 7.81786 12.7387 7.96016 12.5005Z" />
+        </svg>
+        Cats
       </a>
     </div>
 
@@ -122,29 +158,29 @@ const currentFilters = {
     )}
 
     <!-- Dog Information Section -->
-    <div class="mt-16 bg-gradient-to-br from-blue-50 to-sky-50 rounded-xl p-8 border border-blue-100">
-      <h2 class="text-2xl font-bold text-blue-900 mb-6 text-center">About Our Dogs</h2>
+    <div class="mt-16 bg-white rounded-xl p-8 shadow-md border border-gray-100">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">About Our Dogs</h2>
       <div class="grid md:grid-cols-3 gap-6">
         <div class="text-center">
-          <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-3">
+          <div class="inline-flex items-center justify-center w-12 h-12 bg-orange-100 rounded-full mb-3">
             <span class="text-xl">🏥</span>
           </div>
-          <h3 class="font-semibold text-blue-900 mb-2">Health Checked</h3>
-          <p class="text-sm text-blue-700">All dogs are vet checked, vaccinated, and treated for parasites</p>
+          <h3 class="font-semibold text-gray-900 mb-2">Health Checked</h3>
+          <p class="text-sm text-gray-700">All dogs are vet checked, vaccinated, and treated for parasites</p>
         </div>
         <div class="text-center">
-          <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-3">
+          <div class="inline-flex items-center justify-center w-12 h-12 bg-orange-100 rounded-full mb-3">
             <span class="text-xl">🏡</span>
           </div>
-          <h3 class="font-semibold text-blue-900 mb-2">Foster Homes</h3>
-          <p class="text-sm text-blue-700">Living in loving foster homes where their personalities shine</p>
+          <h3 class="font-semibold text-gray-900 mb-2">Foster Homes</h3>
+          <p class="text-sm text-gray-700">Living in loving foster homes where their personalities shine</p>
         </div>
         <div class="text-center">
-          <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-3">
+          <div class="inline-flex items-center justify-center w-12 h-12 bg-orange-100 rounded-full mb-3">
             <span class="text-xl">💖</span>
           </div>
-          <h3 class="font-semibold text-blue-900 mb-2">Support Included</h3>
-          <p class="text-sm text-blue-700">Lifetime support and advice from our experienced team</p>
+          <h3 class="font-semibold text-gray-900 mb-2">Support Included</h3>
+          <p class="text-sm text-gray-700">Lifetime support and advice from our experienced team</p>
         </div>
       </div>
     </div>
@@ -229,4 +265,6 @@ const currentFilters = {
     .asm3-adoptable-item:nth-child(5) { animation-delay: 0.5s; }
     .asm3-adoptable-item:nth-child(6) { animation-delay: 0.6s; }
   </style>
+  <!-- CTA Section -->
+  <CTASection />
 </Base>

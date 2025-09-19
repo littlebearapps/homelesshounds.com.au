@@ -5,25 +5,35 @@ import Base from "../layouts/Base.astro";
 <Base title="About Us | Homeless Hounds Animal Rescue">
   <main>
     <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-indigo-800 via-indigo-700 to-teal-600 text-white">
+    <section class="relative isolate overflow-hidden bg-white min-h-[50vh] flex items-center">
+      <div class="absolute inset-0 -z-10">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-800 via-indigo-600 to-blue-700"></div>
+      </div>
       <div class="absolute inset-0 bg-pattern-dots opacity-10"></div>
-      <div class="relative container-custom py-20 md:py-28">
-        <div class="max-w-3xl">
-          <h1 class="mb-4">Homeless Hounds</h1>
-          <h2 class="text-2xl md:text-3xl text-yellow-300 font-semibold mb-6">Animal Rescue</h2>
-          <p class="text-lg md:text-xl mb-8 leading-relaxed text-indigo-100">
-            Founded in 2011, Homeless Hounds is an Australia-wide network of volunteer foster-carers
-            working to rescue, rehabilitate and rehome animals into loving forever homes.
+
+      <div class="container-custom py-20 md:py-24 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <p class="text-white/80 text-sm uppercase tracking-widest font-semibold mb-4">Founded in 2011</p>
+          <h1 class="text-white mb-6 text-4xl md:text-6xl font-bold">
+            Homeless Hounds <span class="text-orange-400">Animal Rescue</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-white/90 mb-10 max-w-3xl mx-auto">
+            An Australia-wide network of volunteer foster-carers working to rescue, rehabilitate and rehome animals into loving forever homes.
           </p>
-          <p class="text-sm text-indigo-200 mb-8 italic">
-            Homeless Hounds is registered as a charity with the Australian Charities and Not-for-profits Commission – ABN 93 136 291 221
-          </p>
-          <a href="/get-involved/volunteer" class="btn btn-accent inline-flex items-center gap-2">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Join the team
-          </a>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/get-involved/volunteer" class="btn btn-white">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+              Join the Team
+            </a>
+            <a href="/adopt" class="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-indigo-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-700">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 420 404">
+                <path d="m281.78 0c-0.88 0.011256-1.79 0.054519-2.69 0.125-35.82 6.1835-55.52 44.064-58.37 77.469-4.17 30.316 9.19 69.266 42.47 76.066 4.83 0.92 9.84 0.5 14.56-0.78 40.08-13.44 58.01-60.908 52.22-100.22-1.69-25.396-20.83-53.009-48.19-52.66zm-151.87 1.625c-22.28 0.5468-39.63 23.138-43.16 44.375-7.441 42.074 11.698 94.35 55.53 107.66 4.11 0.89 8.35 0.98 12.5 0.34 29.63-4.94 42.18-38.15 40.94-64.969-0.89-35.372-19.27-76.273-56-86.218-3.36-0.8909-6.63-1.2661-9.81-1.188zm248.93 119.5c-38.53 2.31-64.95 40.76-68.72 76.66-5.09 25.89 8.71 60.53 38.26 62.6 41.19-0.51 69.3-44.53 70.46-82.41 2.61-25.05-12.15-55.46-40-56.85zm-337.28 8.54c-16.394-0.14-32.517 9.68-37.874 26.34-14.293 44.58 14.408 101.04 61.624 110.41 19.706 3.37 37.018-11.76 41.908-29.97 10.35-38.95-10.915-84.17-46.908-101.85-5.863-3.29-12.334-4.88-18.75-4.93zm172.75 79.93c-32.14 0.07-64.78 16.38-85.59 40.66-22.48 28.3-40.892 61.23-48.095 96.94-8.751 25.7 11.083 55.29 38.565 55.47 33.06 0.91 61.47-21.79 94.34-23.47 27.89-4.25 52.86 10.25 77.94 19.75 21.35 9.13 50.85 5.63 61.75-17.35 8.57-23.41-4.05-48.39-14.5-69.18-21.32-33.76-44.17-69.24-79.13-90.32-14.01-8.68-29.58-12.53-45.28-12.5z" />
+              </svg>
+              View Adoptable Pets
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -285,20 +295,40 @@ import Base from "../layouts/Base.astro";
     </section>
 
     <!-- Call to Action -->
-    <section class="section bg-gradient-to-br from-indigo-700 via-indigo-800 to-teal-600 text-white">
-      <div class="container-custom text-center">
-        <h3 class="text-white mb-6">Ready to Make a Difference?</h3>
-        <p class="text-lg mb-8 text-indigo-200">Join our community of volunteers and help save more animals in need.</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/get-involved/volunteer" class="btn btn-accent">
-            Volunteer with Us
-          </a>
-          <a href="/adopt" class="btn btn-white">
-            Adopt a Pet
-          </a>
-          <a href="/donate" class="btn bg-indigo-800 text-white hover:bg-indigo-900">
-            Donate Now
-          </a>
+    <section class="relative bg-gradient-to-tr from-blue-700 via-sky-600 to-teal-600">
+      <div class="absolute inset-0 bg-pattern-dots opacity-5"></div>
+      <div class="container-custom section relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-white mb-6">
+            Your help gives homeless pets a second chance
+          </h2>
+          <p class="text-xl text-white/90 mb-10">
+            Whether you adopt, foster, volunteer, or donate, every action helps us save more lives.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="https://donate.homelesshounds.com.au" target="_blank" class="btn btn-accent">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd" />
+              </svg>
+              Donate Now
+            </a>
+            <a href="/get-involved/foster-care" class="btn bg-gradient-to-br from-teal-500 to-teal-700 text-white hover:from-teal-600 hover:to-teal-800 shadow-lg hover:shadow-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+              </svg>
+              Become a Foster Carer
+            </a>
+            <a href="/get-involved/volunteer" class="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-indigo-800 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+              </svg>
+              Volunteer
+            </a>
+          </div>
+          <p class="text-sm text-white/80 mt-6">
+            Donations over $2 are tax-deductible
+          </p>
         </div>
       </div>
     </section>

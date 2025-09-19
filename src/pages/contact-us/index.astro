@@ -7,19 +7,35 @@ export const prerender = false;
 <Base title="Contact Us | Homeless Hounds Animal Rescue">
   <main>
     <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-indigo-800 via-indigo-700 to-teal-600 text-white">
+    <section class="relative isolate overflow-hidden bg-white min-h-[50vh] flex items-center">
+      <div class="absolute inset-0 -z-10">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-800 via-indigo-700 to-blue-600"></div>
+      </div>
       <div class="absolute inset-0 bg-pattern-dots opacity-10"></div>
-      <div class="relative container-custom py-20 md:py-28">
-        <div class="max-w-3xl">
-          <h1 class="mb-4">Contact Us</h1>
-          <h2 class="text-2xl md:text-3xl text-yellow-300 font-semibold mb-6">Before you Contact Us</h2>
-          <p class="text-lg md:text-xl mb-8 leading-relaxed text-indigo-100">
-            We want to help you as quickly as possible. Please check our FAQs below
-            or use our contact form for specific enquiries.
+
+      <div class="container-custom py-20 md:py-24 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <p class="text-white/80 text-sm uppercase tracking-widest font-semibold mb-4">We're here to help</p>
+          <h1 class="text-white mb-6 text-4xl md:text-6xl font-bold">
+            Contact <span class="text-orange-400">Us</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-white/90 mb-10 max-w-3xl mx-auto">
+            We want to help you as quickly as possible. Please check our FAQs below or use our contact form for specific enquiries.
           </p>
-          <p class="text-sm text-indigo-200 mb-8 italic">
-            Homeless Hounds is registered as a charity with the Australian Charities and Not-for-profits Commission – ABN 93 136 291 221
-          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#contact-form" class="btn btn-white">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              Send Message
+            </a>
+            <a href="#faq" class="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-700">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              View FAQs
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -43,7 +59,7 @@ export const prerender = false;
             </button>
             <div id="faq-1" class="faq-content hidden px-5 pb-5">
               <p class="text-gray-700">
-                Visit our <a href="/adopt" class="text-indigo-700 underline hover:text-indigo-800">Adopt page</a>
+                Visit our <a href="/adopt" class="text-orange-600 underline hover:text-orange-700">Adopt page</a>
                 to browse our available animals. When you find a pet you're interested in, you can submit an
                 adoption application directly from their profile page. We'll be in touch within 48 hours
                 to discuss your application.
@@ -496,22 +512,40 @@ export const prerender = false;
     </section>
 
     <!-- Call to Action -->
-    <section class="section bg-gradient-to-br from-indigo-700 via-indigo-800 to-teal-600 text-white">
-      <div class="container-custom text-center">
-        <h3 class="text-white mb-6">Ready to Help Save Lives?</h3>
-        <p class="text-lg mb-8 text-indigo-200">
-          Whether you want to adopt, foster, volunteer, or donate, every action helps us save more animals.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/adopt" class="btn btn-accent">
-            Adopt a Pet
-          </a>
-          <a href="/get-involved/foster-care" class="btn btn-white">
-            Foster Care
-          </a>
-          <a href="/donate" class="btn bg-indigo-800 text-white hover:bg-indigo-900">
-            Donate Now
-          </a>
+    <section class="relative bg-gradient-to-tr from-blue-700 via-sky-600 to-teal-600">
+      <div class="absolute inset-0 bg-pattern-dots opacity-5"></div>
+      <div class="container-custom section relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-white mb-6">
+            Your help gives homeless pets a second chance
+          </h2>
+          <p class="text-xl text-white/90 mb-10">
+            Whether you adopt, foster, volunteer, or donate, every action helps us save more lives.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="https://donate.homelesshounds.com.au" target="_blank" class="btn btn-accent">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd" />
+              </svg>
+              Donate Now
+            </a>
+            <a href="/get-involved/foster-care" class="btn bg-gradient-to-br from-teal-500 to-teal-700 text-white hover:from-teal-600 hover:to-teal-800 shadow-lg hover:shadow-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+              </svg>
+              Become a Foster Carer
+            </a>
+            <a href="/get-involved/volunteer" class="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-indigo-800 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+              </svg>
+              Volunteer
+            </a>
+          </div>
+          <p class="text-sm text-white/80 mt-6">
+            Donations over $2 are tax-deductible
+          </p>
         </div>
       </div>
     </section>

@@ -6,22 +6,33 @@ import Base from "../../../layouts/Base.astro";
   <!-- Hero Section - Full Width -->
   <section class="relative isolate overflow-hidden bg-white min-h-[50vh] flex items-center">
     <div class="absolute inset-0 -z-10">
-      <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/90 via-indigo-800/80 to-teal-600/70"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-emerald-500 to-emerald-700"></div>
     </div>
     <div class="absolute inset-0 bg-pattern-dots opacity-10"></div>
 
-    <div class="container-custom py-20 relative z-10">
-      <div class="max-w-3xl">
-        <p class="text-indigo-300 text-sm uppercase tracking-widest font-semibold mb-4">Make a difference today</p>
-        <h1 class="text-white mb-6">
-          Become a <span class="text-gradient">Volunteer</span>
+    <div class="container-custom py-20 md:py-24 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-white/80 text-sm uppercase tracking-widest font-semibold mb-4">Make a difference today</p>
+        <h1 class="text-white mb-6 text-4xl md:text-6xl font-bold">
+          Become a <span class="text-orange-400">Volunteer</span>
         </h1>
-        <p class="text-xl md:text-2xl text-white/90 mb-8">
+        <p class="text-xl md:text-2xl text-white/90 mb-10 max-w-3xl mx-auto">
           Join our network of dedicated volunteers and help change the lives of hundreds of animals that come into our care each year.
         </p>
-        <p class="text-lg text-indigo-300">
-          <em>We couldn't do it without our amazing volunteers!</em>
-        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#opportunities" class="btn btn-white">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+            View Opportunities
+          </a>
+          <a href="/contact-us" class="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-emerald-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-emerald-600">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Ask Questions
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -383,39 +394,40 @@ import Base from "../../../layouts/Base.astro";
   </section>
 
   <!-- Call to Action - Full Width -->
-  <section class="relative bg-gradient-to-br from-indigo-900 via-indigo-800 to-teal-700">
+  <section class="relative bg-gradient-to-tr from-blue-700 via-sky-600 to-teal-600">
     <div class="absolute inset-0 bg-pattern-dots opacity-5"></div>
     <div class="container-custom section relative z-10">
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-white mb-6">Ready to Start Volunteering?</h2>
-        <p class="text-xl mb-10 text-white/90">
+        <h2 class="text-white mb-6">
+          Your help gives homeless pets a second chance
+        </h2>
+        <p class="text-xl text-white/90 mb-10">
           Join our amazing team of volunteers and help us rescue, rehabilitate, and rehome animals in need.
         </p>
-
-        <!-- Specific Roles -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-          <a href="/get-involved/foster-care" class="btn btn-white">
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="https://donate.homelesshounds.com.au" target="_blank" class="btn btn-accent">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+              <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+              <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd" />
+            </svg>
+            Donate Now
+          </a>
+          <a href="/get-involved/foster-care" class="btn bg-gradient-to-br from-teal-500 to-teal-700 text-white hover:from-teal-600 hover:to-teal-800 shadow-lg hover:shadow-xl">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
             </svg>
             Become a Foster Carer
           </a>
-          <a href="/get-involved/pet-couriers" class="btn btn-secondary">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-              <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z" />
+          <a href="/get-involved/volunteer" class="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-indigo-800 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
             </svg>
-            Join Pet Couriers Team
+            Volunteer
           </a>
         </div>
-
-        <!-- General Contact -->
-        <div>
-          <p class="text-xl mb-6 text-indigo-300">Not sure? Have questions?</p>
-          <a href="/contact-us" class="btn btn-accent">
-            Contact Us to Find Out More
-          </a>
-        </div>
+        <p class="text-sm text-white/80 mt-6">
+          Donations over $2 are tax-deductible
+        </p>
       </div>
     </div>
   </section>
