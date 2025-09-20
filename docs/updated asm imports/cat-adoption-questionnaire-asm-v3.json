@@ -1,0 +1,368 @@
+{
+  "name": "Cat Adoption Questionnaire",
+  "description": "Notes: \r\n\r\n- Adoption is currently only available to Victorian residents.\r\n- This form will take approximately 10-15 minutes to complete.",
+  "header": "",
+  "footer": "By submitting this form, you declare that all details are accurate to the best of your knowledge. \r\n<br><br>\r\nUpon review and approval, Homeless Hounds will contact you as soon as possible. We\r\nreserve the right to refuse any applicant. \r\n<br><br>\r\nWe will require the successful applicant to sign an adoption agreement, provide pictures of the yard as you have described above and allowed for a yard check before adoption.\r\n<br><br>\r\nWe appreciate you taking the time to complete this application.",
+  "fields": [
+    {
+      "index": 1,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "are_you_looking_for_a_specifically_adver",
+      "tooltip": "",
+      "label": "Are you looking for a specifically advertised cat OR any suitable cat?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 2,
+      "lookups": "",
+      "mandatory": true,
+      "name": "reserveanimalname",
+      "tooltip": "",
+      "label": "Name of the Cat you're applying for",
+      "type": "ADOPTABLEANIMAL"
+    },
+    {
+      "index": 3,
+      "lookups": "",
+      "mandatory": false,
+      "name": "your_details",
+      "tooltip": "",
+      "label": "Your Details",
+      "type": "TEXT"
+    },
+    {
+      "index": 4,
+      "lookups": "",
+      "mandatory": true,
+      "name": "firstname",
+      "tooltip": "",
+      "label": "Name - First Name",
+      "type": "TEXT"
+    },
+    {
+      "index": 5,
+      "lookups": "",
+      "mandatory": true,
+      "name": "lastname",
+      "tooltip": "",
+      "label": "Name - Last Name",
+      "type": "TEXT"
+    },
+    {
+      "index": 6,
+      "lookups": "",
+      "mandatory": true,
+      "name": "dateofbirth",
+      "tooltip": "",
+      "label": "Date of Birth",
+      "type": "DATE"
+    },
+    {
+      "index": 7,
+      "lookups": "",
+      "mandatory": true,
+      "name": "address",
+      "tooltip": "",
+      "label": "Address (VIC Only) - Address",
+      "type": "TEXT"
+    },
+    {
+      "index": 8,
+      "lookups": "",
+      "mandatory": true,
+      "name": "city",
+      "tooltip": "",
+      "label": "Address (VIC Only) - City/Town",
+      "type": "TEXT"
+    },
+    {
+      "index": 9,
+      "lookups": "",
+      "mandatory": true,
+      "name": "state",
+      "tooltip": "",
+      "label": "Address (VIC Only) - State/County",
+      "type": "TEXT"
+    },
+    {
+      "index": 10,
+      "lookups": "",
+      "mandatory": true,
+      "name": "postcode",
+      "tooltip": "",
+      "label": "Address (VIC Only) - Postcode/ZIP",
+      "type": "TEXT"
+    },
+    {
+      "index": 11,
+      "lookups": "",
+      "mandatory": true,
+      "name": "emailaddress",
+      "tooltip": "",
+      "label": "Email",
+      "type": "EMAIL"
+    },
+    {
+      "index": 12,
+      "lookups": "",
+      "mandatory": true,
+      "name": "mobiletelephone",
+      "tooltip": "",
+      "label": "Phone",
+      "type": "TELEPHONE"
+    },
+    {
+      "index": 13,
+      "lookups": "— Select —|Alpine|Ararat|Ballarat|Banyule|Baw Baw|Bayside|Benalla|Boroondara|Brimbank|Buloke|Campaspe|Cardinia|Casey|Central Goldfields|Colac Otway|Corangamite|Darebin|East Gippsland|Frankston|Gannawarra|Glen Eira|Glenelg|Golden Plains|Greater Bendigo|Greater Dandenong|Greater Geelong|Hepburn|Hindmarsh|Hobsons Bay|Horsham|Hume|Indigo|Kingston|Knox|Latrobe|Loddon|Macedon Ranges|Manningham|Mansfield|Maribyrnong|Maroondah|Melbourne|Melton|Mildura|Mitchell|Moira|Monash|Moonee Valley|Moorabool|Moreland|Mornington Peninsula|Mount Alexander|Moyne|Murrindindi|Nillumbik|Northern Grampians|Port Phillip|Pyrenees|Queenscliffe|South Gippsland|Southern Grampians|Stonnington|Strathbogie|Surf Coast|Swan Hill|Towong|Wangaratta|Warrnambool|Wellington|West Wimmera|Whitehorse|Whittlesea|Wodonga|Wyndham|Yarra|Yarra Ranges|Yarriambiack|Other",
+      "mandatory": true,
+      "name": "your_local_council_vic_only",
+      "tooltip": "",
+      "label": "Your Local Council (VIC Only)",
+      "type": "LOOKUP"
+    },
+    {
+      "index": 14,
+      "lookups": "",
+      "mandatory": false,
+      "name": "questions_about_your_lifestyle",
+      "tooltip": "",
+      "label": "Questions about your Lifestyle",
+      "type": "TEXT"
+    },
+    {
+      "index": 15,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q15",
+      "tooltip": "",
+      "label": "1. Please tell us more about yourself, your lifestyle and your household? What will the average day for your cat look like?",
+      "type": "TEXT"
+    },
+    {
+      "index": 16,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "q16",
+      "tooltip": "",
+      "label": "2. Do have children under 15 that will live with or have regular contact with the cat?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 17,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q17",
+      "tooltip": "",
+      "label": "2.1 If \"yes\", what are the ages of children (under 15) that will live with or have regular contact with the cat?",
+      "type": "TEXT"
+    },
+    {
+      "index": 18,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "q18",
+      "tooltip": "",
+      "label": "2.2 If \"yes\", have the above mentioned children lived with or had regular contact with cats before?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 19,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "q19",
+      "tooltip": "",
+      "label": "3. Do you currently or have you previously owned a cat, dog or other animals?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 20,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q20",
+      "tooltip": "",
+      "label": "3.1 If yes, please give details - e.g. number, breed, sex, age and whether or not they’re still in your care.",
+      "type": "TEXT"
+    },
+    {
+      "index": 21,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q21",
+      "tooltip": "",
+      "label": "3.1 If no, have you previously owned any cats or other animals? Please give details.",
+      "type": "TEXT"
+    },
+    {
+      "index": 22,
+      "lookups": "Option 1|Option 2|Option 3|Option 4",
+      "mandatory": true,
+      "name": "q22",
+      "tooltip": "",
+      "label": "4. Will the cat have regular contact with elderly people, dogs or livestock? Please specify.",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 23,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q23",
+      "tooltip": "",
+      "label": "4.1 If \"dogs\" or \"livestock\", please elaborate e.g. type, breed, age, gender, desexed, parasite control, vaccinations etc. Are they social w…",
+      "type": "TEXT"
+    },
+    {
+      "index": 24,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q24",
+      "tooltip": "",
+      "label": "4.2 If you have a dog, has it lived with a cat before? If not, has it met a cat and what was its reaction?",
+      "type": "TEXT"
+    },
+    {
+      "index": 25,
+      "lookups": "Option 1|Option 2|Option 3",
+      "mandatory": true,
+      "name": "q25",
+      "tooltip": "",
+      "label": "5. Will your cat be an:",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 26,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q26",
+      "tooltip": "",
+      "label": "5.1 If \"both\", please elaborate e.g. using a cat door, being let in and out etc.",
+      "type": "TEXT"
+    },
+    {
+      "index": 27,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "q27",
+      "tooltip": "",
+      "label": "6. Do you have any experience with fostering animals?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 28,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q28",
+      "tooltip": "",
+      "label": "6.1 If \"yes\", please elaborate.",
+      "type": "TEXT"
+    },
+    {
+      "index": 29,
+      "lookups": "Option 1|Option 2|Option 3",
+      "mandatory": true,
+      "name": "q29",
+      "tooltip": "",
+      "label": "7. Do you have a cat door or cat enclosure? (please select most appropriate)",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 30,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q30",
+      "tooltip": "",
+      "label": "8. If you adopt this cat, how soon can you pick him/her up?",
+      "type": "TEXT"
+    },
+    {
+      "index": 31,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "q31",
+      "tooltip": "",
+      "label": "9. To the best of your knowledge, is anyone in your house allergic to cats?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 32,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q32",
+      "tooltip": "",
+      "label": "9.1 If \"yes\", please elaborate e.g. which family members, what sorts of allergies etc.",
+      "type": "TEXT"
+    },
+    {
+      "index": 33,
+      "lookups": "Option 1|Option 2|Option 3",
+      "mandatory": true,
+      "name": "q33",
+      "tooltip": "",
+      "label": "10. If you’re renting, do you have your Landlord’s approval to have a pet?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 34,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "q34",
+      "tooltip": "",
+      "label": "11. Do you agree to return the cat to Homeless Hounds should your circumstances change or the cat not settle in as hoped?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 35,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "q35",
+      "tooltip": "",
+      "label": "12. Would you be interested in fostering with a view to adoption possibly suitable cats?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 36,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "q36",
+      "tooltip": "",
+      "label": "13. If this cat isn't suitable, would you like us to suggest other options?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 37,
+      "lookups": "Option 1|Option 2|Option 3",
+      "mandatory": true,
+      "name": "q37",
+      "tooltip": "",
+      "label": "14. Are you an Australian Citizen or Permanent Resident?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 38,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "would_you_like_to_receive_news_and_updat",
+      "tooltip": "",
+      "label": "Would you like to receive News and Updates from Homeless Hounds? You can opt-out at any time.",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 39,
+      "lookups": "",
+      "mandatory": true,
+      "name": "signature",
+      "tooltip": "",
+      "label": "Signature",
+      "type": "SIGNATURE"
+    },
+    {
+      "index": 40,
+      "lookups": "",
+      "mandatory": true,
+      "name": "date",
+      "tooltip": "",
+      "label": "Date",
+      "type": "DATE"
+    }
+  ]
+}

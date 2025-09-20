@@ -1,10 +1,371 @@
 ---
 import Base from "../layouts/Base.astro";
-const donate = import.meta.env.PUBLIC_DONATE_URL;
+
+const SUBDOMAIN_RAW = import.meta.env.RAISELY_CAMPAIGN_SUBDOMAIN;
+
+// Handle different subdomain formats:
+// 1. Just subdomain: "donate-homelesshounds"
+// 2. Full Raisely URL: "https://donate-homelesshounds.raisely.com"
+// 3. Custom domain: "https://donate.homelesshounds.com.au"
+let embedSrc = null;
+let SUBDOMAIN = null;
+
+if (SUBDOMAIN_RAW) {
+  if (SUBDOMAIN_RAW.includes('raisely.com') || SUBDOMAIN_RAW.includes('raiselysite.com')) {
+    // Extract subdomain from Raisely URL (both .raisely.com and .raiselysite.com)
+    const match = SUBDOMAIN_RAW.match(/https?:\/\/([^.]+)\.raisely(?:site)?\.com/);
+    SUBDOMAIN = match ? match[1] : null;
+  } else if (SUBDOMAIN_RAW.startsWith('http')) {
+    // Custom domain - use as external link (no embed)
+    SUBDOMAIN = null;
+  } else {
+    // Plain subdomain
+    SUBDOMAIN = SUBDOMAIN_RAW;
+  }
+}
+
+// Optional prefill: /donate?amount=50 (startOnAmount=true moves the user straight to amounts)
+const url = new URL(Astro.request.url);
+const amount = url.searchParams.get('amount');
+const startOnAmount = url.searchParams.get('startOnAmount') ?? 'true';
+
+// Only create embed URL if we have a valid Raisely subdomain
+if (SUBDOMAIN && SUBDOMAIN !== 'YOUR-CAMPAIGN-SUBDOMAIN') {
+  // Build URL with optimization parameters
+  const params = new URLSearchParams();
+
+  // Amount prefilling
+  if (amount) {
+    params.set('amount', amount);
+    if (startOnAmount) params.set('startOnAmount', startOnAmount);
+  }
+
+  // Try various Raisely parameters for better integration
+  params.set('embedded', 'true');           // Tell Raisely this is embedded
+  params.set('theme', 'minimal');           // Request minimal theme
+  params.set('hideHeader', 'true');         // Try to hide header
+  params.set('hideFooter', 'true');         // Try to hide footer
+  params.set('compact', 'true');            // Request compact layout
+  params.set('seamless', 'true');           // Request seamless mode
+  params.set('iframe', 'true');             // Iframe mode
+  params.set('widget', 'true');             // Widget mode
+  params.set('minimal', 'true');            // Another minimal flag
+  params.set('bare', 'true');               // Bare mode
+  params.set('clean', 'true');              // Clean layout
+  params.set('simple', 'true');             // Simple mode
+  params.set('embed', 'true');              // Embed flag
+
+  const path = `/embed?${params.toString()}`;
+  embedSrc = `https://${SUBDOMAIN}.raisely.com${path}`;
+}
+
+// Fallback external donation URL - use custom domain if provided, otherwise default
+const externalDonateUrl = (SUBDOMAIN_RAW && SUBDOMAIN_RAW.startsWith('http'))
+  ? SUBDOMAIN_RAW
+  : "https://donate.homelesshounds.com.au";
 ---
-<Base title="Donate">
-  <h1 class="text-3xl font-semibold mb-4">Donate</h1>
-  {donate
-    ? <p><a class="underline" href={donate} target="_blank" rel="noopener">Open donation page ↗</a></p>
-    : <p class="text-gray-700">Donation link coming soon.</p>}
+
+<Base title="Donate to Homeless Hounds" description="Your gift funds rescue, vet care, and rehoming for homeless animals.">
+  <div class="container-custom py-16">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Help Save Lives
+        </h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Your donation funds rescue operations, veterinary care, and helps find loving homes for animals in need.
+        </p>
+      </div>
+
+      {embedSrc ? (
+        <!-- Enhanced Embedded Raisely Form -->
+        <div class="relative mb-8">
+          <!-- Decorative background elements -->
+          <div class="absolute inset-0 bg-gradient-to-br from-orange-50 via-blue-50 to-teal-50 rounded-3xl transform rotate-1"></div>
+          <div class="absolute inset-0 bg-gradient-to-tl from-orange-100 via-white to-blue-100 rounded-3xl transform -rotate-1"></div>
+
+          <!-- Main donation form container -->
+          <div class="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+            <!-- Header section with gradient -->
+            <div class="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 px-8 py-6">
+              <div class="flex items-center justify-center space-x-3">
+                <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                  <svg class="w-5 h-5 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Make a Donation</h2>
+                <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                  <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                  </svg>
+                </div>
+              </div>
+              <p class="text-center text-orange-100 mt-2 text-sm font-medium">
+                Every dollar helps save a life
+              </p>
+            </div>
+
+            <!-- Loading state -->
+            <div id="donation-loading" class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center z-10 transition-opacity duration-500">
+              <div class="text-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto mb-4"></div>
+                <p class="text-gray-600 font-medium">Loading donation form...</p>
+              </div>
+            </div>
+
+            <!-- Aggressively optimized iframe container -->
+            <div class="relative bg-white overflow-hidden rounded-b-3xl iframe-container">
+              <!-- CSS to crop whitespace on all sides -->
+              <style>
+                #raisely-iframe {
+                  /* Crop whitespace by scaling and positioning */
+                  transform: scale(1.25) translate(-15px, -60px);
+                  transform-origin: center top;
+                  width: calc(100% + 30px);
+                  margin-left: -15px;
+                  margin-right: -15px;
+                }
+
+                /* Container to ensure proper clipping */
+                .iframe-container {
+                  padding: 0 15px;
+                  margin: 0 -15px;
+                  overflow: hidden;
+                }
+
+                /* Try to hide scrollbars and optimize display */
+                #raisely-iframe::-webkit-scrollbar {
+                  display: none;
+                }
+
+                /* Responsive adjustments */
+                @media (max-width: 768px) {
+                  #raisely-iframe {
+                    transform: scale(1.3) translate(-20px, -50px);
+                    width: calc(100% + 40px);
+                    margin-left: -20px;
+                    margin-right: -20px;
+                  }
+                  .iframe-container {
+                    padding: 0 20px;
+                    margin: 0 -20px;
+                  }
+                }
+              </style>
+
+              <iframe
+                id="raisely-iframe"
+                src={embedSrc}
+                width="100%"
+                height="700"
+                style="border:0; background: white; min-height: 500px; margin-bottom: -100px;"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Donation Form"
+                scrolling="no"
+                frameborder="0"
+                allow="payment"
+                onload="
+                  // Hide loading state
+                  document.getElementById('donation-loading').style.opacity = '0';
+                  setTimeout(() => document.getElementById('donation-loading').style.display = 'none', 500);
+
+                  // Auto-resize iframe height based on content
+                  const iframe = this;
+
+                  // Listen for postMessage from iframe to adjust height
+                  window.addEventListener('message', function(event) {
+                    if (event.origin.includes('raisely.com')) {
+                      if (event.data.type === 'resize' && event.data.height) {
+                        iframe.style.height = Math.max(400, event.data.height) + 'px';
+                      }
+                      // Handle various Raisely resize messages
+                      if (event.data.raiselyHeight) {
+                        iframe.style.height = Math.max(400, event.data.raiselyHeight) + 'px';
+                      }
+                      if (event.data.height && !event.data.type) {
+                        iframe.style.height = Math.max(400, event.data.height) + 'px';
+                      }
+                    }
+                  });
+
+                  // Fallback: Try to detect content height after load
+                  setTimeout(() => {
+                    try {
+                      const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                      if (iframeDoc && iframeDoc.body) {
+                        const height = Math.max(
+                          iframeDoc.body.scrollHeight,
+                          iframeDoc.body.offsetHeight,
+                          iframeDoc.documentElement.clientHeight,
+                          iframeDoc.documentElement.scrollHeight,
+                          iframeDoc.documentElement.offsetHeight
+                        );
+                        if (height > 200) {
+                          iframe.style.height = Math.max(400, height + 40) + 'px';
+                        }
+                      }
+                    } catch(e) {
+                      // CORS prevents access, use default height
+                      console.log('Using default iframe height due to CORS policy');
+                    }
+                  }, 1000);
+                "
+                class="transition-all duration-500 ease-in-out w-full"
+              ></iframe>
+            </div>
+
+            <!-- Security badges -->
+            <div class="bg-gray-50 border-t border-gray-200 px-8 py-4">
+              <div class="flex items-center justify-center space-x-6 text-sm text-gray-600">
+                <div class="flex items-center space-x-2">
+                  <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="font-medium">Secure SSL</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="font-medium">Verified</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                    <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="font-medium">PCI Compliant</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <!-- Fallback - External Link -->
+        <div class="bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-8 text-center mb-8">
+          <div class="max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">
+              Support Our Mission
+            </h2>
+            <p class="text-gray-700 mb-6">
+              Every donation helps us rescue, rehabilitate, and rehome animals in need. Your support makes a real difference.
+            </p>
+            <a
+              href={externalDonateUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center px-8 py-4 bg-orange-600 text-white rounded-xl hover:bg-orange-700 font-semibold text-lg transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+              </svg>
+              Donate Now
+            </a>
+          </div>
+        </div>
+      )}
+
+      <!-- Enhanced Impact Information -->
+      <div class="mb-12">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Your Impact in Numbers</h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            See how your generosity directly transforms lives and builds a more compassionate community
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Stat 1: Animals Rescued -->
+          <div class="group relative">
+            <!-- Background decoration -->
+            <div class="absolute inset-0 bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl transform rotate-2 group-hover:rotate-3 transition-transform duration-300"></div>
+            <div class="relative bg-white rounded-2xl p-8 shadow-lg border border-orange-100 group-hover:shadow-xl transition-all duration-300">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div class="text-4xl font-bold text-orange-600 mb-2 tabular-nums">500+</div>
+                <div class="text-gray-700 font-medium text-lg">Animals rescued annually</div>
+                <div class="text-sm text-gray-500 mt-2">Every 17 hours we save a life</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stat 2: Volunteer Organization -->
+          <div class="group relative">
+            <!-- Background decoration -->
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl transform -rotate-2 group-hover:-rotate-3 transition-transform duration-300"></div>
+            <div class="relative bg-white rounded-2xl p-8 shadow-lg border border-blue-100 group-hover:shadow-xl transition-all duration-300">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM9 16a7 7 0 100-14 7 7 0 000 14zm1-9a1 1 0 10-2 0v4a1 1 0 001 1h3a1 1 0 100-2h-2V7z" />
+                  </svg>
+                </div>
+                <div class="text-4xl font-bold text-blue-600 mb-2 tabular-nums">100%</div>
+                <div class="text-gray-700 font-medium text-lg">Volunteer-run organization</div>
+                <div class="text-sm text-gray-500 mt-2">Every dollar goes to animals</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stat 3: Tax Deductible -->
+          <div class="group relative">
+            <!-- Background decoration -->
+            <div class="absolute inset-0 bg-gradient-to-br from-teal-100 to-teal-200 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-300"></div>
+            <div class="relative bg-white rounded-2xl p-8 shadow-lg border border-teal-100 group-hover:shadow-xl transition-all duration-300">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                    <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div class="text-4xl font-bold text-teal-600 mb-2">$2+</div>
+                <div class="text-gray-700 font-medium text-lg">Tax-deductible donations</div>
+                <div class="text-sm text-gray-500 mt-2">Instant receipt provided</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick donation amounts -->
+        <div class="mt-12 text-center">
+          <h3 class="text-xl font-bold text-gray-900 mb-6">Quick Donation Amounts</h3>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="/donate?amount=25" class="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+              <span class="group-hover:animate-pulse">$25</span>
+              <span class="block text-xs opacity-90">Feeds 5 animals</span>
+            </a>
+            <a href="/donate?amount=50" class="group bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:from-blue-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+              <span class="group-hover:animate-pulse">$50</span>
+              <span class="block text-xs opacity-90">Basic vet care</span>
+            </a>
+            <a href="/donate?amount=100" class="group bg-gradient-to-r from-teal-500 to-teal-600 text-white px-6 py-3 rounded-full font-semibold hover:from-teal-600 hover:to-teal-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+              <span class="group-hover:animate-pulse">$100</span>
+              <span class="block text-xs opacity-90">Emergency surgery</span>
+            </a>
+            <a href="/donate?amount=250" class="group bg-gradient-to-r from-purple-500 to-purple-600 text-white px-6 py-3 rounded-full font-semibold hover:from-purple-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+              <span class="group-hover:animate-pulse">$250</span>
+              <span class="block text-xs opacity-90">Full rescue package</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Information -->
+      <div class="bg-gray-50 rounded-xl p-6 text-center">
+        <p class="text-sm text-gray-600">
+          Payments are securely processed. All donations over $2 are tax-deductible.
+          <br />
+          Homeless Hounds Animal Rescue Inc. • ABN 93 136 291 221
+        </p>
+      </div>
+    </div>
+  </div>
 </Base>

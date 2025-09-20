@@ -1,0 +1,368 @@
+{
+  "name": "Surrender Form for Dogs and Cats",
+  "description": "Note: Surrendering a pet is usually only available to Victorian residents, however, if you are located interstate and able to transport your pet, we may be able to help.",
+  "header": "",
+  "footer": "By submitting this form, you agree that the information provided is accurate and truthful to\r\nthe best of your knowledge and you relinquish full ownership of the described animal/s and agree\r\nthat the said animal will become the sole and absolute property of Homeless Hounds\r\nAnimal Rescue.",
+  "fields": [
+    {
+      "index": 1,
+      "lookups": "",
+      "mandatory": false,
+      "name": "your_details",
+      "tooltip": "",
+      "label": "Your Details",
+      "type": "TEXT"
+    },
+    {
+      "index": 2,
+      "lookups": "",
+      "mandatory": true,
+      "name": "firstname",
+      "tooltip": "",
+      "label": "Name - First Name",
+      "type": "TEXT"
+    },
+    {
+      "index": 3,
+      "lookups": "",
+      "mandatory": true,
+      "name": "lastname",
+      "tooltip": "",
+      "label": "Name - Last Name",
+      "type": "TEXT"
+    },
+    {
+      "index": 4,
+      "lookups": "",
+      "mandatory": false,
+      "name": "address",
+      "tooltip": "",
+      "label": "Address (Australian residents only) - Address",
+      "type": "TEXT"
+    },
+    {
+      "index": 5,
+      "lookups": "",
+      "mandatory": false,
+      "name": "city",
+      "tooltip": "",
+      "label": "Address (Australian residents only) - City/Town",
+      "type": "TEXT"
+    },
+    {
+      "index": 6,
+      "lookups": "",
+      "mandatory": false,
+      "name": "state",
+      "tooltip": "",
+      "label": "Address (Australian residents only) - State/County",
+      "type": "TEXT"
+    },
+    {
+      "index": 7,
+      "lookups": "",
+      "mandatory": false,
+      "name": "postcode",
+      "tooltip": "",
+      "label": "Address (Australian residents only) - Postcode/ZIP",
+      "type": "TEXT"
+    },
+    {
+      "index": 8,
+      "lookups": "",
+      "mandatory": true,
+      "name": "emailaddress",
+      "tooltip": "",
+      "label": "Email",
+      "type": "EMAIL"
+    },
+    {
+      "index": 9,
+      "lookups": "",
+      "mandatory": true,
+      "name": "mobiletelephone",
+      "tooltip": "",
+      "label": "Phone",
+      "type": "TELEPHONE"
+    },
+    {
+      "index": 10,
+      "lookups": "",
+      "mandatory": false,
+      "name": "pet_details",
+      "tooltip": "",
+      "label": "Pet Details",
+      "type": "TEXT"
+    },
+    {
+      "index": 11,
+      "lookups": "",
+      "mandatory": true,
+      "name": "reserveanimalname",
+      "tooltip": "",
+      "label": "Pet Name",
+      "type": "ADOPTABLEANIMAL"
+    },
+    {
+      "index": 12,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "type_of_pet",
+      "tooltip": "",
+      "label": "Type of Pet",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 13,
+      "lookups": "",
+      "mandatory": true,
+      "name": "age_of_pet_e_g_years_months",
+      "tooltip": "",
+      "label": "Age of Pet (e.g. years + months)",
+      "type": "TEXT"
+    },
+    {
+      "index": 14,
+      "lookups": "",
+      "mandatory": true,
+      "name": "breed_of_pet_e_g_type_of_dog_or_cat",
+      "tooltip": "",
+      "label": "Breed of Pet (e.g. type of dog or cat)",
+      "type": "TEXT"
+    },
+    {
+      "index": 15,
+      "lookups": "",
+      "mandatory": true,
+      "name": "colour_of_pet",
+      "tooltip": "",
+      "label": "Colour of Pet",
+      "type": "TEXT"
+    },
+    {
+      "index": 16,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "gender_of_pet",
+      "tooltip": "",
+      "label": "Gender of Pet",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 17,
+      "lookups": "",
+      "mandatory": true,
+      "name": "microchip_number",
+      "tooltip": "",
+      "label": "Microchip Number",
+      "type": "NUMBER"
+    },
+    {
+      "index": 18,
+      "lookups": "",
+      "mandatory": false,
+      "name": "general_questions",
+      "tooltip": "",
+      "label": "General Questions",
+      "type": "TEXT"
+    },
+    {
+      "index": 19,
+      "lookups": "Option 1|Option 2|Option 3",
+      "mandatory": true,
+      "name": "has_the_animal_been_microchipped",
+      "tooltip": "",
+      "label": "Has the animal been microchipped?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 20,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "if_yes_are_you_the_microchip_owner",
+      "tooltip": "",
+      "label": "If yes, are you the microchip owner?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 21,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "if_no_is_the_microchip_owner_aware_the_a",
+      "tooltip": "",
+      "label": "If no, is the microchip owner aware the animal is being surrendered?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 22,
+      "lookups": "Option 1|Option 2|Option 3",
+      "mandatory": true,
+      "name": "has_the_animal_been_desexed",
+      "tooltip": "",
+      "label": "Has the animal been desexed?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 23,
+      "lookups": "",
+      "mandatory": true,
+      "name": "reason_for_surrender",
+      "tooltip": "",
+      "label": "Reason for surrender:",
+      "type": "TEXT"
+    },
+    {
+      "index": 24,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "has_your_animal_been_declared_menacing_o",
+      "tooltip": "",
+      "label": "Has your animal been declared menacing or dangerous?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 25,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "is_your_animal_good_with_familiar_people",
+      "tooltip": "",
+      "label": "Is your animal good with Familiar People?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 26,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "is_your_animal_good_with_unfamiliar_peop",
+      "tooltip": "",
+      "label": "Is your animal good with Unfamiliar People?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 27,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "is_your_animal_good_with_children",
+      "tooltip": "",
+      "label": "Is your animal good with Children?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 28,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "is_your_animal_good_with_dogs",
+      "tooltip": "",
+      "label": "Is your animal good with Dogs?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 29,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "is_your_animal_good_with_cats",
+      "tooltip": "",
+      "label": "Is your animal good with Cats?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 30,
+      "lookups": "",
+      "mandatory": true,
+      "name": "if_you_have_any_further_information_from",
+      "tooltip": "",
+      "label": "If you have any further information from any of the above \"Is your animal good with...\" questions, please elaborate:",
+      "type": "TEXT"
+    },
+    {
+      "index": 31,
+      "lookups": "",
+      "mandatory": true,
+      "name": "how_long_on_average_does_your_animal_spe",
+      "tooltip": "",
+      "label": "How long on average does your animal spend alone per day?",
+      "type": "TEXT"
+    },
+    {
+      "index": 32,
+      "lookups": "",
+      "mandatory": true,
+      "name": "how_many_times_per_week_do_you_walk_your",
+      "tooltip": "",
+      "label": "How many times per week do you walk your dog?",
+      "type": "TEXT"
+    },
+    {
+      "index": 33,
+      "lookups": "Option 1|Option 2|Option 3",
+      "mandatory": true,
+      "name": "does_your_animal_live",
+      "tooltip": "",
+      "label": "Does your animal live:",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 34,
+      "lookups": "",
+      "mandatory": true,
+      "name": "does_your_animal_have_a_history_of_inapp",
+      "tooltip": "",
+      "label": "Does your animal have a history of inappropriate urination? If yes, please elaborate.",
+      "type": "TEXT"
+    },
+    {
+      "index": 35,
+      "lookups": "",
+      "mandatory": true,
+      "name": "does_your_animal_have_a_history_of_destr",
+      "tooltip": "",
+      "label": "Does your animal have a history of destructive behaviour (e.g. excessive chewing, clawing, etc)? If yes, please elaborate.",
+      "type": "TEXT"
+    },
+    {
+      "index": 36,
+      "lookups": "",
+      "mandatory": true,
+      "name": "does_your_animal_have_a_history_of_aggre",
+      "tooltip": "",
+      "label": "Does your animal have a history of aggression to people or other animals? If yes, please elaborate.",
+      "type": "TEXT"
+    },
+    {
+      "index": 37,
+      "lookups": "",
+      "mandatory": true,
+      "name": "what_does_your_animal_eat_any_food_sensi",
+      "tooltip": "",
+      "label": "What does your animal eat? Any food sensitivities or allergies?",
+      "type": "TEXT"
+    },
+    {
+      "index": 38,
+      "lookups": "",
+      "mandatory": true,
+      "name": "does_your_dog_have_any_issues_we_need_to",
+      "tooltip": "",
+      "label": "Does your dog have any issues we need to manage? Please be honest here, it will help your dog in the long run.",
+      "type": "TEXT"
+    },
+    {
+      "index": 39,
+      "lookups": "",
+      "mandatory": true,
+      "name": "signature",
+      "tooltip": "",
+      "label": "Signature",
+      "type": "SIGNATURE"
+    },
+    {
+      "index": 40,
+      "lookups": "",
+      "mandatory": true,
+      "name": "date",
+      "tooltip": "",
+      "label": "Date",
+      "type": "DATE"
+    }
+  ]
+}

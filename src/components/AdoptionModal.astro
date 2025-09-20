@@ -7,9 +7,10 @@ export interface Props {
   petAge: string;
   petSex: string;
   petSize: string;
+  formId: string;
 }
 
-const { petId, petName, petBreed, petSpecies, petAge, petSex, petSize } = Astro.props;
+const { petId, petName, petBreed, petSpecies, petAge, petSex, petSize, formId } = Astro.props;
 const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 ---
 
@@ -73,7 +74,7 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 
         <form id="adoption-form" class="space-y-6" action="/api/submit" method="POST" enctype="multipart/form-data">
           <!-- Hidden Fields -->
-          <input type="hidden" name="formid" value="39" />
+          <input type="hidden" name="formid" value={formId} />
           <input type="hidden" name="pet_id" value={petId} />
           <input type="hidden" name="pet_name" value={petName} />
           <input type="hidden" name="pet_breed" value={petBreed} />
@@ -102,6 +103,26 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
             </div>
           </div>
 
+          <!-- Form Header (Important Information) -->
+          <div id="form-header" class="hidden bg-amber-50 border border-amber-200 rounded-xl p-6">
+            <div class="flex items-start">
+              <svg class="w-5 h-5 text-amber-600 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+              </svg>
+              <div class="text-sm text-gray-700" id="form-header-content"></div>
+            </div>
+          </div>
+
+          <!-- Auto-save Notice -->
+          <div class="bg-green-50 border border-green-200 rounded-lg px-4 py-3 mb-6">
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-sm text-green-800 font-medium">Your progress is automatically saved as you type.</span>
+            </div>
+          </div>
+
           <!-- Dynamic form fields will be inserted here -->
           <div id="adoption-fields" class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Loading skeleton -->
@@ -110,6 +131,16 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
               <div class="h-10 bg-gray-200 rounded mb-4"></div>
               <div class="h-32 bg-gray-200 rounded mb-4"></div>
               <div class="h-10 bg-gray-200 rounded w-32"></div>
+            </div>
+          </div>
+
+          <!-- Form Footer (Terms & Conditions) -->
+          <div id="form-footer" class="hidden col-span-full bg-red-50 border border-red-200 rounded-xl p-6">
+            <div class="flex items-start">
+              <svg class="w-5 h-5 text-red-600 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9C9 5 9 5.672 9 6.5S9 8 10 8s1-.672 1-1.5S11 5 10 5z" clip-rule="evenodd"></path>
+              </svg>
+              <div class="text-sm text-gray-700 font-medium" id="form-footer-content"></div>
             </div>
           </div>
 
@@ -156,7 +187,7 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 )}
 
 <!-- Modal JavaScript -->
-<script type="module" define:vars={{ petId, petName, petBreed, petSpecies }}>
+<script type="module" define:vars={{ petId, petName, petBreed, petSpecies, formId }}>
   // Modal elements
   const modal = document.getElementById('adoption-modal');
   const openBtn = document.getElementById('apply-adopt-btn');
@@ -177,19 +208,25 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
     TEXT: () => createInput("text"),
     EMAIL: () => createInput("email"),
     NUMBER: () => createInput("number"),
+    TELEPHONE: () => createInput("tel"),
     TEXTAREA: () => createTextarea(),
+    NOTES: () => createTextarea(),
     LOOKUP: (f) => createSelect(f, false),
+    LOOKUP_MULTI: (f) => createSelect(f, true),
     "MULTI-LOOKUP": (f) => createSelect(f, true),
     RADIO: (f) => createRadios(f),
+    RADIOGROUP: (f) => createRadioGroup(f),
     CHECKBOX: (f) => createCheckbox(f),
     YESNO: (f) => createYesNoSelect(f),
     DATE: () => createInput("date"),
     FILE: () => createFileInput(),
     GDPR: (f) => createGDPR(f),
+    GDPR_CONTACT_OPTIN: (f) => createGDPROptIn(f),
     HTMLNOTE: (f) => createHTMLNote(f),
-    NOTES: () => createTextarea(),
     SPECIES: () => createInput("text"),
-    BREED: () => createInput("text")
+    BREED: () => createInput("text"),
+    ADOPTABLEANIMAL: (f) => createAdoptableAnimal(f),
+    SIGNATURE: (f) => createSignature(f)
   };
 
   // Create form field functions (same as surrender form)
@@ -297,24 +334,161 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
   function createGDPR(f) {
     const wrap = document.createElement("div");
     wrap.className = "bg-gray-50 rounded-lg p-4";
-    
+
     const lbl = document.createElement("label");
     lbl.className = "flex items-start gap-3 cursor-pointer";
-    
+
     const inp = document.createElement("input");
     inp.type = "checkbox";
     inp.name = f.name;
     inp.className = "mt-1 rounded text-indigo-700 focus:ring-indigo-600";
     inp.required = true;
-    
+
     const text = document.createElement("span");
     text.className = "text-sm text-gray-700";
     text.innerHTML = f.label || "I consent to the processing of my data";
-    
+
     lbl.appendChild(inp);
     lbl.appendChild(text);
     wrap.appendChild(lbl);
-    
+
+    return wrap;
+  }
+
+  function createRadioGroup(f) {
+    const wrap = document.createElement("div");
+    wrap.className = "flex flex-col gap-2";
+    (f.lookups || "").split("|").filter(Boolean).forEach((v, idx) => {
+      const lbl = document.createElement("label");
+      lbl.className = "flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 cursor-pointer";
+      const inp = document.createElement("input");
+      inp.type = "radio";
+      inp.name = f.name;
+      inp.value = v;
+      inp.className = "text-indigo-700 focus:ring-indigo-600";
+      if (idx === 0 && f.mandatory) inp.required = true;
+      const span = document.createElement("span");
+      span.textContent = v;
+      lbl.appendChild(inp);
+      lbl.appendChild(span);
+      wrap.appendChild(lbl);
+    });
+    return wrap;
+  }
+
+  function createAdoptableAnimal(f) {
+    const el = document.createElement("input");
+    el.type = "text";
+    el.className = "w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-600 focus:ring-2 focus:ring-purple-200 transition-colors";
+    el.placeholder = "Enter animal name or ID";
+
+    // Pre-fill with the pet name if available
+    if (typeof petName !== 'undefined') {
+      el.value = petName;
+    }
+
+    return el;
+  }
+
+  function createSignature(f) {
+    const wrap = document.createElement("div");
+    wrap.className = "bg-gray-50 rounded-lg p-4";
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 400;
+    canvas.height = 150;
+    canvas.className = "border border-gray-300 rounded-lg bg-white w-full";
+    canvas.style.touchAction = "none";
+
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = f.name;
+
+    const clearBtn = document.createElement("button");
+    clearBtn.type = "button";
+    clearBtn.className = "mt-2 px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors";
+    clearBtn.textContent = "Clear Signature";
+
+    let isDrawing = false;
+    const ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "#1e40af";
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
+
+    function getCoords(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      const coords = getCoords(e);
+      ctx.beginPath();
+      ctx.moveTo(coords.x, coords.y);
+      e.preventDefault();
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      const coords = getCoords(e);
+      ctx.lineTo(coords.x, coords.y);
+      ctx.stroke();
+      input.value = canvas.toDataURL();
+      e.preventDefault();
+    }
+
+    function stopDrawing(e) {
+      isDrawing = false;
+      e.preventDefault();
+    }
+
+    canvas.addEventListener("mousedown", startDrawing);
+    canvas.addEventListener("mousemove", draw);
+    canvas.addEventListener("mouseup", stopDrawing);
+    canvas.addEventListener("mouseout", stopDrawing);
+
+    canvas.addEventListener("touchstart", startDrawing);
+    canvas.addEventListener("touchmove", draw);
+    canvas.addEventListener("touchend", stopDrawing);
+
+    clearBtn.addEventListener("click", () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      input.value = "";
+    });
+
+    wrap.appendChild(canvas);
+    wrap.appendChild(clearBtn);
+    wrap.appendChild(input);
+
+    return wrap;
+  }
+
+  function createGDPROptIn(f) {
+    const wrap = document.createElement("div");
+    wrap.className = "bg-blue-50 rounded-lg p-4";
+
+    const lbl = document.createElement("label");
+    lbl.className = "flex items-start gap-3 cursor-pointer";
+
+    const inp = document.createElement("input");
+    inp.type = "checkbox";
+    inp.name = f.name;
+    inp.className = "mt-1 rounded text-indigo-700 focus:ring-indigo-600";
+    inp.required = f.mandatory || false;
+
+    const text = document.createElement("span");
+    text.className = "text-sm text-gray-700";
+    text.innerHTML = f.label || "I agree to receive updates (opt out anytime)";
+
+    lbl.appendChild(inp);
+    lbl.appendChild(text);
+    wrap.appendChild(lbl);
+
     return wrap;
   }
 
@@ -434,19 +608,134 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
   // Initialize form
   async function initForm() {
     try {
-      const schemaUrl = `/api/asm/form-schema?formid=39`;
+      const schemaUrl = `/api/asm/form-schema?formid=${formId}`;
       const response = await fetch(schemaUrl);
       const data = await response.json();
-      
+
+      // Display form header if available
+      const headerEl = document.getElementById('form-header');
+      const headerContent = document.getElementById('form-header-content');
+      // Use 'header' field first, fallback to 'description' for backward compatibility
+      const headerText = data.header || data.description;
+      if (headerText && headerText.trim()) {
+        // Convert plain text to HTML with line breaks
+        headerContent.innerHTML = headerText.replace(/\n/g, '<br>').replace(/- /g, '• ');
+        headerEl.classList.remove('hidden');
+      }
+
+      // Display form footer if available
+      const footerEl = document.getElementById('form-footer');
+      const footerContent = document.getElementById('form-footer-content');
+      if (data.footer && data.footer.trim()) {
+        footerContent.innerHTML = data.footer;
+        footerEl.classList.remove('hidden');
+      }
+
       container.innerHTML = "";
-      
-      (data.fields || []).forEach(f => {
-        const field = renderField(f);
-        if (field) {
-          container.appendChild(field);
+
+      // Group fields into sections for better UX
+      const sections = {
+        'personal': {
+          title: '👤 Your Details',
+          fields: [],
+          indices: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] // Covers personal info fields
+        },
+        'household': {
+          title: '🏠 Your Household & Lifestyle',
+          fields: [],
+          indices: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] // Household questions
+        },
+        'experience': {
+          title: '🐾 Pet Experience',
+          fields: [],
+          indices: [25, 26, 27, 28, 29, 30, 31, 32, 33] // Pet experience questions
+        },
+        'environment': {
+          title: '🏡 Your Environment',
+          fields: [],
+          indices: [34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44] // Environment & training
+        },
+        'final': {
+          title: '✅ Final Details',
+          fields: [],
+          indices: [45, 46, 47, 48, 49, 50] // Citizenship, consent, signature
+        }
+      };
+
+      // Categorize fields into sections
+      const fields = data.fields || [];
+      fields.forEach(f => {
+        // Skip section header fields (they're just text labels)
+        if (f.type === 'TEXT' && (f.label.includes('Your Details') || f.label.includes('Questions'))) {
+          return;
+        }
+
+        // Find which section this field belongs to
+        let placed = false;
+        for (const [key, section] of Object.entries(sections)) {
+          if (section.indices.includes(f.index)) {
+            section.fields.push(f);
+            placed = true;
+            break;
+          }
+        }
+
+        // If not placed in a section, add to the most appropriate one
+        if (!placed) {
+          if (f.index <= 12) sections.personal.fields.push(f);
+          else if (f.index <= 24) sections.household.fields.push(f);
+          else if (f.index <= 33) sections.experience.fields.push(f);
+          else if (f.index <= 44) sections.environment.fields.push(f);
+          else sections.final.fields.push(f);
         }
       });
-      
+
+      // Render sections with fields
+      Object.entries(sections).forEach(([key, section]) => {
+        if (section.fields.length === 0) return;
+
+        // Create section container
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'col-span-full';
+
+        // Add section header
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'mb-6 pb-3 border-b-2 border-gray-200';
+        headerDiv.innerHTML = `
+          <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+            ${section.title}
+          </h3>
+        `;
+        sectionDiv.appendChild(headerDiv);
+
+        // Create fields container
+        const fieldsContainer = document.createElement('div');
+        fieldsContainer.className = 'grid grid-cols-1 md:grid-cols-2 gap-6';
+
+        // Add fields to section
+        section.fields.forEach(f => {
+          const field = renderField(f);
+          if (field) {
+            // Make some fields full-width (like textareas and special fields)
+            if (f.type === 'NOTES' || f.type === 'TEXTAREA' || f.type === 'SIGNATURE' ||
+                f.type === 'GDPR' || f.type === 'GDPR_CONTACT_OPTIN' || f.type === 'HTMLNOTE') {
+              field.querySelector('div').classList.add('col-span-full');
+            }
+            fieldsContainer.appendChild(field);
+          }
+        });
+
+        sectionDiv.appendChild(fieldsContainer);
+        container.appendChild(sectionDiv);
+
+        // Add spacing between sections
+        if (key !== 'final') {
+          const spacer = document.createElement('div');
+          spacer.className = 'col-span-full h-6';
+          container.appendChild(spacer);
+        }
+      });
+
       submitBtn.disabled = false;
       
       // Load saved data if available

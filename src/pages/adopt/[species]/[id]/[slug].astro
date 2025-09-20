@@ -70,13 +70,20 @@ const entryDate = animal.DATEBROUGHTIN ? new Date(animal.DATEBROUGHTIN).toLocale
   year: 'numeric'
 }) : null;
 
+// Format last updated date
+const lastUpdated = animal.LASTCHANGEDDATE ? new Date(animal.LASTCHANGEDDATE).toLocaleDateString('en-AU', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric'
+}) : null;
+
 // Get coat type if available
 const coatType = animal.COATTYPENAME || null;
 
 // Determine icon for species
 const speciesIcon = species === 'dog' ? '🐕' : '🐱';
-const heroColor = species === 'dog' ? 'from-blue-500 to-blue-700' : 'from-amber-500 to-amber-700';
-const accentColor = species === 'dog' ? 'blue' : 'amber';
+const heroColor = 'from-amber-500 to-amber-700'; // Same orange color for both dogs and cats
+const accentColor = 'amber'; // Same accent color for consistency
 
 // Enhanced compatibility information
 const compatibilityInfo = [
@@ -209,11 +216,11 @@ const compatibilityInfo = [
           <span class="bg-white/20 backdrop-blur text-white px-4 py-2 rounded-full font-medium">
             {animal.SIZENAME} Size
           </span>
-          {profile.basicInfo.weight && (
+          {profile.basicInfo.weight && profile.basicInfo.weight > 0 ? (
             <span class="bg-white/20 backdrop-blur text-white px-4 py-2 rounded-full font-medium">
               {profile.basicInfo.weight}kg
             </span>
-          )}
+          ) : null}
           <span class="bg-white/20 backdrop-blur text-white px-4 py-2 rounded-full font-medium">
             In care {daysText}
           </span>
@@ -307,11 +314,6 @@ const compatibilityInfo = [
                   </span>
                 </div>
 
-                <!-- ID Number -->
-                <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                  <span class="text-gray-600">🏷️ ID</span>
-                  <span class="font-medium text-gray-900">#{animal.ID}</span>
-                </div>
 
                 <!-- Days in Care -->
                 <div class="flex items-center justify-between py-3 border-b border-gray-100">
@@ -332,6 +334,31 @@ const compatibilityInfo = [
                   <div class="flex items-center justify-between py-3 border-b border-gray-100">
                     <span class="text-gray-600">📝 Entry reason</span>
                     <span class="font-medium text-gray-900 text-sm">{animal.ENTRYREASONNAME}</span>
+                  </div>
+                )}
+
+                {/* Microchip Number (Legal Requirement) */}
+                {animal.IDENTICHIPNUMBER && (
+                  <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <span class="text-gray-600">🔬 Microchip</span>
+                    <span class="font-medium text-gray-900 text-sm font-mono">{animal.IDENTICHIPNUMBER}</span>
+                  </div>
+                )}
+
+                {/* Source Number */}
+                {profile.adoption.sourceNumber && (
+                  <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <span class="text-gray-600">🏷️ Source</span>
+                    <span class="font-medium text-gray-900 text-sm">{profile.adoption.sourceNumber}</span>
+                  </div>
+                )}
+
+                {/* Last Updated (Subtle) */}
+                {lastUpdated && (
+                  <div class="pt-3 border-t border-gray-100">
+                    <p class="text-xs text-gray-400 text-center">
+                      Last updated {lastUpdated}
+                    </p>
                   </div>
                 )}
 
@@ -493,17 +520,17 @@ const compatibilityInfo = [
                   <span class="text-gray-600 text-sm">Size</span>
                   <span class="font-medium text-gray-900">{animal.SIZENAME}</span>
                 </div>
-                {profile.basicInfo.weight && (
+                {profile.basicInfo.weight && profile.basicInfo.weight > 0 ? (
                   <div class="flex justify-between items-center py-2 border-b border-gray-100">
                     <span class="text-gray-600 text-sm">Weight</span>
                     <span class="font-medium text-gray-900">{profile.basicInfo.weight}kg</span>
                   </div>
-                )}
+                ) : null}
                 <div class="flex justify-between items-center py-2 border-b border-gray-100">
                   <span class="text-gray-600 text-sm">Breed</span>
                   <span class="font-medium text-gray-900 text-right">
                     {animal.BREEDNAME}
-                    {animal.CROSSBREED === 1 && ' Mix'}
+                    {animal.CROSSBREED === 1 ? ' Mix' : ''}
                   </span>
                 </div>
                 {coatType && (
@@ -602,6 +629,7 @@ const compatibilityInfo = [
       petAge={animal.AGEGROUP}
       petSex={animal.SEXNAME}
       petSize={animal.SIZENAME}
+      formId={animal.SPECIESNAME.toLowerCase() === 'dog' ? '70' : '65'}
     />
   )}
 

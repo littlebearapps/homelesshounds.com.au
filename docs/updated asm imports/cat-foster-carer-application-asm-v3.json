@@ -1,0 +1,251 @@
+{
+  "name": "Cat Foster Carer Application",
+  "description": "Note: Foster Carer positions are currently only available to Victorian residents.",
+  "header": "",
+  "footer": "By submitting this form, you agree that the cat will remain the property of Homeless Hounds and that you will remain in contact with us throughout the duration of fostering. Please be aware that adoption fees will apply if you want to adopt as agreed at the beginning of the Fostering Period.",
+  "fields": [
+    {
+      "index": 1,
+      "lookups": "",
+      "mandatory": false,
+      "name": "your_details",
+      "tooltip": "",
+      "label": "Your Details",
+      "type": "TEXT"
+    },
+    {
+      "index": 2,
+      "lookups": "",
+      "mandatory": true,
+      "name": "firstname",
+      "tooltip": "",
+      "label": "Name - First Name",
+      "type": "TEXT"
+    },
+    {
+      "index": 3,
+      "lookups": "",
+      "mandatory": true,
+      "name": "lastname",
+      "tooltip": "",
+      "label": "Name - Last Name",
+      "type": "TEXT"
+    },
+    {
+      "index": 4,
+      "lookups": "",
+      "mandatory": true,
+      "name": "dateofbirth",
+      "tooltip": "",
+      "label": "Date of Birth",
+      "type": "DATE"
+    },
+    {
+      "index": 5,
+      "lookups": "",
+      "mandatory": true,
+      "name": "address",
+      "tooltip": "",
+      "label": "Address (VIC only) - Address",
+      "type": "TEXT"
+    },
+    {
+      "index": 6,
+      "lookups": "",
+      "mandatory": true,
+      "name": "city",
+      "tooltip": "",
+      "label": "Address (VIC only) - City/Town",
+      "type": "TEXT"
+    },
+    {
+      "index": 7,
+      "lookups": "",
+      "mandatory": true,
+      "name": "state",
+      "tooltip": "",
+      "label": "Address (VIC only) - State/County",
+      "type": "TEXT"
+    },
+    {
+      "index": 8,
+      "lookups": "",
+      "mandatory": true,
+      "name": "postcode",
+      "tooltip": "",
+      "label": "Address (VIC only) - Postcode/ZIP",
+      "type": "TEXT"
+    },
+    {
+      "index": 9,
+      "lookups": "",
+      "mandatory": true,
+      "name": "emailaddress",
+      "tooltip": "",
+      "label": "Email",
+      "type": "EMAIL"
+    },
+    {
+      "index": 10,
+      "lookups": "",
+      "mandatory": true,
+      "name": "mobiletelephone",
+      "tooltip": "",
+      "label": "Phone",
+      "type": "TELEPHONE"
+    },
+    {
+      "index": 11,
+      "lookups": "— Select —|Alpine|Ararat|Ballarat|Banyule|Baw Baw|Bayside|Benalla|Boroondara|Brimbank|Buloke|Campaspe|Cardinia|Casey|Central Goldfields|Colac Otway|Corangamite|Darebin|East Gippsland|Frankston|Gannawarra|Glen Eira|Glenelg|Golden Plains|Greater Bendigo|Greater Dandenong|Greater Geelong|Hepburn|Hindmarsh|Hobsons Bay|Horsham|Hume|Indigo|Kingston|Knox|Latrobe|Loddon|Macedon Ranges|Manningham|Mansfield|Maribyrnong|Maroondah|Melbourne|Melton|Mildura|Mitchell|Moira|Monash|Moonee Valley|Moorabool|Moreland|Mornington Peninsula|Mount Alexander|Moyne|Murrindindi|Nillumbik|Northern Grampians|Port Phillip|Pyrenees|Queenscliffe|South Gippsland|Southern Grampians|Stonnington|Strathbogie|Surf Coast|Swan Hill|Towong|Wangaratta|Warrnambool|Wellington|West Wimmera|Whitehorse|Whittlesea|Wodonga|Wyndham|Yarra|Yarra Ranges|Yarriambiack|Other",
+      "mandatory": true,
+      "name": "your_local_council_vic_only",
+      "tooltip": "",
+      "label": "Your Local Council (VIC only)",
+      "type": "LOOKUP"
+    },
+    {
+      "index": 12,
+      "lookups": "",
+      "mandatory": false,
+      "name": "questions_about_your_lifestyle",
+      "tooltip": "",
+      "label": "Questions about your Lifestyle",
+      "type": "TEXT"
+    },
+    {
+      "index": 13,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "q13",
+      "tooltip": "",
+      "label": "1. Do you have any kids living at home?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 14,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q14",
+      "tooltip": "",
+      "label": "2. If yes, how old are they and have they lived with a cat before?",
+      "type": "TEXT"
+    },
+    {
+      "index": 15,
+      "lookups": "",
+      "mandatory": true,
+      "name": "do_you_currently_have_any_pets_if_so_wha",
+      "tooltip": "",
+      "label": "Do you currently have any pets? If so, what kind? Breed, age, gender, desexed? Up to date with parasite control and vaccinations?",
+      "type": "TEXT"
+    },
+    {
+      "index": 16,
+      "lookups": "",
+      "mandatory": true,
+      "name": "do_you_have_any_experience_with_pets_and",
+      "tooltip": "",
+      "label": "Do you have any experience with pets and/or fostering animals? If yes or no, please explain and elaborate.",
+      "type": "TEXT"
+    },
+    {
+      "index": 17,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "when_fostering_a_cat_are_you_able_to_tra",
+      "tooltip": "",
+      "label": "When fostering a cat, are you able to transport it to a Homeless Hounds vet?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 18,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "are_you_able_to_keep_your_foster_cat_ind",
+      "tooltip": "",
+      "label": "Are you able to keep your foster cat indoors or in a suitable cat enclosure during the day?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 19,
+      "lookups": "",
+      "mandatory": true,
+      "name": "if_you_have_any_other_pets_are_the_socia",
+      "tooltip": "",
+      "label": "If you have any other pets are the social with other animals? If not please specify (e.g. does not like male cats). If you have a dog, is he…",
+      "type": "TEXT"
+    },
+    {
+      "index": 20,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "are_you_happy_to_talk_to_potential_adopt",
+      "tooltip": "",
+      "label": "Are you happy to talk to potential adopters over the phone about your foster cat/s personality, and assuming suitability, facilitate them me…",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 21,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "are_you_or_is_anyone_in_your_house_aller",
+      "tooltip": "",
+      "label": "Are you or is anyone in your house allergic to cats?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 22,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "do_you_agree_that_we_need_ample_amount_o",
+      "tooltip": "",
+      "label": "Do you agree that we need ample amount of time in regards to notice of you going away for a holiday and/or needing the cat to be moved?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 23,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "are_you_willing_to_commit_to_foster_the_",
+      "tooltip": "",
+      "label": "Are you willing to commit to foster the cat for the term that he/she requires to be in care?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 24,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "would_you_be_interested_in_fostering_wit",
+      "tooltip": "",
+      "label": "Would you be interested in fostering with a view to adoption possibly suitable dogs/cats?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 25,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "would_you_like_to_receive_news_and_updat",
+      "tooltip": "",
+      "label": "Would you like to receive News and Updates from Homeless Hounds? You can opt-out at any time.",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 26,
+      "lookups": "",
+      "mandatory": true,
+      "name": "signature",
+      "tooltip": "",
+      "label": "Signature",
+      "type": "SIGNATURE"
+    },
+    {
+      "index": 27,
+      "lookups": "",
+      "mandatory": true,
+      "name": "date",
+      "tooltip": "",
+      "label": "Date",
+      "type": "DATE"
+    }
+  ]
+}

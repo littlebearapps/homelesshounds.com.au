@@ -1,0 +1,179 @@
+{
+  "name": "Dog Adoption & Fee Payment Form",
+  "description": "",
+  "header": "",
+  "footer": "We, the above listed agree to take all necessary care and precautions with regards to the above-mentioned Dog for the duration of his or her life, effective at the date nominated below. I also agree to pay any fines/fees etc incurred whilst the dog is in my custody. This includes any breaches of the relevant local council regulations or laws (such as the dog being found \"at large\"), the dog being impounded or being injured.\r\n<br> <br>\r\nPlease be aware that we cannot give refunds simply because you change your mind. In line with DELWP regulations, a 75% refund will be given within the first 72 hours. Refunds after 72 hours will be given at our discretion.\r\n<br> <br>\r\nPlease note: Homeless Hounds Animal Rescue is here to support you and your Dog. Please contact us if you need help or advice. We ask that you contact us if you can no longer keep him or her.",
+  "fields": [
+    {
+      "index": 1,
+      "lookups": "",
+      "mandatory": true,
+      "name": "firstname",
+      "tooltip": "",
+      "label": "First name",
+      "type": "TEXT"
+    },
+    {
+      "index": 2,
+      "lookups": "",
+      "mandatory": true,
+      "name": "lastname",
+      "tooltip": "",
+      "label": "Last name",
+      "type": "TEXT"
+    },
+    {
+      "index": 3,
+      "lookups": "",
+      "mandatory": true,
+      "name": "reserveanimalname",
+      "tooltip": "",
+      "label": "Dog you are adopting (name or ID)",
+      "type": "ADOPTABLEANIMAL"
+    },
+    {
+      "index": 4,
+      "lookups": "",
+      "mandatory": true,
+      "name": "microchip_number",
+      "tooltip": "",
+      "label": "Dog microchip number",
+      "type": "TEXT"
+    },
+    {
+      "index": 5,
+      "lookups": "",
+      "mandatory": true,
+      "name": "emailaddress",
+      "tooltip": "",
+      "label": "Email address",
+      "type": "EMAIL"
+    },
+    {
+      "index": 6,
+      "lookups": "",
+      "mandatory": true,
+      "name": "mobiletelephone",
+      "tooltip": "",
+      "label": "Phone number",
+      "type": "TELEPHONE"
+    },
+    {
+      "index": 7,
+      "lookups": "",
+      "mandatory": true,
+      "name": "address",
+      "tooltip": "",
+      "label": "Street address (Australia only)",
+      "type": "TEXT"
+    },
+    {
+      "index": 8,
+      "lookups": "",
+      "mandatory": true,
+      "name": "city",
+      "tooltip": "",
+      "label": "City / Town",
+      "type": "TEXT"
+    },
+    {
+      "index": 9,
+      "lookups": "",
+      "mandatory": true,
+      "name": "state",
+      "tooltip": "",
+      "label": "State",
+      "type": "TEXT"
+    },
+    {
+      "index": 10,
+      "lookups": "",
+      "mandatory": true,
+      "name": "postcode",
+      "tooltip": "",
+      "label": "Postcode",
+      "type": "TEXT"
+    },
+    {
+      "index": 11,
+      "lookups": "",
+      "mandatory": false,
+      "name": "emergency_contact_details",
+      "tooltip": "",
+      "label": "Emergency contact (relationship/notes)",
+      "type": "NOTES"
+    },
+    {
+      "index": 12,
+      "lookups": "",
+      "mandatory": true,
+      "name": "ec_firstname",
+      "tooltip": "",
+      "label": "Emergency contact first name",
+      "type": "TEXT"
+    },
+    {
+      "index": 13,
+      "lookups": "",
+      "mandatory": true,
+      "name": "ec_lastname",
+      "tooltip": "",
+      "label": "Emergency contact last name",
+      "type": "TEXT"
+    },
+    {
+      "index": 14,
+      "lookups": "",
+      "mandatory": true,
+      "name": "ec_phone",
+      "tooltip": "",
+      "label": "Emergency contact phone",
+      "type": "TELEPHONE"
+    },
+    {
+      "index": 15,
+      "lookups": "",
+      "mandatory": true,
+      "name": "signature",
+      "tooltip": "",
+      "label": "Signature",
+      "type": "SIGNATURE"
+    },
+    {
+      "index": 16,
+      "lookups": "",
+      "mandatory": true,
+      "name": "date_of_signing",
+      "tooltip": "",
+      "label": "Date of signing",
+      "type": "DATE"
+    },
+    {
+      "index": 17,
+      "lookups": "",
+      "mandatory": false,
+      "name": "payment_intro",
+      "tooltip": "",
+      "label": "Payment",
+      "type": "RAWMARKUP"
+    },
+    {
+      "index": 18,
+      "lookups": "Card (Stripe Checkout)|Bank transfer",
+      "mandatory": true,
+      "name": "payment_method",
+      "tooltip": "",
+      "label": "Select a payment method",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 19,
+      "lookups": "",
+      "mandatory": false,
+      "name": "bank_transfer_details",
+      "tooltip": "",
+      "label": "Bank transfer details (send receipt to accounts@homelesshounds.com.au)",
+      "type": "NOTES"
+    }
+  ]
+}

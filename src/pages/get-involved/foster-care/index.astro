@@ -1,6 +1,7 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import CTASection from "../../../components/CTASection.astro";
+import FosterModal from "../../../components/FosterModal.astro";
 ---
 
 <Base title="Foster Care | Homeless Hounds Animal Rescue">
@@ -115,53 +116,109 @@ import CTASection from "../../../components/CTASection.astro";
       <!-- Foster Care FAQ -->
       <section class="bg-white rounded-lg shadow-md p-8 mb-12">
         <h3 class="text-2xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h3>
-        <div class="space-y-8">
+        <div class="space-y-4">
 
           <!-- FAQ 1 -->
-          <div class="border-b border-gray-200 pb-6">
-            <h4 class="text-lg font-semibold text-gray-900 mb-3">How long do animals stay in foster care?</h4>
-            <p class="text-gray-700">
-              Foster periods vary depending on the animal's needs. It could be a few weeks for a healthy animal
-              waiting for adoption, several months for a mother with babies, or longer for animals requiring
-              medical treatment or behavioural rehabilitation. We'll always discuss the expected timeframe with you beforehand.
-            </p>
+          <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <button
+              onclick="toggleAccordion('faq-1')"
+              class="w-full px-6 py-4 flex items-center justify-between text-left bg-gray-50 hover:bg-gray-100 transition-colors group"
+            >
+              <h4 class="text-lg font-semibold text-gray-900 group-hover:text-teal-700">
+                How long do animals stay in foster care?
+              </h4>
+              <svg id="faq-1-icon" class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7 7"></path>
+              </svg>
+            </button>
+            <div id="faq-1-content" class="hidden">
+              <div class="px-6 py-4 bg-white">
+                <p class="text-gray-700">
+                  Foster periods vary depending on the animal's needs. It could be a few weeks for a healthy animal
+                  waiting for adoption, several months for a mother with babies, or longer for animals requiring
+                  medical treatment or behavioural rehabilitation. We'll always discuss the expected timeframe with you beforehand.
+                </p>
+              </div>
+            </div>
           </div>
 
           <!-- FAQ 2 -->
-          <div class="border-b border-gray-200 pb-6">
-            <h4 class="text-lg font-semibold text-gray-900 mb-3">What support do foster carers receive?</h4>
-            <p class="text-gray-700">
-              Homeless Hounds covers all veterinary expenses and provides food, bedding, toys, and any other
-              supplies needed. You'll have 24/7 access to our support team and experienced volunteers for advice
-              and assistance. We also provide training and resources to help you succeed as a foster carer.
-            </p>
+          <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <button
+              onclick="toggleAccordion('faq-2')"
+              class="w-full px-6 py-4 flex items-center justify-between text-left bg-gray-50 hover:bg-gray-100 transition-colors group"
+            >
+              <h4 class="text-lg font-semibold text-gray-900 group-hover:text-teal-700">
+                What support do foster carers receive?
+              </h4>
+              <svg id="faq-2-icon" class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7 7"></path>
+              </svg>
+            </button>
+            <div id="faq-2-content" class="hidden">
+              <div class="px-6 py-4 bg-white">
+                <p class="text-gray-700">
+                  Homeless Hounds covers all veterinary expenses and provides food, bedding, toys, and any other
+                  supplies needed. You'll have 24/7 access to our support team and experienced volunteers for advice
+                  and assistance. We also provide training and resources to help you succeed as a foster carer.
+                </p>
+              </div>
+            </div>
           </div>
 
           <!-- FAQ 3 -->
-          <div class="border-b border-gray-200 pb-6">
-            <h4 class="text-lg font-semibold text-gray-900 mb-3">What if I fall in love with my foster animal?</h4>
-            <p class="text-gray-700">
-              Foster carers have first option to adopt their foster animals! Many of our volunteers have become
-              "foster failures" – and we couldn't be happier. If you decide to adopt, you'll go through the same
-              adoption process as any other applicant to ensure it's the right match.
-            </p>
+          <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <button
+              onclick="toggleAccordion('faq-3')"
+              class="w-full px-6 py-4 flex items-center justify-between text-left bg-gray-50 hover:bg-gray-100 transition-colors group"
+            >
+              <h4 class="text-lg font-semibold text-gray-900 group-hover:text-teal-700">
+                What if I fall in love with my foster animal?
+              </h4>
+              <svg id="faq-3-icon" class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7 7"></path>
+              </svg>
+            </button>
+            <div id="faq-3-content" class="hidden">
+              <div class="px-6 py-4 bg-white">
+                <p class="text-gray-700">
+                  Foster carers have first option to adopt their foster animals! Many of our volunteers have become
+                  "foster failures" – and we couldn't be happier. If you decide to adopt, you'll go through the same
+                  adoption process as any other applicant to ensure it's the right match.
+                </p>
+              </div>
+            </div>
           </div>
 
           <!-- FAQ 4 -->
-          <div class="border-b border-gray-200 pb-6">
-            <h4 class="text-lg font-semibold text-gray-900 mb-3">Do I need experience with animals to foster?</h4>
-            <p class="text-gray-700">
-              While experience is helpful, it's not essential. What matters most is your commitment, patience, and
-              willingness to learn. We provide comprehensive support and training to all our foster carers, regardless
-              of their experience level. We'll match you with animals that suit your comfort level and experience.
-            </p>
+          <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <button
+              onclick="toggleAccordion('faq-4')"
+              class="w-full px-6 py-4 flex items-center justify-between text-left bg-gray-50 hover:bg-gray-100 transition-colors group"
+            >
+              <h4 class="text-lg font-semibold text-gray-900 group-hover:text-teal-700">
+                Do I need experience with animals to foster?
+              </h4>
+              <svg id="faq-4-icon" class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7 7"></path>
+              </svg>
+            </button>
+            <div id="faq-4-content" class="hidden">
+              <div class="px-6 py-4 bg-white">
+                <p class="text-gray-700">
+                  While experience is helpful, it's not essential. What matters most is your commitment, patience, and
+                  willingness to learn. We provide comprehensive support and training to all our foster carers, regardless
+                  of their experience level. We'll match you with animals that suit your comfort level and experience.
+                </p>
+              </div>
+            </div>
           </div>
 
         </div>
       </section>
 
       <!-- Application Information -->
-      <section class="bg-white rounded-lg shadow-md p-8 mb-12">
+      <section id="application" class="bg-white rounded-lg shadow-md p-8 mb-12">
         <h3 class="text-2xl font-bold text-gray-900 mb-6">Ready to Start Fostering?</h3>
         <div class="prose prose-lg max-w-none text-gray-700 mb-8">
           <p class="mb-4">
@@ -171,41 +228,74 @@ import CTASection from "../../../components/CTASection.astro";
           </p>
           <p class="mb-6">
             We have separate application processes for dog and cat foster carers, as the requirements
-            and considerations can be different for each type of animal.
+            and considerations can be different for each type of animal. Choose the application that best
+            suits your interests below.
           </p>
         </div>
 
-        <!-- Current Application Note -->
-        <div class="bg-amber-50 border border-amber-200 rounded-lg p-6 mb-8">
-          <div class="flex">
-            <div class="flex-shrink-0">
-              <svg class="h-5 w-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+        <!-- Foster Application Options -->
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <!-- Dog Foster Application -->
+          <div class="bg-gradient-to-br from-blue-50 to-white border border-blue-200 rounded-lg p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center mr-4 shadow-lg">
+                <span class="text-2xl">🐕</span>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900">Dog Foster Care</h4>
+            </div>
+            <p class="text-gray-700 mb-4">
+              Foster dogs of all ages, from puppies to seniors. Perfect for those who enjoy active companionship and daily walks.
+            </p>
+            <button
+              onclick="openDogFosterModal()"
+              class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-colors flex items-center justify-center"
+            >
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 128 128">
+                <path d="M35.9,13c-3.5-3.5-9.3-4.4-12.7-1.2L4.5,30.5c-2.9,2.9-1.6,7.7,2.3,8.7L10,40c8.1,2.1,16.3-2.7,18.5-10.7 l2-7.7c0.3-1.1,1.4-1.7,2.4-1.4c1.1,0.3,1.7,1.4,1.4,2.4L32.6,29c3.4-1.9,7.3-3,11.5-3h4.7L35.9,13z"/>
+                <path d="M92.1,13c3.5-3.5,9.3-4.4,12.7-1.2l18.6,18.7c2.9,2.9,1.6,7.7-2.3,8.7l-3.2,0.8c-8.1,2.1-16.3-2.7-18.5-10.7 l-2-7.7c-0.3-1.1-1.4-1.7-2.4-1.4s-1.7,1.4-1.4,2.4l1.7,6.4c-3.4-1.9-7.3-3-11.5-3h-4.7L92.1,13z"/>
+                <path d="M103.6,59.9V49.8c0-10.8-8.9-19.7-19.7-19.7H44.3c-10.8,0-19.7,8.9-19.7,19.7v10.1c-3.1,4.1-5,9.3-5,15v14.9 c0,12.3,8.9,22.6,20.7,24.7c0.1,0,0.1,0,0.2,0c0.3,0.1,0.6,0.1,1,0.1c0.6,0.1,1.2,0.1,1.8,0.2c0.2,0,0.4,0,0.5,0c0.2,0,0.3,0,0.5,0 h0.5h7.5c3.2,2.7,7.2,4.2,11.7,4.2s8.5-1.6,11.7-4.2h7.6h0.5c0.2,0,0.3,0,0.5,0s0.4,0,0.5,0c0.6,0,1.2-0.1,1.8-0.2 c0.3,0,0.6-0.1,1-0.1c0.1,0,0.1,0,0.2,0c11.7-2.1,20.7-12.4,20.7-24.7V74.9C108.5,69.3,106.7,64.1,103.6,59.9z M82.5,47.7 c3.6,0,6.6,3,6.6,6.6s-3,6.6-6.6,6.6s-6.6-3-6.6-6.6C76,50.6,78.9,47.7,82.5,47.7z M45.5,47.7c3.6,0,6.6,3,6.6,6.6s-3,6.6-6.6,6.6 s-6.6-3-6.6-6.6C39,50.6,41.9,47.7,45.5,47.7z M64,114.9c-7.4,0-13.6-5.8-14-13.3c4.6,0,8.9-1.6,12.3-4.5v10.6c0,1,0.7,1.8,1.8,1.8 s1.8-0.7,1.8-1.8V97.1c3.4,2.8,7.7,4.5,12.3,4.5C77.6,109,71.4,114.9,64,114.9z M97.7,81.2c0,9.8-8,17.8-17.8,17.8 c-6.9,0-12.8-3.9-15.8-9.7c-3,5.7-8.9,9.7-15.8,9.7c-9.8,0-17.8-8-17.8-17.8v-5.8c0-1.1,0.8-2,2-2s2,0.8,2,2v5.8 c0,7.6,6.2,13.8,13.8,13.8c7,0,12.7-5.2,13.7-12c-0.1-0.1-0.1-0.1-0.2-0.2l-8-12.1c-1.1-1.6,0.2-3.5,2.3-3.5h16c2,0,3.3,1.9,2.3,3.5 l-8,12.1c0,0.1-0.1,0.1-0.2,0.2c1,6.8,6.7,12,13.7,12c7.6,0,13.8-6.2,13.8-13.8v-5.8c0-1.1,0.8-2,2-2s2,0.8,2,2V81.2L97.7,81.2z"/>
               </svg>
+              Apply to Foster Dogs
+            </button>
+          </div>
+
+          <!-- Cat Foster Application -->
+          <div class="bg-gradient-to-br from-amber-50 to-white border border-amber-200 rounded-lg p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-700 rounded-full flex items-center justify-center mr-4 shadow-lg">
+                <span class="text-2xl">🐱</span>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900">Cat Foster Care</h4>
             </div>
-            <div class="ml-3">
-              <p class="text-sm text-amber-700">
-                <strong>Foster applications are currently being updated.</strong>
-                Please <a href="/contact-us" class="underline text-blue-600 hover:text-blue-700">contact us directly</a>
-                if you're interested in becoming a foster carer and we'll guide you through the application process.
-              </p>
-            </div>
+            <p class="text-gray-700 mb-4">
+              Foster cats and kittens, including mothers with babies. Ideal for those who prefer quieter companions and indoor care.
+            </p>
+            <button
+              onclick="openCatFosterModal()"
+              class="w-full bg-gradient-to-r from-amber-600 to-amber-700 text-white font-semibold py-3 px-6 rounded-lg hover:from-amber-700 hover:to-amber-800 transition-colors flex items-center justify-center"
+            >
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7501 6.40636C10.2698 6.40636 10.1222 6.5625 9.3561 6.5625C8.71769 6.5625 6.80245 5 5.84485 5C4.88724 5 3.77004 5.5625 3.77004 7.1875V9.0625C3.77197 9.55469 3.95081 11.0634 4.65075 10.6602C3.82323 11.6382 3.73963 12.7786 3.751 13.8826C3.52812 13.947 3.30072 14.0196 3.08003 14.095C2.39614 14.3289 1.67085 14.6271 1.3432 14.8387C0.995241 15.0634 0.895339 15.5277 1.12006 15.8756C1.34478 16.2236 1.80903 16.3235 2.15698 16.0988C2.3132 15.9979 2.87823 15.7493 3.56532 15.5144C3.64124 15.4884 3.71731 15.4631 3.79298 15.4386C3.83925 15.8724 3.95408 16.2684 4.12478 16.6292L4.1012 16.6416C3.69148 16.8581 3.3113 17.1067 3.06889 17.2652C3.02694 17.2926 2.98912 17.3173 2.95599 17.3387C2.60803 17.5634 2.50813 18.0277 2.73285 18.3756C2.95757 18.7236 3.42182 18.8235 3.76978 18.5988C3.8109 18.5722 3.85472 18.5436 3.90097 18.5134C4.1463 18.3533 4.45999 18.1485 4.80199 17.9678C4.88218 17.9254 4.95935 17.887 5.03317 17.8524C6.76347 19.4748 9.86991 20 11.7501 20C13.6302 20 16.7367 19.4748 18.467 17.8524C18.5408 17.887 18.6179 17.9254 18.6981 17.9678C19.0401 18.1485 19.3538 18.3533 19.5991 18.5134C19.6454 18.5436 19.6892 18.5722 19.7303 18.5988C20.0783 18.8235 20.5425 18.7236 20.7673 18.3756C20.992 18.0277 20.8921 17.5634 20.5441 17.3387C20.511 17.3173 20.4732 17.2926 20.4312 17.2652C20.1888 17.1067 19.8086 16.8581 19.3989 16.6416L19.3754 16.6292C19.5461 16.2683 19.6609 15.8724 19.7072 15.4385C19.783 15.463 19.8592 15.4883 19.9352 15.5144C20.6223 15.7493 21.1874 15.9979 21.3436 16.0988C21.6915 16.3235 22.1558 16.2236 22.3805 15.8756C22.6052 15.5277 22.5053 15.0634 22.1574 14.8387C21.8297 14.6271 21.1044 14.3289 20.4205 14.095C20.1997 14.0195 19.9722 13.947 19.7492 13.8825C19.7605 12.7785 19.6769 11.6382 18.8494 10.6602C19.5494 11.0634 19.7282 9.55469 19.7302 9.0625V7.18761C19.7302 5.56261 18.6129 5.00011 17.6553 5.00011C16.6977 5.00011 14.7825 6.5625 14.1441 6.5625C13.378 6.5625 13.2305 6.40636 11.7501 6.40636ZM11.0745 15.6004C11.2771 15.5314 11.5162 15.5 11.7501 15.5C11.984 15.5 12.2231 15.5314 12.4257 15.6004C12.5251 15.6342 12.6467 15.6876 12.7537 15.7738C12.8612 15.8603 13.0001 16.0206 13.0001 16.25C13.0001 16.4794 12.8612 16.6397 12.7537 16.7262C12.6467 16.8124 12.5251 16.8658 12.4257 16.8996C12.2231 16.9686 11.984 17 11.7501 17C11.5162 17 11.2771 16.9686 11.0745 16.8996C10.9751 16.8658 10.8535 16.8124 10.7464 16.7262C10.6389 16.6397 10.5001 16.4794 10.5001 16.25C10.5001 16.0206 10.6389 15.8603 10.7464 15.7738C10.8535 15.6876 10.9751 15.6342 11.0745 15.6004ZM13.9201 12.5005C14.0566 12.2721 14.326 12 14.7301 12C15.1342 12 15.4036 12.2721 15.54 12.5005C15.6823 12.7387 15.7501 13.0274 15.7501 13.3125C15.7501 13.5976 15.6823 13.8863 15.54 14.1245C15.4036 14.3529 15.1342 14.625 14.7301 14.625C14.326 14.625 14.0566 14.3529 13.9201 14.1245C13.7778 13.8863 13.7101 13.5976 13.7101 13.3125C13.7101 13.0274 13.7778 12.7387 13.9201 12.5005ZM7.96016 12.5005C8.09658 12.2721 8.36599 12 8.7701 12C9.17421 12 9.44362 12.2721 9.58004 12.5005C9.72234 12.7387 9.79011 13.0274 9.79011 13.3125C9.79011 13.5976 9.72234 13.8863 9.58004 14.1245C9.44362 14.3529 9.17421 14.625 8.7701 14.625C8.36599 14.625 8.09658 14.3529 7.96016 14.1245C7.81786 13.8863 7.75009 13.5976 7.75009 13.3125C7.75009 13.0274 7.81786 12.7387 7.96016 12.5005Z" />
+              </svg>
+              Apply to Foster Cats
+            </button>
           </div>
         </div>
 
         <!-- Contact Information -->
-        <div class="bg-indigo-50 border border-indigo-300 rounded-lg p-6">
-          <h4 class="text-lg font-semibold text-indigo-900 mb-4">Get Started Today</h4>
-          <p class="text-indigo-800 mb-4">
-            Ready to open your heart and home to an animal in need? Contact us to begin your foster care journey:
+        <div class="bg-teal-50 border border-teal-300 rounded-lg p-6">
+          <h4 class="text-lg font-semibold text-teal-900 mb-4">Have Questions?</h4>
+          <p class="text-teal-800 mb-4">
+            If you'd like to learn more about fostering before applying, or have specific questions about the process,
+            we're here to help!
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
             <a href="/contact-us"
-               class="inline-block bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-800 transition-colors text-center">
+               class="inline-block bg-teal-700 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-800 transition-colors text-center">
               Contact Us
             </a>
             <a href="mailto:info@homelesshounds.com.au"
-               class="inline-block bg-white text-indigo-700 border-2 border-indigo-700 font-bold py-3 px-6 rounded-lg hover:bg-indigo-50 transition-colors text-center">
+               class="inline-block bg-white text-teal-700 border-2 border-teal-700 font-bold py-3 px-6 rounded-lg hover:bg-teal-50 transition-colors text-center">
               Email Us
             </a>
           </div>
@@ -278,4 +368,25 @@ import CTASection from "../../../components/CTASection.astro";
 
   <!-- CTA Section -->
   <CTASection />
+
+  <!-- Foster Application Modals -->
+  <FosterModal species="dog" formId="68" />
+  <FosterModal species="cat" formId="69" />
 </Base>
+
+<script>
+  function toggleAccordion(id: string) {
+    const content = document.getElementById(id + '-content');
+    const icon = document.getElementById(id + '-icon');
+
+    if (content && icon) {
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+      } else {
+        content.classList.add('hidden');
+        icon.style.transform = 'rotate(0deg)';
+      }
+    }
+  }
+</script>

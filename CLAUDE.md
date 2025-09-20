@@ -10,7 +10,7 @@
 **Project Type**: Charity website (Non-commercial volunteer project)  
 **Timeline**: Flexible (volunteer basis)  
 **Platform**: Astro v5 + Tailwind CSS v4  
-**Status**: Phase 3 - Email System Complete with Advanced Monitoring
+**Status**: Phase 3 - All Volunteer & Foster Forms Active
 
 ## 🔧 Technical Stack
 
@@ -49,10 +49,10 @@ src/
 
 ## 🚧 Current Focus
 
-**Recently Completed**: Volunteer page complete redesign with accordion opportunities, modern UI, and privacy policy page (2025-09-18)
-**Active Task**: Core website structure enhanced with improved UX across all pages
-**Next Milestone**: Implement volunteer/foster/adoption application forms with ASM integration
-**Priority**: Complete remaining form integrations for volunteer and adoption workflows
+**Recently Completed**: All volunteer forms active - Foster (dog #68, cat #69) and Pet Courier (#67) with modals (2025-09-20)
+**Active Task**: Adoption application forms for dogs and cats
+**Next Milestone**: Complete adoption application forms and volunteer registration
+**Priority**: Finalize adoption workflow and volunteer registration form
 
 ## ⚠️ Critical Requirements
 
@@ -94,7 +94,11 @@ src/
 - [x] **Automated alerts for critical delivery issues**
 - [x] **Signature verification for webhook security**
 - [ ] Volunteer registration form (ASM form ID 36)
-- [ ] Adoption application form (ASM form ID 39)
+- [x] Dog adoption application form (ASM form ID 38 - modal ready)
+- [x] Cat adoption application form (ASM form ID 39 - modal ready)
+- [x] Dog foster application form (ASM form ID 68)
+- [x] Cat foster application form (ASM form ID 69)
+- [x] Pet courier application form (ASM form ID 67)
 - [x] Turnstile spam protection integration
 
 **Phase 4 - Donations**:
@@ -126,8 +130,11 @@ src/
 **Form ID Mapping** (ASM):
 - Form ID 36: Volunteer registration
 - Form ID 37: Animal surrender ✅ (with email notifications)
-- Form ID 38: Adoption application
-- Form ID 39: Foster care application
+- Form ID 38: Dog adoption application (modal ready)
+- Form ID 39: Cat adoption application (modal ready)
+- Form ID 67: Pet courier application ✅ (modal active)
+- Form ID 68: Dog foster application ✅ (modal active)
+- Form ID 69: Cat foster application ✅ (modal active)
 
 **ASM API Authentication**:
 - **Service Account**: `api_service_account` (no-login account for API-only access)
@@ -176,5 +183,5 @@ src/
 ---
 
 **Token Count**: ~650 (Optimized for Claude Code)
-**Last Updated**: 2025-09-18
-**Version**: 0.5.0
+**Last Updated**: 2025-09-20
+**Version**: 0.6.0

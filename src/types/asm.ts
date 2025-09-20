@@ -104,6 +104,9 @@ export interface ASMAnimal {
   // Enhanced Location Fields
   CURRENTOWNERADDRESS?: string;
   CURRENTOWNERPOSTCODE?: string;
+  CURRENTOWNERCOUNTY?: string;
+  CURRENTOWNERTOWN?: string;
+  CURRENTOWNERCOUNTRY?: string;
   
   // Entry & History
   DATEBROUGHTIN: string;
@@ -261,7 +264,12 @@ export function createAnimalProfile(animal: ASMAnimal): AnimalProfile {
     },
     adoption: {
       fee: animal.ADOPTIONDONATION || animal.FEE,
-      location: animal.CURRENTOWNERADDRESS || animal.DISPLAYLOCATIONNAME,
+      location: animal.CURRENTOWNERTOWN && animal.CURRENTOWNERCOUNTY
+        ? `${animal.CURRENTOWNERTOWN}, ${animal.CURRENTOWNERCOUNTY}`
+        : animal.CURRENTOWNERADDRESS ||
+          (animal.DISPLAYLOCATIONNAME && !['Foster', 'Shelter', 'foster', 'shelter'].includes(animal.DISPLAYLOCATIONNAME)
+            ? animal.DISPLAYLOCATIONNAME
+            : 'Contact for details'),
       isReserved: animal.HASACTIVERESERVE === 1,
       coordinator: animal.ADOPTIONCOORDINATORNAME,
       sourceNumber: animal.SOURCENUMBER

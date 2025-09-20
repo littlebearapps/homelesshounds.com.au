@@ -1,0 +1,458 @@
+{
+  "name": "Dog Adoption Application",
+  "description": "Victorian residents only. This form takes ~10–15 minutes.",
+  "header": "",
+  "footer": "By submitting this form, you declare that all details are accurate to the best of your knowledge. \r\n<br><br>\r\nUpon review and approval, Homeless Hounds will contact you as soon as possible. \r\n<br><br>\r\nWe reserve the right to refuse any applicant. We will require the successful applicant to sign an adoption agreement, provide pictures of the yard as you have described above and allowed for a yard check before adoption.\r\n<br><br>\r\nWe appreciate you taking the time to complete this application.",
+  "fields": [
+    {
+      "index": 1,
+      "lookups": "Specific dog|Any suitable dog",
+      "mandatory": true,
+      "name": "q01",
+      "tooltip": "",
+      "label": "Are you applying for a specific dog or open to any suitable dog?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 2,
+      "lookups": "",
+      "mandatory": true,
+      "name": "reserveanimalname",
+      "tooltip": "",
+      "label": "Dog you are applying for (name or ID)",
+      "type": "ADOPTABLEANIMAL"
+    },
+    {
+      "index": 3,
+      "lookups": "",
+      "mandatory": true,
+      "name": "firstname",
+      "tooltip": "",
+      "label": "First name",
+      "type": "TEXT"
+    },
+    {
+      "index": 4,
+      "lookups": "",
+      "mandatory": true,
+      "name": "lastname",
+      "tooltip": "",
+      "label": "Last name",
+      "type": "TEXT"
+    },
+    {
+      "index": 5,
+      "lookups": "",
+      "mandatory": false,
+      "name": "dateofbirth",
+      "tooltip": "",
+      "label": "Date of birth",
+      "type": "DATE"
+    },
+    {
+      "index": 6,
+      "lookups": "",
+      "mandatory": true,
+      "name": "address",
+      "tooltip": "",
+      "label": "Street address",
+      "type": "TEXT"
+    },
+    {
+      "index": 7,
+      "lookups": "",
+      "mandatory": true,
+      "name": "city",
+      "tooltip": "",
+      "label": "City / Town",
+      "type": "TEXT"
+    },
+    {
+      "index": 8,
+      "lookups": "",
+      "mandatory": true,
+      "name": "state",
+      "tooltip": "",
+      "label": "State",
+      "type": "TEXT"
+    },
+    {
+      "index": 9,
+      "lookups": "",
+      "mandatory": true,
+      "name": "postcode",
+      "tooltip": "",
+      "label": "Postcode",
+      "type": "TEXT"
+    },
+    {
+      "index": 10,
+      "lookups": "",
+      "mandatory": true,
+      "name": "emailaddress",
+      "tooltip": "",
+      "label": "Email address",
+      "type": "EMAIL"
+    },
+    {
+      "index": 11,
+      "lookups": "",
+      "mandatory": true,
+      "name": "mobiletelephone",
+      "tooltip": "",
+      "label": "Phone number",
+      "type": "TELEPHONE"
+    },
+    {
+      "index": 12,
+      "lookups": "— Select —|Banyule|Bayside|Boroondara|Brimbank|Casey|Darebin|Frankston|Glen Eira|Greater Dandenong|Greater Geelong|Hobsons Bay|Hume|Kingston|Knox|Manningham|Maribyrnong|Maroondah|Melbourne|Melton|Monash|Moonee Valley|Moreland|Mornington Peninsula|Nillumbik|Port Phillip|Stonnington|Whitehorse|Whittlesea|Wyndham|Yarra|Yarra Ranges|Other",
+      "mandatory": true,
+      "name": "q02",
+      "tooltip": "",
+      "label": "Your local council (VIC only)",
+      "type": "LOOKUP"
+    },
+    {
+      "index": 13,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q03",
+      "tooltip": "",
+      "label": "Briefly describe your household and daily routine for the dog.",
+      "type": "NOTES"
+    },
+    {
+      "index": 14,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q04",
+      "tooltip": "",
+      "label": "Are there children under 18 who live with or regularly visit the dog?",
+      "type": "YESNO"
+    },
+    {
+      "index": 15,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q05",
+      "tooltip": "",
+      "label": "If yes, what are the ages?",
+      "type": "TEXT"
+    },
+    {
+      "index": 16,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q06",
+      "tooltip": "",
+      "label": "Have those children regularly interacted with dogs before?",
+      "type": "YESNO"
+    },
+    {
+      "index": 17,
+      "lookups": "Elderly people|Cats|Livestock|Other",
+      "mandatory": true,
+      "name": "q07",
+      "tooltip": "",
+      "label": "Will the dog regularly be around any of the following? (select all that apply)",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 18,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q08",
+      "tooltip": "",
+      "label": "If selected, please provide brief details.",
+      "type": "NOTES"
+    },
+    {
+      "index": 19,
+      "lookups": "Inside|Outside|Both",
+      "mandatory": true,
+      "name": "q09",
+      "tooltip": "",
+      "label": "Where will the dog stay when you are out during the day?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 20,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q10",
+      "tooltip": "",
+      "label": "If Outside or Both, provide details (shade, water, shelter, yard size).",
+      "type": "NOTES"
+    },
+    {
+      "index": 21,
+      "lookups": "Inside|Outside|Both",
+      "mandatory": true,
+      "name": "q11",
+      "tooltip": "",
+      "label": "Where will the dog sleep at night?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 22,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q12",
+      "tooltip": "",
+      "label": "If Outside or Both, provide details.",
+      "type": "NOTES"
+    },
+    {
+      "index": 23,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q13",
+      "tooltip": "",
+      "label": "Will the dog be without human company for periods of the day?",
+      "type": "YESNO"
+    },
+    {
+      "index": 24,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q14",
+      "tooltip": "",
+      "label": "If yes, about how many hours per day?",
+      "type": "TEXT"
+    },
+    {
+      "index": 25,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q15",
+      "tooltip": "",
+      "label": "Do you currently have other pets?",
+      "type": "YESNO"
+    },
+    {
+      "index": 26,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q16",
+      "tooltip": "",
+      "label": "If yes, list species/breed, age, sex, desexed, parasite control, vaccinations, temperament with other animals.",
+      "type": "NOTES"
+    },
+    {
+      "index": 27,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q17",
+      "tooltip": "",
+      "label": "Tell us about previous dogs you’ve owned (breed, sex, desexed, why no longer with you).",
+      "type": "NOTES"
+    },
+    {
+      "index": 28,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q18",
+      "tooltip": "",
+      "label": "Do you have experience fostering animals?",
+      "type": "YESNO"
+    },
+    {
+      "index": 29,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q19",
+      "tooltip": "",
+      "label": "If yes, please provide details.",
+      "type": "NOTES"
+    },
+    {
+      "index": 30,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q20",
+      "tooltip": "",
+      "label": "How often will you walk the dog? How long? On-lead or off-lead?",
+      "type": "NOTES"
+    },
+    {
+      "index": 31,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q21",
+      "tooltip": "",
+      "label": "If enquiring about a particular dog, why are you interested in them?",
+      "type": "NOTES"
+    },
+    {
+      "index": 32,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q22",
+      "tooltip": "",
+      "label": "What are you looking for? (breed, size, age, sex, traits).",
+      "type": "NOTES"
+    },
+    {
+      "index": 33,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q23",
+      "tooltip": "",
+      "label": "Any breed/traits you would not consider?",
+      "type": "NOTES"
+    },
+    {
+      "index": 34,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q24",
+      "tooltip": "",
+      "label": "If this dog isn’t a match, would you like us to suggest other suitable dogs?",
+      "type": "YESNO"
+    },
+    {
+      "index": 35,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q25",
+      "tooltip": "",
+      "label": "If you adopt, how soon could you collect the dog?",
+      "type": "TEXT"
+    },
+    {
+      "index": 36,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q26",
+      "tooltip": "",
+      "label": "Do you have a yard or safe outdoor area?",
+      "type": "YESNO"
+    },
+    {
+      "index": 37,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q27",
+      "tooltip": "",
+      "label": "Describe the area (size, fencing type/height, containment, toilet area).",
+      "type": "NOTES"
+    },
+    {
+      "index": 38,
+      "lookups": "",
+      "mandatory": false,
+      "name": "q28",
+      "tooltip": "",
+      "label": "If you live on acreage, how will you restrain the dog when you’re away?",
+      "type": "NOTES"
+    },
+    {
+      "index": 39,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q29",
+      "tooltip": "",
+      "label": "Do you have a swimming pool?",
+      "type": "YESNO"
+    },
+    {
+      "index": 40,
+      "lookups": "Yes|No|Not applicable",
+      "mandatory": true,
+      "name": "q30",
+      "tooltip": "",
+      "label": "If yes, is the pool securely fenced?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 41,
+      "lookups": "Obedience classes|Self-training|Both|Unsure",
+      "mandatory": true,
+      "name": "q31",
+      "tooltip": "",
+      "label": "How do you plan to train the dog?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 42,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q32",
+      "tooltip": "",
+      "label": "If self-training, what methods will you use?",
+      "type": "NOTES"
+    },
+    {
+      "index": 43,
+      "lookups": "Yes|No|Prefer quieter settings",
+      "mandatory": true,
+      "name": "q33",
+      "tooltip": "",
+      "label": "Should your dog be comfortable at busy dog parks / around many dogs?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 44,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q34",
+      "tooltip": "",
+      "label": "If no/prefer quiet, how will you socialise your dog appropriately?",
+      "type": "NOTES"
+    },
+    {
+      "index": 45,
+      "lookups": "Own|Rent|Other",
+      "mandatory": true,
+      "name": "q35",
+      "tooltip": "",
+      "label": "Do you own or rent your home?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 46,
+      "lookups": "Yes|No|Not applicable",
+      "mandatory": true,
+      "name": "q36",
+      "tooltip": "",
+      "label": "If renting, do you have landlord permission to keep a dog?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 47,
+      "lookups": "Citizen|Permanent resident|Neither",
+      "mandatory": true,
+      "name": "q37",
+      "tooltip": "",
+      "label": "Are you an Australian citizen or permanent resident?",
+      "type": "RADIOGROUP"
+    },
+    {
+      "index": 48,
+      "lookups": "",
+      "mandatory": false,
+      "name": "q38",
+      "tooltip": "",
+      "label": "I agree to receive updates from Homeless Hounds (opt out anytime).",
+      "type": "GDPR_CONTACT_OPTIN"
+    },
+    {
+      "index": 49,
+      "lookups": "",
+      "mandatory": true,
+      "name": "signature",
+      "tooltip": "",
+      "label": "Signature",
+      "type": "SIGNATURE"
+    },
+    {
+      "index": 50,
+      "lookups": "",
+      "mandatory": true,
+      "name": "q39",
+      "tooltip": "",
+      "label": "Date of signing",
+      "type": "DATE"
+    }
+  ]
+}

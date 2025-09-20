@@ -2,10 +2,10 @@
 
 ## 📍 Project Stage
 
-**Current Phase**: 2 - Core Implementation
-**Progress**: 70% complete
-**Last Session**: 2025-09-18
-**Session Goal**: Complete production-grade email monitoring with webhooks and alerts
+**Current Phase**: 3 - Forms & Applications Complete
+**Progress**: 85% complete
+**Last Session**: 2025-09-20
+**Session Goal**: Complete all volunteer and foster application forms with modals
 
 ## ✅ Completed This Session
 
@@ -21,25 +21,25 @@
 - [x] Fixed JavaScript errors and Turnstile integration
 - [x] Created universal form submission API endpoint
 - [x] Added form schema API with HTML parsing fallback
+- [x] Complete email system with SendGrid integration
+- [x] Production domain authentication and webhooks
 
-### Today (2025-09-18)
-- [x] **Updated homepage adoption section** with "Meet:" heading and three category buttons
-- [x] **Removed Goodwill Wines** from navigation menu and entire website
-- [x] **Created Privacy Policy page** using content from current WordPress site
-- [x] **Restructured volunteer page** with modern 2-column layout and improved visual hierarchy
-- [x] **Applied modern design updates** to volunteer page matching homepage style
-- [x] **Integrated Code of Conduct** into Getting Started column for better balance
-- [x] **Restructured volunteer CTA section** with improved button layout
-- [x] **Implemented accordion-style opportunities** with always-visible key info and expandable details
-- [x] **Enhanced accordion UI** with colored buttons, "View Details" text, and hover effects
+### Today (2025-09-20)
+- [x] **Fixed cat adoption modal** header display issue (using 'header' field)
+- [x] **Unified hero colors** on animal profile pages (all orange now)
+- [x] **Converted Foster FAQs** to accordion format
+- [x] **Created FosterModal component** for dog (#68) and cat (#69) applications
+- [x] **Fixed modal ID conflicts** preventing cat foster modal from opening
+- [x] **Converted Pet Courier FAQs** to accordion format
+- [x] **Created PetCourierModal component** for courier applications (#67)
+- [x] **Created thank you pages** for foster and pet courier applications
 
 ## 🔄 Active Tasks
 
 ### Next Priority
-- [ ] **Volunteer registration form** (ASM form ID 36) with email notifications
-- [ ] **Adoption application form** (ASM form ID 39) with email notifications
-- [ ] **Remove foster care form functionality** (requested removal)
-- [ ] **Test complete webhook monitoring system** in production
+- [ ] **Volunteer registration form** (ASM form ID 36) with modal
+- [ ] **Test all forms end-to-end** in production environment
+- [ ] **Optimize form loading performance**
 
 ### Future Phases
 - [ ] Donation integration with payment gateway
@@ -50,9 +50,9 @@
 
 **Project Structure**:
 - Pages: `src/pages/adopt/` (native ASM)
-- Components: `src/components/AnimalCard.astro`, `AnimalFilters.astro`
+- Components: `src/components/` (modals: AdoptionModal, FosterModal, PetCourierModal)
 - API Routes: `src/pages/api/asm/`
-- Functions: `functions/api/` (proposed)
+- Email System: `src/lib/email/`
 
 **Live Sites**:
 - Production: https://homelesshounds-com-au.pages.dev
@@ -61,25 +61,28 @@
 ## 🔖 Session Continuity
 
 ### Last Session Summary
-**VOLUNTEER ENGAGEMENT SYSTEM ENHANCED**: Complete redesign of volunteer page with modern UI including accordion-style opportunity listings, 2-column layout for Getting Started/Benefits sections, integrated Code of Conduct, and improved CTA section. Created Privacy Policy page from WordPress content. Updated homepage adoption buttons to match /adopt page style with category navigation. Removed outdated Goodwill Wines references. All pages now feature consistent modern design language with gradients, rounded corners, shadow effects, and responsive layouts. Accordion implementation provides better UX for volunteer opportunities with always-visible key information and expandable details.
+**ALL VOLUNTEER FORMS ACTIVE**: Completed implementation of all volunteer application forms with modal interfaces. Fixed critical bug where duplicate IDs prevented cat foster modal from opening. Converted FAQs to accordion format on foster and pet courier pages for better UX. All forms now feature auto-save, section-based layouts, dynamic field generation from ASM, and proper thank you pages. Consistent color scheme (orange for animals, teal for foster, indigo for couriers) across all forms.
 
 ### Key Implementation Details
 ```typescript
-// Universal form submission with Turnstile
-/api/submit - handles all ASM forms with spam protection
-
-// Form schema with fallback parsing  
-/api/asm/form-schema?formid=37 - JSON schema from ASM API
-
-// Form ID mapping corrected:
+// Form ID mapping complete:
 37: Animal surrender ✅ (with email notifications)
+38: Dog adoption ✅ (modal ready)
+39: Cat adoption ✅ (modal ready)
+67: Pet courier ✅ (modal active)
+68: Dog foster ✅ (modal active)
+69: Cat foster ✅ (modal active)
 36: Volunteer registration (next)
-39: Adoption application (corrected ID, next)
-38: Foster application (to be removed per user request)
 
-// Conditional Turnstile integration
-if (TURNSTILE_SECRET_KEY && TURNSTILE_SECRET_KEY !== '') {
-  // Verify token
+// Modal ID fix for multiple forms:
+id={`foster-fields-${species}`} // Unique IDs per species
+id={`form-header-${species}`}
+
+// Accordion implementation:
+function toggleAccordion(id) {
+  const content = document.getElementById(id + '-content');
+  const icon = document.getElementById(id + '-icon');
+  // Toggle visibility and rotate icon
 }
 ```
 
@@ -88,59 +91,59 @@ if (TURNSTILE_SECRET_KEY && TURNSTILE_SECRET_KEY !== '') {
 - Deployment: Cloudflare Pages
 - ASM Account: st3418
 - ASM Service Account: `api_service_account` (no-login)
-- Animals in system: 2 currently adoptable (Spike & Kodi)
+- SendGrid: Configured with domain auth and webhooks
 
 ## ⏭️ Next Actions
 
 ### Next Session Priority
-1. **Volunteer registration form** - Copy surrender form pattern to /contact-us/volunteer/ with form ID 36 + email notifications
-2. **Adoption application form** - Create /adopt/apply/[petId] with form ID 39 + email notifications
-3. **Remove foster care form references** - Clean up TODO comments per user request
-4. **General contact form** - Simple contact form without ASM integration
+1. **Volunteer registration form** - Create modal for form ID 36
+2. **Test all forms** - End-to-end testing in production
+3. **Performance optimization** - Lazy load modals, optimize API calls
+4. **Documentation update** - Update user guides for all forms
 
 ### Future Sessions
 1. Payment integration for donations (Stripe/PayPal)
-2. Enhanced email templates for volunteer/adoption flows
-3. Performance optimization and monitoring
+2. Enhanced email templates for all form types
+3. Analytics and conversion tracking
+4. Admin dashboard for form submissions
 
 ## ⚠️ Important Context
 
 ### ASM Integration Notes
-- API credentials stored in Cloudflare Pages env vars (encrypted)
-- Local development uses `.env` file with same variables
-- API endpoints updated with fallback: `locals?.runtime?.env?.VAR || import.meta.env.VAR`
-- Using dedicated `api_service_account` with "Can Login: NO" for security
-- Forms can use `online_form_json` for schema
-- Submit to `online_form_html` for processing
-- Cache form schemas for performance
+- All forms use modal pattern for consistency
+- Auto-save functionality prevents data loss
+- Section-based layouts improve form completion
+- Dynamic field generation from ASM API
+- Turnstile protection on all forms
 
-### Proposed Forms Architecture
-- Use Cloudflare Pages Functions for backend
-- Turnstile for anti-spam protection  
-- Native form rendering from ASM JSON
-- Proper CSP headers for security
-- Thank you page redirects
+### Modal Architecture
+- Each modal has unique IDs to prevent conflicts
+- Global functions for opening modals (e.g., `openDogFosterModal()`)
+- localStorage for form persistence (7-day expiry)
+- Responsive design with max-height constraints
+- Thank you pages with personalization
 
 ### Security Considerations
-- Never expose ASM credentials to client
-- Use server-side form validation
-- Implement rate limiting
-- Add CSP headers for XSS protection
+- Server-side form validation
+- Turnstile anti-spam protection
+- Email verification via SendGrid
+- Webhook signature validation
+- CSP headers for XSS protection
 
 ## 💭 Session Notes
 
-The native ASM integration is a major improvement over JavaScript embeds:
-- Better SEO (server-rendered content)
-- Faster initial page loads
-- More control over styling and UX
-- Improved accessibility
-- Real-time data without iframe issues
+The modal-based form system provides excellent UX:
+- No page navigation required
+- Auto-save prevents frustration
+- Section-based layout reduces cognitive load
+- Immediate feedback on submission
+- Consistent experience across all forms
 
-The proposed forms system looks excellent - well-architected with proper security (Turnstile), caching, and native rendering. This will complete the transition away from JavaScript embeds.
+Key learning: Always ensure unique IDs when multiple similar components exist on same page. The cat foster modal bug was caused by both modals using identical element IDs.
 
 ---
 
-**Token Count**: ~600 (Optimized for continuity)
+**Token Count**: ~650 (Optimized for continuity)
 **Session Started**: 2025-09-05 (continued from previous)
-**Session Updated**: 2025-09-18 (Production Email Monitoring Complete)
-**Next Review**: After forms implementation
+**Session Updated**: 2025-09-20 (All volunteer forms active)
+**Next Review**: After volunteer registration implementation

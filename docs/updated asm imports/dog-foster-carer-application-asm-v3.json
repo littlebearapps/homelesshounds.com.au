@@ -1,0 +1,287 @@
+{
+  "name": "Dog Foster Carer Application",
+  "description": "Note: Foster Carer positions are currently only available to Victorian residents.",
+  "header": "",
+  "footer": "By submitting this form, you agree that the dog will remain the property of Homeless Hounds and that you will remain in contact with us throughout the duration of fostering. Please be aware that adoption fees will apply if you want to adopt as agreed at the beginning of the Fostering Period.",
+  "fields": [
+    {
+      "index": 1,
+      "lookups": "",
+      "mandatory": false,
+      "name": "your_details",
+      "tooltip": "",
+      "label": "Your Details",
+      "type": "TEXT"
+    },
+    {
+      "index": 2,
+      "lookups": "",
+      "mandatory": true,
+      "name": "firstname",
+      "tooltip": "",
+      "label": "Name - First Name",
+      "type": "TEXT"
+    },
+    {
+      "index": 3,
+      "lookups": "",
+      "mandatory": true,
+      "name": "lastname",
+      "tooltip": "",
+      "label": "Name - Last Name",
+      "type": "TEXT"
+    },
+    {
+      "index": 4,
+      "lookups": "",
+      "mandatory": true,
+      "name": "dateofbirth",
+      "tooltip": "",
+      "label": "Date of Birth",
+      "type": "DATE"
+    },
+    {
+      "index": 5,
+      "lookups": "",
+      "mandatory": true,
+      "name": "address",
+      "tooltip": "",
+      "label": "Address (VIC only) - Address",
+      "type": "TEXT"
+    },
+    {
+      "index": 6,
+      "lookups": "",
+      "mandatory": true,
+      "name": "city",
+      "tooltip": "",
+      "label": "Address (VIC only) - City/Town",
+      "type": "TEXT"
+    },
+    {
+      "index": 7,
+      "lookups": "",
+      "mandatory": true,
+      "name": "state",
+      "tooltip": "",
+      "label": "Address (VIC only) - State/County",
+      "type": "TEXT"
+    },
+    {
+      "index": 8,
+      "lookups": "",
+      "mandatory": true,
+      "name": "postcode",
+      "tooltip": "",
+      "label": "Address (VIC only) - Postcode/ZIP",
+      "type": "TEXT"
+    },
+    {
+      "index": 9,
+      "lookups": "",
+      "mandatory": true,
+      "name": "emailaddress",
+      "tooltip": "",
+      "label": "Email",
+      "type": "EMAIL"
+    },
+    {
+      "index": 10,
+      "lookups": "",
+      "mandatory": true,
+      "name": "mobiletelephone",
+      "tooltip": "",
+      "label": "Phone",
+      "type": "TELEPHONE"
+    },
+    {
+      "index": 11,
+      "lookups": "— Select —|Alpine|Ararat|Ballarat|Banyule|Baw Baw|Bayside|Benalla|Boroondara|Brimbank|Buloke|Campaspe|Cardinia|Casey|Central Goldfields|Colac Otway|Corangamite|Darebin|East Gippsland|Frankston|Gannawarra|Glen Eira|Glenelg|Golden Plains|Greater Bendigo|Greater Dandenong|Greater Geelong|Hepburn|Hindmarsh|Hobsons Bay|Horsham|Hume|Indigo|Kingston|Knox|Latrobe|Loddon|Macedon Ranges|Manningham|Mansfield|Maribyrnong|Maroondah|Melbourne|Melton|Mildura|Mitchell|Moira|Monash|Moonee Valley|Moorabool|Moreland|Mornington Peninsula|Mount Alexander|Moyne|Murrindindi|Nillumbik|Northern Grampians|Port Phillip|Pyrenees|Queenscliffe|South Gippsland|Southern Grampians|Stonnington|Strathbogie|Surf Coast|Swan Hill|Towong|Wangaratta|Warrnambool|Wellington|West Wimmera|Whitehorse|Whittlesea|Wodonga|Wyndham|Yarra|Yarra Ranges|Yarriambiack|Other",
+      "mandatory": true,
+      "name": "your_local_council_vic_only",
+      "tooltip": "",
+      "label": "Your Local Council (VIC only)",
+      "type": "LOOKUP"
+    },
+    {
+      "index": 12,
+      "lookups": "",
+      "mandatory": false,
+      "name": "questions_about_your_lifestyle",
+      "tooltip": "",
+      "label": "Questions about your Lifestyle",
+      "type": "TEXT"
+    },
+    {
+      "index": 13,
+      "lookups": "",
+      "mandatory": true,
+      "name": "how_long_will_your_foster_dog_be_alone_f",
+      "tooltip": "",
+      "label": "How long will your foster dog be alone for on the average day?",
+      "type": "TEXT"
+    },
+    {
+      "index": 14,
+      "lookups": "",
+      "mandatory": true,
+      "name": "do_you_currently_have_any_pets_if_so_wha",
+      "tooltip": "",
+      "label": "Do you currently have any pets? If so, what kind? Breed, age, gender, desexed? Up to date with parasite control and vaccinations? Are they s…",
+      "type": "TEXT"
+    },
+    {
+      "index": 15,
+      "lookups": "",
+      "mandatory": true,
+      "name": "do_you_have_any_experience_with_pets_and",
+      "tooltip": "",
+      "label": "Do you have any experience with pets and/or fostering animals? If yes or no, please explain and elaborate.",
+      "type": "TEXT"
+    },
+    {
+      "index": 16,
+      "lookups": "",
+      "mandatory": true,
+      "name": "where_do_your_pets_sleep_where_would_you",
+      "tooltip": "",
+      "label": "Where do your pets sleep? Where would your foster dog sleep?",
+      "type": "TEXT"
+    },
+    {
+      "index": 17,
+      "lookups": "",
+      "mandatory": true,
+      "name": "if_you_are_fostering_a_dog_are_you_able_",
+      "tooltip": "",
+      "label": "If you are fostering a dog, are you able to provide exercise? If so how much time can you spend walking your foster dog per day?",
+      "type": "TEXT"
+    },
+    {
+      "index": 18,
+      "lookups": "",
+      "mandatory": true,
+      "name": "are_you_able_to_undertake_any_basic_trai",
+      "tooltip": "",
+      "label": "Are you able to undertake any basic training? (we can provide instruction and tips)",
+      "type": "TEXT"
+    },
+    {
+      "index": 19,
+      "lookups": "",
+      "mandatory": true,
+      "name": "is_your_yard_securely_fenced_and_without",
+      "tooltip": "",
+      "label": "Is your yard securely fenced and without gaps a dog could fit through? Please describe type and height of fencing. Note that when applying t…",
+      "type": "TEXT"
+    },
+    {
+      "index": 20,
+      "lookups": "",
+      "mandatory": true,
+      "name": "do_you_have_any_children_or_other_adults",
+      "tooltip": "",
+      "label": "Do you have any children or other adults living with you? (Please include the number of each)",
+      "type": "TEXT"
+    },
+    {
+      "index": 21,
+      "lookups": "",
+      "mandatory": true,
+      "name": "do_you_have_a_preference_for_certain_bre",
+      "tooltip": "",
+      "label": "Do you have a preference for certain breed types, size of dog or are there breeds you won’t foster?",
+      "type": "TEXT"
+    },
+    {
+      "index": 22,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "if_you_are_fostering_a_dog_are_you_able_",
+      "tooltip": "",
+      "label": "If you are fostering a dog, are you able to transport him or her to our vet and take it on social outings?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 23,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "are_you_happy_to_talk_to_potential_adopt",
+      "tooltip": "",
+      "label": "Are you happy to talk to potential adopters over the phone about your foster dog/s personality and if suitable meet with them and facilitate…",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 24,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "do_you_agree_not_to_have_your_foster_dog",
+      "tooltip": "",
+      "label": "Do you agree NOT to have your foster dog off-lead while in your care?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 25,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "do_you_agree_that_we_need_ample_amount_o",
+      "tooltip": "",
+      "label": "Do you agree that we need ample amount of time in regards to notice of you going away for a holiday and/or needing the dog to be moved?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 26,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "are_you_willing_to_commit_to_foster_the_",
+      "tooltip": "",
+      "label": "Are you willing to commit to foster the dog for the term that he/she requires to be in care?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 27,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "are_you_looking_for_a_dog_to_adopt",
+      "tooltip": "",
+      "label": "Are you looking for a dog to adopt?",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 28,
+      "lookups": "",
+      "mandatory": true,
+      "name": "please_give_details_on_what_sort_of_dog_",
+      "tooltip": "",
+      "label": "Please give details on what sort of dog you're looking to adopt.",
+      "type": "TEXT"
+    },
+    {
+      "index": 29,
+      "lookups": "Option 1|Option 2",
+      "mandatory": true,
+      "name": "would_you_like_to_receive_news_and_updat",
+      "tooltip": "",
+      "label": "Would you like to receive News and Updates from Homeless Hounds? You can opt-out at any time.",
+      "type": "LOOKUP_MULTI"
+    },
+    {
+      "index": 30,
+      "lookups": "",
+      "mandatory": true,
+      "name": "signature",
+      "tooltip": "",
+      "label": "Signature",
+      "type": "SIGNATURE"
+    },
+    {
+      "index": 31,
+      "lookups": "",
+      "mandatory": true,
+      "name": "date",
+      "tooltip": "",
+      "label": "Date",
+      "type": "DATE"
+    }
+  ]
+}

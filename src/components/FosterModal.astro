@@ -1,0 +1,663 @@
+---
+export interface Props {
+  species: 'dog' | 'cat';
+  formId: string;
+}
+
+const { species, formId } = Astro.props;
+const modalId = `foster-modal-${species}`;
+const speciesCapitalized = species.charAt(0).toUpperCase() + species.slice(1);
+
+// Turnstile configuration
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+---
+
+<div id={modalId} class="fixed inset-0 z-50 overflow-y-auto hidden">
+  <div class="flex items-center justify-center min-h-screen p-4">
+    <!-- Backdrop -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity" data-close-modal></div>
+
+    <!-- Modal -->
+    <div class="relative bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-xl">
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-teal-500 to-teal-700 text-white p-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-2xl font-bold flex items-center">
+              {species === 'dog' ? '🐕' : '🐱'} {speciesCapitalized} Foster Application
+            </h2>
+            <p class="mt-2 text-teal-100">
+              Thank you for your interest in fostering! Please complete this application to help us match you with the right {species}.
+            </p>
+          </div>
+          <button
+            type="button"
+            class="text-white hover:bg-white/20 rounded-lg p-2 transition-colors"
+            data-close-modal
+            aria-label="Close modal"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+        <form id={`foster-form-${species}`} class="space-y-6">
+          <input type="hidden" name="formid" value={formId} />
+
+          <!-- Form Header from ASM -->
+          <div id={`form-header-${species}`} class="hidden bg-amber-50 border border-amber-200 rounded-xl p-6">
+            <div class="flex items-start">
+              <svg class="w-5 h-5 text-amber-600 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+              </svg>
+              <div class="text-sm text-gray-700" id={`form-header-content-${species}`}></div>
+            </div>
+          </div>
+
+          <!-- Auto-save Notice -->
+          <div class="bg-green-50 border border-green-200 rounded-lg px-4 py-3 mb-6">
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-sm text-green-800 font-medium">Your progress is automatically saved as you type.</span>
+            </div>
+          </div>
+
+          <!-- Dynamic form fields will be inserted here -->
+          <div id={`foster-fields-${species}`} class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Loading skeleton -->
+            <div class="col-span-full animate-pulse">
+              <div class="h-10 bg-gray-200 rounded mb-4"></div>
+              <div class="h-10 bg-gray-200 rounded mb-4"></div>
+              <div class="h-32 bg-gray-200 rounded mb-4"></div>
+              <div class="h-10 bg-gray-200 rounded w-32"></div>
+            </div>
+          </div>
+
+          <!-- Form Footer (Terms & Conditions) -->
+          <div id={`form-footer-${species}`} class="hidden col-span-full bg-red-50 border border-red-200 rounded-xl p-6">
+            <div class="flex items-start">
+              <svg class="w-5 h-5 text-red-600 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9C9 5 9 5.672 9 6.5S9 8 10 8s1-.672 1-1.5S11 5 10 5z" clip-rule="evenodd"></path>
+              </svg>
+              <div class="text-sm text-gray-700 font-medium" id={`form-footer-content-${species}`}></div>
+            </div>
+          </div>
+
+          <!-- Turnstile widget -->
+          {TURNSTILE_SITE_KEY && TURNSTILE_SITE_KEY !== '' && (
+            <div class="pt-4 border-t border-gray-200">
+              <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY}></div>
+            </div>
+          )}
+
+          <!-- Error message -->
+          <div id={`error-message-${species}`} class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg"></div>
+
+          <!-- Submit button -->
+          <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+            <button
+              type="button"
+              class="px-6 py-3 text-gray-700 bg-gray-100 hover:bg-gray-200 font-semibold rounded-lg transition-colors"
+              data-close-modal
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="px-6 py-3 bg-gradient-to-r from-teal-600 to-teal-700 text-white font-semibold rounded-lg hover:from-teal-700 hover:to-teal-800 transition-colors flex items-center"
+            >
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+              </svg>
+              Submit Foster Application
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ modalId, formId, species }}>
+  // Modal controls
+  const modal = document.getElementById(modalId);
+  const closeButtons = modal?.querySelectorAll('[data-close-modal]');
+  const form = modal?.querySelector('form');
+  const errorMessage = modal?.querySelector(`#error-message-${species}`);
+  const STORAGE_KEY = `foster-${species}-form-data`;
+  const TIMESTAMP_KEY = `foster-${species}-form-timestamp`;
+
+  function openModal() {
+    console.log(`Opening ${species} foster modal`);
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      loadFormSchema();
+    } else {
+      console.error(`Modal not found: ${modalId}`);
+    }
+  }
+
+  function closeModal() {
+    if (modal) {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Bind close buttons
+  closeButtons?.forEach(button => {
+    button.addEventListener('click', closeModal);
+  });
+
+  // Close on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
+      closeModal();
+    }
+  });
+
+  // Make openModal available globally for this specific modal
+  window[`open${species.charAt(0).toUpperCase() + species.slice(1)}FosterModal`] = openModal;
+
+  // Helper function to create form field based on type
+  function createFormField(field) {
+    const wrapper = document.createElement('div');
+    const isFullWidth = ['TEXT', 'RAWMARKUP', 'SIGNATURE', 'GDPR_CONTACT_OPTIN'].includes(field.type)
+                        || field.name.includes('address')
+                        || field.name.includes('description')
+                        || field.label.toLowerCase().includes('elaborate')
+                        || field.label.toLowerCase().includes('additional');
+
+    wrapper.className = isFullWidth ? 'col-span-full' : '';
+
+    // Skip rawmarkup header fields
+    if (field.type === 'RAWMARKUP') {
+      return null;
+    }
+
+    // Create label
+    if (field.type !== 'RAWMARKUP' && field.type !== 'GDPR_CONTACT_OPTIN') {
+      const label = document.createElement('label');
+      label.className = 'block text-sm font-medium text-gray-700 mb-2';
+      label.htmlFor = field.name;
+      label.textContent = field.label || field.lookups;
+      if (field.mandatory) {
+        const required = document.createElement('span');
+        required.className = 'text-red-500 ml-1';
+        required.textContent = '*';
+        label.appendChild(required);
+      }
+      wrapper.appendChild(label);
+    }
+
+    // Create input based on type
+    switch(field.type) {
+      case 'TEXT':
+        if (field.label && (field.label.toLowerCase().includes('elaborate') ||
+            field.label.toLowerCase().includes('describe') ||
+            field.label.toLowerCase().includes('additional') ||
+            field.label.toLowerCase().includes('information'))) {
+          const textarea = document.createElement('textarea');
+          textarea.name = field.name;
+          textarea.id = field.name;
+          textarea.rows = 4;
+          textarea.required = field.mandatory;
+          textarea.className = 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500';
+          if (field.tooltip) textarea.placeholder = field.tooltip;
+          wrapper.appendChild(textarea);
+        } else {
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.name = field.name;
+          input.id = field.name;
+          input.required = field.mandatory;
+          input.className = 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500';
+          if (field.tooltip) input.placeholder = field.tooltip;
+          wrapper.appendChild(input);
+        }
+        break;
+
+      case 'EMAIL':
+        const emailInput = document.createElement('input');
+        emailInput.type = 'email';
+        emailInput.name = field.name;
+        emailInput.id = field.name;
+        emailInput.required = field.mandatory;
+        emailInput.className = 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500';
+        wrapper.appendChild(emailInput);
+        break;
+
+      case 'TELEPHONE':
+        const telInput = document.createElement('input');
+        telInput.type = 'tel';
+        telInput.name = field.name;
+        telInput.id = field.name;
+        telInput.required = field.mandatory;
+        telInput.className = 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500';
+        wrapper.appendChild(telInput);
+        break;
+
+      case 'DATE':
+        const dateInput = document.createElement('input');
+        dateInput.type = 'date';
+        dateInput.name = field.name;
+        dateInput.id = field.name;
+        dateInput.required = field.mandatory;
+        dateInput.className = 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500';
+        wrapper.appendChild(dateInput);
+        break;
+
+      case 'NUMBER':
+        const numberInput = document.createElement('input');
+        numberInput.type = 'number';
+        numberInput.name = field.name;
+        numberInput.id = field.name;
+        numberInput.required = field.mandatory;
+        numberInput.className = 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500';
+        wrapper.appendChild(numberInput);
+        break;
+
+      case 'RADIOGROUP':
+        const radioContainer = document.createElement('div');
+        radioContainer.className = 'space-y-2';
+        const options = field.lookups?.split('|') || ['Yes', 'No'];
+        options.forEach((option, index) => {
+          const radioLabel = document.createElement('label');
+          radioLabel.className = 'flex items-center space-x-3 cursor-pointer';
+
+          const radio = document.createElement('input');
+          radio.type = 'radio';
+          radio.name = field.name;
+          radio.id = `${field.name}_${index}`;
+          radio.value = option.trim();
+          radio.required = field.mandatory && index === 0;
+          radio.className = 'h-4 w-4 text-teal-600 border-gray-300 focus:ring-teal-500';
+
+          const span = document.createElement('span');
+          span.className = 'text-gray-700';
+          span.textContent = option.trim();
+
+          radioLabel.appendChild(radio);
+          radioLabel.appendChild(span);
+          radioContainer.appendChild(radioLabel);
+        });
+        wrapper.appendChild(radioContainer);
+        break;
+
+      case 'LOOKUP_MULTI':
+      case 'LOOKUP':
+        const select = document.createElement('select');
+        select.name = field.name;
+        select.id = field.name;
+        select.required = field.mandatory;
+        select.className = 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500';
+
+        // Add default option
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'Please select...';
+        select.appendChild(defaultOption);
+
+        // Add options from lookups
+        const selectOptions = field.lookups?.split('|') || [];
+        selectOptions.forEach(option => {
+          const optionEl = document.createElement('option');
+          optionEl.value = option.trim();
+          optionEl.textContent = option.trim();
+          select.appendChild(optionEl);
+        });
+        wrapper.appendChild(select);
+        break;
+
+      case 'CHECKBOX':
+        const checkboxLabel = document.createElement('label');
+        checkboxLabel.className = 'flex items-start space-x-3';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.name = field.name;
+        checkbox.id = field.name;
+        checkbox.className = 'h-4 w-4 mt-1 text-teal-600 border-gray-300 rounded focus:ring-teal-500';
+
+        const checkboxText = document.createElement('span');
+        checkboxText.className = 'text-gray-700';
+        checkboxText.textContent = field.label || field.lookups;
+
+        checkboxLabel.appendChild(checkbox);
+        checkboxLabel.appendChild(checkboxText);
+        wrapper.appendChild(checkboxLabel);
+        break;
+
+      case 'SIGNATURE':
+        const signatureContainer = document.createElement('div');
+        signatureContainer.className = 'border border-gray-300 rounded-lg p-4';
+
+        const canvas = document.createElement('canvas');
+        canvas.width = 400;
+        canvas.height = 150;
+        canvas.className = 'border border-gray-200 rounded w-full';
+        canvas.style.touchAction = 'none';
+        signatureContainer.appendChild(canvas);
+
+        const clearBtn = document.createElement('button');
+        clearBtn.type = 'button';
+        clearBtn.className = 'mt-2 px-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200';
+        clearBtn.textContent = 'Clear Signature';
+        signatureContainer.appendChild(clearBtn);
+
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = field.name;
+        hiddenInput.id = field.name;
+        signatureContainer.appendChild(hiddenInput);
+
+        // Initialize signature pad
+        let isDrawing = false;
+        const ctx = canvas.getContext('2d');
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = '#000';
+
+        function startDrawing(e) {
+          isDrawing = true;
+          const rect = canvas.getBoundingClientRect();
+          const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+          const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          e.preventDefault();
+        }
+
+        function draw(e) {
+          if (!isDrawing) return;
+          const rect = canvas.getBoundingClientRect();
+          const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+          const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+          ctx.lineTo(x, y);
+          ctx.stroke();
+          hiddenInput.value = canvas.toDataURL();
+          e.preventDefault();
+        }
+
+        function stopDrawing(e) {
+          if (!isDrawing) return;
+          isDrawing = false;
+          e.preventDefault();
+        }
+
+        // Mouse events
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        // Touch events
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('touchend', stopDrawing);
+
+        clearBtn.addEventListener('click', () => {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          hiddenInput.value = '';
+        });
+
+        wrapper.appendChild(signatureContainer);
+        break;
+
+      case 'GDPR_CONTACT_OPTIN':
+        const gdprLabel = document.createElement('label');
+        gdprLabel.className = 'flex items-start space-x-3';
+
+        const gdprCheckbox = document.createElement('input');
+        gdprCheckbox.type = 'checkbox';
+        gdprCheckbox.name = field.name;
+        gdprCheckbox.id = field.name;
+        gdprCheckbox.className = 'h-4 w-4 mt-1 text-teal-600 border-gray-300 rounded focus:ring-teal-500';
+
+        const gdprText = document.createElement('span');
+        gdprText.className = 'text-sm text-gray-700';
+        gdprText.innerHTML = field.label || 'I consent to receive communications from Homeless Hounds Animal Rescue';
+
+        gdprLabel.appendChild(gdprCheckbox);
+        gdprLabel.appendChild(gdprText);
+        wrapper.appendChild(gdprLabel);
+        break;
+
+      default:
+        // Fallback to text input
+        const defaultInput = document.createElement('input');
+        defaultInput.type = 'text';
+        defaultInput.name = field.name;
+        defaultInput.id = field.name;
+        defaultInput.required = field.mandatory;
+        defaultInput.className = 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500';
+        wrapper.appendChild(defaultInput);
+    }
+
+    return wrapper;
+  }
+
+  // Session storage functions
+  function saveFormData() {
+    const formData = new FormData(form);
+    const data = {};
+    for (let [key, value] of formData.entries()) {
+      data[key] = value;
+    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    localStorage.setItem(TIMESTAMP_KEY, Date.now().toString());
+  }
+
+  function loadFormData() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      const timestamp = localStorage.getItem(TIMESTAMP_KEY);
+
+      if (saved && timestamp) {
+        const data = JSON.parse(saved);
+        const savedTime = parseInt(timestamp);
+        const now = Date.now();
+
+        // Show data if saved within last 7 days
+        if (now - savedTime < 7 * 24 * 60 * 60 * 1000) {
+          Object.entries(data).forEach(([key, value]) => {
+            const field = form.querySelector(`[name="${key}"]`);
+            if (field) {
+              if (field.type === 'checkbox') {
+                field.checked = value === 'on';
+              } else if (field.type === 'radio') {
+                const radio = form.querySelector(`[name="${key}"][value="${value}"]`);
+                if (radio) radio.checked = true;
+              } else {
+                field.value = value;
+              }
+            }
+          });
+        } else {
+          // Clear old data
+          localStorage.removeItem(STORAGE_KEY);
+          localStorage.removeItem(TIMESTAMP_KEY);
+        }
+      }
+    } catch (e) {
+      console.error('Error loading saved form data:', e);
+    }
+  }
+
+  // Load form schema from API
+  async function loadFormSchema() {
+    console.log(`Loading form schema for ${species} foster form, formId: ${formId}`);
+    try {
+      const fieldsContainer = document.getElementById(`foster-fields-${species}`);
+      if (!fieldsContainer) {
+        console.error(`foster-fields-${species} container not found`);
+        return;
+      }
+
+      // Fetch form schema
+      const schemaUrl = `/api/asm/form-schema?formid=${formId}`;
+      const response = await fetch(schemaUrl);
+      const data = await response.json();
+
+      // Display form header if available
+      const headerEl = document.getElementById(`form-header-${species}`);
+      const headerContent = document.getElementById(`form-header-content-${species}`);
+      // Use 'header' field first, fallback to 'description' for backward compatibility
+      const headerText = data.header || data.description;
+      if (headerText && headerText.trim()) {
+        // Convert plain text to HTML with line breaks
+        headerContent.innerHTML = headerText.replace(/\n/g, '<br>').replace(/- /g, '• ');
+        headerEl.classList.remove('hidden');
+      }
+
+      // Display form footer if available
+      const footerEl = document.getElementById(`form-footer-${species}`);
+      const footerContent = document.getElementById(`form-footer-content-${species}`);
+      if (data.footer && data.footer.trim()) {
+        // Convert plain text to HTML with line breaks
+        footerContent.innerHTML = data.footer.replace(/\n/g, '<br>');
+        footerEl.classList.remove('hidden');
+      }
+
+      // Group fields into sections based on field indices
+      const sections = {
+        'personal': {
+          title: '👤 Your Details',
+          fields: [],
+          indices: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        },
+        'experience': {
+          title: '🐾 Your Experience',
+          fields: [],
+          indices: [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        },
+        'home': {
+          title: '🏠 Your Home Environment',
+          fields: [],
+          indices: [21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+        },
+        'preferences': {
+          title: '💭 Foster Preferences',
+          fields: [],
+          indices: [31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
+        },
+        'additional': {
+          title: '📋 Additional Information',
+          fields: [],
+          indices: []
+        }
+      };
+
+      // Sort fields by index and assign to sections
+      if (data.fields && Array.isArray(data.fields)) {
+        data.fields.sort((a, b) => a.index - b.index);
+
+        data.fields.forEach(field => {
+          let assigned = false;
+          for (const [key, section] of Object.entries(sections)) {
+            if (section.indices.includes(field.index)) {
+              section.fields.push(field);
+              assigned = true;
+              break;
+            }
+          }
+          if (!assigned) {
+            sections.additional.fields.push(field);
+          }
+        });
+      }
+
+      // Clear loading skeleton and add fields by section
+      fieldsContainer.innerHTML = '';
+
+      for (const [key, section] of Object.entries(sections)) {
+        if (section.fields.length > 0) {
+          // Create section container
+          const sectionDiv = document.createElement('div');
+          sectionDiv.className = 'col-span-full';
+
+          // Add section title
+          const titleDiv = document.createElement('h3');
+          titleDiv.className = 'text-lg font-semibold text-gray-900 mb-4 pb-2 border-b border-gray-200';
+          titleDiv.textContent = section.title;
+          sectionDiv.appendChild(titleDiv);
+
+          // Create grid for section fields
+          const sectionGrid = document.createElement('div');
+          sectionGrid.className = 'grid grid-cols-1 md:grid-cols-2 gap-6 mb-8';
+
+          section.fields.forEach(field => {
+            const fieldElement = createFormField(field);
+            if (fieldElement) {
+              sectionGrid.appendChild(fieldElement);
+            }
+          });
+
+          sectionDiv.appendChild(sectionGrid);
+          fieldsContainer.appendChild(sectionDiv);
+        }
+      }
+
+      // Load saved form data
+      loadFormData();
+
+      // Add auto-save on input
+      form.addEventListener('input', saveFormData);
+
+    } catch (error) {
+      console.error('Error loading form schema:', error);
+      fieldsContainer.innerHTML = '<div class="col-span-full text-red-600 text-center">Error loading form. Please try again later.</div>';
+    }
+  }
+
+  // Handle form submission
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    try {
+      const submitButton = form.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Submitting...';
+
+      const formData = new FormData(form);
+
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        // Clear saved data on successful submission
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(TIMESTAMP_KEY);
+
+        // Redirect to thank you page
+        window.location.href = `/get-involved/foster/thanks?name=${encodeURIComponent(formData.get('firstname') || '')}`;
+      } else {
+        throw new Error(result.error || 'Failed to submit application');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      errorMessage.textContent = error.message || 'An error occurred. Please try again.';
+      errorMessage.classList.remove('hidden');
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      submitButton.disabled = false;
+      submitButton.textContent = 'Submit Foster Application';
+    }
+  });
+</script>
+
+<!-- Load Turnstile script if configured -->
+{TURNSTILE_SITE_KEY && TURNSTILE_SITE_KEY !== '' && (
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+)}
