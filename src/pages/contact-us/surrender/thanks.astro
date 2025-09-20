@@ -1,11 +1,11 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
+import Base from '../../../layouts/Base.astro';
 
 // Get the URL for server-side processing
 const url = new URL(Astro.request.url);
 ---
 
-<Layout title="Surrender Request Received | Homeless Hounds">
+<Base title="Surrender Request Received | Homeless Hounds">
   <main class="min-h-screen bg-gradient-to-b from-orange-50 to-white py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-3xl mx-auto">
       <!-- Success Animation -->
@@ -267,4 +267,4 @@ const url = new URL(Astro.request.url);
       });
     });
   </script>
-</Layout>
+</Base>
