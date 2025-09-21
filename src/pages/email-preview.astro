@@ -1,0 +1,160 @@
+---
+// Development-only page to preview email templates
+if (import.meta.env.MODE !== 'development') {
+  return Astro.redirect('/404');
+}
+
+export const prerender = false;
+
+const formType = Astro.url.searchParams.get('form') || '66';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Template Preview - Homeless Hounds</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f3f4f6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #1f2937;
+      margin-bottom: 10px;
+    }
+    .notice {
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      padding: 10px 15px;
+      border-radius: 6px;
+      margin-bottom: 30px;
+      color: #92400e;
+    }
+    .key-notice {
+      background: #dcfce7;
+      border-left: 4px solid #16a34a;
+      padding: 15px 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    .key-notice h3 {
+      margin: 0 0 10px 0;
+      color: #14532d;
+      font-size: 16px;
+    }
+    .key-notice p {
+      margin: 0;
+      color: #14532d;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .form-selector {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    .form-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .form-btn {
+      padding: 10px 15px;
+      background: #7c3aed;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+    .form-btn:hover {
+      background: #6d28d9;
+    }
+    .form-btn.active {
+      background: #4c1d95;
+    }
+    .iframe-container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .iframe-header {
+      background: #7c3aed;
+      color: white;
+      padding: 15px 20px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    iframe {
+      width: 100%;
+      height: 800px;
+      border: none;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📧 Email Template Preview</h1>
+
+    <div class="notice">
+      <strong>⚠️ Development Only:</strong> Preview all user-facing confirmation email templates
+    </div>
+
+    <div class="key-notice">
+      <h3>✅ Key Features in All Emails:</h3>
+      <p>
+        <strong>1.</strong> Yellow "inbox not monitored" notice before footer<br>
+        <strong>2.</strong> Clear message that noreply@homelesshounds.com.au is unmonitored<br>
+        <strong>3.</strong> Direct link to Contact Us page for user inquiries<br>
+        <strong>4.</strong> SendGrid click tracking disabled (no link.homelesshounds.com.au redirects)<br>
+        <strong>5.</strong> Correct ASM login URL for admin emails
+      </p>
+    </div>
+
+    <div class="form-selector">
+      <h2>Select Form to Preview:</h2>
+      <div class="form-buttons">
+        <a href="?form=66" class={`form-btn ${formType === '66' ? 'active' : ''}`}>
+          Surrender (66)
+        </a>
+        <a href="?form=70" class={`form-btn ${formType === '70' ? 'active' : ''}`}>
+          Dog Adoption (70)
+        </a>
+        <a href="?form=65" class={`form-btn ${formType === '65' ? 'active' : ''}`}>
+          Cat Adoption (65)
+        </a>
+        <a href="?form=68" class={`form-btn ${formType === '68' ? 'active' : ''}`}>
+          Dog Foster (68)
+        </a>
+        <a href="?form=69" class={`form-btn ${formType === '69' ? 'active' : ''}`}>
+          Cat Foster (69)
+        </a>
+        <a href="?form=67" class={`form-btn ${formType === '67' ? 'active' : ''}`}>
+          Pet Courier (67)
+        </a>
+      </div>
+    </div>
+
+    <div class="iframe-container">
+      <div class="iframe-header">
+        Form {formType} - User Confirmation Email
+      </div>
+      <iframe src={`/api/test-template?formId=${formType}`}></iframe>
+    </div>
+  </div>
+</body>
+</html>

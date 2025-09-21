@@ -1,4 +1,7 @@
 ---
+import InstagramFeed from './InstagramFeed.astro';
+import NewsletterSignup from './NewsletterSignup.astro';
+
 const currentYear = new Date().getFullYear();
 
 // Schema.org JSON-LD for SEO
@@ -25,6 +28,8 @@ const schemaOrg = {
 ---
 
 <footer>
+  <!-- Instagram Feed -->
+  <InstagramFeed />
 
   <!-- Main Footer -->
   <section class="bg-gray-900 text-gray-300">
@@ -132,28 +137,8 @@ const schemaOrg = {
 
       <!-- Newsletter Signup -->
       <div class="border-t border-gray-800 pt-8">
-        <div class="max-w-md mx-auto text-center">
-          <h3 class="text-white font-semibold mb-2">Stay Connected</h3>
-          <p class="text-sm mb-4">Get rescue stories, adoption alerts, and ways to help</p>
-          <form class="flex flex-col sm:flex-row gap-3" action="/api/newsletter" method="POST">
-            <label for="email" class="sr-only">Email address</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              placeholder="Your email address"
-              class="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-              aria-label="Email address for newsletter"
-            />
-            <!-- Honeypot field for spam protection -->
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-              <input type="text" name="website" tabindex="-1" autocomplete="off">
-            </div>
-            <button type="submit" class="px-6 py-2 bg-indigo-700 text-white font-medium rounded-lg hover:bg-indigo-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900">
-              Subscribe
-            </button>
-          </form>
+        <div class="max-w-md mx-auto">
+          <NewsletterSignup userType="general" source="footer" compact={false} theme="dark" />
         </div>
       </div>
     </div>

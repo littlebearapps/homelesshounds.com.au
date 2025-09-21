@@ -10,7 +10,7 @@
 **Project Type**: Charity website (Non-commercial volunteer project)  
 **Timeline**: Flexible (volunteer basis)  
 **Platform**: Astro v5 + Tailwind CSS v4  
-**Status**: Phase 3 - All Volunteer & Foster Forms Active
+**Status**: Phase 3 - Complete Newsletter & Email System Integration
 
 ## 🔧 Technical Stack
 
@@ -19,7 +19,8 @@
 **Deployment**: Cloudflare Pages (Active: homelesshounds-com-au.pages.dev)
 **Content**: Native ASM API integration + Markdown/MDX
 **Data Source**: Animal Shelter Manager (ASM) API
-**Email Service**: SendGrid with templated notifications
+**Email Service**: SendGrid with templated notifications + newsletter system
+**Newsletter System**: SendGrid Contacts API with comprehensive segmentation
 
 **Performance Targets**:
 - Lighthouse score: >90 all categories
@@ -39,9 +40,10 @@ src/
 ├── components/      # Reusable components
 ├── layouts/         # Page layouts
 ├── lib/
-│   └── email/       # Email templates & services
-│       ├── templates/   # Email template files
-│       └── services/    # SendGrid integration
+│   ├── email/       # Email templates & services
+│   │   ├── templates/   # Email template files
+│   │   └── services/    # SendGrid integration
+│   └── sendgrid-newsletter.ts # Newsletter & contact management
 ├── styles/          # Global styles
 │   └── global.css   # Tailwind imports
 └── content/         # Markdown content
@@ -49,10 +51,10 @@ src/
 
 ## 🚧 Current Focus
 
-**Recently Completed**: All volunteer forms active - Foster (dog #68, cat #69) and Pet Courier (#67) with modals (2025-09-20)
-**Active Task**: Adoption application forms for dogs and cats
-**Next Milestone**: Complete adoption application forms and volunteer registration
-**Priority**: Finalize adoption workflow and volunteer registration form
+**Recently Completed**: Complete SendGrid newsletter integration with contact segmentation (2025-09-21)
+**Active Task**: Newsletter system operational with GDPR-compliant contact management
+**Next Milestone**: GDPR compliance review and policy updates
+**Priority**: Review privacy policies and compliance across SendGrid & ASM platforms
 
 ## ⚠️ Critical Requirements
 
@@ -82,7 +84,7 @@ src/
 - [ ] Adoption application form (ASM form ID 38)
 - [x] Search/filter functionality
 
-**Phase 3 - Email System & Monitoring** ✅:
+**Phase 3 - Email System & Newsletter Integration** ✅:
 - [x] Animal surrender form (ASM form ID 37) with email notifications
 - [x] SendGrid email system with templated notifications
 - [x] Smart email routing by department (dogs/cats/general)
@@ -93,6 +95,11 @@ src/
 - [x] **Event webhooks with real-time monitoring**
 - [x] **Automated alerts for critical delivery issues**
 - [x] **Signature verification for webhook security**
+- [x] **Newsletter system with contact segmentation**
+- [x] **GDPR-compliant contact management**
+- [x] **Automatic form integration for newsletter signup**
+- [x] **Footer newsletter component with dark theme support**
+- [x] **Dual segmentation: Contact lists + Marketing lists**
 - [ ] Volunteer registration form (ASM form ID 36)
 - [x] Dog adoption application form (ASM form ID 38 - modal ready)
 - [x] Cat adoption application form (ASM form ID 39 - modal ready)
@@ -183,5 +190,5 @@ src/
 ---
 
 **Token Count**: ~650 (Optimized for Claude Code)
-**Last Updated**: 2025-09-20
-**Version**: 0.6.0
+**Last Updated**: 2025-09-21
+**Version**: 0.7.0

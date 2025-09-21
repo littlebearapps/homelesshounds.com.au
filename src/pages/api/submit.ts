@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { createEmailService } from '../../lib/email/services/sendgrid.service';
+import { sendGridNewsletter, type NewsletterContact } from '../../lib/sendgrid-newsletter';
 
 // POST /api/submit - Single endpoint for all form submissions
 const TURNSTILE_VERIFY = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
@@ -88,7 +89,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     if (asmRes.status >= 300 && asmRes.status < 400) {
       const location = asmRes.headers.get("location");
 
-      // Successful submission - send email notifications
+      // Successful submission - handle both email notifications AND newsletter signup
       try {
         // Get all environment variables including email config
         const fullEnv = {
@@ -104,18 +105,68 @@ export const POST: APIRoute = async ({ request, locals }) => {
           EMAIL_ADMIN_DEFAULT: env.EMAIL_ADMIN_DEFAULT || import.meta.env.EMAIL_ADMIN_DEFAULT,
         };
 
+        // Convert FormData to plain object for processing
+        const formDataObj: any = {};
+        for (const [key, value] of form.entries()) {
+          // Skip files for processing
+          if (!(value instanceof File)) {
+            formDataObj[key] = value;
+          }
+        }
+
+        // Newsletter subscription handling (before sending notification emails)
+        const email = formDataObj.email;
+        const marketingOptIn = formDataObj.newsletter_signup === 'true' || formDataObj.marketing_opt_in === 'true';
+
+        if (email && email.includes('@')) {
+          // Determine user type and contact reason based on form ID
+          let userType: NewsletterContact['userType'] = 'general';
+          let contactReason = 'website contact';
+
+          if (formid === "36") {
+            userType = 'volunteer';
+            contactReason = 'volunteer application';
+          } else if (formid === "37") {
+            userType = 'general';
+            contactReason = 'animal surrender';
+          } else if (formid === "38") {
+            userType = 'general';
+            contactReason = 'general inquiry';
+          } else if (formid === "39") {
+            userType = 'adopter';
+            contactReason = 'adoption application';
+          }
+
+          const newsletterContact: NewsletterContact = {
+            email: email,
+            firstName: formDataObj.firstname || formDataObj.first_name || '',
+            lastName: formDataObj.lastname || formDataObj.last_name || '',
+            phone: formDataObj.phone || formDataObj.mobile || '',
+            city: formDataObj.city || '',
+            state: formDataObj.state || '',
+            userType,
+            source: `form_${formid}`,
+            marketingOptIn,
+            contactReason,
+            subscriptionDate: new Date().toISOString()
+          };
+
+          // Add to SendGrid newsletter system asynchronously
+          sendGridNewsletter.addContact(newsletterContact).then(result => {
+            if (result.success) {
+              console.log(`Newsletter contact added for ${email}: ${userType} (marketing: ${marketingOptIn})`);
+            } else {
+              console.error(`Newsletter signup failed for ${email}:`, result.error);
+            }
+          }).catch(error => {
+            console.error('Newsletter signup error:', error);
+          });
+        }
+
+        // Send notification emails
         const emailService = createEmailService(fullEnv);
 
         if (emailService) {
-          // Convert FormData to plain object for email templates
-          const formDataObj: any = {};
-          for (const [key, value] of form.entries()) {
-            // Skip files for email templates
-            if (!(value instanceof File)) {
-              formDataObj[key] = value;
-            }
-          }
-
           // Send emails asynchronously (don't block the redirect)
           emailService.sendFormEmails(formid, formDataObj).then(results => {
             console.log(`Email results for form ${formid}:`, {
@@ -130,7 +181,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
         }
       } catch (emailError) {
         // Log but don't fail the form submission
-        console.error('Email setup error:', emailError);
+        console.error('Email/newsletter setup error:', emailError);
       }
 
       // Determine thank you page based on form ID

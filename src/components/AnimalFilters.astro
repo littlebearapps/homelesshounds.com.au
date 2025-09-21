@@ -51,10 +51,10 @@ const { currentFilters = {}, showSpeciesFilter = true } = Astro.props;
           name="agegroup"
           class="filter-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         >
-          <option value="">Any Age</option>
-          <option value="Young" selected={currentFilters.agegroup === 'Young'}>Young</option>
-          <option value="Adult" selected={currentFilters.agegroup === 'Adult'}>Adult</option>
-          <option value="Senior" selected={currentFilters.agegroup === 'Senior'}>Senior</option>
+          <option value="">🎂 Any Age</option>
+          <option value="Young" selected={currentFilters.agegroup === 'Young'}>🐶 Young</option>
+          <option value="Adult" selected={currentFilters.agegroup === 'Adult'}>🐕 Adult</option>
+          <option value="Senior" selected={currentFilters.agegroup === 'Senior'}>👴 Senior</option>
         </select>
       </div>
       
@@ -65,11 +65,11 @@ const { currentFilters = {}, showSpeciesFilter = true } = Astro.props;
           name="size"
           class="filter-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         >
-          <option value="">Any Size</option>
-          <option value="Small" selected={currentFilters.size === 'Small'}>Small</option>
-          <option value="Medium" selected={currentFilters.size === 'Medium'}>Medium</option>
-          <option value="Large" selected={currentFilters.size === 'Large'}>Large</option>
-          <option value="Very Large" selected={currentFilters.size === 'Very Large'}>Very Large</option>
+          <option value="">📏 Any Size</option>
+          <option value="Small" selected={currentFilters.size === 'Small'}>🐩 Small</option>
+          <option value="Medium" selected={currentFilters.size === 'Medium'}>🐕 Medium</option>
+          <option value="Large" selected={currentFilters.size === 'Large'}>🦮 Large</option>
+          <option value="Very Large" selected={currentFilters.size === 'Very Large'}>🐕‍🦺 Very Large</option>
         </select>
       </div>
       
@@ -80,9 +80,9 @@ const { currentFilters = {}, showSpeciesFilter = true } = Astro.props;
           name="sex"
           class="filter-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         >
-          <option value="">Any Sex</option>
-          <option value="Male" selected={currentFilters.sex === 'Male'}>Male</option>
-          <option value="Female" selected={currentFilters.sex === 'Female'}>Female</option>
+          <option value="">⚧ Any Sex</option>
+          <option value="Male" selected={currentFilters.sex === 'Male'}>♂️ Male</option>
+          <option value="Female" selected={currentFilters.sex === 'Female'}>♀️ Female</option>
         </select>
       </div>
     </div>
@@ -96,34 +96,6 @@ const { currentFilters = {}, showSpeciesFilter = true } = Astro.props;
         Compatibility & Special Requirements
       </h3>
       <div class="flex flex-wrap gap-4">
-        <div class="flex-1 min-w-40">
-          <label for="goodwith-filter" class="sr-only">Good With</label>
-          <select 
-            id="goodwith-filter" 
-            name="goodWith"
-            class="filter-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-          >
-            <option value="">Good With Any</option>
-            <option value="cats" selected={currentFilters.goodWith === 'cats'}>🐱 Good with Cats</option>
-            <option value="dogs" selected={currentFilters.goodWith === 'dogs'}>🐕 Good with Dogs</option>
-            <option value="children" selected={currentFilters.goodWith === 'children'}>👶 Good with Children</option>
-            <option value="smallanimals" selected={currentFilters.goodWith === 'smallanimals'}>🐰 Good with Small Animals</option>
-          </select>
-        </div>
-
-        <div class="flex-1 min-w-32">
-          <label for="housetrained-filter" class="sr-only">House Trained</label>
-          <select 
-            id="housetrained-filter" 
-            name="isHouseTrained"
-            class="filter-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-          >
-            <option value="">Any Training</option>
-            <option value="yes" selected={currentFilters.isHouseTrained === 'yes'}>🏠 House Trained</option>
-            <option value="no" selected={currentFilters.isHouseTrained === 'no'}>Training Needed</option>
-          </select>
-        </div>
-
         <div class="flex-1 min-w-32">
           <label for="specialneeds-filter" class="sr-only">Special Needs</label>
           <select 
@@ -131,9 +103,9 @@ const { currentFilters = {}, showSpeciesFilter = true } = Astro.props;
             name="hasSpecialNeeds"
             class="filter-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
           >
-            <option value="">Any Needs</option>
+            <option value="">💝 Any Needs</option>
             <option value="yes" selected={currentFilters.hasSpecialNeeds === 'yes'}>💖 Special Needs</option>
-            <option value="no" selected={currentFilters.hasSpecialNeeds === 'no'}>No Special Needs</option>
+            <option value="no" selected={currentFilters.hasSpecialNeeds === 'no'}>✨ No Special Needs</option>
           </select>
         </div>
 
@@ -144,11 +116,47 @@ const { currentFilters = {}, showSpeciesFilter = true } = Astro.props;
             name="hasActiveReserve"
             class="filter-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
           >
-            <option value="">All Animals</option>
+            <option value="">🏷️ All Animals</option>
             <option value="no" selected={currentFilters.hasActiveReserve === 'no'}>✅ Available Now</option>
-            <option value="yes" selected={currentFilters.hasActiveReserve === 'yes'}>📋 Reserved</option>
+            <option value="yes" selected={currentFilters.hasActiveReserve === 'yes'}>🔒 Reserved</option>
           </select>
         </div>
+      </div>
+
+      <!-- Good With Toggle Buttons -->
+      <div class="mt-4">
+        <h4 class="text-sm font-medium text-gray-700 mb-3">Good With / Training</h4>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" class="good-with-toggle" data-value="cats">
+            🐱 Good with Cats
+          </button>
+          <button type="button" class="good-with-toggle" data-value="dogs">
+            🐕 Good with Dogs
+          </button>
+          <button type="button" class="good-with-toggle" data-value="children">
+            👶 Good with Children
+          </button>
+          <button type="button" class="good-with-toggle" data-value="smallanimals">
+            🐰 Good with Small Animals
+          </button>
+          <button type="button" class="good-with-toggle" data-value="housetrained">
+            🏠 House Trained
+          </button>
+          <button type="button" class="good-with-toggle" data-value="elderly">
+            👴 Good with Elderly
+          </button>
+          <button type="button" class="good-with-toggle" data-value="crate">
+            📦 Crate Trained
+          </button>
+          <button type="button" class="good-with-toggle" data-value="travel">
+            🚗 Travel Friendly
+          </button>
+          <button type="button" class="good-with-toggle" data-value="lead">
+            🦮 Good on Lead
+          </button>
+        </div>
+        <!-- Hidden inputs for form submission -->
+        <div id="goodwith-inputs" class="hidden"></div>
       </div>
     </div>
 
@@ -212,25 +220,48 @@ const { currentFilters = {}, showSpeciesFilter = true } = Astro.props;
     function handleFilterChange() {
       const formData = new FormData(form);
       const params = new URLSearchParams();
-      
+
+      // Handle multiple goodWith checkboxes
+      const goodWithValues = formData.getAll('goodWith');
+
       // Build query parameters
       for (const [key, value] of formData.entries()) {
+        if (key === 'goodWith') continue; // Handle separately
         if (value && value !== '') {
           params.set(key, value);
         }
       }
-      
+
+      // Add all goodWith values
+      if (goodWithValues.length > 0) {
+        params.set('goodWith', goodWithValues.join(','));
+      }
+
       // Update URL without page reload
       const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
       window.history.replaceState({}, '', newUrl);
-      
+
       // Apply filters to visible animals
-      filterAnimals(Object.fromEntries(params));
+      const filters = Object.fromEntries(params);
+      if (goodWithValues.length > 0) {
+        filters.goodWithArray = goodWithValues;
+      }
+      filterAnimals(filters);
     }
     
     // Clear filters handler
     function clearFilters() {
       form.reset();
+
+      // Clear toggle buttons
+      document.querySelectorAll('.good-with-toggle').forEach(button => {
+        button.classList.remove('active');
+      });
+
+      // Clear hidden inputs
+      const hiddenInputsContainer = document.getElementById('goodwith-inputs');
+      hiddenInputsContainer.innerHTML = '';
+
       window.history.replaceState({}, '', window.location.pathname);
       filterAnimals({});
     }
@@ -239,61 +270,100 @@ const { currentFilters = {}, showSpeciesFilter = true } = Astro.props;
     function filterAnimals(filters) {
       const animals = document.querySelectorAll('.asm3-adoptable-item');
       let visibleCount = 0;
-      
+
       animals.forEach(animal => {
         let shouldShow = true;
         const link = animal.querySelector('a');
         const href = link?.getAttribute('href') || '';
-        
+
         // Extract animal info from the card
         const nameEl = animal.querySelector('.asm3-adoptable-name');
         const taglineEl = animal.querySelector('.asm3-adoptable-tagline');
-        const badgesEl = animal.querySelector('.flex.flex-wrap.gap-2');
-        
+
+        // Get all badge elements from both compatibility and status sections
+        const allBadges = animal.querySelectorAll('span[class*="bg-"][class*="text-"]');
+        const badgeTexts = Array.from(allBadges).map(badge => badge.textContent?.toLowerCase() || '');
+        const badges = badgeTexts.join(' ');
+
         if (!nameEl || !taglineEl) return;
-        
+
         const name = nameEl.textContent?.toLowerCase() || '';
         const content = taglineEl.textContent?.toLowerCase() || '';
-        const badges = badgesEl?.textContent?.toLowerCase() || '';
-        
-        // Apply filters
+
+        // Species filter - check URL path
         if (filters.species && !href.includes(`/adopt/${filters.species}/`)) {
           shouldShow = false;
         }
-        
-        if (filters.agegroup && !content.includes(filters.agegroup.toLowerCase())) {
-          shouldShow = false;
-        }
-        
-        if (filters.size && !content.includes(filters.size.toLowerCase())) {
-          shouldShow = false;
-        }
-        
-        if (filters.sex && !content.includes(filters.sex.toLowerCase())) {
-          shouldShow = false;
-        }
-        
-        if (filters.goodWith) {
-          const goodWithMap = {
-            'cats': 'cat friendly',
-            'dogs': 'dog friendly', 
-            'children': 'kid friendly',
-            'smallanimals': 'small animal friendly'
-          };
-          const searchTerm = goodWithMap[filters.goodWith];
-          if (searchTerm && !badges.includes(searchTerm)) {
+
+        // Age group filter - check tagline content for age group
+        if (filters.agegroup) {
+          const ageLines = taglineEl.querySelectorAll('div');
+          let hasAge = false;
+          ageLines.forEach(line => {
+            if (line.textContent?.toLowerCase().includes(filters.agegroup.toLowerCase())) {
+              hasAge = true;
+            }
+          });
+          if (!hasAge) {
             shouldShow = false;
           }
         }
 
-        // Enhanced filtering for new fields
-        if (filters.isHouseTrained === 'yes' && !badges.includes('house trained')) {
-          shouldShow = false;
+        // Size filter - check tagline content for size
+        if (filters.size) {
+          const sizeLines = taglineEl.querySelectorAll('div');
+          let hasSize = false;
+          sizeLines.forEach(line => {
+            if (line.textContent?.toLowerCase().includes(filters.size.toLowerCase())) {
+              hasSize = true;
+            }
+          });
+          if (!hasSize) {
+            shouldShow = false;
+          }
         }
-        if (filters.isHouseTrained === 'no' && badges.includes('house trained')) {
-          shouldShow = false;
+
+        // Sex filter - check tagline content for sex
+        if (filters.sex) {
+          const sexLines = taglineEl.querySelectorAll('div');
+          let hasSex = false;
+          sexLines.forEach(line => {
+            if (line.textContent?.toLowerCase().includes(filters.sex.toLowerCase())) {
+              hasSex = true;
+            }
+          });
+          if (!hasSex) {
+            shouldShow = false;
+          }
         }
         
+        // Handle multiple goodWith selections
+        if (filters.goodWithArray && filters.goodWithArray.length > 0) {
+          const goodWithMap = {
+            'cats': '🐱 cat friendly',
+            'dogs': '🐕 dog friendly',
+            'children': '👶 kid friendly',
+            'smallanimals': '🐰 small animal friendly',
+            'housetrained': '🏠 house trained',
+            'elderly': 'elderly friendly',
+            'crate': 'crate trained',
+            'travel': 'travel friendly',
+            'lead': 'good on lead'
+          };
+
+          // Animal must match ALL selected criteria (AND logic)
+          const matches = filters.goodWithArray.every(criterion => {
+            const searchTerm = goodWithMap[criterion];
+            return searchTerm && badges.includes(searchTerm);
+          });
+
+          if (!matches) {
+            shouldShow = false;
+          }
+        }
+
+
+        // Special needs filter - check for special needs badge
         if (filters.hasSpecialNeeds === 'yes' && !badges.includes('special needs')) {
           shouldShow = false;
         }
@@ -314,26 +384,76 @@ const { currentFilters = {}, showSpeciesFilter = true } = Astro.props;
         animal.style.display = shouldShow ? 'block' : 'none';
         if (shouldShow) visibleCount++;
       });
-      
-      // Update results count
+
+      // Update results count and toggle availability
       updateResultsCount(visibleCount);
+      updateToggleAvailability();
     }
     
-    // Update results counter
+    // Update results counter and no results message
     function updateResultsCount(count) {
       let counter = document.getElementById('results-counter');
+      let noResultsMessage = document.getElementById('no-results-message');
+      const container = document.querySelector('.animals-grid')?.parentElement;
+
+      if (!container) return;
+
+      // Create counter if it doesn't exist
       if (!counter) {
         counter = document.createElement('div');
         counter.id = 'results-counter';
         counter.className = 'text-sm text-gray-600 mb-4';
-        const container = document.querySelector('.animals-grid')?.parentElement;
-        if (container) {
-          container.insertBefore(counter, container.querySelector('.animals-grid'));
+        container.insertBefore(counter, container.querySelector('.animals-grid'));
+      }
+
+      // Create no results message if it doesn't exist
+      if (!noResultsMessage) {
+        noResultsMessage = document.createElement('div');
+        noResultsMessage.id = 'no-results-message';
+        noResultsMessage.className = 'text-center py-16 hidden';
+        noResultsMessage.innerHTML = `
+          <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-8 max-w-lg mx-auto">
+            <div class="text-blue-600 mb-4">
+              <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-blue-800 mb-2">No Animals Found</h3>
+            <p class="text-blue-700 text-sm mb-4">We couldn't find any animals matching your current filters.</p>
+            <p class="text-blue-600 text-xs mb-4">Try adjusting your search criteria:</p>
+            <ul class="text-blue-600 text-xs text-left mb-4 space-y-1">
+              <li>• Select fewer "Good With" requirements</li>
+              <li>• Try different age groups or sizes</li>
+              <li>• Check "Available Now" animals</li>
+              <li>• Clear all filters to see all pets</li>
+            </ul>
+            <button
+              onclick="document.getElementById('clear-filters').click()"
+              class="px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded-lg font-medium transition-colors text-sm"
+            >
+              Clear All Filters
+            </button>
+          </div>
+        `;
+        const animalsGrid = container.querySelector('.animals-grid');
+        if (animalsGrid) {
+          container.insertBefore(noResultsMessage, animalsGrid.nextSibling);
         }
       }
-      
+
       const total = document.querySelectorAll('.asm3-adoptable-item').length;
-      counter.textContent = `Showing ${count} of ${total} animals`;
+
+      if (count === 0) {
+        counter.textContent = `No animals match your search criteria`;
+        noResultsMessage.classList.remove('hidden');
+        const animalsGrid = container.querySelector('.animals-grid');
+        if (animalsGrid) animalsGrid.style.display = 'none';
+      } else {
+        counter.textContent = `Showing ${count} of ${total} animals`;
+        noResultsMessage.classList.add('hidden');
+        const animalsGrid = container.querySelector('.animals-grid');
+        if (animalsGrid) animalsGrid.style.display = 'grid';
+      }
     }
     
     // Advanced view toggle
@@ -366,29 +486,143 @@ const { currentFilters = {}, showSpeciesFilter = true } = Astro.props;
       }
     }
 
+    // Check which compatibility options are available in current animals
+    function updateToggleAvailability() {
+      const animals = document.querySelectorAll('.asm3-adoptable-item');
+      const availableOptions = new Set();
+
+      // Check what compatibility badges exist across all animals
+      animals.forEach(animal => {
+        if (animal.style.display === 'none') return; // Skip hidden animals
+
+        const allBadges = animal.querySelectorAll('span[class*="bg-"][class*="text-"]');
+        const badgeTexts = Array.from(allBadges).map(badge => badge.textContent?.toLowerCase() || '');
+
+        badgeTexts.forEach(text => {
+          if (text.includes('cat friendly')) availableOptions.add('cats');
+          if (text.includes('dog friendly')) availableOptions.add('dogs');
+          if (text.includes('kid friendly')) availableOptions.add('children');
+          if (text.includes('small animal friendly')) availableOptions.add('smallanimals');
+          if (text.includes('house trained')) availableOptions.add('housetrained');
+          if (text.includes('elderly friendly') || text.includes('good with elderly')) availableOptions.add('elderly');
+          if (text.includes('crate trained')) availableOptions.add('crate');
+          if (text.includes('travel friendly')) availableOptions.add('travel');
+          if (text.includes('good on lead') || text.includes('lead trained')) availableOptions.add('lead');
+        });
+      });
+
+      // Update button states
+      const toggleButtons = document.querySelectorAll('.good-with-toggle');
+      toggleButtons.forEach(button => {
+        const value = button.dataset.value;
+        const isAvailable = availableOptions.has(value);
+
+        if (isAvailable) {
+          button.classList.remove('disabled');
+          button.disabled = false;
+        } else {
+          button.classList.add('disabled');
+          button.disabled = true;
+          // Also deactivate if currently active
+          if (button.classList.contains('active')) {
+            button.classList.remove('active');
+            const hiddenInputsContainer = document.getElementById('goodwith-inputs');
+            const hiddenInput = hiddenInputsContainer.querySelector(`input[value="${value}"]`);
+            if (hiddenInput) hiddenInput.remove();
+          }
+        }
+      });
+    }
+
+    // Good With toggle button functionality
+    function setupGoodWithToggles() {
+      const toggleButtons = document.querySelectorAll('.good-with-toggle');
+      const hiddenInputsContainer = document.getElementById('goodwith-inputs');
+
+      toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Don't allow clicking disabled buttons
+          if (this.disabled || this.classList.contains('disabled')) return;
+
+          const value = this.dataset.value;
+          const isActive = this.classList.contains('active');
+
+          if (isActive) {
+            // Deactivate
+            this.classList.remove('active');
+            // Remove hidden input
+            const hiddenInput = hiddenInputsContainer.querySelector(`input[value="${value}"]`);
+            if (hiddenInput) hiddenInput.remove();
+          } else {
+            // Activate
+            this.classList.add('active');
+            // Add hidden input
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'goodWith';
+            hiddenInput.value = value;
+            hiddenInputsContainer.appendChild(hiddenInput);
+          }
+
+          // Trigger filter change
+          handleFilterChange();
+        });
+      });
+    }
+
     // Event listeners
     form.addEventListener('change', handleFilterChange);
     clearButton.addEventListener('click', clearFilters);
-    
+
     const toggleButton = document.getElementById('toggle-advanced');
     if (toggleButton) {
       toggleButton.addEventListener('click', toggleAdvancedView);
     }
-    
+
+    // Initialize good with toggles
+    setupGoodWithToggles();
+
     // Initialize view preference
     loadViewPreference();
+
+    // Initial toggle availability check
+    updateToggleAvailability();
     
     // Initialize filters from URL
     const urlParams = new URLSearchParams(window.location.search);
     const initialFilters = Object.fromEntries(urlParams);
-    
+
     // Set form values from URL
     Object.entries(initialFilters).forEach(([key, value]) => {
-      const input = form.querySelector(`[name="${key}"]`);
-      if (input) input.value = value;
+      if (key === 'goodWith') {
+        // Handle comma-separated goodWith values for toggle buttons
+        const values = value.split(',');
+        const hiddenInputsContainer = document.getElementById('goodwith-inputs');
+
+        values.forEach(val => {
+          // Activate the button
+          const button = document.querySelector(`.good-with-toggle[data-value="${val}"]`);
+          if (button) {
+            button.classList.add('active');
+
+            // Add hidden input
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'goodWith';
+            hiddenInput.value = val;
+            hiddenInputsContainer.appendChild(hiddenInput);
+          }
+        });
+      } else {
+        const input = form.querySelector(`[name="${key}"]`);
+        if (input) input.value = value;
+      }
     });
-    
-    // Apply initial filters
+
+    // Apply initial filters with proper goodWith handling
+    if (initialFilters.goodWith) {
+      initialFilters.goodWithArray = initialFilters.goodWith.split(',');
+    }
     filterAnimals(initialFilters);
   });
 </script>
@@ -406,5 +640,46 @@ const { currentFilters = {}, showSpeciesFilter = true } = Astro.props;
     @apply border-transparent;
     outline: 2px solid rgb(168 85 247);
     outline-offset: 2px;
+  }
+
+  .good-with-toggle {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    border: 2px solid #d1d5db;
+    color: #374151;
+    background-color: white;
+    transition: all 0.2s;
+    outline: none;
+  }
+
+  .good-with-toggle:hover {
+    background-color: #f9fafb;
+  }
+
+  .good-with-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #6366f1, 0 0 0 4px rgba(99, 102, 241, 0.1);
+  }
+
+  .good-with-toggle.active {
+    border-color: #4f46e5;
+    color: #3730a3;
+    background-color: #eef2ff;
+  }
+
+  .good-with-toggle.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background-color: #f3f4f6;
+    color: #9ca3af;
+    border-color: #e5e7eb;
+  }
+
+  .good-with-toggle.disabled:hover {
+    background-color: #f3f4f6;
+    color: #9ca3af;
+    border-color: #e5e7eb;
   }
 </style>

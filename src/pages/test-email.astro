@@ -11,13 +11,13 @@ export const prerender = false;
 
 <Base title="Email Test Page | Homeless Hounds">
   <main class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-3xl mx-auto">
+    <div class="max-w-4xl mx-auto">
       <div class="bg-white shadow-xl rounded-lg p-8">
-        <h1 class="text-3xl font-bold text-gray-900 mb-8">Email System Test</h1>
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">Email System Test - All Forms</h1>
 
         <div class="space-y-8">
-          <!-- Test Email -->
-          <section>
+          <!-- Test Basic Email -->
+          <section class="border-b pb-8">
             <h2 class="text-xl font-semibold text-gray-800 mb-4">1. Test Email Configuration</h2>
             <p class="text-gray-600 mb-4">Send a test email to verify SendGrid configuration is working.</p>
 
@@ -44,190 +44,174 @@ export const prerender = false;
             <div id="testResult" class="mt-4"></div>
           </section>
 
-          <!-- Test Surrender Email -->
-          <section>
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">2. Test Surrender Notification</h2>
-            <p class="text-gray-600 mb-4">Simulate a surrender form submission to test email templates.</p>
+          <!-- Test Surrender Email (Form ID 66) -->
+          <section class="border-b pb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">2. Surrender Form (ID: 66)</h2>
+            <p class="text-gray-600 mb-4">Test surrender form email templates (admin + user confirmation).</p>
 
             <form id="surrenderTestForm" class="space-y-4">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    name="firstname"
-                    value="Test"
-                    required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                  />
+                  <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                  <input type="text" name="firstname" value="Test" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    name="lastname"
-                    value="User"
-                    required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                  />
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                  <input type="email" name="email" value="web@homelesshounds.com.au" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
                 </div>
               </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value="web@homelesshounds.com.au"
-                  required
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                />
-              </div>
-
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Pet Name
-                  </label>
-                  <input
-                    type="text"
-                    name="animalname"
-                    value="Buddy"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                  />
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Pet Name</label>
+                  <input type="text" name="animalname" value="Buddy" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Species
-                  </label>
-                  <select
-                    name="species"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                  >
-                    <option value="Dog">Dog</option>
-                    <option value="Cat">Cat</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Breed
-                  </label>
-                  <input
-                    type="text"
-                    name="breed"
-                    value="Labrador"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                  />
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Species</label>
+                  <input type="text" name="species" value="Dog" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
                 </div>
               </div>
-
-              <button
-                type="submit"
-                class="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
-              >
-                Send Surrender Test Emails
+              <button type="submit" class="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
+                Test Surrender Emails
               </button>
             </form>
             <div id="surrenderResult" class="mt-4"></div>
           </section>
 
-          <!-- Test Adoption Email -->
-          <section>
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">3. Test Adoption Notification</h2>
-            <p class="text-gray-600 mb-4">Simulate an adoption application to test email templates.</p>
+          <!-- Test Dog Adoption Email (Form ID 70) -->
+          <section class="border-b pb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">3. Dog Adoption Form (ID: 70)</h2>
+            <p class="text-gray-600 mb-4">Test dog adoption email templates (admin + user confirmation).</p>
 
-            <form id="adoptionTestForm" class="space-y-4">
+            <form id="dogAdoptionTestForm" class="space-y-4">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    name="firstname"
-                    value="Jane"
-                    required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                  />
+                  <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                  <input type="text" name="firstname" value="Jane" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    name="lastname"
-                    value="Adopter"
-                    required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                  />
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                  <input type="email" name="email" value="web@homelesshounds.com.au" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
                 </div>
               </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value="web@homelesshounds.com.au"
-                  required
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                />
-              </div>
-
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Pet Name
-                  </label>
-                  <input
-                    type="text"
-                    name="pet_name"
-                    value="Spike"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                  />
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Pet Name</label>
+                  <input type="text" name="pet_name" value="Spike" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Pet Species
-                  </label>
-                  <select
-                    name="pet_species"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                  >
-                    <option value="Dog">Dog</option>
-                    <option value="Cat">Cat</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Pet Breed
-                  </label>
-                  <input
-                    type="text"
-                    name="pet_breed"
-                    value="Mixed Breed"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                  />
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Pet Breed</label>
+                  <input type="text" name="pet_breed" value="Labrador Mix" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
                 </div>
               </div>
-
-              <button
-                type="submit"
-                class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Send Adoption Test Emails
+              <input type="hidden" name="pet_species" value="Dog" />
+              <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                Test Dog Adoption Emails
               </button>
             </form>
-            <div id="adoptionResult" class="mt-4"></div>
+            <div id="dogAdoptionResult" class="mt-4"></div>
+          </section>
+
+          <!-- Test Cat Adoption Email (Form ID 65) -->
+          <section class="border-b pb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">4. Cat Adoption Form (ID: 65)</h2>
+            <p class="text-gray-600 mb-4">Test cat adoption email templates (admin + user confirmation).</p>
+
+            <form id="catAdoptionTestForm" class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                  <input type="text" name="firstname" value="John" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                  <input type="email" name="email" value="web@homelesshounds.com.au" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Pet Name</label>
+                  <input type="text" name="pet_name" value="Whiskers" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Pet Breed</label>
+                  <input type="text" name="pet_breed" value="Domestic Shorthair" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
+                </div>
+              </div>
+              <input type="hidden" name="pet_species" value="Cat" />
+              <button type="submit" class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+                Test Cat Adoption Emails
+              </button>
+            </form>
+            <div id="catAdoptionResult" class="mt-4"></div>
+          </section>
+
+          <!-- Test Dog Foster Email (Form ID 68) -->
+          <section class="border-b pb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">5. Dog Foster Form (ID: 68)</h2>
+            <p class="text-gray-600 mb-4">Test dog foster email templates (admin + user confirmation).</p>
+
+            <form id="dogFosterTestForm" class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                  <input type="text" name="firstname" value="Sarah" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                  <input type="email" name="email" value="web@homelesshounds.com.au" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
+                </div>
+              </div>
+              <button type="submit" class="px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors">
+                Test Dog Foster Emails
+              </button>
+            </form>
+            <div id="dogFosterResult" class="mt-4"></div>
+          </section>
+
+          <!-- Test Cat Foster Email (Form ID 69) -->
+          <section class="border-b pb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">6. Cat Foster Form (ID: 69)</h2>
+            <p class="text-gray-600 mb-4">Test cat foster email templates (admin + user confirmation).</p>
+
+            <form id="catFosterTestForm" class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                  <input type="text" name="firstname" value="Emily" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                  <input type="email" name="email" value="web@homelesshounds.com.au" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
+                </div>
+              </div>
+              <button type="submit" class="px-6 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors">
+                Test Cat Foster Emails
+              </button>
+            </form>
+            <div id="catFosterResult" class="mt-4"></div>
+          </section>
+
+          <!-- Test Pet Courier Email (Form ID 67) -->
+          <section class="border-b pb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">7. Pet Courier Form (ID: 67)</h2>
+            <p class="text-gray-600 mb-4">Test pet courier email templates (admin + user confirmation).</p>
+
+            <form id="petCourierTestForm" class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                  <input type="text" name="firstname" value="Michael" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                  <input type="email" name="email" value="web@homelesshounds.com.au" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
+                </div>
+              </div>
+              <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                Test Pet Courier Emails
+              </button>
+            </form>
+            <div id="petCourierResult" class="mt-4"></div>
           </section>
         </div>
 
@@ -235,6 +219,7 @@ export const prerender = false;
           <p class="text-sm text-yellow-800">
             <strong>Note:</strong> This page is only available in development mode.
             Check the browser console for detailed email sending logs.
+            All test emails will be sent to the configured email addresses in your environment variables.
           </p>
         </div>
       </div>
@@ -242,6 +227,43 @@ export const prerender = false;
   </main>
 
   <script>
+    // Helper function to send test emails
+    async function sendTestEmail(formElement: HTMLFormElement, type: string, formId: string, resultDiv: HTMLElement) {
+      const formData = new FormData(formElement);
+
+      resultDiv.innerHTML = '<p class="text-blue-600">Sending test emails...</p>';
+
+      try {
+        const response = await fetch('/api/test-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: type,
+            formId: formId,
+            data: Object.fromEntries(formData)
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          resultDiv.innerHTML = `
+            <div class="text-green-600">
+              <p class="font-semibold">✅ Emails sent successfully!</p>
+              <ul class="text-sm mt-2 space-y-1">
+                <li>Admin notification: ${result.admin ? '✓ Sent' : '✗ Failed'}</li>
+                <li>User confirmation: ${result.user ? '✓ Sent' : result.user === null ? 'N/A (no user email)' : '✗ Failed'}</li>
+              </ul>
+            </div>
+          `;
+        } else {
+          resultDiv.innerHTML = `<p class="text-red-600">❌ Failed: ${result.error}</p>`;
+        }
+      } catch (error) {
+        resultDiv.innerHTML = `<p class="text-red-600">❌ Error: ${error}</p>`;
+      }
+    }
+
     // Test basic email
     document.getElementById('testEmailForm')?.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -271,80 +293,40 @@ export const prerender = false;
       }
     });
 
-    // Test surrender emails
+    // Surrender Form (66)
     document.getElementById('surrenderTestForm')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const form = e.target as HTMLFormElement;
-      const formData = new FormData(form);
-      const resultDiv = document.getElementById('surrenderResult')!;
-
-      resultDiv.innerHTML = '<p class="text-blue-600">Sending surrender test emails...</p>';
-
-      try {
-        const response = await fetch('/api/test-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            type: 'surrender',
-            formId: '37',
-            data: Object.fromEntries(formData)
-          })
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-          resultDiv.innerHTML = `
-            <p class="text-green-600">✅ Emails sent!</p>
-            <ul class="text-sm text-gray-600 mt-2">
-              <li>Admin: ${result.admin ? 'Sent' : 'Failed'}</li>
-              <li>User: ${result.user ? 'Sent' : 'Failed'}</li>
-            </ul>
-          `;
-        } else {
-          resultDiv.innerHTML = `<p class="text-red-600">❌ Failed: ${result.error}</p>`;
-        }
-      } catch (error) {
-        resultDiv.innerHTML = `<p class="text-red-600">❌ Error: ${error}</p>`;
-      }
+      await sendTestEmail(e.target as HTMLFormElement, 'surrender', '66', document.getElementById('surrenderResult')!);
     });
 
-    // Test adoption emails
-    document.getElementById('adoptionTestForm')?.addEventListener('submit', async (e) => {
+    // Dog Adoption Form (70)
+    document.getElementById('dogAdoptionTestForm')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const form = e.target as HTMLFormElement;
-      const formData = new FormData(form);
-      const resultDiv = document.getElementById('adoptionResult')!;
+      await sendTestEmail(e.target as HTMLFormElement, 'adoption', '70', document.getElementById('dogAdoptionResult')!);
+    });
 
-      resultDiv.innerHTML = '<p class="text-blue-600">Sending adoption test emails...</p>';
+    // Cat Adoption Form (65)
+    document.getElementById('catAdoptionTestForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      await sendTestEmail(e.target as HTMLFormElement, 'adoption', '65', document.getElementById('catAdoptionResult')!);
+    });
 
-      try {
-        const response = await fetch('/api/test-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            type: 'adoption',
-            formId: '39',
-            data: Object.fromEntries(formData)
-          })
-        });
+    // Dog Foster Form (68)
+    document.getElementById('dogFosterTestForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      await sendTestEmail(e.target as HTMLFormElement, 'foster', '68', document.getElementById('dogFosterResult')!);
+    });
 
-        const result = await response.json();
+    // Cat Foster Form (69)
+    document.getElementById('catFosterTestForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      await sendTestEmail(e.target as HTMLFormElement, 'foster', '69', document.getElementById('catFosterResult')!);
+    });
 
-        if (result.success) {
-          resultDiv.innerHTML = `
-            <p class="text-green-600">✅ Emails sent!</p>
-            <ul class="text-sm text-gray-600 mt-2">
-              <li>Admin: ${result.admin ? 'Sent' : 'Failed'}</li>
-              <li>User: ${result.user ? 'Sent' : 'Failed'}</li>
-            </ul>
-          `;
-        } else {
-          resultDiv.innerHTML = `<p class="text-red-600">❌ Failed: ${result.error}</p>`;
-        }
-      } catch (error) {
-        resultDiv.innerHTML = `<p class="text-red-600">❌ Error: ${error}</p>`;
-      }
+    // Pet Courier Form (67)
+    document.getElementById('petCourierTestForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      await sendTestEmail(e.target as HTMLFormElement, 'petcourier', '67', document.getElementById('petCourierResult')!);
     });
   </script>
 </Base>

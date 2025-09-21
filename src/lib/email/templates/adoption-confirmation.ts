@@ -33,7 +33,7 @@ export const adoptionConfirmationEmail = (data: EmailData) => {
         <li><strong>Reference Checks</strong> - We may contact your references</li>
         <li><strong>Meet & Greet</strong> - Arrange a meeting with your potential new family member</li>
         <li><strong>Home Check</strong> - Quick visit to ensure a safe environment</li>
-        <li><strong>Adoption Finalized</strong> - Welcome your new pet home!</li>
+        <li><strong>Adoption Finalised</strong> - Welcome your new pet home!</li>
       </ol>
     </div>
 
@@ -41,7 +41,7 @@ export const adoptionConfirmationEmail = (data: EmailData) => {
 
     <h3 style="color: #2d3748; font-size: 16px; font-weight: 600; margin: 0 0 10px;">What to Expect</h3>
     <p style="color: #4a5568; font-size: 14px; line-height: 1.6; margin: 0 0 15px;">
-      Our adoption coordinator will contact you within the next 24-48 hours to discuss your application.
+      Our adoption co-ordinator will contact you within the next 24-48 hours to discuss your application.
       In the meantime, here are some things you can do to prepare:
     </p>
     <ul style="color: #4a5568; font-size: 14px; line-height: 1.8; margin: 0 0 15px; padding-left: 20px;">

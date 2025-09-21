@@ -2,10 +2,10 @@
 
 ## 📍 Project Stage
 
-**Current Phase**: 3 - Forms & Applications Complete
-**Progress**: 85% complete
-**Last Session**: 2025-09-20
-**Session Goal**: Complete all volunteer and foster application forms with modals
+**Current Phase**: 3 - Newsletter & Contact Management Complete
+**Progress**: 90% complete
+**Last Session**: 2025-09-21
+**Session Goal**: Complete SendGrid newsletter integration with contact segmentation
 
 ## ✅ Completed This Session
 
@@ -24,22 +24,23 @@
 - [x] Complete email system with SendGrid integration
 - [x] Production domain authentication and webhooks
 
-### Today (2025-09-20)
-- [x] **Fixed cat adoption modal** header display issue (using 'header' field)
-- [x] **Unified hero colors** on animal profile pages (all orange now)
-- [x] **Converted Foster FAQs** to accordion format
-- [x] **Created FosterModal component** for dog (#68) and cat (#69) applications
-- [x] **Fixed modal ID conflicts** preventing cat foster modal from opening
-- [x] **Converted Pet Courier FAQs** to accordion format
-- [x] **Created PetCourierModal component** for courier applications (#67)
-- [x] **Created thank you pages** for foster and pet courier applications
+### Today (2025-09-21)
+- [x] **Complete SendGrid newsletter integration** with contact segmentation
+- [x] **GDPR-compliant contact management** (all contacts saved, marketing opt-in respected)
+- [x] **Dual segmentation system** (contact lists + marketing lists)
+- [x] **Newsletter signup component** with dark theme support for footer
+- [x] **Enhanced form integration** with automatic newsletter subscription
+- [x] **Contact API endpoints** for subscribe/unsubscribe functionality
+- [x] **Smart user type detection** based on form submissions
+- [x] **Operational vs marketing email separation** for compliance
 
 ## 🔄 Active Tasks
 
 ### Next Priority
+- [ ] **GDPR compliance review** for SendGrid and ASM data handling
+- [ ] **Privacy policy updates** to reflect new newsletter system
 - [ ] **Volunteer registration form** (ASM form ID 36) with modal
-- [ ] **Test all forms end-to-end** in production environment
-- [ ] **Optimize form loading performance**
+- [ ] **Test newsletter integration** in production environment
 
 ### Future Phases
 - [ ] Donation integration with payment gateway
@@ -50,9 +51,10 @@
 
 **Project Structure**:
 - Pages: `src/pages/adopt/` (native ASM)
-- Components: `src/components/` (modals: AdoptionModal, FosterModal, PetCourierModal)
-- API Routes: `src/pages/api/asm/`
+- Components: `src/components/` (modals: AdoptionModal, FosterModal, PetCourierModal, NewsletterSignup)
+- API Routes: `src/pages/api/asm/`, `src/pages/api/newsletter/`
 - Email System: `src/lib/email/`
+- Newsletter System: `src/lib/sendgrid-newsletter.ts`
 
 **Live Sites**:
 - Production: https://homelesshounds-com-au.pages.dev
@@ -61,29 +63,29 @@
 ## 🔖 Session Continuity
 
 ### Last Session Summary
-**ALL VOLUNTEER FORMS ACTIVE**: Completed implementation of all volunteer application forms with modal interfaces. Fixed critical bug where duplicate IDs prevented cat foster modal from opening. Converted FAQs to accordion format on foster and pet courier pages for better UX. All forms now feature auto-save, section-based layouts, dynamic field generation from ASM, and proper thank you pages. Consistent color scheme (orange for animals, teal for foster, indigo for couriers) across all forms.
+**COMPLETE NEWSLETTER INTEGRATION**: Implemented comprehensive SendGrid newsletter system with GDPR-compliant contact management. All form submissions now automatically capture contacts with proper segmentation (adopters, volunteers, foster carers, couriers). Dual segmentation ensures operational emails reach all contacts while marketing emails only reach opt-ins. Added standalone newsletter component to footer with dark theme support. Enhanced form integration preserves existing workflow while adding newsletter functionality.
 
 ### Key Implementation Details
 ```typescript
-// Form ID mapping complete:
-37: Animal surrender ✅ (with email notifications)
-38: Dog adoption ✅ (modal ready)
-39: Cat adoption ✅ (modal ready)
-67: Pet courier ✅ (modal active)
-68: Dog foster ✅ (modal active)
-69: Cat foster ✅ (modal active)
-36: Volunteer registration (next)
-
-// Modal ID fix for multiple forms:
-id={`foster-fields-${species}`} // Unique IDs per species
-id={`form-header-${species}`}
-
-// Accordion implementation:
-function toggleAccordion(id) {
-  const content = document.getElementById(id + '-content');
-  const icon = document.getElementById(id + '-icon');
-  // Toggle visibility and rotate icon
+// Newsletter contact segmentation:
+interface NewsletterContact {
+  userType: 'adopter' | 'volunteer' | 'foster' | 'courier' | 'general';
+  marketingOptIn: boolean; // GDPR compliance
+  contactReason: string; // 'adoption application', 'volunteer application', etc.
 }
+
+// Dual list system:
+contactLists: ['contacts-all', 'contacts-adopters', 'contacts-volunteers'] // Operational
+marketingLists: ['newsletter-general', 'newsletter-adopters'] // Opt-in only
+
+// Form integration (automatic):
+if (email && email.includes('@')) {
+  const userType = formid === "36" ? 'volunteer' : formid === "39" ? 'adopter' : 'general';
+  await sendGridNewsletter.addContact({ email, userType, marketingOptIn, ... });
+}
+
+// Newsletter component (dark theme support):
+<NewsletterSignup userType="general" source="footer" theme="dark" />
 ```
 
 ### Environment State
@@ -96,10 +98,10 @@ function toggleAccordion(id) {
 ## ⏭️ Next Actions
 
 ### Next Session Priority
-1. **Volunteer registration form** - Create modal for form ID 36
-2. **Test all forms** - End-to-end testing in production
-3. **Performance optimization** - Lazy load modals, optimize API calls
-4. **Documentation update** - Update user guides for all forms
+1. **GDPR compliance review** - Review SendGrid and ASM data handling policies
+2. **Privacy policy updates** - Update privacy policy to reflect new newsletter system
+3. **Newsletter testing** - Test contact segmentation and email delivery
+4. **Volunteer registration form** - Create modal for form ID 36
 
 ### Future Sessions
 1. Payment integration for donations (Stripe/PayPal)
@@ -145,5 +147,5 @@ Key learning: Always ensure unique IDs when multiple similar components exist on
 
 **Token Count**: ~650 (Optimized for continuity)
 **Session Started**: 2025-09-05 (continued from previous)
-**Session Updated**: 2025-09-20 (All volunteer forms active)
-**Next Review**: After volunteer registration implementation
+**Session Updated**: 2025-09-21 (Newsletter integration complete)
+**Next Review**: After GDPR compliance review

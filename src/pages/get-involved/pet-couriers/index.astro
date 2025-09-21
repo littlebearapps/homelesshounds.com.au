@@ -23,12 +23,12 @@ import PetCourierModal from "../../../components/PetCourierModal.astro";
             Help save lives by transporting rescued animals from foster carers to their new homes. Every journey you make helps an animal find their forever family.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onclick="openPetCourierModal()" class="btn btn-white">
+            <a href="#apply-section" class="btn btn-white">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path>
               </svg>
-              Apply Now
-            </button>
+              Apply to Transport
+            </a>
             <a href="#benefits" class="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-indigo-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600">
               <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -261,7 +261,7 @@ import PetCourierModal from "../../../components/PetCourierModal.astro";
         </div>
 
         <!-- Application CTA -->
-        <div class="bg-indigo-50 border border-indigo-300 rounded-lg p-6">
+        <div id="apply-section" class="bg-indigo-50 border border-indigo-300 rounded-lg p-6 scroll-mt-20">
           <h4 class="text-lg font-semibold text-indigo-900 mb-4">Apply Now</h4>
           <p class="text-indigo-800 mb-4">
             Ready to start helping animals reach their forever homes? Apply to become a pet courier:

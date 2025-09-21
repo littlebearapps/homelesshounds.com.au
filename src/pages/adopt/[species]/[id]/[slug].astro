@@ -85,37 +85,61 @@ const speciesIcon = species === 'dog' ? '🐕' : '🐱';
 const heroColor = 'from-amber-500 to-amber-700'; // Same orange color for both dogs and cats
 const accentColor = 'amber'; // Same accent color for consistency
 
-// Enhanced compatibility information
+// Enhanced compatibility information - only show known values (not unknown)
 const compatibilityInfo = [
   {
     label: '🐱 Good with Cats',
     level: profile.compatibility.cats,
     icon: getCompatibilityIcon(profile.compatibility.cats, 'cats'),
-    show: true
+    show: profile.compatibility.cats !== 2 && profile.compatibility.cats !== undefined
   },
   {
     label: '🐕 Good with Dogs',
     level: profile.compatibility.dogs,
     icon: getCompatibilityIcon(profile.compatibility.dogs, 'dogs'),
-    show: true
+    show: profile.compatibility.dogs !== 2 && profile.compatibility.dogs !== undefined
   },
   {
     label: '👶 Good with Children',
     level: profile.compatibility.children,
     icon: getCompatibilityIcon(profile.compatibility.children, 'children'),
-    show: true
+    show: profile.compatibility.children !== 2 && profile.compatibility.children !== undefined
+  },
+  {
+    label: '👴 Good with Elderly',
+    level: animal.ISGOODWITHELDERLY,
+    icon: getCompatibilityIcon(animal.ISGOODWITHELDERLY, 'elderly'),
+    show: animal.ISGOODWITHELDERLY !== 2 && animal.ISGOODWITHELDERLY !== undefined
   },
   {
     label: '🐰 Good with Small Animals',
     level: profile.compatibility.smallAnimals,
     icon: getCompatibilityIcon(profile.compatibility.smallAnimals, 'small'),
-    show: animal.ISGOODWITHSMALLANIMALS !== undefined
+    show: profile.compatibility.smallAnimals !== 2 && profile.compatibility.smallAnimals !== undefined
   },
   {
     label: '🏠 House Trained',
     level: profile.compatibility.houseTrained,
     icon: getCompatibilityIcon(profile.compatibility.houseTrained, 'house'),
-    show: true
+    show: profile.compatibility.houseTrained !== 2 && profile.compatibility.houseTrained !== undefined
+  },
+  {
+    label: '📦 Crate Trained',
+    level: animal.ISCRATETRAINED,
+    icon: getCompatibilityIcon(animal.ISCRATETRAINED, 'crate'),
+    show: animal.ISCRATETRAINED !== 2 && animal.ISCRATETRAINED !== undefined
+  },
+  {
+    label: '🚗 Good Traveller',
+    level: animal.ISGOODTRAVELLER,
+    icon: getCompatibilityIcon(animal.ISGOODTRAVELLER, 'travel'),
+    show: animal.ISGOODTRAVELLER !== 2 && animal.ISGOODTRAVELLER !== undefined
+  },
+  {
+    label: '🦴 Good on Lead',
+    level: animal.ISGOODONLEAD,
+    icon: getCompatibilityIcon(animal.ISGOODONLEAD, 'lead'),
+    show: species === 'dog' && animal.ISGOODONLEAD !== 2 && animal.ISGOODONLEAD !== undefined
   },
 ].filter(item => item.show);
 ---
@@ -291,7 +315,7 @@ const compatibilityInfo = [
             <!-- Quick Info Card -->
             <div class="lg:col-span-1">
               <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-24">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Quick Info</h3>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">{animal.ANIMALNAME}'s Details</h3>
 
                 <!-- Adoption Fee -->
                 <div class={`bg-gradient-to-r from-${accentColor}-50 to-pink-50 rounded-xl p-4 mb-4`}>
@@ -312,13 +336,6 @@ const compatibilityInfo = [
                   <span class="font-medium text-gray-900">
                     {profile.adoption.location || animal.SHELTERLOCATIONNAME || 'Contact for details'}
                   </span>
-                </div>
-
-
-                <!-- Days in Care -->
-                <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                  <span class="text-gray-600">📅 Time with us</span>
-                  <span class="font-medium text-gray-900">{daysText}</span>
                 </div>
 
                 {/* Entry Date */}
@@ -345,10 +362,18 @@ const compatibilityInfo = [
                   </div>
                 )}
 
-                {/* Source Number */}
-                {profile.adoption.sourceNumber && (
+                {/* Shelter Code - Provider Source (Legal Requirement) */}
+                {animal.SHELTERCODE && (
                   <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                    <span class="text-gray-600">🏷️ Source</span>
+                    <span class="text-gray-600">🏷️ Provider Source</span>
+                    <span class="font-medium text-gray-900 text-sm font-mono">{animal.SHELTERCODE}</span>
+                  </div>
+                )}
+
+                {/* Source Number (if different from Shelter Code) */}
+                {profile.adoption.sourceNumber && profile.adoption.sourceNumber !== animal.SHELTERCODE && (
+                  <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <span class="text-gray-600">📝 Source</span>
                     <span class="font-medium text-gray-900 text-sm">{profile.adoption.sourceNumber}</span>
                   </div>
                 )}
@@ -407,13 +432,24 @@ const compatibilityInfo = [
                   `${animal.ANIMALNAME} is a ${animal.AGEGROUP.toLowerCase()} ${animal.SEXNAME.toLowerCase()} ${animal.BREEDNAME} looking for a loving home. ${animal.HASSPECIALNEEDS === 1 ? 'This pet has special needs and requires an understanding family. ' : ''}Please contact us to learn more about this wonderful ${animal.SPECIESNAME.toLowerCase()}.`
                 }
               </div>
+
+              {/* Physical Description Section */}
+              {animal.MARKINGS && (
+                <div class="border-t border-gray-200 mt-6 pt-6">
+                  <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center justify-center">
+                    <span class="text-xl mr-2">🎨</span>
+                    Physical Description
+                  </h3>
+                  <p class="text-gray-600">{animal.MARKINGS}</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
 
         <!-- Key Information Cards -->
         <div class="mb-16">
-          <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Key Information</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">{animal.ANIMALNAME}'s Key Information</h2>
           <div class="grid md:grid-cols-3 gap-6">
             <!-- Compatibility Card -->
             <div class="bg-white rounded-2xl shadow-md p-6">
@@ -441,22 +477,32 @@ const compatibilityInfo = [
                 <span class="text-2xl mr-2">🏥</span>
                 Health Status
               </h3>
-              {(profile.medical.isNeutered || profile.medical.isMicrochipped ||
+              {(profile.medical.isNeutered !== undefined ||
+                profile.medical.isMicrochipped !== undefined ||
                 (profile.medical.vaccinationCount && profile.medical.vaccinationCount > 0) ||
-                profile.medical.hasSpecialNeeds || animal.HEARTWORMTESTED === 1 ||
-                (animal.COMBITESTED === 1 && animal.SPECIESNAME === 'Cat') ||
-                (animal.DECLAWED === 1 && animal.SPECIESNAME === 'Cat')) ? (
+                profile.medical.hasSpecialNeeds !== undefined ||
+                (animal.HEARTWORMTESTED !== 0 && animal.HEARTWORMTESTED !== undefined) ||
+                (animal.COMBITESTED !== 0 && animal.COMBITESTED !== undefined && animal.SPECIESNAME === 'Cat') ||
+                (animal.DECLAWED !== undefined && animal.SPECIESNAME === 'Cat')) ? (
                 <div class="space-y-3">
-                  {profile.medical.isNeutered ? (
-                    <div class="flex items-center text-green-700 bg-green-50 rounded-lg p-3">
-                      <span class="text-green-600 mr-2">✅</span>
-                      <span class="font-medium text-gray-900">Desexed</span>
+                  {profile.medical.isNeutered !== undefined ? (
+                    <div class={`flex items-center ${profile.medical.isNeutered ? 'text-green-700 bg-green-50' : 'text-red-700 bg-red-50'} rounded-lg p-3`}>
+                      <span class={profile.medical.isNeutered ? 'text-green-600 mr-2' : 'text-red-600 mr-2'}>
+                        {profile.medical.isNeutered ? '✅' : '❌'}
+                      </span>
+                      <span class="font-medium text-gray-900">
+                        {profile.medical.isNeutered ? 'Desexed' : 'Not Desexed'}
+                      </span>
                     </div>
                   ) : null}
-                  {profile.medical.isMicrochipped ? (
-                    <div class="flex items-center text-green-700 bg-green-50 rounded-lg p-3">
-                      <span class="text-green-600 mr-2">✅</span>
-                      <span class="font-medium text-gray-900">Microchipped</span>
+                  {profile.medical.isMicrochipped !== undefined ? (
+                    <div class={`flex items-center ${profile.medical.isMicrochipped ? 'text-green-700 bg-green-50' : 'text-red-700 bg-red-50'} rounded-lg p-3`}>
+                      <span class={profile.medical.isMicrochipped ? 'text-green-600 mr-2' : 'text-red-600 mr-2'}>
+                        {profile.medical.isMicrochipped ? '✅' : '❌'}
+                      </span>
+                      <span class="font-medium text-gray-900">
+                        {profile.medical.isMicrochipped ? 'Microchipped' : 'Not Microchipped'}
+                      </span>
                     </div>
                   ) : null}
                   {profile.medical.vaccinationCount && profile.medical.vaccinationCount > 0 ? (
@@ -465,27 +511,33 @@ const compatibilityInfo = [
                       <span class="font-medium text-gray-900">{profile.medical.vaccinationCount}x Vaccinated</span>
                     </div>
                   ) : null}
-                  {profile.medical.hasSpecialNeeds ? (
-                    <div class="flex items-center text-orange-700 bg-orange-50 rounded-lg p-3">
-                      <span class="text-orange-600 mr-2">💖</span>
-                      <span class="font-medium text-gray-900">Special Needs</span>
-                    </div>
-                  ) : null}
-                  {animal.HEARTWORMTESTED === 1 ? (
-                    <div class="flex items-center text-green-700 bg-green-50 rounded-lg p-3">
-                      <span class="text-green-600 mr-2">🔬</span>
+                  {profile.medical.hasSpecialNeeds !== undefined ? (
+                    <div class={`flex items-center ${profile.medical.hasSpecialNeeds ? 'text-orange-700 bg-orange-50' : 'text-green-700 bg-green-50'} rounded-lg p-3`}>
+                      <span class={profile.medical.hasSpecialNeeds ? 'text-orange-600 mr-2' : 'text-green-600 mr-2'}>
+                        {profile.medical.hasSpecialNeeds ? '💖' : '✅'}
+                      </span>
                       <span class="font-medium text-gray-900">
-                        Heartworm {animal.HEARTWORMTESTRESULTNAME === 'Negative' ? 'Negative' :
-                                  animal.HEARTWORMTESTRESULTNAME === 'Positive' ? 'Positive' : 'Tested'}
+                        {profile.medical.hasSpecialNeeds ? 'Special Needs' : 'No Special Needs'}
                       </span>
                     </div>
                   ) : null}
-                  {animal.COMBITESTED === 1 && animal.SPECIESNAME === 'Cat' ? (
-                    <div class="flex items-center text-green-700 bg-green-50 rounded-lg p-3">
-                      <span class="text-green-600 mr-2">🔬</span>
+                  {animal.HEARTWORMTESTED === 1 && animal.HEARTWORMTESTRESULTNAME !== 'Unknown' ? (
+                    <div class={`flex items-center ${animal.HEARTWORMTESTRESULTNAME === 'Negative' ? 'text-green-700 bg-green-50' : 'text-red-700 bg-red-50'} rounded-lg p-3`}>
+                      <span class={animal.HEARTWORMTESTRESULTNAME === 'Negative' ? 'text-green-600 mr-2' : 'text-red-600 mr-2'}>
+                        {animal.HEARTWORMTESTRESULTNAME === 'Negative' ? '✅' : '⚠️'}
+                      </span>
                       <span class="font-medium text-gray-900">
-                        FIV/FeLV {animal.FLVRESULTNAME === 'Negative' ? 'Negative' :
-                                 animal.FLVRESULTNAME === 'Positive' ? 'Positive' : 'Tested'}
+                        Heartworm {animal.HEARTWORMTESTRESULTNAME}
+                      </span>
+                    </div>
+                  ) : null}
+                  {animal.COMBITESTED === 1 && animal.SPECIESNAME === 'Cat' && animal.FLVRESULTNAME !== 'Unknown' ? (
+                    <div class={`flex items-center ${animal.FLVRESULTNAME === 'Negative' ? 'text-green-700 bg-green-50' : 'text-red-700 bg-red-50'} rounded-lg p-3`}>
+                      <span class={animal.FLVRESULTNAME === 'Negative' ? 'text-green-600 mr-2' : 'text-red-600 mr-2'}>
+                        {animal.FLVRESULTNAME === 'Negative' ? '✅' : '⚠️'}
+                      </span>
+                      <span class="font-medium text-gray-900">
+                        FIV/FeLV {animal.FLVRESULTNAME}
                       </span>
                     </div>
                   ) : null}
@@ -498,6 +550,23 @@ const compatibilityInfo = [
                 </div>
               ) : (
                 <p class="text-sm text-gray-500 italic">Health information being updated</p>
+              )}
+
+              {/* Medical Notes Section */}
+              {profile.medical.healthNotes && (
+                <>
+                  <div class="border-t border-gray-200 mt-4 pt-4">
+                    <h4 class="text-sm font-semibold text-gray-700 mb-2 flex items-center">
+                      <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                      </svg>
+                      Medical Notes
+                    </h4>
+                    <div class="bg-blue-50 rounded-lg p-3">
+                      <p class="text-sm text-blue-800 whitespace-pre-line">{profile.medical.healthNotes}</p>
+                    </div>
+                  </div>
+                </>
               )}
             </div>
 
@@ -534,9 +603,20 @@ const compatibilityInfo = [
                   </span>
                 </div>
                 {coatType && (
-                  <div class="flex justify-between items-center py-2">
+                  <div class="flex justify-between items-center py-2 border-b border-gray-100">
                     <span class="text-gray-600 text-sm">Coat</span>
                     <span class="font-medium text-gray-900">{coatType}</span>
+                  </div>
+                )}
+                {animal.ENERGYLEVEL > 0 && (
+                  <div class="flex justify-between items-center py-2">
+                    <span class="text-gray-600 text-sm">Energy Level</span>
+                    <span class="font-medium text-gray-900">
+                      {animal.ENERGYLEVEL === 1 ? 'Low' :
+                       animal.ENERGYLEVEL === 2 ? 'Medium' :
+                       animal.ENERGYLEVEL === 3 ? 'High' :
+                       'Very High'}
+                    </span>
                   </div>
                 )}
               </div>
@@ -544,33 +624,7 @@ const compatibilityInfo = [
           </div>
         </div>
 
-        <!-- Medical Notes -->
-        {profile.medical.healthNotes && (
-          <div class="mb-16 max-w-4xl mx-auto">
-            <div class="bg-blue-50 border-l-4 border-blue-500 rounded-xl p-6">
-              <h3 class="text-lg font-bold text-blue-900 mb-3 flex items-center">
-                <svg class="w-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
-                </svg>
-                Medical Notes
-              </h3>
-              <p class="text-blue-800 whitespace-pre-line">{profile.medical.healthNotes}</p>
-            </div>
-          </div>
-        )}
 
-        <!-- Physical Description -->
-        {animal.MARKINGS && (
-          <div class="mb-16 max-w-4xl mx-auto">
-            <div class={`bg-${accentColor}-50 rounded-2xl p-6`}>
-              <h3 class={`text-lg font-bold text-${accentColor}-900 mb-3 flex items-center`}>
-                <span class="text-2xl mr-2">🎨</span>
-                Physical Description
-              </h3>
-              <p class={`text-${accentColor}-800`}>{animal.MARKINGS}</p>
-            </div>
-          </div>
-        )}
 
         <!-- Final CTA Section -->
         <div class="mb-16">

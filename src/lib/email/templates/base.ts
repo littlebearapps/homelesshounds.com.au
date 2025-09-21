@@ -85,6 +85,18 @@ export const baseEmailTemplate = (content: string, preheader?: string) => `
             </td>
           </tr>
 
+          <!-- Important Notice -->
+          <tr>
+            <td style="padding: 20px 30px; background-color: #fef5e7; border-top: 1px solid #f6ad55;">
+              <p style="margin: 0; color: #744210; font-size: 12px; text-align: center;">
+                <strong>⚠️ Important:</strong> This email was sent from an unmonitored inbox (noreply@homelesshounds.com.au).
+                Please do not reply to this email. If you need to contact us, please visit our
+                <a href="https://homelesshounds.com.au/contact-us" style="color: #8B5CF6; text-decoration: underline;">Contact Us</a>
+                page and use the appropriate form.
+              </p>
+            </td>
+          </tr>
+
           <!-- Footer -->
           <tr>
             <td style="background-color: #f7fafc; padding: 30px; text-align: center; border-top: 1px solid #e2e8f0;" class="dark-mode-footer">

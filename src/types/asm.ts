@@ -264,12 +264,90 @@ export function createAnimalProfile(animal: ASMAnimal): AnimalProfile {
     },
     adoption: {
       fee: animal.ADOPTIONDONATION || animal.FEE,
-      location: animal.CURRENTOWNERTOWN && animal.CURRENTOWNERCOUNTY
-        ? `${animal.CURRENTOWNERTOWN}, ${animal.CURRENTOWNERCOUNTY}`
-        : animal.CURRENTOWNERADDRESS ||
-          (animal.DISPLAYLOCATIONNAME && !['Foster', 'Shelter', 'foster', 'shelter'].includes(animal.DISPLAYLOCATIONNAME)
-            ? animal.DISPLAYLOCATIONNAME
-            : 'Contact for details'),
+      location: (() => {
+        // If we have town and county, use those
+        if (animal.CURRENTOWNERTOWN && animal.CURRENTOWNERCOUNTY) {
+          return `${animal.CURRENTOWNERTOWN}, ${animal.CURRENTOWNERCOUNTY}`;
+        }
+
+        // If we have an address, try to extract suburb, state, postcode
+        if (animal.CURRENTOWNERADDRESS) {
+          // Split address by newlines only (preserve commas in suburb/state)
+          const lines = animal.CURRENTOWNERADDRESS.split(/\n/).map(l => l.trim()).filter(l => l);
+
+          // Common patterns for Australian addresses:
+          // Line format typically: Street, Suburb State Postcode
+          // Or: Street\nSuburb, State\nPostcode
+          // Or: Street\nSuburb State Postcode
+
+          // Try to find the line with suburb, state, postcode
+          for (let i = lines.length - 1; i >= 0; i--) {
+            const line = lines[i];
+
+            // Check if this line contains a postcode (4 digits)
+            if (line.match(/\d{4}/)) {
+              // Extract everything after the street address
+              // Pattern: "Suburb, STATE POSTCODE" or "Suburb STATE POSTCODE"
+              const suburbStatePostcode = line.match(/([A-Za-z\s]+,?\s+[A-Z]{2,3}\s+\d{4})/);
+              if (suburbStatePostcode) {
+                return suburbStatePostcode[1].trim();
+              }
+
+              // If it's just a postcode, combine with previous line
+              if (line.match(/^\d{4}$/)) {
+                if (i > 0) {
+                  const prevLine = lines[i - 1];
+                  // Previous line should have suburb and state
+                  if (prevLine.match(/[A-Z]{2,3}$/)) {
+                    return `${prevLine} ${line}`;
+                  }
+                  // Or suburb, state
+                  if (prevLine.match(/,\s*[A-Z]{2,3}$/)) {
+                    return `${prevLine} ${line}`;
+                  }
+                }
+              }
+            }
+
+            // Check if line has state abbreviation (might be missing postcode)
+            if (line.match(/[A-Z]{2,3}$/) && i < lines.length - 1) {
+              const nextLine = lines[i + 1];
+              if (nextLine.match(/^\d{4}$/)) {
+                return `${line} ${nextLine}`;
+              }
+            }
+          }
+
+          // Last resort: try to find any line with suburb pattern
+          const lastLine = lines[lines.length - 1];
+          if (lastLine && !lastLine.match(/^\d+\s+/)) {
+            // Not a street address (doesn't start with number)
+            return lastLine;
+          }
+
+          // If no pattern matched, try to get the last non-empty line
+          const nonEmptyLines = lines.filter(l => l.trim()).map(l => l.trim());
+          if (nonEmptyLines.length >= 2) {
+            // Assume second-to-last line is suburb/state/postcode
+            const lastLine = nonEmptyLines[nonEmptyLines.length - 1];
+            const secondLastLine = nonEmptyLines[nonEmptyLines.length - 2];
+
+            // Check if last line looks like suburb/state/postcode
+            if (lastLine.match(/\d{4}/)) {
+              return lastLine;
+            } else if (secondLastLine.match(/\d{4}/)) {
+              return secondLastLine;
+            }
+          }
+        }
+
+        // Fall back to display location or default
+        if (animal.DISPLAYLOCATIONNAME && !['Foster', 'Shelter', 'foster', 'shelter'].includes(animal.DISPLAYLOCATIONNAME)) {
+          return animal.DISPLAYLOCATIONNAME;
+        }
+
+        return 'Contact for details';
+      })(),
       isReserved: animal.HASACTIVERESERVE === 1,
       coordinator: animal.ADOPTIONCOORDINATORNAME,
       sourceNumber: animal.SOURCENUMBER

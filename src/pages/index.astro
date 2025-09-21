@@ -4,6 +4,7 @@ export const prerender = false;
 import Base from "../layouts/Base.astro";
 import AnimalCard from "../components/AnimalCard.astro";
 import type { AdoptableAnimalsResponse } from "../types/asm";
+import { createAnimalSlug } from "../types/asm";
 
 // Fetch adoptable animals from our API
 let animalsData: AdoptableAnimalsResponse | null = null;
@@ -237,7 +238,7 @@ const partners = [
                     {animal.BREEDNAME || 'Unknown Breed'} • {animal.AGEGROUP || 'Unknown Age'}
                   </p>
                   <a
-                    href={`/pets/${animal.SPECIESNAME?.toLowerCase() || 'other'}/${animal.ID}`}
+                    href={`/adopt/${animal.SPECIESNAME?.toLowerCase() || 'other'}/${animal.ID}/${createAnimalSlug(animal)}`}
                     class="inline-flex items-center text-indigo-700 font-semibold hover:text-indigo-800 group-hover:translate-x-1 transition-transform"
                   >
                     Meet {animal.ANIMALNAME}

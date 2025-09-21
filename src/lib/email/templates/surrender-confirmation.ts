@@ -45,7 +45,7 @@ export const surrenderConfirmationEmail = (data: EmailData) => {
     </p>
     <ul style="color: #4a5568; font-size: 14px; line-height: 1.8; margin: 0 0 15px; padding-left: 20px;" class="dark-mode-subtext">
       <li>Temporary foster care in emergency situations</li>
-      <li>Behavioral support and training resources</li>
+      <li>Behavioural support and training resources</li>
       <li>Financial assistance for veterinary care</li>
       <li>Alternative rehoming options</li>
     </ul>
@@ -53,7 +53,7 @@ export const surrenderConfirmationEmail = (data: EmailData) => {
     <div ${styles.warningBox}>
       <p style="margin: 0; color: #744210; font-size: 13px;">
         <strong>Please note:</strong> Acceptance depends on our current capacity and resources.
-        We prioritize Victorian residents but may help interstate cases where possible.
+        We prioritise Victorian residents but may help interstate cases where possible.
       </p>
     </div>
 

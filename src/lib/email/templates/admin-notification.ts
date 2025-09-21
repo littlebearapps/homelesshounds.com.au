@@ -6,10 +6,12 @@ import { baseEmailTemplate, styles, EmailData } from './base';
 
 export const adminNotificationEmail = (formType: string, data: EmailData) => {
   const formTypeLabels: { [key: string]: string } = {
-    '37': 'Surrender Request',
-    '39': 'Adoption Application',
-    '36': 'Volunteer Registration',
-    '38': 'Foster Application',
+    '66': 'Surrender Request',
+    '70': 'Dog Adoption Application',
+    '65': 'Cat Adoption Application',
+    '68': 'Dog Foster Application',
+    '69': 'Cat Foster Application',
+    '67': 'Pet Courier Application',
   };
 
   const formLabel = formTypeLabels[formType] || `Form ${formType}`;
@@ -99,7 +101,7 @@ export const adminNotificationEmail = (formType: string, data: EmailData) => {
     <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 20px 0;">
       <tr>
         <td align="center">
-          <a href="https://service.sheltermanager.com/asm" ${styles.button}>
+          <a href="https://service.sheltermanager.com/asmlogin" ${styles.button}>
             View in ASM
           </a>
         </td>

@@ -7,6 +7,8 @@ import type { MailDataRequired } from '@sendgrid/mail';
 import { getAdminEmails } from './email-router';
 import { surrenderConfirmationEmail } from '../templates/surrender-confirmation';
 import { adoptionConfirmationEmail } from '../templates/adoption-confirmation';
+import { fosterConfirmationEmail } from '../templates/foster-confirmation';
+import { petCourierConfirmationEmail } from '../templates/pet-courier-confirmation';
 import { adminNotificationEmail } from '../templates/admin-notification';
 
 // Email sending result
@@ -111,19 +113,31 @@ export class EmailService {
     let userEmailContent: any = null;
 
     switch (formId) {
-      case '37': // Surrender
+      case '66': // Surrender
         if (formData.email) {
           userEmailContent = surrenderConfirmationEmail(formData);
         }
         break;
 
-      case '39': // Adoption
+      case '70': // Dog Adoption
+      case '65': // Cat Adoption
         if (formData.email) {
           userEmailContent = adoptionConfirmationEmail(formData);
         }
         break;
 
-      // Add other form types as needed
+      case '68': // Dog Foster
+      case '69': // Cat Foster
+        if (formData.email) {
+          userEmailContent = fosterConfirmationEmail(formData);
+        }
+        break;
+
+      case '67': // Pet Courier
+        if (formData.email) {
+          userEmailContent = petCourierConfirmationEmail(formData);
+        }
+        break;
     }
 
     // Generate admin notification
@@ -140,7 +154,12 @@ export class EmailService {
         },
         subject: adminEmailContent.subject,
         html: adminEmailContent.html,
-        text: adminEmailContent.text
+        text: adminEmailContent.text,
+        trackingSettings: {
+          clickTracking: {
+            enable: false
+          }
+        }
       };
 
       results.admin = await this.sendWithRetry(adminMsg);
@@ -163,7 +182,12 @@ export class EmailService {
           },
           subject: userEmailContent.subject,
           html: userEmailContent.html,
-          text: userEmailContent.text
+          text: userEmailContent.text,
+          trackingSettings: {
+            clickTracking: {
+              enable: false
+            }
+          }
         };
 
         results.user = await this.sendWithRetry(userMsg);
@@ -199,7 +223,12 @@ export class EmailService {
         <hr>
         <p><small>Sent: ${new Date().toLocaleString('en-AU', { timeZone: 'Australia/Melbourne' })}</small></p>
       `,
-      text: 'Test email from Homeless Hounds. Configuration is working!'
+      text: 'Test email from Homeless Hounds. Configuration is working!',
+      trackingSettings: {
+        clickTracking: {
+          enable: false
+        }
+      }
     };
 
     return this.sendWithRetry(msg);

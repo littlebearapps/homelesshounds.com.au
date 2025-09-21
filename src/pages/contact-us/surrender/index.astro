@@ -567,13 +567,13 @@ const formid = url.searchParams.get('formid') || '66';
                   fields: [],
                   indices: [18, 19, 20, 21, 22, 23, 24] // Microchip and surrender reason
                 },
-                'behavior': {
-                  title: '🦴 Pet Behavior & Temperament',
+                'behaviour': {
+                  title: '🦴 Pet Behaviour & Temperament',
                   fields: [],
-                  indices: [25, 26, 27, 28, 29, 30, 31, 32, 33] // Behavior questions
+                  indices: [25, 26, 27, 28, 29, 30, 31, 32, 33] // Behaviour questions
                 },
                 'history': {
-                  title: '📋 Medical & Behavioral History',
+                  title: '📋 Medical & Behavioural History',
                   fields: [],
                   indices: [34, 35, 36, 37, 38] // History questions
                 },
@@ -611,7 +611,7 @@ const formid = url.searchParams.get('formid') || '66';
                   if (f.index <= 9) sections.personal.fields.push(f);
                   else if (f.index <= 17) sections.pet.fields.push(f);
                   else if (f.index <= 24) sections.general.fields.push(f);
-                  else if (f.index <= 33) sections.behavior.fields.push(f);
+                  else if (f.index <= 33) sections.behaviour.fields.push(f);
                   else if (f.index <= 38) sections.history.fields.push(f);
                   else sections.agreement.fields.push(f);
                 }

@@ -31,7 +31,7 @@ const startOnAmount = url.searchParams.get('startOnAmount') ?? 'true';
 
 // Only create embed URL if we have a valid Raisely subdomain
 if (SUBDOMAIN && SUBDOMAIN !== 'YOUR-CAMPAIGN-SUBDOMAIN') {
-  // Build URL with optimization parameters
+  // Build URL with optimisation parameters
   const params = new URLSearchParams();
 
   // Amount prefilling
@@ -115,7 +115,7 @@ const externalDonateUrl = (SUBDOMAIN_RAW && SUBDOMAIN_RAW.startsWith('http'))
               </div>
             </div>
 
-            <!-- Aggressively optimized iframe container -->
+            <!-- Aggressively optimised iframe container -->
             <div class="relative bg-white overflow-hidden rounded-b-3xl iframe-container">
               <!-- CSS to crop whitespace on all sides -->
               <style>
@@ -135,7 +135,7 @@ const externalDonateUrl = (SUBDOMAIN_RAW && SUBDOMAIN_RAW.startsWith('http'))
                   overflow: hidden;
                 }
 
-                /* Try to hide scrollbars and optimize display */
+                /* Try to hide scrollbars and optimise display */
                 #raisely-iframe::-webkit-scrollbar {
                   display: none;
                 }
@@ -296,7 +296,7 @@ const externalDonateUrl = (SUBDOMAIN_RAW && SUBDOMAIN_RAW.startsWith('http'))
             </div>
           </div>
 
-          <!-- Stat 2: Volunteer Organization -->
+          <!-- Stat 2: Volunteer Organisation -->
           <div class="group relative">
             <!-- Background decoration -->
             <div class="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl transform -rotate-2 group-hover:-rotate-3 transition-transform duration-300"></div>
@@ -308,7 +308,7 @@ const externalDonateUrl = (SUBDOMAIN_RAW && SUBDOMAIN_RAW.startsWith('http'))
                   </svg>
                 </div>
                 <div class="text-4xl font-bold text-blue-600 mb-2 tabular-nums">100%</div>
-                <div class="text-gray-700 font-medium text-lg">Volunteer-run organization</div>
+                <div class="text-gray-700 font-medium text-lg">Volunteer-run organisation</div>
                 <div class="text-sm text-gray-500 mt-2">Every dollar goes to animals</div>
               </div>
             </div>

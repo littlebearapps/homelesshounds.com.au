@@ -96,7 +96,7 @@ const url = new URL(Astro.request.url);
                 <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-300 rounded-full -left-3">
                   <span class="text-white text-xs">5</span>
                 </span>
-                <h4 class="font-medium text-gray-900">Adoption Finalized</h4>
+                <h4 class="font-medium text-gray-900">Adoption Finalised</h4>
                 <p class="text-sm text-gray-600">Complete the adoption paperwork and take your new pet home!</p>
               </li>
             </ol>
@@ -147,7 +147,7 @@ const url = new URL(Astro.request.url);
         try {
           const data = JSON.parse(formData);
 
-          // Add personalized greeting if name is available
+          // Add personalised greeting if name is available
           const personalGreeting = document.getElementById('personalGreeting');
           if (personalGreeting && data.firstname) {
             personalGreeting.textContent = `Thank you, ${data.firstname}! Your interest in adoption means the world to us.`;

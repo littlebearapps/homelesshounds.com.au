@@ -32,31 +32,28 @@ export function getAdminEmails(formId: string, formData: any, env: any): EmailRo
   } = env;
 
   switch (formId) {
-    case '39': // Adoption Applications
-      // Determine if it's a dog or cat adoption based on pet_species or other fields
-      const species = (formData.pet_species || formData.species || '').toLowerCase();
-
-      if (species.includes('dog') || species.includes('canine')) {
-        emails.to.push(EMAIL_DOG_ADOPTIONS || EMAIL_ADMIN_DEFAULT);
-      } else if (species.includes('cat') || species.includes('feline')) {
-        emails.to.push(EMAIL_CAT_ADOPTIONS || EMAIL_ADMIN_DEFAULT);
-      } else {
-        // If species is unclear, send to both
-        emails.to.push(EMAIL_DOG_ADOPTIONS || EMAIL_ADMIN_DEFAULT);
-        emails.cc.push(EMAIL_CAT_ADOPTIONS || EMAIL_ADMIN_DEFAULT);
-      }
+    case '70': // Dog Adoption Applications
+      emails.to.push(EMAIL_DOG_ADOPTIONS || EMAIL_ADMIN_DEFAULT);
       break;
 
-    case '37': // Surrender Applications
+    case '65': // Cat Adoption Applications
+      emails.to.push(EMAIL_CAT_ADOPTIONS || EMAIL_ADMIN_DEFAULT);
+      break;
+
+    case '66': // Surrender Applications
       emails.to.push(EMAIL_SURRENDER_APPLICATIONS || EMAIL_ADMIN_DEFAULT);
       break;
 
-    case '36': // Volunteer Applications
-      emails.to.push(EMAIL_VOLUNTEER_APPLICATIONS || EMAIL_ADMIN_DEFAULT);
+    case '68': // Dog Foster Applications
+      emails.to.push(EMAIL_FOSTER_APPLICATIONS || EMAIL_ADMIN_DEFAULT);
       break;
 
-    case '38': // Foster Applications (future)
+    case '69': // Cat Foster Applications
       emails.to.push(EMAIL_FOSTER_APPLICATIONS || EMAIL_ADMIN_DEFAULT);
+      break;
+
+    case '67': // Pet Courier Applications
+      emails.to.push(EMAIL_PET_COURIER || EMAIL_ADMIN_DEFAULT);
       break;
 
     default:
