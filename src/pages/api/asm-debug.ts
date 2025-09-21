@@ -33,18 +33,31 @@ export const GET: APIRoute = async ({ locals }) => {
   }
 
   try {
-    // Build ASM API URL
-    const asmUrl = new URL(ASM_BASE_URL);
-    asmUrl.searchParams.set('method', 'json_adoptable_animals');
-    asmUrl.searchParams.set('account', ASM_ACCOUNT);
-    asmUrl.searchParams.set('username', ASM_USERNAME);
-    asmUrl.searchParams.set('password', ASM_PASSWORD);
-    asmUrl.searchParams.set('speciesid', '1'); // Dogs only for test
+    // Build ASM API URL - manually construct to avoid double encoding
+    const params = new URLSearchParams({
+      method: 'json_adoptable_animals',
+      account: ASM_ACCOUNT,
+      username: ASM_USERNAME,
+      password: ASM_PASSWORD,
+      speciesid: '1'
+    });
 
-    debugInfo.requestUrl = asmUrl.toString().replace(ASM_PASSWORD, '***').replace(ASM_USERNAME, '***');
+    const asmUrl = `${ASM_BASE_URL}?${params.toString()}`;
+
+    // Also try with manual construction
+    const manualUrl = `${ASM_BASE_URL}?method=json_adoptable_animals&account=${encodeURIComponent(ASM_ACCOUNT)}&username=${encodeURIComponent(ASM_USERNAME)}&password=${encodeURIComponent(ASM_PASSWORD)}&speciesid=1`;
+
+    debugInfo.requestUrl = asmUrl.replace(ASM_PASSWORD, '***').replace(ASM_USERNAME, '***');
+    debugInfo.manualUrl = manualUrl.replace(ASM_PASSWORD, '***').replace(ASM_USERNAME, '***');
+    debugInfo.rawPassword = {
+      length: ASM_PASSWORD.length,
+      hasSpecialChars: /[^a-zA-Z0-9]/.test(ASM_PASSWORD),
+      firstChar: ASM_PASSWORD[0],
+      lastChar: ASM_PASSWORD[ASM_PASSWORD.length - 1]
+    };
 
     // Try to fetch
-    const response = await fetch(asmUrl.toString(), {
+    const response = await fetch(asmUrl, {
       method: 'GET',
       headers: {
         'User-Agent': 'HomelessHounds-Website/1.0',
