@@ -1,153 +1,250 @@
 ---
-import Base from "../layouts/Base.astro";
-import CTASection from "../components/CTASection.astro";
+import Base from '../layouts/Base.astro';
+
+const lastUpdated = '21 September 2025';
 ---
 
-<Base title="Privacy Policy | Homeless Hounds Animal Rescue">
-  <main class="min-h-screen bg-gray-50">
-    <!-- Hero Section -->
-    <section class="relative isolate overflow-hidden bg-white min-h-[50vh] flex items-center">
-      <div class="absolute inset-0 -z-10">
-        <div class="absolute inset-0 bg-gradient-to-br from-indigo-900 via-blue-800 to-indigo-700"></div>
-      </div>
-      <div class="absolute inset-0 bg-pattern-dots opacity-10"></div>
+<Base title="Privacy Policy | Homeless Hounds">
+  <div class="container mx-auto px-4 py-12 max-w-4xl">
+    <h1 class="text-4xl font-bold text-gray-900 mb-2">Privacy Policy</h1>
+    <p class="text-gray-600 mb-8">Last updated: {lastUpdated}</p>
 
-      <div class="container-custom py-20 md:py-24 relative z-10">
-        <div class="max-w-4xl mx-auto text-center">
-          <p class="text-white/80 text-sm uppercase tracking-widest font-semibold mb-4">Your privacy matters</p>
-          <h1 class="text-white mb-6 text-4xl md:text-6xl font-bold">
-            Privacy <span class="text-orange-400">Policy</span>
-          </h1>
-          <p class="text-xl md:text-2xl text-white/90 mb-10 max-w-3xl mx-auto">
-            Our commitment to protecting your personal information and respecting your privacy.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#content" class="btn btn-white">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
-              Read Policy
-            </a>
-            <a href="/contact-us" class="btn btn-accent">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              Ask Questions
-            </a>
-          </div>
+    <div class="prose prose-lg max-w-none space-y-8">
+
+      <!-- Introduction -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">1. About This Policy</h2>
+        <p class="text-gray-700">
+          Homeless Hounds Animal Rescue ("we", "us", "our") is committed to protecting your privacy.
+          This Privacy Policy explains how we collect, use, store, and protect your personal information
+          when you interact with our website and services.
+        </p>
+        <p class="text-gray-700">
+          While we may not be legally required to comply with the Privacy Act 1988 (Cth) as a small
+          not-for-profit organization, we voluntarily align with the Australian Privacy Principles (APPs)
+          as best practice to protect your information and maintain your trust.
+        </p>
+      </section>
+
+      <!-- Contact Information -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">2. Contact Information</h2>
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <p class="font-semibold">Homeless Hounds Animal Rescue</p>
+          <p>Victoria, Australia</p>
+          <p>Email: <a href="mailto:web@homelesshounds.com.au" class="text-indigo-600 hover:text-indigo-800">web@homelesshounds.com.au</a></p>
+          <p>Website: <a href="https://homelesshounds.com.au" class="text-indigo-600 hover:text-indigo-800">homelesshounds.com.au</a></p>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Main Content -->
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <section class="bg-white rounded-lg shadow-md p-8 mb-8">
-        <div class="prose prose-lg max-w-none">
-          <p class="text-gray-700 mb-6">
-            Homeless Hounds Animal Rescue is committed to providing quality services to you, and this policy outlines our ongoing obligations to you in respect of how we manage your Personal Information.
-          </p>
+      <!-- Information We Collect -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">3. Information We Collect</h2>
+        <p class="text-gray-700 mb-4">We collect the following types of personal information:</p>
 
-          <p class="text-gray-700 mb-6">
-            We have adopted the Australian Privacy Principles (APPs) contained in the <em>Privacy Act 1988</em> (Cth) (the Privacy Act). The APPs govern the way in which we collect, use, disclose, store, secure and dispose of your Personal Information.
-          </p>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Information you provide:</h3>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li><strong>Contact details:</strong> Name, email address, phone number, postal address</li>
+          <li><strong>Application information:</strong> Details provided in adoption, volunteer, foster care, surrender, or pet courier applications</li>
+          <li><strong>Communication records:</strong> Emails, enquiries, and correspondence with us</li>
+          <li><strong>Newsletter preferences:</strong> Your marketing consent and communication preferences</li>
+        </ul>
 
-          <p class="text-gray-700 mb-8">
-            A copy of the Australian Privacy Principles may be obtained from the website of The Office of the Australian Information Commissioner at
-            <a href="https://www.oaic.gov.au/" target="_blank" rel="noopener" class="text-indigo-700 hover:text-indigo-800 underline">https://www.oaic.gov.au/</a>.
-          </p>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2 mt-4">Information collected automatically:</h3>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li><strong>Technical information:</strong> IP address, browser type, device information</li>
+          <li><strong>Usage data:</strong> Pages visited, time spent on site, referring website</li>
+          <li><strong>Cookies:</strong> Essential cookies for site functionality and security (see Section 9)</li>
+        </ul>
+      </section>
 
-          <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">What is Personal Information and why do we collect it?</h2>
+      <!-- How We Use Your Information -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">4. How We Use Your Information</h2>
+        <p class="text-gray-700 mb-4">We use your personal information for the following purposes:</p>
 
-          <p class="text-gray-700 mb-6">
-            Personal Information is information or an opinion that identifies an individual. Examples of Personal Information we collect include names, addresses, email addresses, phone and facsimile numbers.
-          </p>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Operational purposes:</h3>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li>Processing and responding to adoption, volunteer, foster care, surrender, and pet courier applications</li>
+          <li>Coordinating animal care, adoptions, and related activities</li>
+          <li>Communicating with you about your applications or enquiries</li>
+          <li>Meeting our legal and regulatory obligations</li>
+          <li>Maintaining records for operational and legal purposes</li>
+        </ul>
 
-          <p class="text-gray-700 mb-6">
-            This Personal Information is obtained in many ways including interviews, correspondence, by telephone and facsimile, by email, via our website www.homelesshounds.com.au, from your website, from media and publications, from other publicly available sources, from cookies and from third parties. We don't guarantee website links or the policy of authorised third parties.
-          </p>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2 mt-4">Marketing purposes (only with your consent):</h3>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li>Sending newsletters and updates about our rescue activities</li>
+          <li>Sharing success stories and adoption opportunities</li>
+          <li>Promoting fundraising events and volunteer opportunities</li>
+        </ul>
+      </section>
 
-          <p class="text-gray-700 mb-6">
-            We collect your Personal Information for the primary purpose of providing our services to you, providing information to our clients and marketing. We may also use your Personal Information for secondary purposes closely related to the primary purpose in circumstances where you would reasonably expect such use or disclosure. You may unsubscribe from our mailing/marketing lists at any time by contacting us in writing.
-          </p>
+      <!-- Direct Marketing -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">5. Direct Marketing</h2>
+        <p class="text-gray-700">
+          We will only send you marketing communications (newsletters and promotional updates) if you have
+          explicitly opted in by checking the consent box on our forms or newsletter signup.
+        </p>
+        <p class="text-gray-700">
+          Every marketing email we send includes an unsubscribe link. You can opt out at any time by:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li>Clicking the unsubscribe link in any marketing email</li>
+          <li>Emailing us at <a href="mailto:web@homelesshounds.com.au" class="text-indigo-600 hover:text-indigo-800">web@homelesshounds.com.au</a></li>
+          <li>Using our online unsubscribe form</li>
+        </ul>
+        <p class="text-gray-700 mt-4">
+          We will process your unsubscribe request within 5 business days. You will continue to receive
+          operational emails related to any applications or services you've requested.
+        </p>
+      </section>
 
-          <p class="text-gray-700 mb-8">
-            When we collect Personal Information, we will, where appropriate and where possible, explain to you why we are collecting the information and how we plan to use it.
-          </p>
+      <!-- Disclosure and International Transfers -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Disclosure and International Transfers</h2>
+        <p class="text-gray-700 mb-4">
+          We may share your personal information with third-party service providers who assist us in
+          operating our services. These include:
+        </p>
 
-          <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Sensitive Information</h2>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Service providers:</h3>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li><strong>SendGrid (Twilio):</strong> Email service provider (data stored in the United States)</li>
+          <li><strong>Cloudflare:</strong> Website hosting and security services (global infrastructure)</li>
+          <li><strong>Animal Shelter Manager:</strong> Animal management system</li>
+        </ul>
 
-          <p class="text-gray-700 mb-6">
-            Sensitive information is defined in the Privacy Act to include information or opinion about such things as an individual's racial or ethnic origin, political opinions, membership of a political association, religious or philosophical beliefs, membership of a trade union or other professional body, criminal record or health information.
-          </p>
-
-          <p class="text-gray-700 mb-4">Sensitive information will be used by us only:</p>
-          <ul class="list-disc pl-6 mb-8 text-gray-700 space-y-2">
-            <li>For the primary purpose for which it was obtained</li>
-            <li>For a secondary purpose that is directly related to the primary purpose</li>
-            <li>With your consent; or where required or authorised by law.</li>
-          </ul>
-
-          <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Third Parties</h2>
-
-          <p class="text-gray-700 mb-8">
-            Where reasonable and practicable to do so, we will collect your Personal Information only from you. However, in some circumstances, we may be provided with information by third parties. In such a case we will take reasonable steps to ensure that you are made aware of the information provided to us by the third party.
-          </p>
-
-          <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Disclosure of Personal Information</h2>
-
-          <p class="text-gray-700 mb-4">Your Personal Information may be disclosed in a number of circumstances including the following:</p>
-          <ul class="list-disc pl-6 mb-8 text-gray-700 space-y-2">
-            <li>Third parties where you consent to the use or disclosure; and</li>
-            <li>Where required or authorised by law.</li>
-          </ul>
-
-          <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Security of Personal Information</h2>
-
-          <p class="text-gray-700 mb-6">
-            Your Personal Information is stored in a manner that reasonably protects it from misuse and loss and from unauthorized access, modification or disclosure.
-          </p>
-
-          <p class="text-gray-700 mb-8">
-            When your Personal Information is no longer needed for the purpose for which it was obtained, we will take reasonable steps to destroy or permanently de-identify your Personal Information. However, most of the Personal Information is or will be stored in client files which will be kept by us for a minimum of 7 years.
-          </p>
-
-          <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Access to your Personal Information</h2>
-
-          <p class="text-gray-700 mb-6">
-            You may access the Personal Information we hold about you and update and/or correct it, subject to certain exceptions. If you wish to access your Personal Information, please contact us in writing.
-          </p>
-
-          <p class="text-gray-700 mb-6">
-            Homeless Hounds Animal Rescue will not charge any fee for your access request but may charge an administrative fee for providing a copy of your Personal Information.
-          </p>
-
-          <p class="text-gray-700 mb-8">
-            In order to protect your Personal Information, we may require identification from you before releasing the requested information.
-          </p>
-
-          <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Maintaining the Quality of your Personal Information</h2>
-
-          <p class="text-gray-700 mb-8">
-            It is important to us that your Personal Information is up to date. We will take reasonable steps to make sure that your Personal Information is accurate, complete and up-to-date. If you find that the information we have is not up to date or is inaccurate, please advise us as soon as practicable so we can update our records and ensure we can continue to provide quality services to you.
-          </p>
-
-          <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Policy Updates</h2>
-
-          <p class="text-gray-700 mb-8">
-            This Policy may change from time to time and is available on our website.
-          </p>
-
-          <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Privacy Policy Complaints and Enquiries</h2>
-
-          <p class="text-gray-700">
-            If you have any queries or complaints about our Privacy Policy, please
-            <a href="/contact-us" class="text-indigo-700 hover:text-indigo-800 underline">contact us here</a>.
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mt-4">
+          <p class="text-blue-900">
+            <strong>International data transfers:</strong> Some of our service providers, particularly SendGrid,
+            store and process data in the United States. We take reasonable steps to ensure these providers
+            handle your information securely, including reviewing their privacy policies, security standards,
+            and data protection agreements.
           </p>
         </div>
       </section>
-    </div>
-  </main>
 
-  <!-- CTA Section -->
-  <CTASection />
+      <!-- Data Security -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Data Security</h2>
+        <p class="text-gray-700 mb-4">
+          We implement appropriate technical and organizational measures to protect your personal information, including:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li>Encryption of data in transit (SSL/TLS)</li>
+          <li>Access controls and authentication (including multi-factor authentication)</li>
+          <li>Regular security updates and monitoring</li>
+          <li>Limiting access to personal information on a need-to-know basis</li>
+          <li>Secure disposal of personal information when no longer needed</li>
+        </ul>
+        <p class="text-gray-700 mt-4">
+          While we take security seriously, no method of electronic storage or transmission is 100% secure.
+          We cannot guarantee absolute security of your information.
+        </p>
+      </section>
+
+      <!-- Data Retention -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">8. Data Retention and Deletion</h2>
+        <p class="text-gray-700 mb-4">
+          We retain personal information only as long as necessary for our operational and legal requirements:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li><strong>Marketing contacts:</strong> Deleted after 24 months of inactivity or upon request</li>
+          <li><strong>Application records:</strong> Retained for 3 years after final outcome</li>
+          <li><strong>Financial/donation records:</strong> Retained for 7 years (tax requirements)</li>
+          <li><strong>Operational emails:</strong> Retained as needed for record-keeping</li>
+        </ul>
+        <p class="text-gray-700 mt-4">
+          You can request deletion of your personal information by contacting us. We will comply unless
+          we have a legal obligation to retain the information.
+        </p>
+      </section>
+
+      <!-- Cookies -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">9. Cookies and Online Tracking</h2>
+        <p class="text-gray-700 mb-4">
+          We use the following cookies and tracking technologies:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li><strong>Essential cookies:</strong> Required for website functionality and security</li>
+          <li><strong>Cloudflare Turnstile:</strong> CAPTCHA service to prevent spam (essential)</li>
+        </ul>
+        <p class="text-gray-700 mt-4">
+          We do not currently use analytics or advertising cookies. If we add these in the future,
+          we will update this policy and provide appropriate consent mechanisms.
+        </p>
+      </section>
+
+      <!-- Your Rights -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">10. Your Rights</h2>
+        <p class="text-gray-700 mb-4">You have the following rights regarding your personal information:</p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li><strong>Access:</strong> Request a copy of the personal information we hold about you</li>
+          <li><strong>Correction:</strong> Request correction of inaccurate or incomplete information</li>
+          <li><strong>Deletion:</strong> Request deletion of your information (subject to legal requirements)</li>
+          <li><strong>Opt-out:</strong> Unsubscribe from marketing communications at any time</li>
+          <li><strong>Complaints:</strong> Lodge a complaint about our privacy practices</li>
+        </ul>
+        <p class="text-gray-700 mt-4">
+          To exercise these rights, contact us at
+          <a href="mailto:web@homelesshounds.com.au" class="text-indigo-600 hover:text-indigo-800">web@homelesshounds.com.au</a>.
+          We will respond within 30 days.
+        </p>
+      </section>
+
+      <!-- Complaints -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">11. Complaints</h2>
+        <p class="text-gray-700">
+          If you have concerns about how we handle your personal information, please contact us first at
+          <a href="mailto:web@homelesshounds.com.au" class="text-indigo-600 hover:text-indigo-800">web@homelesshounds.com.au</a>.
+        </p>
+        <p class="text-gray-700 mt-4">
+          If you're not satisfied with our response and believe we are subject to the Privacy Act 1988 (Cth),
+          you may lodge a complaint with the Office of the Australian Information Commissioner (OAIC):
+        </p>
+        <div class="bg-gray-50 p-4 rounded-lg mt-4">
+          <p>Website: <a href="https://www.oaic.gov.au" target="_blank" class="text-indigo-600 hover:text-indigo-800">www.oaic.gov.au</a></p>
+          <p>Phone: 1300 363 992</p>
+        </div>
+      </section>
+
+      <!-- Children's Privacy -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">12. Children's Privacy</h2>
+        <p class="text-gray-700">
+          Our services are not directed to children under 16. We do not knowingly collect personal
+          information from children under 16 without parental consent. If you believe we have collected
+          information from a child under 16, please contact us immediately.
+        </p>
+      </section>
+
+      <!-- Changes to This Policy -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">13. Changes to This Policy</h2>
+        <p class="text-gray-700">
+          We may update this Privacy Policy from time to time. Changes will be posted on this page with
+          an updated revision date. For significant changes, we may notify you by email if you've opted
+          in to communications.
+        </p>
+        <p class="text-gray-700 mt-4">
+          By continuing to use our website after changes are posted, you accept the updated Privacy Policy.
+        </p>
+      </section>
+
+      <!-- Footer -->
+      <div class="border-t pt-8 mt-12">
+        <p class="text-sm text-gray-600">
+          This Privacy Policy was last updated on {lastUpdated}.
+          If you have any questions, please contact us at
+          <a href="mailto:web@homelesshounds.com.au" class="text-indigo-600 hover:text-indigo-800">web@homelesshounds.com.au</a>.
+        </p>
+      </div>
+    </div>
+  </div>
 </Base>
