@@ -187,14 +187,19 @@ export const POST: APIRoute = async ({ request, locals }) => {
       // Determine thank you page based on form ID
       let thankYouPage = "/contact-us/thanks";
       if (formid === "36") {
-        thankYouPage = "/contact-us/volunteer/thanks";
+        thankYouPage = "/get-involved/volunteer/thanks";  // Volunteer registration
       } else if (formid === "37") {
-        thankYouPage = "/contact-us/surrender/thanks";
+        thankYouPage = "/contact-us/surrender/thanks";  // Animal surrender
       } else if (formid === "38") {
-        // TODO: Form 38 is currently unassigned - update when new form is added
-        thankYouPage = "/contact-us/thanks";
+        thankYouPage = "/adopt/thanks";  // Dog adoption application
       } else if (formid === "39") {
-        thankYouPage = "/adopt/thanks";  // Adoption application
+        thankYouPage = "/adopt/thanks";  // Cat adoption application
+      } else if (formid === "67") {
+        thankYouPage = "/get-involved/pet-courier/thanks";  // Pet courier application
+      } else if (formid === "68") {
+        thankYouPage = "/get-involved/foster/thanks";  // Dog foster application
+      } else if (formid === "69") {
+        thankYouPage = "/get-involved/foster/thanks";  // Cat foster application
       }
 
       return Response.redirect(location || thankYouPage, 303);

@@ -1,0 +1,85 @@
+---
+import Base from '../../../layouts/Base.astro';
+
+const title = "Thank You for Volunteering!";
+const description = "Your volunteer application has been received";
+---
+
+<Base title={title} description={description}>
+  <div class="container mx-auto px-4 py-12 min-h-[60vh] flex items-center justify-center">
+    <div class="max-w-2xl text-center">
+      <!-- Success Icon -->
+      <div class="mb-6 flex justify-center">
+        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+          <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Thank You Message -->
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Thank You for Your Application!</h1>
+
+      <div class="space-y-4 text-lg text-gray-700">
+        <p>
+          We've successfully received your volunteer application and are thrilled that you want to join our team!
+        </p>
+
+        <p>
+          Our volunteer coordinator will review your application and contact you within <strong>3-5 business days</strong> to discuss the next steps.
+        </p>
+
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mt-6 text-left">
+          <p class="font-semibold text-blue-900 mb-2">What happens next?</p>
+          <ul class="text-base text-blue-800 space-y-2">
+            <li class="flex items-start">
+              <span class="text-blue-600 mr-2">✓</span>
+              <span>You'll receive a confirmation email shortly</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-blue-600 mr-2">✓</span>
+              <span>Our volunteer coordinator will review your application</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-blue-600 mr-2">✓</span>
+              <span>We'll contact you about orientation and training</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-blue-600 mr-2">✓</span>
+              <span>You'll be matched with volunteer opportunities that suit your interests and availability</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 mt-6">
+          <p class="text-orange-900 font-medium">
+            🐾 Every volunteer makes a difference in the lives of our animals!
+          </p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/" class="btn btn-primary">
+          Return Home
+        </a>
+        <a href="/about-us" class="btn btn-secondary">
+          Learn More About Us
+        </a>
+        <a href="/adopt" class="btn btn-accent">
+          View Our Animals
+        </a>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="mt-8 text-sm text-gray-600">
+        <p>
+          If you have any questions, please contact us at
+          <a href="mailto:volunteer@homelesshounds.com.au" class="text-indigo-600 hover:text-indigo-800 underline">
+            volunteer@homelesshounds.com.au
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</Base>
