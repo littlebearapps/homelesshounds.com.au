@@ -6,14 +6,23 @@ export const GET = async ({ params, request, locals }) => {
   const { id } = params;
 
   // Get environment variables from Cloudflare runtime OR local dev environment
-  const ASM_ACCOUNT = locals?.runtime?.env?.ASM_ACCOUNT || import.meta.env.ASM_ACCOUNT;
-  const ASM_BASE_URL = locals?.runtime?.env?.ASM_BASE_URL || import.meta.env.ASM_BASE_URL;
-  const ASM_USERNAME = locals?.runtime?.env?.ASM_USERNAME || import.meta.env.ASM_USERNAME;
-  const ASM_PASSWORD = locals?.runtime?.env?.ASM_PASSWORD || import.meta.env.ASM_PASSWORD;
+  // In Cloudflare Pages, environment variables are accessed through context.env
+  const runtime = (locals as any)?.runtime;
+  const ASM_ACCOUNT = runtime?.env?.ASM_ACCOUNT || import.meta.env.ASM_ACCOUNT || process.env.ASM_ACCOUNT;
+  const ASM_BASE_URL = runtime?.env?.ASM_BASE_URL || import.meta.env.ASM_BASE_URL || process.env.ASM_BASE_URL;
+  const ASM_USERNAME = runtime?.env?.ASM_USERNAME || import.meta.env.ASM_USERNAME || process.env.ASM_USERNAME;
+  const ASM_PASSWORD = runtime?.env?.ASM_PASSWORD || import.meta.env.ASM_PASSWORD || process.env.ASM_PASSWORD;
 
   // Validate environment variables
   if (!ASM_ACCOUNT || !ASM_BASE_URL || !ASM_USERNAME || !ASM_PASSWORD) {
-    console.error('Missing ASM environment variables');
+    console.error('Missing ASM environment variables:', {
+      ASM_ACCOUNT: ASM_ACCOUNT ? 'set' : 'missing',
+      ASM_BASE_URL: ASM_BASE_URL ? 'set' : 'missing',
+      ASM_USERNAME: ASM_USERNAME ? 'set' : 'missing',
+      ASM_PASSWORD: ASM_PASSWORD ? 'set' : 'missing',
+      runtime: runtime ? 'exists' : 'missing',
+      runtimeEnv: runtime?.env ? 'exists' : 'missing'
+    });
     return new Response(JSON.stringify({ 
       error: 'Server configuration error',
       animal: null,
