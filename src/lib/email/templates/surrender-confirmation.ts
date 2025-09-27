@@ -77,6 +77,20 @@ export const surrenderConfirmationEmail = (data: EmailData) => {
       With compassion and understanding,<br>
       <strong>The Homeless Hounds Team</strong>
     </p>
+
+    ${styles.divider}
+
+    <div style="background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 15px; margin: 20px 0;">
+      <p style="color: #4a5568; font-size: 12px; margin: 0; line-height: 1.5;">
+        <strong>Why you're receiving this email:</strong> You submitted an animal surrender request on our website. This is an operational message confirming receipt of your request, not marketing.
+        <br><br>
+        <strong>From:</strong> Homeless Hounds, QLD, Australia | <strong>Contact:</strong> web@homelesshounds.com.au
+        <br><br>
+        To withdraw your request or update your information, reply to this email or contact web@homelesshounds.com.au.
+        <br><br>
+        <a href="https://homelesshounds.com.au/privacy-policy" style="color: #667eea;">Privacy Policy</a>
+      </p>
+    </div>
   `;
 
   const preheader = `We've received your surrender request. Our team will contact you within 24-48 hours.`;

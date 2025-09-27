@@ -129,12 +129,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
           } else if (formid === "37") {
             userType = 'general';
             contactReason = 'animal surrender';
-          } else if (formid === "38") {
-            userType = 'general';
-            contactReason = 'general inquiry';
-          } else if (formid === "39") {
+          } else if (formid === "70") {
             userType = 'adopter';
-            contactReason = 'adoption application';
+            contactReason = 'dog adoption application';
+          } else if (formid === "65") {
+            userType = 'adopter';
+            contactReason = 'cat adoption application';
           }
 
           const newsletterContact: NewsletterContact = {
@@ -190,9 +190,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
         thankYouPage = "/get-involved/volunteer/thanks";  // Volunteer registration
       } else if (formid === "37") {
         thankYouPage = "/contact-us/surrender/thanks";  // Animal surrender
-      } else if (formid === "38") {
+      } else if (formid === "70") {
         thankYouPage = "/adopt/thanks";  // Dog adoption application
-      } else if (formid === "39") {
+      } else if (formid === "65") {
         thankYouPage = "/adopt/thanks";  // Cat adoption application
       } else if (formid === "67") {
         thankYouPage = "/get-involved/pet-courier/thanks";  // Pet courier application

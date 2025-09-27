@@ -23,6 +23,7 @@
   "homepage": "https://github.com/littlebearapps/homelesshounds.com.au#readme",
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.7",
+    "@astrojs/sitemap": "^3.6.0",
     "@sendgrid/eventwebhook": "^8.0.0",
     "@sendgrid/mail": "^8.1.5",
     "@tailwindcss/vite": "^4.1.12",

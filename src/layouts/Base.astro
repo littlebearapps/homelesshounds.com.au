@@ -1,7 +1,22 @@
 ---
 import "../styles/global.css";
 import Footer from "../components/Footer.astro";
-const { title = "Homeless Hounds", description = "Volunteer-run animal rescue in Victoria" } = Astro.props;
+
+// Props with defaults
+const {
+  title = "Homeless Hounds",
+  description = "Volunteer-run animal rescue in Victoria. Adopt, foster, volunteer or donate to help dogs and cats find loving homes.",
+  ogImage = "/og-default.jpg",
+  ogType = "website",
+  noindex = false
+} = Astro.props;
+
+// Build canonical URL
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Remove any trailing slashes except for the homepage
+if (canonicalURL.pathname !== '/' && canonicalURL.pathname.endsWith('/')) {
+  canonicalURL.pathname = canonicalURL.pathname.slice(0, -1);
+}
 ---
 
 <style>
@@ -30,8 +45,37 @@ const { title = "Homeless Hounds", description = "Volunteer-run animal rescue in
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL.href} />
+
+    <!-- Robots meta tag (if noindex is set) -->
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Homeless Hounds Animal Rescue" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
+    <meta property="og:image:alt" content="Homeless Hounds Animal Rescue - Helping dogs and cats find loving homes" />
+    <meta property="og:locale" content="en_AU" />
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site).href} />
+    <meta name="twitter:image:alt" content="Homeless Hounds Animal Rescue - Helping dogs and cats find loving homes" />
+
+    <!-- Favicons -->
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/hh-logo.png" />
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="https://service.sheltermanager.com" />
+    <link rel="preconnect" href="https://service.sheltermanager.com" crossorigin />
   </head>
   <body>
     <!-- Header with sticky navigation -->

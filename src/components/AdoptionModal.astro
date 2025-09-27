@@ -72,9 +72,13 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
           </div>
         </div>
 
-        <form id="adoption-form" class="space-y-6" action="/api/submit" method="POST" enctype="multipart/form-data">
+        <form id="adoption-form" class="space-y-6" action="/api/adoption-applications/submit" method="POST" enctype="multipart/form-data">
           <!-- Hidden Fields -->
           <input type="hidden" name="formid" value={formId} />
+          <input type="hidden" name="animal_id" value={petId} />
+          <input type="hidden" name="animal_name" value={petName} />
+          <input type="hidden" name="species" value={petSpecies.toLowerCase() === 'dog' ? 'dogs' : 'cats'} />
+          <input type="hidden" name="source_url" id="adoption-source-url" />
           <input type="hidden" name="pet_id" value={petId} />
           <input type="hidden" name="pet_name" value={petName} />
           <input type="hidden" name="pet_breed" value={petBreed} />
@@ -758,6 +762,11 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
   if (openBtn) {
     openBtn.addEventListener('click', (e) => {
       e.preventDefault();
+      // Set source URL for adoption outcome tracking
+      const sourceUrlField = document.getElementById('adoption-source-url');
+      if (sourceUrlField) {
+        sourceUrlField.value = window.location.href;
+      }
       openModal();
       if (container.innerHTML.includes('animate-pulse')) {
         initForm();

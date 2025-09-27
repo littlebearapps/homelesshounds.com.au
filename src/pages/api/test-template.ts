@@ -3,6 +3,8 @@ import { surrenderConfirmationEmail } from '../../lib/email/templates/surrender-
 import { adoptionConfirmationEmail } from '../../lib/email/templates/adoption-confirmation';
 import { fosterConfirmationEmail } from '../../lib/email/templates/foster-confirmation';
 import { petCourierConfirmationEmail } from '../../lib/email/templates/pet-courier-confirmation';
+import { adoptionOutcomeCongratsEmail } from '../../lib/email/templates/adoption-outcome-congrats';
+import { adoptionOutcomeSorryEmail } from '../../lib/email/templates/adoption-outcome-sorry';
 
 export const prerender = false;
 
@@ -19,10 +21,14 @@ export const GET: APIRoute = async ({ url }) => {
     email: 'john.smith@example.com',
     animalname: 'Max',
     pet_name: 'Buddy',
+    animal_name: 'Buddy',
+    animal_photo: 'https://images.unsplash.com/photo-1551717743-49959800b1f6?w=200&h=200&fit=crop&crop=face',
     species: 'Dog',
     breed: 'Golden Retriever',
     pet_breed: 'Labrador',
-    pet_species: 'Dog'
+    pet_species: 'Dog',
+    adoption_date: new Date().toISOString(),
+    similar_animals_url: '/adopt/dogs'
   };
 
   let template;
@@ -40,6 +46,12 @@ export const GET: APIRoute = async ({ url }) => {
       break;
     case '67': // Pet Courier
       template = petCourierConfirmationEmail(testData);
+      break;
+    case 'adoption-congrats': // Adoption Success
+      template = adoptionOutcomeCongratsEmail(testData);
+      break;
+    case 'adoption-sorry': // Adoption Update
+      template = adoptionOutcomeSorryEmail(testData);
       break;
     default:
       return new Response('Invalid form ID', { status: 400 });

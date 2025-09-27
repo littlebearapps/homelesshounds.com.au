@@ -1,0 +1,37 @@
+# Wrangler configuration for Homeless Hounds adoption notifications
+name = "homeless-hounds"
+compatibility_date = "2024-09-01"
+
+# Cron trigger for adoption polling (every 10 minutes)
+[triggers]
+crons = ["*/10 * * * *"]
+
+# D1 Database for adoption notifications
+[[d1_databases]]
+binding = "DB"
+database_name = "homeless_hounds_adoptions"
+database_id = "36c75f91-4dc1-49f9-b2b7-8c44a2669004"
+
+# Environment variables (set these in Cloudflare Pages dashboard)
+[vars]
+# These are example values - set actual values in dashboard
+ASM_BASE_URL = "https://service.sheltermanager.com/asmservice"
+ASM_ACCOUNT = "st3418"
+ADOPTION_FORM_IDS_DOGS = "70"
+ADOPTION_FORM_IDS_CATS = "65"
+ADOPTION_NOTIFY_DELAY_HOURS = "12"
+EMAIL_FROM = "noreply@homelesshounds.com.au"
+
+# Testing/Production Mode Controls
+NOTIFICATION_MODE = "production"                    # 'testing' | 'production'
+TEST_EMAIL_RECIPIENT = "web@homelesshounds.com.au" # Override email for testing
+TEST_TRIGGER_VALUE = "TEST_ADOPTION_NOTIFICATION"  # Value to trigger test notifications
+
+# Secret environment variables (set in dashboard, not here)
+# ASM_USERNAME
+# ASM_PASSWORD
+# SENDGRID_API_KEY
+# TEMPLATE_CONGRATS_ID
+# TEMPLATE_SORRY_ID
+# ADMIN_SECRET
+# TURNSTILE_SECRET

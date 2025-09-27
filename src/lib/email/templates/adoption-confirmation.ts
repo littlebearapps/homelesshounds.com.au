@@ -79,6 +79,20 @@ export const adoptionConfirmationEmail = (data: EmailData) => {
       Warm regards,<br>
       <strong>The Homeless Hounds Adoption Team</strong>
     </p>
+
+    ${styles.divider}
+
+    <div style="background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 15px; margin: 20px 0;">
+      <p style="color: #4a5568; font-size: 12px; margin: 0; line-height: 1.5;">
+        <strong>Why you're receiving this email:</strong> You submitted an adoption application${data.pet_name || data.animalname ? ` for ${data.pet_name || data.animalname}` : ''} on our website. This is an operational message confirming receipt of your application, not marketing.
+        <br><br>
+        <strong>From:</strong> Homeless Hounds, QLD, Australia | <strong>Contact:</strong> web@homelesshounds.com.au
+        <br><br>
+        To withdraw your application or update your information, reply to this email or contact web@homelesshounds.com.au.
+        <br><br>
+        <a href="https://homelesshounds.com.au/privacy-policy" style="color: #667eea;">Privacy Policy</a>
+      </p>
+    </div>
   `;
 
   const preheader = `Your adoption application has been received! We'll contact you within 24-48 hours.`;

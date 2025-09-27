@@ -10,7 +10,7 @@
 **Project Type**: Charity website (Non-commercial volunteer project)  
 **Timeline**: Flexible (volunteer basis)  
 **Platform**: Astro v5 + Tailwind CSS v4  
-**Status**: Phase 3 - Complete Newsletter & Email System Integration
+**Status**: Phase 4 - Adoption Outcome Notification System Complete
 
 ## 🔧 Technical Stack
 
@@ -51,10 +51,10 @@ src/
 
 ## 🚧 Current Focus
 
-**Recently Completed**: Complete SendGrid newsletter integration with contact segmentation (2025-09-21)
-**Active Task**: Newsletter system operational with GDPR-compliant contact management
-**Next Milestone**: GDPR compliance review and policy updates
-**Priority**: Review privacy policies and compliance across SendGrid & ASM platforms
+**Recently Completed**: Full email compliance implementation - transactional vs marketing distinction (2025-09-27)
+**Active Task**: Email system fully compliant with proper transactional/marketing separation
+**Next Milestone**: Testing adoption outcome notifications in production
+**Priority**: Verify notification system with test mode before production deployment
 
 ## ⚠️ Critical Requirements
 
@@ -101,14 +101,30 @@ src/
 - [x] **Footer newsletter component with dark theme support**
 - [x] **Dual segmentation: Contact lists + Marketing lists**
 - [ ] Volunteer registration form (ASM form ID 36)
-- [x] Dog adoption application form (ASM form ID 38 - modal ready)
-- [x] Cat adoption application form (ASM form ID 39 - modal ready)
+- [x] Dog adoption application form (ASM form ID 70 - corrected)
+- [x] Cat adoption application form (ASM form ID 65 - corrected)
 - [x] Dog foster application form (ASM form ID 68)
 - [x] Cat foster application form (ASM form ID 69)
 - [x] Pet courier application form (ASM form ID 67)
 - [x] Turnstile spam protection integration
 
-**Phase 4 - Donations**:
+**Phase 4 - Adoption Outcome Notification System** ✅:
+- [x] **Cloudflare D1 database** for application and adoption tracking
+- [x] **Submit proxy endpoint** to intercept adoption applications (form IDs 70/65)
+- [x] **Cron-triggered polling worker** checks ASM every 10 minutes for adoptions
+- [x] **Automated email notifications** - congratulations to winners, sorry to others
+- [x] **Testing/Production mode switches** with email redirection for safe testing
+- [x] **Extensible notification architecture** - ready for foster, volunteer, donation outcomes
+- [x] **Admin API endpoints** - monitor, configure, suppress, test notifications
+- [x] **12-hour safety delay** before notifications (configurable, disabled in test mode)
+- [x] **Email matching logic** - identifies successful adopter vs other applicants
+- [x] **Idempotent operations** - prevents duplicate notifications
+- [x] **Comprehensive logging** and error handling with SendGrid integration
+- [x] **Manual test triggers** via admin API for quality assurance
+- [ ] **SendGrid email templates** for adoption outcome messages
+- [ ] **Production environment setup** with all required variables
+
+**Phase 5 - Donations**:
 - Payment gateway integration
 - Recurring donation options
 - Donation impact information
@@ -137,11 +153,11 @@ src/
 **Form ID Mapping** (ASM):
 - Form ID 36: Volunteer registration
 - Form ID 37: Animal surrender ✅ (with email notifications)
-- Form ID 38: Dog adoption application (modal ready)
-- Form ID 39: Cat adoption application (modal ready)
+- Form ID 65: Cat adoption application ✅ (corrected - with outcome notifications)
 - Form ID 67: Pet courier application ✅ (modal active)
 - Form ID 68: Dog foster application ✅ (modal active)
 - Form ID 69: Cat foster application ✅ (modal active)
+- Form ID 70: Dog adoption application ✅ (corrected - with outcome notifications)
 
 **ASM API Authentication**:
 - **Service Account**: `api_service_account` (no-login account for API-only access)
@@ -158,6 +174,12 @@ src/
 - `SENDGRID_API_KEY` - SendGrid API key for email notifications
 - `SENDGRID_WEBHOOK_PUBLIC_KEY` - Webhook signature verification
 - `EMAIL_*` - Smart routing emails for different departments
+- `NOTIFICATION_MODE` - 'testing' or 'production' (controls notification system)
+- `TEST_EMAIL_RECIPIENT` - Email address for test mode notifications
+- `TEST_TRIGGER_VALUE` - ASM field value to trigger test notifications
+- `TEMPLATE_CONGRATS_ID` - SendGrid template ID for congratulations email
+- `TEMPLATE_SORRY_ID` - SendGrid template ID for sorry email
+- `ADMIN_SECRET` - Authentication key for admin API endpoints
 
 ## 💡 Key Decisions
 
@@ -166,6 +188,25 @@ src/
 - **Cloudflare Pages**: Leverages edge functions and KV storage
 - **Turnstile Protection**: Anti-spam for forms (proposed)
 - **Tailwind CSS**: Utility-first for rapid, consistent styling
+
+## 🚀 SEO Tasks
+
+### Pre-Launch Tasks
+1. **Replace Open Graph image** - Create real 1200x630px image (currently placeholder)
+2. **Enable Cloudflare Brotli** - Turn on in Cloudflare dashboard for compression
+3. **Final SEO audit** - Test all meta tags, sitemaps, and structured data
+4. **Performance testing** - Verify Core Web Vitals scores
+5. **Mobile testing** - Test on real devices and Google Mobile-Friendly Test
+
+### Post-Launch Tasks
+1. **Submit sitemap to Google Search Console** - Register property and submit sitemap.xml
+2. **Submit to Bing Webmaster Tools** - Register and submit sitemap
+3. **Set up Google Business Profile** - Claim and optimize listing
+4. **Implement FAQ schema** - Add to adoption process pages
+5. **Create local event pages** - With Event schema for adoption days
+6. **Monitor 404s** - Set up monitoring for broken links
+7. **Track Core Web Vitals** - Monitor in Search Console
+8. **Build backlinks** - Partner with local vets, councils, pet businesses
 
 ## 📝 Notes for Claude
 
@@ -179,6 +220,7 @@ src/
 **Context Files**:
 - See `.claude-context` for session continuity
 - Check `README.md` for project progress
+- See `NOTIFICATION_SYSTEM_GUIDE.md` for adoption notification system documentation
 - Reference existing site: homelesshounds.com.au
 
 **Development Approach**:
@@ -189,6 +231,6 @@ src/
 
 ---
 
-**Token Count**: ~650 (Optimized for Claude Code)
-**Last Updated**: 2025-09-21
-**Version**: 0.7.0
+**Token Count**: ~750 (Optimized for Claude Code)
+**Last Updated**: 2025-09-27
+**Version**: 0.9.0

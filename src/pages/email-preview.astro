@@ -146,12 +146,20 @@ const formType = Astro.url.searchParams.get('form') || '66';
         <a href="?form=67" class={`form-btn ${formType === '67' ? 'active' : ''}`}>
           Pet Courier (67)
         </a>
+        <a href="?form=adoption-congrats" class={`form-btn ${formType === 'adoption-congrats' ? 'active' : ''}`}>
+          🎉 Adoption Success
+        </a>
+        <a href="?form=adoption-sorry" class={`form-btn ${formType === 'adoption-sorry' ? 'active' : ''}`}>
+          💙 Adoption Update
+        </a>
       </div>
     </div>
 
     <div class="iframe-container">
       <div class="iframe-header">
-        Form {formType} - User Confirmation Email
+        {formType === 'adoption-congrats' ? '🎉 Adoption Success Email' :
+         formType === 'adoption-sorry' ? '💙 Adoption Update Email' :
+         `Form ${formType} - User Confirmation Email`}
       </div>
       <iframe src={`/api/test-template?formId=${formType}`}></iframe>
     </div>

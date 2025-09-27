@@ -45,6 +45,20 @@ export const fosterConfirmationEmail = (data: EmailData) => {
       If you have any questions in the meantime, please don't hesitate to contact our foster team
       at <a href="mailto:foster@homelesshounds.com.au" style="color: #7b47d1;">foster@homelesshounds.com.au</a>
     </p>
+
+    ${styles.divider}
+
+    <div style="background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 15px; margin: 20px 0;">
+      <p style="color: #4a5568; font-size: 12px; margin: 0; line-height: 1.5;">
+        <strong>Why you're receiving this email:</strong> You submitted a foster care application on our website. This is an operational message confirming receipt of your application, not marketing.
+        <br><br>
+        <strong>From:</strong> Homeless Hounds, QLD, Australia | <strong>Contact:</strong> web@homelesshounds.com.au
+        <br><br>
+        To withdraw your application or update your information, reply to this email or contact web@homelesshounds.com.au.
+        <br><br>
+        <a href="https://homelesshounds.com.au/privacy-policy" style="color: #667eea;">Privacy Policy</a>
+      </p>
+    </div>
   `;
 
   const preheader = `Thank you for your foster application. Our team will contact you within 3-5 days.`;

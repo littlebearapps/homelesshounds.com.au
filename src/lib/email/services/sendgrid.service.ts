@@ -152,11 +152,27 @@ export class EmailService {
           email: this.config.fromEmail,
           name: this.config.fromName
         },
+        replyTo: {
+          email: 'web@homelesshounds.com.au',
+          name: 'Homeless Hounds'
+        },
         subject: adminEmailContent.subject,
         html: adminEmailContent.html,
         text: adminEmailContent.text,
+        categories: ['transactional', 'admin_notification'],
+        // Transactional emails: bypass marketing unsubscribes but honor bounces/spam
+        mailSettings: {
+          bypassListManagement: { enabled: true }
+        },
         trackingSettings: {
           clickTracking: {
+            enable: false,
+            enableText: false
+          },
+          openTracking: {
+            enable: false
+          },
+          subscriptionTracking: {
             enable: false
           }
         }
@@ -180,11 +196,27 @@ export class EmailService {
             email: this.config.fromEmail,
             name: this.config.fromName
           },
+          replyTo: {
+            email: 'web@homelesshounds.com.au',
+            name: 'Homeless Hounds'
+          },
           subject: userEmailContent.subject,
           html: userEmailContent.html,
           text: userEmailContent.text,
+          categories: ['transactional', 'form_confirmation'],
+          // Transactional emails: bypass marketing unsubscribes but honor bounces/spam
+          mailSettings: {
+            bypassListManagement: { enabled: true }
+          },
           trackingSettings: {
             clickTracking: {
+              enable: false,
+              enableText: false
+            },
+            openTracking: {
+              enable: false
+            },
+            subscriptionTracking: {
               enable: false
             }
           }
